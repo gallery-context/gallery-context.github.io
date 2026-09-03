@@ -8,6 +8,12 @@
       content="Research project page for The Gallery as Context: Transductive Text-Based Person Search."
     >
     <title>The Gallery as Context | Transductive Text-Based Person Search</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    >
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -16,51 +22,49 @@
     <header class="site-header" aria-label="Site header">
       <nav class="site-nav" aria-label="Primary navigation">
         <a class="brand" href="#hero" aria-label="The Gallery as Context home">
-          <span class="brand-mark" aria-hidden="true">G</span>
-          <span>Gallery Context</span>
+          The Gallery as Context
         </a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
           <span class="nav-toggle-lines" aria-hidden="true"></span>
           <span class="sr-only">Toggle navigation</span>
         </button>
         <div class="nav-links" id="nav-links">
+          <a href="#hero">Overview</a>
           <a href="#motivation">Motivation</a>
-          <a href="#diagnostic">Diagnostic</a>
-          <a href="#ttbps">T-TBPS</a>
-          <a href="#gate">GATE</a>
+          <a href="#method">Method</a>
           <a href="#results">Results</a>
           <a href="#examples">Examples</a>
           <a href="#analysis">Analysis</a>
-          <a href="#limitations">Limitations</a>
+          <a href="#scope">Scope</a>
         </div>
       </nav>
     </header>
 
     <main id="main">
-      <section class="hero-section section-band" id="hero" aria-labelledby="hero-title">
+      <section class="hero-section chapter" id="hero" aria-labelledby="hero-title">
         <div class="section-inner hero-grid">
           <div class="hero-copy">
-            <p class="eyebrow">Research project page</p>
+            <p class="eyebrow">Research project</p>
             <h1 id="hero-title">The Gallery as Context</h1>
             <p class="hero-subtitle">Transductive Text-Based Person Search</p>
             <p class="hero-thesis">
               What makes a textual cue useful depends on who else is in the gallery.
             </p>
-            <div class="hero-stats" aria-label="Headline scope">
-              <span><strong>3</strong> benchmarks</span>
-              <span><strong>5</strong> frozen retrievers</span>
-              <span><strong>624,440</strong> paired interventions</span>
-            </div>
+            <p class="hero-overview">
+              Standard TBPS builds a query representation before seeing the candidate gallery.
+              T-TBPS asks whether the current unlabeled gallery can instead help construct a
+              more discriminative query for that exact search.
+            </p>
           </div>
 
           <figure
-            class="figure-panel hero-figure"
+            class="research-figure hero-figure"
             role="img"
             aria-label="Standard text-based person search builds a query without gallery feedback, while transductive text-based person search sends gallery context back into query construction."
           >
             <div class="hero-comparison">
               <div class="flow-column standard-flow">
-                <h2>Standard TBPS</h2>
+                <p class="figure-title">Standard TBPS</p>
                 <div class="flow-node query-node">Natural-language query</div>
                 <div class="flow-arrow" aria-hidden="true">&darr;</div>
                 <div class="flow-node muted-node">Gallery-independent query</div>
@@ -71,7 +75,7 @@
                 <p>Search uses a fixed text representation.</p>
               </div>
               <div class="flow-column aware-flow">
-                <h2>T-TBPS</h2>
+                <p class="figure-title">T-TBPS</p>
                 <div class="flow-node query-node">Natural-language query</div>
                 <div class="flow-arrow" aria-hidden="true">&darr;</div>
                 <div class="flow-node accent-node">Gallery-aware query</div>
@@ -89,204 +93,196 @@
         </div>
       </section>
 
-      <section class="content-section" id="motivation" aria-labelledby="core-question-title">
-        <div class="section-inner narrow">
-          <p class="section-kicker">The core question</p>
-          <h2 id="core-question-title">A hidden assumption in text-based person search</h2>
-          <p>
-            Standard TBPS encodes a text description before observing the current candidate gallery.
-            That makes the query representation fixed, even though a cue such as clothing color,
-            carried objects, or footwear may become more or less discriminative depending on the
-            alternatives in front of it.
-          </p>
-          <div class="question-callout">
-            <p>Should query construction always remain independent of the search space?</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="content-section alt-band" id="same-query" aria-labelledby="same-query-title">
+      <section class="chapter" id="motivation" aria-labelledby="motivation-title">
         <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-kicker">Same query, different gallery</p>
-            <h2 id="same-query-title">The useful cue can change with the candidate population</h2>
+          <div class="chapter-heading">
+            <p class="section-kicker">Motivation and diagnostic</p>
+            <h2 id="motivation-title">Why the Gallery Matters</h2>
             <p>
-              Consider the same description: a person wearing a black jacket and carrying a bag.
-              In one gallery, the jacket may be rare. In another, many distractors share that jacket,
-              so the bag or another local cue becomes more useful.
+              The central assumption being challenged is simple: should query construction always
+              remain independent of the search space? The diagnostic story moves from intuition to
+              controlled evidence.
             </p>
           </div>
 
-          <figure
-            class="figure-panel paired-gallery-figure"
-            role="img"
-            aria-label="Two schematic galleries use the same query and target. In Gallery A black jacket is rare, while in Gallery B black jackets are common and the bag becomes more informative."
-          >
-            <div class="same-query-label">Same text query: black jacket + bag</div>
-            <div class="paired-galleries">
-              <div class="gallery-panel">
-                <div class="gallery-panel-title">
-                  <strong>Gallery A</strong>
-                  <span>black jacket rare</span>
-                </div>
-                <div class="person-grid cue-rare">
-                  <div class="person-card target" data-label="Target">
-                    <span class="person jacket bag"></span>
-                    <small>target</small>
+          <div class="chapter-flow" aria-label="Motivation chapter flow">
+            <span>different competitors</span>
+            <span>controlled swap</span>
+            <span>measurable decision sensitivity</span>
+          </div>
+
+          <article class="subsection paired-motivation" id="same-query" aria-labelledby="same-query-title">
+            <div class="subsection-copy">
+              <p class="subsection-label">Same query, different gallery</p>
+              <h3 id="same-query-title">A useful cue can depend on the candidate population</h3>
+              <p>
+                Consider the same description: a person wearing a black jacket and carrying a bag.
+                In one gallery, the jacket may be rare. In another, many distractors share that
+                jacket, so the bag or another local cue becomes more informative.
+              </p>
+            </div>
+
+            <figure
+              class="research-figure paired-gallery-figure"
+              role="img"
+              aria-label="Two schematic galleries use the same query and target. In Gallery A black jacket is rare, while in Gallery B black jackets are common and the bag becomes more informative."
+            >
+              <div class="same-query-label">Same text query: black jacket + bag</div>
+              <div class="paired-galleries">
+                <div class="gallery-panel">
+                  <div class="gallery-panel-title">
+                    <strong>Gallery A</strong>
+                    <span>black jacket rare</span>
                   </div>
-                  <div class="person-card"><span class="person shirt"></span><small>neutral</small></div>
-                  <div class="person-card"><span class="person hoodie"></span><small>neutral</small></div>
-                  <div class="person-card"><span class="person coat"></span><small>neutral</small></div>
-                  <div class="person-card"><span class="person vest"></span><small>neutral</small></div>
-                  <div class="person-card"><span class="person light"></span><small>neutral</small></div>
-                </div>
-                <p class="cue-note good">Jacket cue separates the target.</p>
-              </div>
-
-              <div class="gallery-panel">
-                <div class="gallery-panel-title">
-                  <strong>Gallery B</strong>
-                  <span>black jacket common</span>
-                </div>
-                <div class="person-grid cue-common">
-                  <div class="person-card target" data-label="Target">
-                    <span class="person jacket bag"></span>
-                    <small>target</small>
+                  <div class="person-grid cue-rare">
+                    <div class="person-card target" data-label="Target">
+                      <span class="person jacket bag"></span>
+                      <small>target</small>
+                    </div>
+                    <div class="person-card"><span class="person shirt"></span><small>neutral</small></div>
+                    <div class="person-card"><span class="person hoodie"></span><small>neutral</small></div>
+                    <div class="person-card"><span class="person coat"></span><small>neutral</small></div>
+                    <div class="person-card"><span class="person vest"></span><small>neutral</small></div>
+                    <div class="person-card"><span class="person light"></span><small>neutral</small></div>
                   </div>
-                  <div class="person-card distractor"><span class="person jacket"></span><small>jacket</small></div>
-                  <div class="person-card distractor"><span class="person jacket"></span><small>jacket</small></div>
-                  <div class="person-card distractor"><span class="person jacket"></span><small>jacket</small></div>
-                  <div class="person-card"><span class="person coat"></span><small>neutral</small></div>
-                  <div class="person-card"><span class="person shirt bag pale"></span><small>bag</small></div>
+                  <p class="cue-note good">Jacket cue separates the target.</p>
                 </div>
-                <p class="cue-note warn">Bag cue becomes more informative.</p>
-              </div>
-            </div>
-            <figcaption>
-              Schematic illustration only; it recreates the motivating logic rather than redistributing
-              benchmark images.
-            </figcaption>
-          </figure>
-        </div>
-      </section>
 
-      <section class="content-section" id="intervention" aria-labelledby="intervention-title">
-        <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-kicker">Controlled gallery intervention</p>
-            <h2 id="intervention-title">Keep the retrieval problem fixed, swap the cue-directed distractors</h2>
-            <p>
-              The diagnostic creates paired galleries for an eligible query that mentions two cues.
-              Each pair preserves the query, target identity, complete positive image set, neutral
-              fillers, gallery size, and evaluated retriever. Only an equal-sized distractor subset
-              is swapped to emphasize one query-mentioned cue versus the other.
-            </p>
-          </div>
-
-          <figure
-            class="figure-panel intervention-figure"
-            role="img"
-            aria-label="Controlled-variable diagram showing held fixed query, target identity, positive images, neutral fillers, gallery size, and evaluated retriever, with only the cue-directed distractor subset changed."
-          >
-            <div class="fixed-changed-layout">
-              <div class="fixed-list">
-                <h3>Held fixed</h3>
-                <ul>
-                  <li><span>Text query</span><b>same full caption</b></li>
-                  <li><span>Target identity</span><b>same person</b></li>
-                  <li><span>Positive images</span><b>complete set</b></li>
-                  <li><span>Neutral fillers</span><b>shared set</b></li>
-                  <li><span>Gallery size</span><b>same cardinality</b></li>
-                  <li><span>Evaluated retriever</span><b>not used to build trials</b></li>
-                </ul>
-              </div>
-              <div class="changed-block">
-                <h3>Intervened</h3>
-                <div class="split-path">
-                  <div class="cue-box">Cue-directed distractors favor cue A</div>
-                  <div class="split-line" aria-hidden="true"></div>
-                  <div class="cue-box">Cue-directed distractors favor cue B</div>
+                <div class="gallery-panel">
+                  <div class="gallery-panel-title">
+                    <strong>Gallery B</strong>
+                    <span>black jacket common</span>
+                  </div>
+                  <div class="person-grid cue-common">
+                    <div class="person-card target" data-label="Target">
+                      <span class="person jacket bag"></span>
+                      <small>target</small>
+                    </div>
+                    <div class="person-card distractor"><span class="person jacket"></span><small>jacket</small></div>
+                    <div class="person-card distractor"><span class="person jacket"></span><small>jacket</small></div>
+                    <div class="person-card distractor"><span class="person jacket"></span><small>jacket</small></div>
+                    <div class="person-card"><span class="person coat"></span><small>neutral</small></div>
+                    <div class="person-card"><span class="person shirt bag pale"></span><small>bag</small></div>
+                  </div>
+                  <p class="cue-note warn">Bag cue becomes more informative.</p>
                 </div>
               </div>
-            </div>
-          </figure>
+              <figcaption>
+                Schematic illustration only; it recreates the motivating logic rather than
+                redistributing benchmark images.
+              </figcaption>
+            </figure>
+          </article>
 
-          <details class="technical-details">
-            <summary>Technical details of the diagnostic protocol</summary>
-            <div class="details-grid">
+          <article class="subsection diagnostic-subsection" id="diagnostic" aria-labelledby="diagnostic-title">
+            <div class="subsection-copy">
+              <p class="subsection-label">Controlled gallery intervention</p>
+              <h3 id="diagnostic-title">Keep the retrieval problem fixed, swap cue-directed distractors</h3>
               <p>
-                The diagnostic uses a predefined 79-cue semantic catalog spanning clothing and
-                footwear color, garment and footwear type, sleeve length, carried items, worn
-                accessories, and clothing patterns. Cues are matched by deterministic, slot-aware
-                lexical rules that favor precision.
-              </p>
-              <p>
-                After compatibility pruning, 2,613 unordered cue-pair cases form the frozen master
-                case set. Each eligible case-query instance can produce five indexed paired trials
-                with gallery size 300, fixed seed 42, and a cue-density-shift admission threshold
-                of 0.1.
-              </p>
-              <p>
-                An off-the-shelf CLIP model is used only as a label-free construction instrument
-                for cue-directed distractors and neutral fillers. The evaluated retrievers do not
-                construct or admit their own trials.
-              </p>
-              <p>
-                Confidence intervals are computed with 1,000 query-cluster bootstrap resamples,
-                preserving all trials associated with each sampled query.
+                The paired cue-swap diagnostic preserves the query, target identity, complete
+                positive image set, neutral fillers, gallery size, and evaluated retriever. Only an
+                equal-sized distractor subset is swapped to emphasize one query-mentioned cue versus
+                the other.
               </p>
             </div>
-          </details>
-        </div>
-      </section>
 
-      <section class="content-section accent-band" id="diagnostic" aria-labelledby="diagnostic-title">
-        <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-kicker">Diagnostic result</p>
-            <h2 id="diagnostic-title">Frozen retrievers are sensitive to cue-directed gallery composition</h2>
-            <p>
-              Across three benchmarks and five frozen retrievers, the paired cue-swap protocol yields
-              624,440 gallery interventions and more than 3.1 million retriever-trial evaluations.
-              Top-1 correctness changes in 2.84% to 15.66% of paired trials.
+            <div class="diagnostic-grid">
+              <figure
+                class="research-figure intervention-figure"
+                role="img"
+                aria-label="Controlled-variable diagram showing held fixed query, target identity, positive images, neutral fillers, gallery size, and evaluated retriever, with only the cue-directed distractor subset changed."
+              >
+                <div class="fixed-changed-layout">
+                  <div class="fixed-list">
+                    <h4>Held fixed</h4>
+                    <ul>
+                      <li><span>Text query</span><b>same full caption</b></li>
+                      <li><span>Target identity</span><b>same person</b></li>
+                      <li><span>Positive images</span><b>complete set</b></li>
+                      <li><span>Neutral fillers</span><b>shared set</b></li>
+                      <li><span>Gallery size</span><b>same cardinality</b></li>
+                      <li><span>Evaluated retriever</span><b>not used to build trials</b></li>
+                    </ul>
+                  </div>
+                  <div class="changed-block">
+                    <h4>Intervened</h4>
+                    <div class="split-path">
+                      <div class="cue-box">Distractors favor cue A</div>
+                      <div class="split-line" aria-hidden="true"></div>
+                      <div class="cue-box">Distractors favor cue B</div>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+
+              <div class="diagnostic-result">
+                <div class="large-fact">
+                  <strong>15 / 15</strong>
+                  <span>dataset x retriever combinations exhibit non-zero decision sensitivity</span>
+                </div>
+                <div class="chart-panel">
+                  <div id="diagnostic-heatmap" class="heatmap" aria-live="polite"></div>
+                  <p class="chart-summary">
+                    Across 3 benchmarks and 5 frozen retrievers, the protocol yields 624,440 paired
+                    gallery interventions and more than 3.1 million retriever-trial evaluations.
+                    Top-1 correctness Flip Rate ranges from 2.84% to 15.66%.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <p class="careful-note">
+              Interpretation matters: this demonstrates sensitivity to cue-directed gallery
+              composition. Because the swapped distractor subsets also contain different images and
+              identities, it is not a sole-cause estimate of cue prevalence.
             </p>
-          </div>
 
-          <div class="result-layout">
-            <div class="large-fact">
-              <strong>15 / 15</strong>
-              <span>dataset x retriever combinations exhibit non-zero decision sensitivity</span>
-            </div>
-            <div class="chart-panel">
-              <div id="diagnostic-heatmap" class="heatmap" aria-live="polite"></div>
-              <p class="chart-summary">
-                Every 95% query-cluster bootstrap interval remains above zero; the smallest lower
-                bound is 2.56%.
-              </p>
-            </div>
-          </div>
-          <p class="careful-note">
-            Interpretation matters: this demonstrates sensitivity to cue-directed gallery composition.
-            Because the swapped distractor subsets also contain different images and identities, it is
-            not a sole-cause estimate of cue prevalence.
-          </p>
+            <details class="technical-details">
+              <summary>Technical details of the diagnostic protocol</summary>
+              <div class="details-grid">
+                <p>
+                  The diagnostic uses a predefined 79-cue semantic catalog spanning clothing and
+                  footwear color, garment and footwear type, sleeve length, carried items, worn
+                  accessories, and clothing patterns. Cues are matched by deterministic, slot-aware
+                  lexical rules that favor precision.
+                </p>
+                <p>
+                  After compatibility pruning, 2,613 unordered cue-pair cases form the frozen master
+                  case set. Each eligible case-query instance can produce five indexed paired trials
+                  with gallery size 300, fixed seed 42, and a cue-density-shift admission threshold
+                  of 0.1.
+                </p>
+                <p>
+                  An off-the-shelf CLIP model is used only as a label-free construction instrument
+                  for cue-directed distractors and neutral fillers. The evaluated retrievers do not
+                  construct or admit their own trials.
+                </p>
+                <p>
+                  Confidence intervals are computed with 1,000 query-cluster bootstrap resamples,
+                  preserving all trials associated with each sampled query.
+                </p>
+              </div>
+            </details>
+          </article>
         </div>
       </section>
 
-      <section class="content-section" id="ttbps" aria-labelledby="ttbps-title">
+      <section class="chapter ttbps-chapter" id="ttbps" aria-labelledby="ttbps-title">
         <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-kicker">From TBPS to T-TBPS</p>
-            <h2 id="ttbps-title">Move the information boundary</h2>
+          <div class="chapter-heading two-column-heading">
+            <div>
+              <p class="section-kicker">Inference setting</p>
+              <h2 id="ttbps-title">From TBPS to T-TBPS</h2>
+            </div>
             <p>
-              T-TBPS is the inference setting. It allows the current unlabeled gallery to participate
-              in query construction before final retrieval. GATE is one instantiation of that setting,
+              T-TBPS is the proposed inference setting: the current unlabeled gallery can inform
+              query construction before final retrieval. GATE is one instantiation of that setting,
               not a synonym for it.
             </p>
           </div>
 
           <figure
-            class="figure-panel pipeline-comparison"
+            class="research-figure pipeline-comparison"
             role="img"
             aria-label="A two-column comparison: standard TBPS encodes text independently, while T-TBPS combines the text query with the current unlabeled gallery before retrieval."
           >
@@ -312,246 +308,248 @@
               <div class="gallery-to-query" aria-hidden="true">gallery context &rarr; query construction</div>
             </div>
           </figure>
+
+          <div class="gate-intro">
+            <p class="subsection-label">One realization</p>
+            <h3>Gallery-Aware Text Enrichment</h3>
+            <p>
+              GATE keeps the base retriever frozen, builds label-free evidence from the current
+              gallery, reasons over that evidence in a query-conditioned way, and outputs an
+              enriched query for complete-gallery retrieval.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section class="content-section alt-band" id="gate" aria-labelledby="gate-title">
+      <section class="chapter method-chapter" id="method" aria-labelledby="method-title">
         <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-kicker">Introducing GATE</p>
-            <h2 id="gate-title">Gallery-Aware Text Enrichment</h2>
+          <div class="chapter-heading">
+            <p class="section-kicker">Method</p>
+            <h2 id="method-title">How GATE Works</h2>
             <p>
-              GATE is a plug-and-play framework that keeps the base TBPS retriever frozen. It
-              separates gallery evidence construction from query-conditioned gallery reasoning, then
-              returns an enriched query for complete-gallery retrieval.
+              The method follows a compact sequence: observe the gallery, construct evidence, reason
+              over rank x slot structure, enrich the query residually, and retrieve over the complete
+              gallery.
             </p>
           </div>
 
-          <div class="step-ribbon" aria-label="GATE sequence">
-            <span>Observe</span>
-            <span>Construct evidence</span>
-            <span>Reason</span>
-            <span>Correct</span>
-            <span>Retrieve</span>
-          </div>
-
-          <figure
-            class="figure-panel gate-overview"
-            role="img"
-            aria-label="GATE overview showing a frozen retriever, initial ranking, Top-M candidates, structured evidence, QCRS-Mixer, residual enrichment, enriched query, and complete-gallery retrieval."
-          >
-            <div class="gate-diagram">
-              <div class="gate-node frozen">Frozen retriever</div>
-              <div class="gate-row">
-                <div class="gate-node query">Query</div>
-                <div class="gate-arrow" aria-hidden="true">&rarr;</div>
-                <div class="gate-node">Initial gallery ranking</div>
-                <div class="gate-arrow" aria-hidden="true">&rarr;</div>
-                <div class="gate-node">Top-M evidence pool</div>
+          <div class="method-layout">
+            <figure
+              class="research-figure gate-overview"
+              role="img"
+              aria-label="GATE overview showing a frozen retriever, initial ranking, Top-M candidates, structured evidence, QCRS-Mixer, residual enrichment, enriched query, and complete-gallery retrieval."
+            >
+              <div class="gate-diagram">
+                <div class="gate-node frozen">Frozen retriever</div>
+                <div class="gate-row">
+                  <div class="gate-node query">Query</div>
+                  <div class="gate-arrow" aria-hidden="true">&rarr;</div>
+                  <div class="gate-node">Initial ranking</div>
+                  <div class="gate-arrow" aria-hidden="true">&rarr;</div>
+                  <div class="gate-node">Top-M candidates</div>
+                </div>
+                <div class="gate-row trainable-row">
+                  <div class="gate-node evidence">Structured evidence</div>
+                  <div class="gate-arrow" aria-hidden="true">&rarr;</div>
+                  <div class="gate-node trainable">QCRS-Mixer</div>
+                  <div class="gate-arrow" aria-hidden="true">&rarr;</div>
+                  <div class="gate-node trainable">Gallery context</div>
+                </div>
+                <div class="gate-row">
+                  <div class="gate-node query">Original query</div>
+                  <div class="gate-arrow" aria-hidden="true">&rarr;</div>
+                  <div class="gate-node trainable">Residual enrichment</div>
+                  <div class="gate-arrow" aria-hidden="true">&rarr;</div>
+                  <div class="gate-node output">Enriched query</div>
+                </div>
+                <div class="gate-return">
+                  <span>Complete-gallery retrieval</span>
+                </div>
               </div>
-              <div class="gate-row trainable-row">
-                <div class="gate-node evidence">Structured evidence</div>
-                <div class="gate-arrow" aria-hidden="true">&rarr;</div>
-                <div class="gate-node trainable">QCRS-Mixer</div>
-                <div class="gate-arrow" aria-hidden="true">&rarr;</div>
-                <div class="gate-node trainable">Gallery context</div>
-              </div>
-              <div class="gate-row">
-                <div class="gate-node query">Original query</div>
-                <div class="gate-arrow" aria-hidden="true">&rarr;</div>
-                <div class="gate-node trainable">Residual enrichment</div>
-                <div class="gate-arrow" aria-hidden="true">&rarr;</div>
-                <div class="gate-node output">Enriched query</div>
-              </div>
-              <div class="gate-return">
-                <span>Complete-gallery retrieval</span>
-              </div>
-            </div>
-            <figcaption>
-              Frozen components are outlined in gray; trainable GATE components use the accent outline.
-            </figcaption>
-          </figure>
-        </div>
-      </section>
+              <figcaption>
+                Frozen components are outlined in gray; trainable GATE components use the accent
+                outline.
+              </figcaption>
+            </figure>
 
-      <section class="content-section" id="observe" aria-labelledby="observe-title">
-        <div class="section-inner split-section">
-          <div>
-            <p class="section-kicker">Step 1 - Observe the gallery</p>
-            <h2 id="observe-title">Use the frozen ranking as the current competition</h2>
-            <p>
-              The base retriever ranks the gallery normally. GATE gathers an ordered Top-M candidate
-              set as query-specific context. These candidates are not pseudo-labels and not a final
-              candidate restriction; hard negatives can be informative evidence about the search space.
-            </p>
+            <div class="method-steps" aria-label="GATE method steps">
+              <article class="method-step" id="observe" aria-labelledby="observe-title">
+                <div class="step-copy">
+                  <span>01</span>
+                  <div>
+                    <h3 id="observe-title">Observe the gallery</h3>
+                    <p>
+                      The frozen retriever ranks the gallery normally. GATE gathers an ordered
+                      Top-M candidate set as query-specific context; these candidates are current
+                      competition, not pseudo-labels.
+                    </p>
+                  </div>
+                </div>
+                <figure
+                  class="research-figure ranked-strip"
+                  role="img"
+                  aria-label="A ranked strip of Top-M candidates annotated as current competition, not pseudo-labels, and not final candidate restriction."
+                >
+                  <div class="query-chip">Query: black jacket + bag</div>
+                  <div class="rank-row">
+                    <div><b>Rank 1</b><span class="candidate wrong">D</span></div>
+                    <div><b>Rank 2</b><span class="candidate right">T</span></div>
+                    <div><b>Rank 3</b><span class="candidate wrong">D</span></div>
+                    <div><b>Rank 4</b><span class="candidate right">T</span></div>
+                    <div><b>...</b><span class="candidate neutral">M</span></div>
+                  </div>
+                  <div class="rank-tags">
+                    <span>current competition</span>
+                    <span>not pseudo-labels</span>
+                    <span>not a final restriction</span>
+                  </div>
+                </figure>
+              </article>
+
+              <article class="method-step" id="evidence" aria-labelledby="evidence-title">
+                <div class="step-copy">
+                  <span>02</span>
+                  <div>
+                    <h3 id="evidence-title">Construct evidence</h3>
+                    <p>
+                      Evidence Providers expose complementary, label-free views of gallery
+                      candidates. Provider outputs are deterministic and parameter-free; the
+                      Evidence Cache is constructed once for the current gallery and reused.
+                    </p>
+                  </div>
+                </div>
+                <figure
+                  class="research-figure evidence-figure"
+                  role="img"
+                  aria-label="One gallery image produces parallel evidence slots for global semantic, spatial appearance, and gallery-relative evidence; many candidates form an evidence cache."
+                >
+                  <div class="evidence-candidate">
+                    <div class="candidate-image">image</div>
+                    <div class="slot-stack">
+                      <span>Global semantic slot</span>
+                      <span>Spatial appearance slots</span>
+                      <span>Gallery-relative slot</span>
+                    </div>
+                  </div>
+                  <div class="cache-grid" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                    <span></span><span></span><span></span>
+                    <span></span><span></span><span></span>
+                  </div>
+                  <p>Aligned slots form an Evidence Cache for the unlabeled gallery.</p>
+                </figure>
+              </article>
+
+              <article class="method-step featured-step" id="qcrs" aria-labelledby="qcrs-title">
+                <div class="step-copy">
+                  <span>03</span>
+                  <div>
+                    <h3 id="qcrs-title">Reason over rank x slot structure</h3>
+                    <p>
+                      The Query-Conditioned Rank-Slot Mixer keeps the evidence tensor organized.
+                      The slot axis integrates complementary evidence for one candidate; the rank
+                      axis compares the same evidence type across competing candidates.
+                    </p>
+                  </div>
+                </div>
+                <figure
+                  class="research-figure qcrs-figure"
+                  role="img"
+                  aria-label="A rank by evidence-slot matrix showing within-row slot mixing and within-column rank mixing."
+                >
+                  <div class="matrix-label top">Evidence slots</div>
+                  <div class="qcrs-matrix">
+                    <span class="axis-label">Rank 1</span>
+                    <span class="matrix-dot slot-pulse"></span>
+                    <span class="matrix-dot slot-pulse"></span>
+                    <span class="matrix-dot slot-pulse"></span>
+                    <span class="axis-label">Rank 2</span>
+                    <span class="matrix-dot rank-pulse"></span>
+                    <span class="matrix-dot rank-pulse"></span>
+                    <span class="matrix-dot rank-pulse"></span>
+                    <span class="axis-label">Rank 3</span>
+                    <span class="matrix-dot"></span>
+                    <span class="matrix-dot rank-pulse"></span>
+                    <span class="matrix-dot"></span>
+                    <span class="axis-label">Rank M</span>
+                    <span class="matrix-dot"></span>
+                    <span class="matrix-dot rank-pulse"></span>
+                    <span class="matrix-dot"></span>
+                  </div>
+                  <div class="matrix-legend">
+                    <span>within-row: slot mixing</span>
+                    <span>within-column: rank mixing</span>
+                    <span>query-conditioned interpretation</span>
+                  </div>
+                </figure>
+              </article>
+
+              <article class="method-step" id="residual" aria-labelledby="residual-title">
+                <div class="step-copy">
+                  <span>04</span>
+                  <div>
+                    <h3 id="residual-title">Enrich the query residually</h3>
+                    <p>
+                      GATE fuses gallery context with the original frozen query representation and
+                      predicts a residual correction. The identity path keeps the original query
+                      visible.
+                    </p>
+                  </div>
+                </div>
+                <figure
+                  class="research-figure residual-figure"
+                  role="img"
+                  aria-label="Original query representation and gallery-derived correction merge into an enriched query."
+                >
+                  <div class="residual-line main-path">
+                    <span>Original query representation</span>
+                    <i></i>
+                  </div>
+                  <div class="residual-line correction-path">
+                    <span>Gallery-derived correction</span>
+                    <i></i>
+                  </div>
+                  <div class="sum-node">+</div>
+                  <div class="enriched-node">Enriched query</div>
+                </figure>
+              </article>
+
+              <article class="method-step" id="complete-gallery" aria-labelledby="complete-gallery-title">
+                <div class="step-copy">
+                  <span>05</span>
+                  <div>
+                    <h3 id="complete-gallery-title">Retrieve over the complete gallery</h3>
+                    <p>
+                      GATE is not Top-M re-ranking. Top-M gathers context; after enrichment, every
+                      gallery image remains eligible, with no test-gallery identity labels or
+                      test-time gallery optimization.
+                    </p>
+                  </div>
+                </div>
+                <figure
+                  class="research-figure complete-gallery-figure"
+                  role="img"
+                  aria-label="Full gallery is ranked to produce Top-M context, then after query enrichment the full gallery is searched again for the final ranking."
+                >
+                  <div class="complete-flow">
+                    <div class="complete-node full">Full gallery</div>
+                    <div class="complete-arrow" aria-hidden="true">&darr;</div>
+                    <div class="complete-node">Initial ranking</div>
+                    <div class="complete-arrow" aria-hidden="true">&darr;</div>
+                    <div class="complete-node context">Top-M context</div>
+                    <div class="complete-arrow" aria-hidden="true">&darr;</div>
+                    <div class="complete-node">Enriched query</div>
+                    <div class="complete-return" aria-hidden="true">returns to</div>
+                    <div class="complete-node full final">Full gallery again</div>
+                    <div class="complete-arrow" aria-hidden="true">&darr;</div>
+                    <div class="complete-node output">Final ranking</div>
+                  </div>
+                </figure>
+              </article>
+            </div>
           </div>
-          <figure
-            class="figure-panel ranked-strip"
-            role="img"
-            aria-label="A ranked strip of Top-M candidates annotated as current competition, not pseudo-labels, and not final candidate restriction."
-          >
-            <div class="query-chip">Query: black jacket + bag</div>
-            <div class="rank-row">
-              <div><b>Rank 1</b><span class="candidate wrong">D</span></div>
-              <div><b>Rank 2</b><span class="candidate right">T</span></div>
-              <div><b>Rank 3</b><span class="candidate wrong">D</span></div>
-              <div><b>Rank 4</b><span class="candidate right">T</span></div>
-              <div><b>...</b><span class="candidate neutral">M</span></div>
-            </div>
-            <div class="rank-tags">
-              <span>current competition</span>
-              <span>not pseudo-labels</span>
-              <span>not final restriction</span>
-            </div>
-          </figure>
-        </div>
-      </section>
 
-      <section class="content-section alt-band" id="evidence" aria-labelledby="evidence-title">
-        <div class="section-inner split-section reverse">
-          <div>
-            <p class="section-kicker">Step 2 - Construct gallery evidence</p>
-            <h2 id="evidence-title">Cache complementary evidence slots for each gallery image</h2>
-            <p>
-              Evidence Providers expose structured, label-free views of each candidate. The reported
-              experiments use a single-slot Global Semantic provider for the main model, and evaluate
-              spatial and gallery-relative providers in ablations.
-            </p>
-            <p>
-              Provider outputs are deterministic and parameter-free. The Evidence Cache is constructed
-              once for the current gallery and reused across queries.
-            </p>
-          </div>
-          <figure
-            class="figure-panel evidence-figure"
-            role="img"
-            aria-label="One gallery image produces parallel evidence slots for global semantic, spatial appearance, and gallery-relative evidence; many candidates form an evidence cache."
-          >
-            <div class="evidence-candidate">
-              <div class="candidate-image">image</div>
-              <div class="slot-stack">
-                <span>Global semantic slot</span>
-                <span>Spatial appearance slots</span>
-                <span>Gallery-relative slot</span>
-              </div>
-            </div>
-            <div class="cache-grid" aria-hidden="true">
-              <span></span><span></span><span></span>
-              <span></span><span></span><span></span>
-              <span></span><span></span><span></span>
-            </div>
-            <p>Aligned slots form an Evidence Cache for the unlabeled gallery.</p>
-          </figure>
-        </div>
-      </section>
-
-      <section class="content-section" id="qcrs" aria-labelledby="qcrs-title">
-        <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-kicker">Step 3 - Reason with QCRS-Mixer</p>
-            <h2 id="qcrs-title">Preserve rank x slot structure while reasoning</h2>
-            <p>
-              The Query-Conditioned Rank-Slot Mixer treats the evidence tensor as organized information,
-              not an unordered pile. The slot axis integrates complementary evidence for one candidate;
-              the rank axis compares the same evidence type across competing candidates.
-            </p>
-          </div>
-
-          <figure
-            class="figure-panel qcrs-figure"
-            role="img"
-            aria-label="A rank by evidence-slot matrix showing within-row slot mixing and within-column rank mixing."
-          >
-            <div class="matrix-label top">Evidence slots</div>
-            <div class="qcrs-matrix">
-              <span class="axis-label">Rank 1</span>
-              <span class="matrix-dot slot-pulse"></span>
-              <span class="matrix-dot slot-pulse"></span>
-              <span class="matrix-dot slot-pulse"></span>
-              <span class="axis-label">Rank 2</span>
-              <span class="matrix-dot rank-pulse"></span>
-              <span class="matrix-dot rank-pulse"></span>
-              <span class="matrix-dot rank-pulse"></span>
-              <span class="axis-label">Rank 3</span>
-              <span class="matrix-dot"></span>
-              <span class="matrix-dot rank-pulse"></span>
-              <span class="matrix-dot"></span>
-              <span class="axis-label">Rank M</span>
-              <span class="matrix-dot"></span>
-              <span class="matrix-dot rank-pulse"></span>
-              <span class="matrix-dot"></span>
-            </div>
-            <div class="matrix-legend">
-              <span>within-row: slot mixing</span>
-              <span>within-column: rank mixing</span>
-              <span>query-conditioned interpretation</span>
-            </div>
-          </figure>
-        </div>
-      </section>
-
-      <section class="content-section alt-band" id="residual" aria-labelledby="residual-title">
-        <div class="section-inner split-section">
-          <div>
-            <p class="section-kicker">Step 4 - Residual query enrichment</p>
-            <h2 id="residual-title">Correct the frozen query instead of replacing it</h2>
-            <p>
-              GATE fuses the gallery context with the original frozen query representation and predicts
-              a residual correction. The identity path keeps the original query visible, so enrichment
-              is an additive correction rather than a reconstruction from scratch.
-            </p>
-          </div>
-          <figure
-            class="figure-panel residual-figure"
-            role="img"
-            aria-label="Original query representation and gallery-derived correction merge into an enriched query."
-          >
-            <div class="residual-line main-path">
-              <span>Original query representation</span>
-              <i></i>
-            </div>
-            <div class="residual-line correction-path">
-              <span>Gallery-derived correction</span>
-              <i></i>
-            </div>
-            <div class="sum-node">+</div>
-            <div class="enriched-node">Enriched query</div>
-          </figure>
-        </div>
-      </section>
-
-      <section class="content-section" id="complete-gallery" aria-labelledby="complete-gallery-title">
-        <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-kicker">Step 5 - Retrieve over the complete gallery</p>
-            <h2 id="complete-gallery-title">GATE is not Top-M re-ranking</h2>
-            <p>
-              Top-M is used to gather context. After enrichment, every gallery image remains eligible,
-              the enriched query is evaluated against the complete gallery, no test-gallery identity
-              labels are used, and no test-time gallery optimization is performed.
-            </p>
-          </div>
-          <figure
-            class="figure-panel complete-gallery-figure"
-            role="img"
-            aria-label="Full gallery is ranked to produce Top-M context, then after query enrichment the full gallery is searched again for the final ranking."
-          >
-            <div class="complete-flow">
-              <div class="complete-node full">Full gallery</div>
-              <div class="complete-arrow" aria-hidden="true">&darr;</div>
-              <div class="complete-node">Initial ranking</div>
-              <div class="complete-arrow" aria-hidden="true">&darr;</div>
-              <div class="complete-node context">Top-M context</div>
-              <div class="complete-arrow" aria-hidden="true">&darr;</div>
-              <div class="complete-node">Enriched query</div>
-              <div class="complete-return" aria-hidden="true">returns to</div>
-              <div class="complete-node full final">Full gallery again</div>
-              <div class="complete-arrow" aria-hidden="true">&darr;</div>
-              <div class="complete-node output">Final ranking</div>
-            </div>
-          </figure>
-
-          <details class="technical-details">
+          <details class="technical-details method-details">
             <summary>Technical details of GATE training and inference</summary>
             <div class="details-grid">
               <p>
@@ -578,87 +576,98 @@
         </div>
       </section>
 
-      <section class="content-section accent-band" id="results" aria-labelledby="benchmark-title">
+      <section class="chapter results-chapter" id="results" aria-labelledby="results-title">
         <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-kicker">Main benchmark results</p>
-            <h2 id="benchmark-title">The strongest GATE configuration leads all three benchmarks</h2>
+          <div class="chapter-heading">
+            <p class="section-kicker">Quantitative evidence</p>
+            <h2 id="results-title">Results</h2>
             <p>
-              GATE attached to ITSELF reports the strongest in-domain results across CUHK-PEDES,
-              ICFG-PEDES, and RSTPReid. The page shows R@1 and mAP beside the frozen base retriever
-              so the gain is visible rather than implied.
+              Results are reported beside the relevant frozen host retriever, across base models,
+              and under cross-domain transfer. The emphasis is on scientific comparison, not
+              headline counters.
             </p>
           </div>
-          <div id="benchmark-cards" class="benchmark-grid"></div>
-          <p class="chart-summary">
-            Average gains across the five base retrievers are +0.44 R@1 / +2.53 mAP on CUHK-PEDES,
-            +0.72 / +4.33 on ICFG-PEDES, and +1.50 / +2.27 on RSTPReid.
-          </p>
-        </div>
-      </section>
 
-      <section class="content-section" id="retrievers" aria-labelledby="retrievers-title">
-        <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-kicker">Improvements across base retrievers</p>
-            <h2 id="retrievers-title">Gallery-aware enrichment is not tied to one host model</h2>
-            <p>
-              CLIP, IRRA, RDE, DM-Adapter, and ITSELF all improve when the frozen retriever is paired
-              with GATE. Both R@1 and mAP improve in all 15 in-domain base-retriever and benchmark
-              combinations.
-            </p>
-          </div>
-          <div id="retriever-deltas" class="delta-chart"></div>
-        </div>
-      </section>
-
-      <section class="content-section alt-band" id="cross-domain" aria-labelledby="cross-domain-title">
-        <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-kicker">Cross-domain generalization</p>
-            <h2 id="cross-domain-title">The benefit persists when the target benchmark is unseen</h2>
-            <p>
-              Source-trained retrievers and their GATE modules transfer directly to a new target
-              benchmark. GATE constructs a new cache from the unlabeled target gallery, without target
-              labels, pseudo-labels, prompt updates, parameter updates, or target-set optimization.
-            </p>
-          </div>
-          <div class="cross-domain-layout">
-            <figure
-              class="figure-panel transfer-figure"
-              role="img"
-              aria-label="Three dataset nodes, CUHK, ICFG, and RSTP, connected by six transfer arrows."
-            >
-              <div class="transfer-triangle">
-                <div class="dataset-node cuhk">CUHK</div>
-                <div class="dataset-node icfg">ICFG</div>
-                <div class="dataset-node rstp">RSTP</div>
-                <span class="transfer-line line-ci"></span>
-                <span class="transfer-line line-cr"></span>
-                <span class="transfer-line line-ir"></span>
+          <div class="results-stack">
+            <article class="result-block" aria-labelledby="benchmark-title">
+              <div class="result-copy">
+                <p class="subsection-label">Main benchmark results</p>
+                <h3 id="benchmark-title">The strongest GATE configuration leads all three benchmarks</h3>
+                <p>
+                  GATE attached to ITSELF reports the strongest in-domain results across
+                  CUHK-PEDES, ICFG-PEDES, and RSTPReid. R@1 and mAP are shown beside the frozen
+                  base retriever so the gain is visible rather than implied.
+                </p>
               </div>
-            </figure>
-            <div class="cross-facts">
-              <div class="large-fact compact">
-                <strong>30 / 30</strong>
-                <span>base-retriever x transfer settings improve in both R@1 and mAP</span>
+              <div id="benchmark-cards" class="benchmark-grid"></div>
+              <p class="chart-summary">
+                Average gains across the five base retrievers are +0.44 R@1 / +2.53 mAP on
+                CUHK-PEDES, +0.72 / +4.33 on ICFG-PEDES, and +1.50 / +2.27 on RSTPReid.
+              </p>
+            </article>
+
+            <article class="result-block" id="retrievers" aria-labelledby="retrievers-title">
+              <div class="result-copy">
+                <p class="subsection-label">Across base retrievers</p>
+                <h3 id="retrievers-title">Gallery-aware enrichment is not tied to one host model</h3>
+                <p>
+                  CLIP, IRRA, RDE, DM-Adapter, and ITSELF all improve when the frozen retriever is
+                  paired with GATE. Both R@1 and mAP improve in all 15 in-domain
+                  base-retriever and benchmark combinations.
+                </p>
               </div>
-              <div id="transfer-summary" class="transfer-summary"></div>
-            </div>
+              <div id="retriever-deltas" class="delta-chart"></div>
+            </article>
+
+            <article class="result-block cross-domain-block" id="cross-domain" aria-labelledby="cross-domain-title">
+              <div class="result-copy">
+                <p class="subsection-label">Cross-domain generalization</p>
+                <h3 id="cross-domain-title">The benefit persists when the target benchmark is unseen</h3>
+                <p>
+                  Source-trained retrievers and their GATE modules transfer directly to a new target
+                  benchmark. GATE constructs a new cache from the unlabeled target gallery, without
+                  target labels, pseudo-labels, prompt updates, parameter updates, or target-set
+                  optimization.
+                </p>
+              </div>
+              <div class="cross-domain-layout">
+                <figure
+                  class="research-figure transfer-figure"
+                  role="img"
+                  aria-label="Three dataset nodes, CUHK, ICFG, and RSTP, connected by six transfer arrows."
+                >
+                  <div class="transfer-triangle">
+                    <div class="dataset-node cuhk">CUHK</div>
+                    <div class="dataset-node icfg">ICFG</div>
+                    <div class="dataset-node rstp">RSTP</div>
+                    <span class="transfer-line line-ci"></span>
+                    <span class="transfer-line line-cr"></span>
+                    <span class="transfer-line line-ir"></span>
+                  </div>
+                </figure>
+                <div class="cross-facts">
+                  <div class="large-fact compact">
+                    <strong>30 / 30</strong>
+                    <span>base-retriever x transfer settings improve in both R@1 and mAP</span>
+                  </div>
+                  <div id="transfer-summary" class="transfer-summary"></div>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
       </section>
 
-      <section class="content-section" id="examples" aria-labelledby="examples-title">
+      <section class="chapter examples-chapter" id="examples" aria-labelledby="examples-title">
         <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-kicker">Qualitative retrieval examples</p>
-            <h2 id="examples-title">Selected Rank-1 correction patterns</h2>
+          <div class="chapter-heading">
+            <p class="section-kicker">Qualitative evidence</p>
+            <h2 id="examples-title">Qualitative Retrieval Examples</h2>
             <p>
-              The supplementary analysis reports selected cases where the frozen base retriever ranks
-              a distractor first and GATE promotes a target image to Rank 1. Because public
-              redistribution rights for benchmark imagery are not established in this repository, the
-              rows below are schematic summaries rather than copied figure crops.
+              The supplementary analysis reports selected cases where the frozen base retriever
+              ranks a distractor first and GATE promotes a target image to Rank 1. Because public
+              redistribution rights for benchmark imagery are not established in this repository,
+              the rows below are schematic summaries rather than copied figure crops.
             </p>
           </div>
           <div class="qual-tabs" role="tablist" aria-label="Qualitative examples by retriever">
@@ -677,136 +686,157 @@
         </div>
       </section>
 
-      <section class="content-section alt-band" id="analysis" aria-labelledby="evidence-ablation-title">
+      <section class="chapter analysis-chapter" id="analysis" aria-labelledby="analysis-title">
         <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-kicker">What matters? Evidence ablations</p>
-            <h2 id="evidence-ablation-title">More evidence is not automatically better</h2>
+          <div class="chapter-heading">
+            <p class="section-kicker">Interpretation</p>
+            <h2 id="analysis-title">Analysis</h2>
             <p>
-              Semantic, spatial, and gallery-relative providers can all help, but the best provider
-              varies by dataset and metric. Combining additional providers does not monotonically
-              outperform the strongest individual provider.
+              The ablations separate the value of gallery evidence from the value of structured
+              query-conditioned reasoning, then situate GATE inside a broader T-TBPS design space.
             </p>
           </div>
-          <div id="evidence-ablation" class="ablation-chart"></div>
-        </div>
-      </section>
 
-      <section class="content-section" id="reasoning" aria-labelledby="reasoning-title">
-        <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-kicker">What matters? Reasoning structure ablations</p>
-            <h2 id="reasoning-title">Seeing gallery evidence is not enough</h2>
-            <p>
-              MeanPool gives little mAP improvement, and Flat-MLP is stronger but remains below the
-              complete QCRS-Mixer across the three benchmark evaluations. The complete QCRS-Mixer
-              reports the best R@1 on all three benchmarks and the best mAP on two.
-            </p>
-          </div>
-          <div class="reasoning-layout">
-            <div class="structure-sketches" aria-label="Reasoning structure sketches">
-              <div><strong>MeanPool</strong><span>evidence &rarr; one vector</span></div>
-              <div><strong>Flat MLP</strong><span>flattened evidence &rarr; MLP</span></div>
-              <div><strong>QCRS</strong><span>rank x slot structure &rarr; structured mixing</span></div>
-            </div>
-            <div id="reasoning-ablation" class="ablation-chart"></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="content-section alt-band" id="is-is-not" aria-labelledby="is-is-not-title">
-        <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-kicker">What GATE is - and is not</p>
-            <h2 id="is-is-not-title">A concise checklist</h2>
-          </div>
-          <div class="comparison-cards">
-            <div class="comparison-card positive">
-              <h3>GATE is</h3>
-              <ul>
-                <li>gallery-aware query enrichment</li>
-                <li>built on a frozen base retriever</li>
-                <li>label-free with respect to the test gallery</li>
-                <li>complete-gallery retrieval after enrichment</li>
-                <li>a plug-in realization of T-TBPS</li>
-              </ul>
-            </div>
-            <div class="comparison-card negative">
-              <h3>GATE is not</h3>
-              <ul>
-                <li>pseudo-labeling</li>
-                <li>test-time optimization</li>
-                <li>a replacement for the base retriever</li>
-                <li>Top-M re-ranking</li>
-                <li>dependent on test-gallery identity labels</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="content-section" id="design-space" aria-labelledby="design-space-title">
-        <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-kicker">Beyond GATE</p>
-            <h2 id="design-space-title">The broader T-TBPS design space</h2>
-            <p>
-              GATE demonstrates one way to exploit the extra inference context allowed by T-TBPS.
-              Future methods can vary what gallery evidence is exposed and how a query reasons over
-              that evidence.
-            </p>
-          </div>
-          <figure
-            class="figure-panel design-space-figure"
-            role="img"
-            aria-label="A conceptual two-axis design space with gallery evidence on one axis, query reasoning on the other, and GATE placed in the structured reasoning region."
-          >
-            <div class="design-space">
-              <div class="axis y-axis">Gallery evidence<br><span>global - local - relational</span></div>
-              <div class="axis x-axis">Query reasoning <span>pooling - structured - adaptive</span></div>
-              <div class="space-grid">
-                <span class="gate-point">GATE</span>
+          <div class="analysis-grid">
+            <article class="analysis-block" id="evidence-ablation-section" aria-labelledby="evidence-ablation-title">
+              <div class="result-copy">
+                <p class="subsection-label">Evidence ablations</p>
+                <h3 id="evidence-ablation-title">More evidence is not automatically better</h3>
+                <p>
+                  Semantic, spatial, and gallery-relative providers can all help, but the best
+                  provider varies by dataset and metric. Combining additional providers does not
+                  monotonically outperform the strongest individual provider.
+                </p>
               </div>
-            </div>
-            <figcaption>Conceptual map, not a quantitative plot.</figcaption>
-          </figure>
+              <div id="evidence-ablation" class="ablation-chart"></div>
+            </article>
+
+            <article class="analysis-block" id="reasoning" aria-labelledby="reasoning-title">
+              <div class="result-copy">
+                <p class="subsection-label">Reasoning structure ablations</p>
+                <h3 id="reasoning-title">Seeing gallery evidence is not enough</h3>
+                <p>
+                  MeanPool gives little mAP improvement, and Flat-MLP is stronger but remains below
+                  the complete QCRS-Mixer across the three benchmark evaluations.
+                </p>
+              </div>
+              <div class="reasoning-layout">
+                <div class="structure-sketches" aria-label="Reasoning structure sketches">
+                  <div><strong>MeanPool</strong><span>evidence &rarr; one vector</span></div>
+                  <div><strong>Flat MLP</strong><span>flattened evidence &rarr; MLP</span></div>
+                  <div><strong>QCRS</strong><span>rank x slot structure &rarr; structured mixing</span></div>
+                </div>
+                <div id="reasoning-ablation" class="ablation-chart"></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="analysis-bottom">
+            <article class="checklist-block" id="is-is-not" aria-labelledby="is-is-not-title">
+              <div class="result-copy">
+                <p class="subsection-label">Boundary conditions</p>
+                <h3 id="is-is-not-title">What GATE is - and is not</h3>
+              </div>
+              <div class="comparison-cards">
+                <div class="comparison-card positive">
+                  <h4>GATE is</h4>
+                  <ul>
+                    <li>gallery-aware query enrichment</li>
+                    <li>built on a frozen base retriever</li>
+                    <li>label-free with respect to the test gallery</li>
+                    <li>complete-gallery retrieval after enrichment</li>
+                    <li>a plug-in realization of T-TBPS</li>
+                  </ul>
+                </div>
+                <div class="comparison-card negative">
+                  <h4>GATE is not</h4>
+                  <ul>
+                    <li>pseudo-labeling</li>
+                    <li>test-time optimization</li>
+                    <li>a replacement for the base retriever</li>
+                    <li>Top-M re-ranking</li>
+                    <li>dependent on test-gallery identity labels</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="design-block" id="design-space" aria-labelledby="design-space-title">
+              <div class="result-copy">
+                <p class="subsection-label">Beyond GATE</p>
+                <h3 id="design-space-title">The broader T-TBPS design space</h3>
+                <p>
+                  GATE demonstrates one way to exploit the extra inference context allowed by
+                  T-TBPS. Future methods can vary what gallery evidence is exposed and how a query
+                  reasons over that evidence.
+                </p>
+              </div>
+              <figure
+                class="research-figure design-space-figure"
+                role="img"
+                aria-label="A conceptual two-axis design space with gallery evidence on one axis, query reasoning on the other, and GATE placed in the structured reasoning region."
+              >
+                <div class="design-space">
+                  <div class="axis y-axis">Gallery evidence<br><span>global - local - relational</span></div>
+                  <div class="axis x-axis">Query reasoning <span>pooling - structured - adaptive</span></div>
+                  <div class="space-grid">
+                    <span class="gate-point">GATE</span>
+                  </div>
+                </div>
+                <figcaption>Conceptual map, not a quantitative plot.</figcaption>
+              </figure>
+            </article>
+          </div>
         </div>
       </section>
 
-      <section class="content-section alt-band" id="limitations" aria-labelledby="limitations-title">
+      <section class="chapter scope-chapter" id="scope" aria-labelledby="scope-title">
         <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-kicker">Limitations</p>
-            <h2 id="limitations-title">Where the setting applies most naturally</h2>
+          <div class="chapter-heading">
+            <p class="section-kicker">Scope</p>
+            <h2 id="scope-title">Limitations and Takeaway</h2>
+            <p>
+              T-TBPS intentionally changes the inference information boundary by using the current
+              unlabeled target gallery. That opens useful context, but it also defines where the
+              setting applies most naturally.
+            </p>
           </div>
-          <div class="limitation-grid">
+
+          <div class="limitation-grid" id="limitations" aria-label="Limitations">
             <div>
               <h3>Gallery availability</h3>
               <p>The current unlabeled gallery must be available before final retrieval.</p>
             </div>
             <div>
               <h3>Gallery dynamics</h3>
-              <p>The setting is most natural for fixed or slowly changing galleries, and less direct for fully streaming galleries.</p>
+              <p>
+                The setting is most natural for fixed or slowly changing galleries, and less direct
+                for fully streaming galleries.
+              </p>
             </div>
             <div>
               <h3>Diagnostic scope</h3>
-              <p>The cue-swap diagnostic establishes sensitivity to cue-directed gallery composition, but does not show that every query benefits equally.</p>
+              <p>
+                The cue-swap diagnostic establishes sensitivity to cue-directed gallery composition,
+                but does not show that every query benefits equally.
+              </p>
             </div>
             <div>
               <h3>Inference boundary</h3>
-              <p>T-TBPS intentionally changes standard TBPS by letting the current unlabeled target gallery inform query construction.</p>
+              <p>
+                T-TBPS intentionally changes standard TBPS by letting the current unlabeled target
+                gallery inform query construction.
+              </p>
             </div>
           </div>
-        </div>
-      </section>
 
-      <section class="closing-section" id="takeaway" aria-labelledby="takeaway-title">
-        <div class="section-inner narrow">
-          <p class="section-kicker">Closing takeaway</p>
-          <h2 id="takeaway-title">
-            The gallery is not only the destination of retrieval. It can be a source of context for
-            deciding how the query should search.
-          </h2>
+          <div class="closing-takeaway" id="takeaway">
+            <p class="section-kicker">Closing takeaway</p>
+            <p>
+              The gallery is not only the destination of retrieval. It can be a source of context for
+              deciding how the query should search.
+            </p>
+          </div>
         </div>
       </section>
     </main>
