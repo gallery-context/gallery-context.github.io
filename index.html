@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Research project page for The Gallery as Context: Transductive Text-Based Person Search."
+      content="Overview for The Gallery as Context: Transductive Text-Based Person Search."
     >
-    <title>The Gallery as Context | Transductive Text-Based Person Search</title>
+    <title>The Gallery as Context: Transductive Text-Based Person Search</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -30,6 +30,7 @@
         </button>
         <div class="nav-links" id="nav-links">
           <a href="#hero">Overview</a>
+          <a href="#ttbps">T-TBPS</a>
           <a href="#motivation">Motivation</a>
           <a href="#method">Method</a>
           <a href="#results">Results</a>
@@ -41,54 +42,113 @@
     </header>
 
     <main id="main">
-      <section class="hero-section chapter" id="hero" aria-labelledby="hero-title">
-        <div class="section-inner hero-grid">
-          <div class="hero-copy">
-            <p class="eyebrow">Research project</p>
-            <h1 id="hero-title">The Gallery as Context</h1>
-            <p class="hero-subtitle">Transductive Text-Based Person Search</p>
-            <p class="hero-thesis">
-              What makes a textual cue useful depends on who else is in the gallery.
-            </p>
-            <p class="hero-overview">
-              Standard TBPS builds a query representation before seeing the candidate gallery.
-              T-TBPS asks whether the current unlabeled gallery can instead help construct a
-              more discriminative query for that exact search.
+      <section class="chapter paper-hero" id="hero" aria-labelledby="hero-title">
+        <div class="section-inner paper-header">
+          <h1 id="hero-title">The Gallery as Context: Transductive Text-Based Person Search</h1>
+
+          <div class="paper-metadata" aria-label="Author and publication metadata"><!-- TODO(public metadata): add author names once explicitly supplied by the project owner. --><!-- TODO(public metadata): add affiliation and venue once explicitly supplied by the project owner. --></div>
+
+          <nav class="paper-links" aria-label="Project resources">
+            <a href="https://github.com/gallery-context/gallery-context.github.io" target="_blank" rel="noreferrer noopener">Code</a>
+          </nav>
+        </div>
+      </section>
+
+      <section class="chapter overview-tldr" aria-labelledby="tldr-title">
+        <div class="section-inner tldr-inner">
+          <h2 id="tldr-title" class="sr-only">TL;DR</h2>
+          <p class="tldr-copy">
+            <strong>TL;DR:</strong> The discriminative value of a textual cue depends on the current gallery.
+            T-TBPS lets the unlabeled gallery inform query construction, and GATE realizes this idea by
+            enriching the query with gallery context while keeping the underlying TBPS retriever frozen.
+          </p>
+        </div>
+      </section>
+
+      <section class="chapter overview-highlights" id="highlights" aria-labelledby="highlights-title">
+        <div class="section-inner highlights-inner">
+          <header class="overview-heading">
+            <p class="section-kicker">Key results</p>
+            <h2 id="highlights-title">Highlights</h2>
+          </header>
+
+          <div class="highlight-grid">
+            <article class="highlight-card">
+              <strong>2.84&ndash;15.66%</strong>
+              <span>Top-1 Flip Rate</span>
+              <p>Across 15/15 dataset &times; retriever combinations, changing cue-directed gallery composition produces non-zero decision sensitivity.</p>
+            </article>
+
+            <article class="highlight-card">
+              <strong>15 / 15</strong>
+              <span>In-domain gains</span>
+              <p>base-retriever &times; benchmark combinations improve in both R@1 and mAP when paired with GATE.</p>
+            </article>
+
+            <article class="highlight-card">
+              <strong>30 / 30</strong>
+              <span>Transfer gains</span>
+              <p>base-retriever &times; transfer settings improve in both R@1 and mAP without target-gallery labels or target-set optimization.</p>
+            </article>
+          </div>
+
+          <p class="overview-note">
+            The strongest GATE configuration reports the strongest in-domain results across all three evaluated benchmarks.
+          </p>
+        </div>
+      </section>
+
+      <section class="chapter ttbps-overview" id="ttbps" aria-labelledby="ttbps-title">
+        <div class="section-inner ttbps-inner">
+          <div class="chapter-heading ttbps-heading">
+            <p class="section-kicker">Inference setting</p>
+            <h2 id="ttbps-title">From TBPS to T-TBPS</h2>
+            <p>
+              T-TBPS lets the current unlabeled gallery inform query construction before final retrieval.
+              GATE is one realization of that setting, not a synonym for it.
             </p>
           </div>
 
           <figure
-            class="research-figure hero-figure"
-            role="img"
-            aria-label="Standard text-based person search builds a query without gallery feedback, while transductive text-based person search sends gallery context back into query construction."
+            class="research-figure pipeline-overview"
+            aria-describedby="ttbps-caption"
           >
-            <div class="hero-comparison">
-              <div class="flow-column standard-flow">
-                <p class="figure-title">Standard TBPS</p>
-                <div class="flow-node query-node">Natural-language query</div>
-                <div class="flow-arrow" aria-hidden="true">&darr;</div>
-                <div class="flow-node muted-node">Gallery-independent query</div>
-                <div class="flow-arrow" aria-hidden="true">&darr;</div>
-                <div class="mini-gallery" aria-hidden="true">
-                  <span></span><span></span><span></span><span></span>
-                </div>
-                <p>Search uses a fixed text representation.</p>
-              </div>
-              <div class="flow-column aware-flow">
-                <p class="figure-title">T-TBPS</p>
-                <div class="flow-node query-node">Natural-language query</div>
-                <div class="flow-arrow" aria-hidden="true">&darr;</div>
-                <div class="flow-node accent-node">Gallery-aware query</div>
-                <div class="context-loop" aria-hidden="true">
-                  <span>gallery context</span>
-                </div>
-                <div class="flow-arrow" aria-hidden="true">&darr;</div>
-                <div class="mini-gallery active" aria-hidden="true">
-                  <span></span><span></span><span></span><span></span>
-                </div>
-                <p>The gallery also informs how the query searches.</p>
+            <div class="pipeline-lane standard-lane" aria-label="Standard TBPS pipeline">
+              <p class="pipeline-lane-label">Standard TBPS</p>
+              <div class="pipeline-row standard-row">
+                <div class="pipeline-stage">Text Query</div>
+                <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
+                <div class="pipeline-stage">Fixed Query Representation</div>
+                <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
+                <div class="pipeline-stage">Gallery Matching</div>
+                <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
+                <div class="pipeline-stage">Ranking</div>
               </div>
             </div>
+
+            <div class="pipeline-lane transductive-lane" aria-label="T-TBPS pipeline">
+              <p class="pipeline-lane-label accent">T-TBPS</p>
+              <div class="pipeline-row transductive-row">
+                <div class="pipeline-stage">Text Query</div>
+                <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
+                <div class="pipeline-bridge">
+                  <div class="pipeline-context">Current unlabeled gallery</div>
+                  <span class="pipeline-context-arrow" aria-hidden="true">&darr;</span>
+                  <div class="pipeline-stage pipeline-stage-accent">Gallery-Aware Query Construction</div>
+                </div>
+                <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
+                <div class="pipeline-stage pipeline-stage-accent">Enriched Query</div>
+                <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
+                <div class="pipeline-stage pipeline-stage-accent">Complete-Gallery Retrieval</div>
+                <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
+                <div class="pipeline-stage pipeline-stage-accent">Ranking</div>
+              </div>
+            </div>
+
+            <figcaption id="ttbps-caption">
+              Standard TBPS constructs the query independently. T-TBPS uses the unlabeled gallery as
+              inference context during query construction, then ranks over the full gallery.
+            </figcaption>
           </figure>
         </div>
       </section>
@@ -105,7 +165,7 @@
             </p>
           </div>
 
-          <div class="chapter-flow" aria-label="Motivation chapter flow">
+            <div class="chapter-flow" aria-label="Motivation chapter flow">
             <span>different competitors</span>
             <span>controlled swap</span>
             <span>measurable decision sensitivity</span>
@@ -267,69 +327,15 @@
         </div>
       </section>
 
-      <section class="chapter ttbps-chapter" id="ttbps" aria-labelledby="ttbps-title">
-        <div class="section-inner">
-          <div class="chapter-heading two-column-heading">
-            <div>
-              <p class="section-kicker">Inference setting</p>
-              <h2 id="ttbps-title">From TBPS to T-TBPS</h2>
-            </div>
-            <p>
-              T-TBPS is the proposed inference setting: the current unlabeled gallery can inform
-              query construction before final retrieval. GATE is one instantiation of that setting,
-              not a synonym for it.
-            </p>
-          </div>
-
-          <figure
-            class="research-figure pipeline-comparison"
-            role="img"
-            aria-label="A two-column comparison: standard TBPS encodes text independently, while T-TBPS combines the text query with the current unlabeled gallery before retrieval."
-          >
-            <div class="pipeline-column">
-              <h3>Standard TBPS</h3>
-              <ol class="pipeline-list">
-                <li>Text query</li>
-                <li>Fixed query representation</li>
-                <li>Image representations</li>
-                <li>Pairwise similarity</li>
-                <li>Ranking</li>
-              </ol>
-            </div>
-            <div class="pipeline-column ttbps-column">
-              <h3>T-TBPS</h3>
-              <ol class="pipeline-list">
-                <li>Text query + current unlabeled gallery</li>
-                <li>Gallery-aware query construction</li>
-                <li>Enriched query representation</li>
-                <li>Complete-gallery similarity</li>
-                <li>Ranking</li>
-              </ol>
-              <div class="gallery-to-query" aria-hidden="true">gallery context &rarr; query construction</div>
-            </div>
-          </figure>
-
-          <div class="gate-intro">
-            <p class="subsection-label">One realization</p>
-            <h3>Gallery-Aware Text Enrichment</h3>
-            <p>
-              GATE keeps the base retriever frozen, builds label-free evidence from the current
-              gallery, reasons over that evidence in a query-conditioned way, and outputs an
-              enriched query for complete-gallery retrieval.
-            </p>
-          </div>
-        </div>
-      </section>
-
       <section class="chapter method-chapter" id="method" aria-labelledby="method-title">
         <div class="section-inner">
           <div class="chapter-heading">
             <p class="section-kicker">Method</p>
             <h2 id="method-title">How GATE Works</h2>
             <p>
-              The method follows a compact sequence: observe the gallery, construct evidence, reason
-              over rank x slot structure, enrich the query residually, and retrieve over the complete
-              gallery.
+              GATE is one realization of T-TBPS: it keeps the base retriever frozen, builds
+              label-free evidence from the current gallery, reasons over rank x slot structure,
+              enriches the query residually, and retrieves over the complete gallery.
             </p>
           </div>
 
@@ -843,8 +849,8 @@
 
     <footer class="site-footer">
       <div class="section-inner footer-inner">
-        <p><strong>The Gallery as Context</strong> - Research project page.</p>
-        <p>Publication metadata and public links will be added when available.</p>
+        <p><strong>The Gallery as Context</strong></p>
+        <p>Publication metadata and public links will be added when explicitly supplied.</p>
       </div>
     </footer>
 
