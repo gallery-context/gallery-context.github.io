@@ -137,7 +137,7 @@ function renderDiagnosticHeatmap() {
       const intensity = (value - min) / (max - min);
       const alpha = 0.16 + intensity * 0.62;
       return `
-        <td class="heat-cell" style="background-color: rgba(8, 125, 135, ${alpha.toFixed(3)})">
+        <td class="heat-cell" style="--heat-alpha: ${alpha.toFixed(3)}">
           <span>${value.toFixed(2)}%</span>
           <small>${row.ci[index]}</small>
         </td>
