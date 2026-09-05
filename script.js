@@ -11,21 +11,43 @@ const diagnostic = [
 const benchmarkResults = [
   {
     dataset: "CUHK-PEDES",
-    base: { name: "ITSELF", r1: 76.92, map: 69.34 },
-    gate: { name: "GATE-ITSELF", r1: 77.39, map: 72.49 },
-    gain: { r1: 0.47, map: 3.15 }
+    r1: 77.39,
+    map: 72.49,
+    deltaR1: 0.47,
+    deltaMap: 1.59
   },
   {
     dataset: "ICFG-PEDES",
-    base: { name: "ITSELF", r1: 69.19, map: 43.78 },
-    gate: { name: "GATE-ITSELF", r1: 69.64, map: 48.23 },
-    gain: { r1: 0.45, map: 4.45 }
+    r1: 69.64,
+    map: 48.23,
+    deltaR1: 0.45,
+    deltaMap: 4.09
   },
   {
     dataset: "RSTPReid",
-    base: { name: "ITSELF", r1: 67.25, map: 53.02 },
-    gate: { name: "GATE-ITSELF", r1: 68.50, map: 55.24 },
-    gain: { r1: 1.25, map: 2.22 }
+    r1: 68.50,
+    map: 55.24,
+    deltaR1: 1.00,
+    deltaMap: 2.11
+  }
+];
+
+const differentSettingGroups = [
+  {
+    title: "ALBEF-based methods",
+    items: ["ALBEF family", "Image-language pretraining"]
+  },
+  {
+    title: "External tools / ReID pre-training",
+    items: ["External tools", "ReID-domain pretraining"]
+  },
+  {
+    title: "CLIP-based TBPS methods",
+    items: ["Frozen CLIP host", "T-TBPS inference"]
+  },
+  {
+    title: "GATE + ITSELF",
+    items: ["Best reported frontier"]
   }
 ];
 
@@ -35,6 +57,21 @@ const retrieverDeltas = [
   { name: "RDE", deltas: [{ r1: 0.33, map: 1.25 }, { r1: 0.66, map: 1.67 }, { r1: 1.00, map: 1.50 }] },
   { name: "DM-Adapter", deltas: [{ r1: 0.51, map: 3.46 }, { r1: 1.05, map: 6.84 }, { r1: 1.50, map: 2.39 }] },
   { name: "ITSELF", deltas: [{ r1: 0.47, map: 3.15 }, { r1: 0.45, map: 4.45 }, { r1: 1.25, map: 2.22 }] }
+];
+
+const rankingAverageGains = [
+  { dataset: "CUHK-PEDES", r1: 0.44, map: 2.53 },
+  { dataset: "ICFG-PEDES", r1: 0.72, map: 4.33 },
+  { dataset: "RSTPReid", r1: 1.50, map: 2.27 }
+];
+
+const transferDirections = [
+  ["CUHK-PEDES", "ICFG-PEDES"],
+  ["CUHK-PEDES", "RSTPReid"],
+  ["ICFG-PEDES", "CUHK-PEDES"],
+  ["ICFG-PEDES", "RSTPReid"],
+  ["RSTPReid", "CUHK-PEDES"],
+  ["RSTPReid", "ICFG-PEDES"]
 ];
 
 const transfers = [
@@ -62,64 +99,35 @@ const reasoningAblation = [
   { name: "QCRS-Mixer", values: [{ r1: 0.49, map: 1.83 }, { r1: 0.33, map: 4.36 }, { r1: 1.90, map: 2.65 }] }
 ];
 
-const qualitativeExamples = [
-  {
-    retriever: "CLIP",
-    dataset: "CUHK-PEDES",
-    query: "Dominant clothing cues plus a carried bag.",
-    base: ["D", "T", "D", "T", "D"],
-    gate: ["T", "T", "D", "T", "D"]
-  },
-  {
-    retriever: "CLIP",
-    dataset: "ICFG-PEDES",
-    query: "Backpack logo, scarf, or footwear details sharpen the ranking.",
-    base: ["D", "D", "T", "D", "T"],
-    gate: ["T", "T", "D", "T", "D"]
-  },
-  {
-    retriever: "ITSELF",
-    dataset: "ICFG-PEDES",
-    query: "A strong base retriever still leaves mixed positives and hard negatives.",
-    base: ["D", "T", "D", "T", "D"],
-    gate: ["T", "T", "T", "T", "T"]
-  },
-  {
-    retriever: "DM-Adapter",
-    dataset: "RSTPReid",
-    query: "Viewpoint-sensitive case with dark outerwear.",
-    base: ["D", "T", "D", "D", "T"],
-    gate: ["T", "D", "T", "D", "T"]
-  },
-  {
-    retriever: "RDE",
-    dataset: "CUHK-PEDES",
-    query: "A rescue case where the base Top-5 has no target image.",
-    base: ["D", "D", "D", "D", "D"],
-    gate: ["T", "D", "D", "T", "D"]
-  },
-  {
-    retriever: "RDE",
-    dataset: "ICFG-PEDES",
-    query: "A carried jacket or blue insulated coat disambiguates similar candidates.",
-    base: ["D", "T", "D", "D", "T"],
-    gate: ["T", "T", "T", "D", "T"]
-  },
-  {
-    retriever: "IRRA",
-    dataset: "ICFG-PEDES",
-    query: "Residual identity ambiguity among candidates with similar descriptions.",
-    base: ["D", "T", "D", "T", "D"],
-    gate: ["T", "T", "T", "T", "T"]
-  },
-  {
-    retriever: "IRRA",
-    dataset: "RSTPReid",
-    query: "Rear views and low-resolution dark outerwear make local cues unreliable.",
-    base: ["D", "D", "D", "D", "D"],
-    gate: ["T", "D", "T", "D", "D"]
-  }
-];
+const qualitativeDatasetLabels = {
+  cuhk: "CUHK-PEDES",
+  icfg: "ICFG-PEDES",
+  rstp: "RSTPReid"
+};
+
+const qualitativeSourceFiles = {
+  CLIP: ["[t]clip-cuhk.png", "[t]clip-icfg.png", "[t]clip-rstp.png"],
+  ITSELF: ["[t]itself-cuhk.png", "[t]itself-icfg.png", "[t]itself-rstp.png"],
+  "DM-Adapter": ["[t]dm-adapter-cuhk.png", "[t]dm-adapter-icfg.png", "[t]dm-adapter-rstp.png"],
+  RDE: ["[t]rde-cuhk.png", "[t]rde-icfg.png", "[t]rde-rstp.png"],
+  IRRA: ["[t]irra-cuhk.png", "[t]irra-icfg.png", "[t]irra-rstp.png"]
+};
+
+function inferQualitativeDatasetKey(src) {
+  const match = src.match(/-(cuhk|icfg|rstp)\.png$/i);
+  return match ? match[1] : "";
+}
+
+const qualitativeExamples = Object.entries(qualitativeSourceFiles).map(([retriever, sources]) => ({
+  retriever,
+  figures: sources.map((file) => {
+    const datasetKey = inferQualitativeDatasetKey(file);
+    return {
+      datasetKey,
+      src: `assets/qualitative/${file}`
+    };
+  })
+}));
 
 function formatDelta(value) {
   return `+${value.toFixed(2)}`;
@@ -155,7 +163,7 @@ function renderDiagnosticHeatmap() {
 }
 
 function renderBenchmarkCards() {
-  const container = document.querySelector("#benchmark-cards");
+  const container = document.querySelector("#benchmark-frontier");
   if (!container) return;
   container.innerHTML = benchmarkResults.map((item) => `
     <article class="benchmark-card">
@@ -163,15 +171,86 @@ function renderBenchmarkCards() {
       <div class="metric-row">
         <div class="metric-box">
           <span>R@1</span>
-          <strong>${item.gate.r1.toFixed(2)}</strong>
+          <strong>${item.r1.toFixed(2)}</strong>
         </div>
         <div class="metric-box">
           <span>mAP</span>
-          <strong>${item.gate.map.toFixed(2)}</strong>
+          <strong>${item.map.toFixed(2)}</strong>
         </div>
       </div>
-      <p class="gain-line">${formatDelta(item.gain.r1)} R@1 / ${formatDelta(item.gain.map)} mAP over ${item.base.name}</p>
-      <p class="baseline-line">Frozen base: ${item.base.r1.toFixed(2)} R@1 / ${item.base.map.toFixed(2)} mAP</p>
+      <p class="gain-line">vs best non-GATE result: ${formatDelta(item.deltaR1)} R@1 / ${formatDelta(item.deltaMap)} mAP</p>
+    </article>
+  `).join("");
+}
+
+function renderComparisonLadder() {
+  const container = document.querySelector("#comparison-ladder");
+  if (!container) return;
+  container.innerHTML = differentSettingGroups.map((group, index) => `
+    <article class="comparison-step ${index === differentSettingGroups.length - 1 ? "comparison-step--final" : ""}">
+      <div class="comparison-step__index">0${index + 1}</div>
+      <div class="comparison-step__body">
+        <strong>${group.title}</strong>
+        <div class="comparison-step__items">
+          ${group.items.map((item) => `<span>${item}</span>`).join("")}
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function renderRetrieverDeltas() {
+  const container = document.querySelector("#retriever-matrix");
+  if (!container) return;
+  const header = datasets.map((dataset) => `<div class="retriever-matrix__head">${dataset}</div>`).join("");
+  const rows = retrieverDeltas.map((row) => `
+    <div class="retriever-matrix__row">
+      <div class="retriever-matrix__label">${row.name}</div>
+      ${row.deltas.map((value) => `
+        <div class="retriever-matrix__cell">
+          <strong>${formatDelta(value.r1)} / ${formatDelta(value.map)}</strong>
+          <span>ΔR@1 / ΔmAP</span>
+        </div>
+      `).join("")}
+    </div>
+  `).join("");
+  container.innerHTML = `
+    <div class="retriever-matrix__header">
+      <div></div>
+      ${header}
+    </div>
+    <div class="retriever-matrix__body">${rows}</div>
+  `;
+}
+
+function tile(status, index) {
+  if (status === "…" || status === "...") {
+    return '<span class="result-tile ellipsis" aria-hidden="true">…</span>';
+  }
+  const isTarget = status === "T";
+  const label = isTarget ? "target" : "distractor";
+  return `<span class="result-tile ${label}" aria-label="Rank ${index + 1}: ${label}">${status}</span>`;
+}
+
+function renderRankingStrips() {
+  const frozen = document.querySelector("#ranking-frozen");
+  const enriched = document.querySelector("#ranking-enriched");
+  if (frozen) {
+    frozen.innerHTML = ["D", "T", "D", "T", "D", "T"].map(tile).join("");
+  }
+  if (enriched) {
+    enriched.innerHTML = ["T", "T", "D", "T", "D", "…"].map(tile).join("");
+  }
+}
+
+function renderRankingGains() {
+  const container = document.querySelector("#ranking-gains");
+  if (!container) return;
+  container.innerHTML = rankingAverageGains.map((item) => `
+    <article class="ranking-gain">
+      <strong>${item.dataset}</strong>
+      <span>${formatDelta(item.r1)} R@1</span>
+      <span>${formatDelta(item.map)} mAP</span>
     </article>
   `).join("");
 }
@@ -205,27 +284,16 @@ function renderGroupedDeltas(containerSelector, rows, maxR1, maxMap) {
   }).join("");
 }
 
-function renderRetrieverDeltas() {
-  const rows = retrieverDeltas.map((row) => ({ name: row.name, values: row.deltas }));
-  renderGroupedDeltas("#retriever-deltas", rows, 1.9, 6.84);
-}
-
-function renderTransferSummary() {
-  const container = document.querySelector("#transfer-summary");
+function renderTransferDirections() {
+  const container = document.querySelector("#transfer-directions");
   if (!container) return;
-  container.innerHTML = transfers.map((transfer) => `
-    <article class="transfer-card">
-      <strong>${transfer.direction}</strong>
-      <span>avg ${formatDelta(transfer.avgR1)} R@1 / ${formatDelta(transfer.avgMap)} mAP</span>
-      <span>max ${formatDelta(transfer.maxR1)} R@1 / ${formatDelta(transfer.maxMap)} mAP</span>
-    </article>
+  container.innerHTML = transferDirections.map(([source, target]) => `
+    <div class="transfer-direction">
+      <span>${source}</span>
+      <strong>&rarr;</strong>
+      <span>${target}</span>
+    </div>
   `).join("");
-}
-
-function tile(status, index) {
-  const isTarget = status === "T";
-  const label = isTarget ? "target" : "distractor";
-  return `<span class="result-tile ${label}" aria-label="Rank ${index + 1}: ${label}">${status}</span>`;
 }
 
 function renderQualitative(filter = "all") {
@@ -235,19 +303,23 @@ function renderQualitative(filter = "all") {
     ? qualitativeExamples
     : qualitativeExamples.filter((item) => item.retriever === filter);
   container.innerHTML = selected.map((item) => `
-    <article class="qual-card">
-      <h3>${item.retriever} on ${item.dataset}</h3>
-      <p>${item.query}</p>
-      <div class="retrieval-row">
-        <strong>Base</strong>
-        <div class="retrieval-strip">${item.base.map(tile).join("")}</div>
+    <section class="qual-model-row">
+      <div class="qual-model-heading">
+        <h3>${item.retriever}</h3>
       </div>
-      <div class="retrieval-row">
-        <strong>+ GATE</strong>
-        <div class="retrieval-strip">${item.gate.map(tile).join("")}</div>
+      <div class="qual-image-grid">
+        ${item.figures.map((figure) => `
+          <figure class="qual-figure">
+            <figcaption>${qualitativeDatasetLabels[figure.datasetKey]}</figcaption>
+            <button type="button" class="qual-image-button" aria-label="Open ${item.retriever} ${qualitativeDatasetLabels[figure.datasetKey]} retrieval figure" data-qual-src="${figure.src}" data-qual-alt="${item.retriever} ${qualitativeDatasetLabels[figure.datasetKey]} retrieval figure">
+              <img src="${figure.src}" alt="${item.retriever} ${qualitativeDatasetLabels[figure.datasetKey]} retrieval figure" loading="lazy" decoding="async">
+            </button>
+          </figure>
+        `).join("")}
       </div>
-    </article>
+    </section>
   `).join("");
+  bindQualitativeFigures();
 }
 
 function bindQualitativeTabs() {
@@ -259,6 +331,64 @@ function bindQualitativeTabs() {
       renderQualitative(tab.dataset.filter);
     });
   });
+}
+
+function bindQualitativeFigures() {
+  const lightbox = document.querySelector("#qualitative-lightbox");
+  const lightboxImage = document.querySelector("#qualitative-lightbox-image");
+  if (!lightbox || !lightboxImage) return;
+  const closeButton = lightbox.querySelector("[data-qual-lightbox-close]");
+  let closeTimer = 0;
+
+  const closeLightbox = () => {
+    window.clearTimeout(closeTimer);
+    lightbox.setAttribute("aria-hidden", "true");
+    lightbox.dataset.open = "false";
+    closeTimer = window.setTimeout(() => {
+      lightbox.hidden = true;
+      lightboxImage.src = "";
+      lightboxImage.alt = "";
+    }, 160);
+  };
+
+  const openLightbox = (src, alt) => {
+    window.clearTimeout(closeTimer);
+    lightboxImage.src = src;
+    lightboxImage.alt = alt;
+    lightbox.setAttribute("aria-hidden", "false");
+    lightbox.hidden = false;
+    window.requestAnimationFrame(() => {
+      lightbox.dataset.open = "true";
+      closeButton?.focus({ preventScroll: true });
+    });
+  };
+
+  const buttons = Array.from(document.querySelectorAll(".qual-image-button"));
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const src = button.dataset.qualSrc;
+      const alt = button.dataset.qualAlt || "";
+      if (src) openLightbox(src, alt);
+    });
+  });
+
+  if (lightbox.dataset.bound === "true") return;
+  lightbox.dataset.bound = "true";
+
+  lightbox.addEventListener("click", (event) => {
+    const target = event.target;
+    if (target instanceof HTMLElement && target.closest("[data-qual-lightbox-close]")) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !lightbox.hidden) {
+      closeLightbox();
+    }
+  });
+
+  closeButton?.addEventListener("click", closeLightbox);
 }
 
 function bindNav() {
@@ -377,8 +507,11 @@ function bindTtbpsScrollFlow() {
 document.addEventListener("DOMContentLoaded", () => {
   renderDiagnosticHeatmap();
   renderBenchmarkCards();
+  renderComparisonLadder();
   renderRetrieverDeltas();
-  renderTransferSummary();
+  renderRankingStrips();
+  renderRankingGains();
+  renderTransferDirections();
   renderGroupedDeltas("#evidence-ablation", evidenceAblation, 1.9, 4.36);
   renderGroupedDeltas("#reasoning-ablation", reasoningAblation, 1.9, 4.36);
   renderQualitative();
