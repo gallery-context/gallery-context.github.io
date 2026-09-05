@@ -304,6 +304,76 @@ function bindActiveNav() {
   window.addEventListener("resize", updateActiveNav);
 }
 
+function bindTtbpsScrollFlow() {
+  const figure = document.querySelector("[data-ttbps-visual]");
+  const stage = figure?.querySelector("[data-ttbps-stage]");
+  const panel = figure?.querySelector("[data-ttbps-panel]");
+  const lanes = figure?.querySelector("[data-ttbps-lanes]");
+  const queryCard = figure?.querySelector("[data-ttbps-query-card]");
+  const standardDock = figure?.querySelector('[data-ttbps-query-dock="standard"]');
+  const transductiveDock = figure?.querySelector('[data-ttbps-query-dock="transductive"]');
+
+  if (!figure || !stage || !panel || !lanes || !queryCard || !standardDock || !transductiveDock) return;
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+  let rafId = 0;
+
+  function applyLayout(progress) {
+    const lanesRect = lanes.getBoundingClientRect();
+    const standardRect = standardDock.getBoundingClientRect();
+    const transductiveRect = transductiveDock.getBoundingClientRect();
+    const standardX = standardRect.left - lanesRect.left;
+    const eased = progress * progress * (3 - 2 * progress);
+    const cardWidth = clamp(Math.round(Math.max(standardRect.width, 420)), 300, Math.round(lanesRect.width - standardX - 8));
+    figure.style.setProperty("--ttbps-card-x", `${Math.round(standardX)}px`);
+    figure.style.setProperty("--ttbps-card-width", `${cardWidth}px`);
+
+    const cardHeight = queryCard.getBoundingClientRect().height;
+    const standardCenter = standardRect.top + standardRect.height / 2 - lanesRect.top;
+    const transductiveCenter = transductiveRect.top + transductiveRect.height / 2 - lanesRect.top;
+    const cardY = standardCenter - cardHeight / 2 + (transductiveCenter - standardCenter) * eased;
+    const flowOffset = (1 - eased) * 124;
+
+    figure.style.setProperty("--ttbps-card-y", `${cardY.toFixed(2)}px`);
+    figure.style.setProperty("--ttbps-trace-offset", `${flowOffset.toFixed(2)}`);
+    figure.style.setProperty("--ttbps-standard-focus", `${(1 - eased * 0.42).toFixed(3)}`);
+    figure.style.setProperty("--ttbps-transductive-focus", `${(0.7 + eased * 0.3).toFixed(3)}`);
+    figure.dataset.ttbpsPhase = progress < 0.38 ? "standard" : progress > 0.68 ? "transductive" : "transition";
+    queryCard.setAttribute("data-ttbps-progress", progress.toFixed(3));
+  }
+
+  function update() {
+    rafId = 0;
+    const viewport = window.innerHeight || document.documentElement.clientHeight;
+    const stageRect = stage.getBoundingClientRect();
+    const start = viewport * 0.82;
+    const travel = Math.max(viewport * 0.9, stageRect.height - viewport * 0.12);
+    const progress = clamp((start - stageRect.top) / travel, 0, 1);
+    applyLayout(reduceMotion ? 0 : progress);
+  }
+
+  function scheduleUpdate() {
+    if (rafId) return;
+    rafId = window.requestAnimationFrame(update);
+  }
+
+  update();
+
+  if (reduceMotion) return;
+
+  window.addEventListener("scroll", scheduleUpdate, { passive: true });
+  window.addEventListener("resize", scheduleUpdate);
+  if ("ResizeObserver" in window) {
+    const observer = new ResizeObserver(scheduleUpdate);
+    observer.observe(stage);
+    observer.observe(panel);
+    observer.observe(lanes);
+    observer.observe(standardDock);
+    observer.observe(transductiveDock);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderDiagnosticHeatmap();
   renderBenchmarkCards();
@@ -315,4 +385,5 @@ document.addEventListener("DOMContentLoaded", () => {
   bindQualitativeTabs();
   bindNav();
   bindActiveNav();
+  bindTtbpsScrollFlow();
 });

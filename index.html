@@ -75,6 +75,25 @@
               </svg>
               <span>BibTeX</span>
             </a>
+            <a href="https://gallery-context.github.io/" target="_blank" rel="noreferrer noopener">
+              <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M3.25 2.75h9.5v10.5h-9.5z"></path>
+                <path d="M5.05 5.1h5.9"></path>
+                <path d="M5.05 7.1h5.9"></path>
+                <path d="M5.05 9.1h3.6"></path>
+              </svg>
+              <span>Blog</span>
+            </a>
+            <a href="https://gallery-context.github.io/" target="_blank" rel="noreferrer noopener">
+              <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M3.4 4.1h9.2v6.1H3.4z"></path>
+                <path d="M5.1 10.2v1.6"></path>
+                <path d="M10.9 10.2v1.6"></path>
+                <path d="M4.7 12.2h6.6"></path>
+                <path d="M5.05 6.1h5.15"></path>
+              </svg>
+              <span>Slides</span>
+            </a>
           </nav>
         </div>
       </section>
@@ -94,8 +113,90 @@
         <div class="section-inner highlights-inner">
           <header class="overview-heading">
             <p class="section-kicker">Research story</p>
-            <h2 id="highlights-title">Highlights</h2>
+            <h2 id="highlights-title">From Observation to Method</h2>
+            <p class="overview-bridge">If the gallery changes what makes a description discriminative, why construct the query in isolation? We trace this observation from controlled evidence, to the T-TBPS setting, to GATE as a plug-and-play realization.</p>
           </header>
+
+          <figure class="overview-observation research-figure" aria-label="Observation figure comparing the same query and target across two galleries. Gallery A repeats red shirts, while Gallery B repeats black backpacks.">
+            <div class="overview-figure-intro">
+              <p class="overview-figure-kicker">SAME QUERY · SAME TARGET</p>
+              <p class="overview-figure-query">
+                A person in a <span class="overview-query-mark red">red shirt</span> with a
+                <span class="overview-query-mark backpack">black backpack</span>
+              </p>
+            </div>
+
+            <div class="overview-galleries">
+              <div class="overview-gallery" aria-label="Gallery A: red shirts are common and the black backpack is distinctive.">
+                <div class="overview-gallery-head">
+                  <strong>Gallery A</strong>
+                </div>
+                <div class="overview-gallery-people">
+                  <div class="overview-gallery-person target">
+                    <img src="assets/overview/target.png" alt="Target person" />
+                  </div>
+                  <div class="overview-gallery-person">
+                    <img src="assets/overview/a_red_01.png" alt="" />
+                  </div>
+                  <div class="overview-gallery-person">
+                    <img src="assets/overview/a_red_02.png" alt="" />
+                  </div>
+                  <div class="overview-gallery-person">
+                    <img src="assets/overview/a_red_03.png" alt="" />
+                  </div>
+                </div>
+                <div class="overview-cue-summary">
+                  <div class="overview-cue-row overview-cue-red overview-cue-common">
+                    <span class="overview-cue-name">red shirt</span>
+                    <span class="overview-cue-leader" aria-hidden="true"></span>
+                    <span class="overview-cue-state">COMMON</span>
+                  </div>
+                  <div class="overview-cue-row overview-cue-bag overview-cue-distinctive">
+                    <span class="overview-cue-name">black backpack</span>
+                    <span class="overview-cue-leader" aria-hidden="true"></span>
+                    <span class="overview-cue-state">DISTINCTIVE</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="overview-gallery" aria-label="Gallery B: black backpacks are common and the red shirt is distinctive.">
+                <div class="overview-gallery-head">
+                  <strong>Gallery B</strong>
+                </div>
+                <div class="overview-gallery-people">
+                  <div class="overview-gallery-person target">
+                    <img src="assets/overview/target.png" alt="Target person" />
+                  </div>
+                  <div class="overview-gallery-person">
+                    <img src="assets/overview/b_bag_01.png" alt="" />
+                  </div>
+                  <div class="overview-gallery-person">
+                    <img src="assets/overview/b_bag_02.png" alt="" />
+                  </div>
+                  <div class="overview-gallery-person">
+                    <img src="assets/overview/b_bag_03.png" alt="" />
+                  </div>
+                </div>
+                <div class="overview-cue-summary">
+                  <div class="overview-cue-row overview-cue-red overview-cue-distinctive">
+                    <span class="overview-cue-name">red shirt</span>
+                    <span class="overview-cue-leader" aria-hidden="true"></span>
+                    <span class="overview-cue-state">DISTINCTIVE</span>
+                  </div>
+                  <div class="overview-cue-row overview-cue-bag overview-cue-common">
+                    <span class="overview-cue-name">black backpack</span>
+                    <span class="overview-cue-leader" aria-hidden="true"></span>
+                    <span class="overview-cue-state">COMMON</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="overview-conclusion">
+              <span class="overview-conclusion-rule" aria-hidden="true"></span>
+              <p>Gallery context changes what is discriminative.</p>
+            </div>
+          </figure>
 
           <div class="highlight-grid">
             <article class="highlight-card">
@@ -128,44 +229,100 @@
           </div>
 
           <figure
-            class="research-figure pipeline-overview"
+            class="research-figure ttbps-visual"
+            data-ttbps-visual
             aria-describedby="ttbps-caption"
           >
-            <div class="pipeline-lane standard-lane" aria-label="Standard TBPS pipeline">
-              <p class="pipeline-lane-label">Standard TBPS</p>
-              <div class="pipeline-row standard-row">
-                <div class="pipeline-stage">Text Query</div>
-                <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
-                <div class="pipeline-stage">Fixed Query Representation</div>
-                <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
-                <div class="pipeline-stage">Gallery Matching</div>
-                <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
-                <div class="pipeline-stage">Ranking</div>
-              </div>
-            </div>
+            <div class="ttbps-scroll-stage" data-ttbps-stage>
+              <div class="ttbps-panel" data-ttbps-panel>
+                <div class="ttbps-lanes" data-ttbps-lanes>
+                  <svg class="ttbps-query-trace" viewBox="0 0 24 180" aria-hidden="true" focusable="false">
+                    <path class="ttbps-query-trace-base" d="M12 4 C12 42 12 138 12 176"></path>
+                    <path class="ttbps-query-trace-active" d="M12 4 C12 42 12 138 12 176"></path>
+                  </svg>
 
-            <div class="pipeline-lane transductive-lane" aria-label="T-TBPS pipeline">
-              <p class="pipeline-lane-label accent">T-TBPS</p>
-              <div class="pipeline-row transductive-row">
-                <div class="pipeline-stage">Text Query</div>
-                <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
-                <div class="pipeline-bridge">
-                  <div class="pipeline-context">Current unlabeled gallery</div>
-                  <span class="pipeline-context-arrow" aria-hidden="true">&darr;</span>
-                  <div class="pipeline-stage pipeline-stage-accent">Gallery-Aware Query Construction</div>
+                  <div class="ttbps-query-card" data-ttbps-query-card aria-label="Shared text query">
+                    A person wearing a muted red shirt and carrying a black backpack.
+                  </div>
+
+                  <div class="ttbps-lane ttbps-standard-lane" aria-label="Standard TBPS pipeline">
+                    <p class="ttbps-lane-label">Standard TBPS</p>
+                    <div class="ttbps-row ttbps-standard-row">
+                      <div
+                        class="ttbps-query-dock"
+                        data-ttbps-query-dock="standard"
+                        aria-label="Text query: A person wearing a muted red shirt and carrying a black backpack."
+                      ></div>
+                      <svg class="ttbps-flow-arrow ttbps-arrow-standard" viewBox="0 0 112 46" aria-hidden="true" focusable="false">
+                        <path class="ttbps-arrow-base" d="M6 24 C34 18 72 30 104 22"></path>
+                        <path class="ttbps-arrow-highlight" d="M6 24 C34 18 72 30 104 22"></path>
+                        <path class="ttbps-arrow-head" d="M98 16 L106 22 L98 29"></path>
+                      </svg>
+                      <div class="ttbps-step ttbps-retrieval-muted" aria-label="Complete-gallery retrieval">
+                        <span>Complete-gallery retrieval</span>
+                      </div>
+                      <svg class="ttbps-flow-arrow ttbps-arrow-standard" viewBox="0 0 112 46" aria-hidden="true" focusable="false">
+                        <path class="ttbps-arrow-base" d="M6 24 C34 18 72 30 104 22"></path>
+                        <path class="ttbps-arrow-highlight" d="M6 24 C34 18 72 30 104 22"></path>
+                        <path class="ttbps-arrow-head" d="M98 16 L106 22 L98 29"></path>
+                      </svg>
+                      <div class="ttbps-ranking ttbps-ranking-muted" aria-label="Ranking output">
+                        <span><strong>#1</strong></span>
+                        <span><strong>#2</strong></span>
+                        <span><strong>#3</strong></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="ttbps-lane ttbps-transductive-lane" aria-label="T-TBPS pipeline">
+                    <p class="ttbps-lane-label accent">T-TBPS</p>
+                    <div class="ttbps-row ttbps-transductive-row">
+                      <div
+                        class="ttbps-query-dock"
+                        data-ttbps-query-dock="transductive"
+                        aria-label="Text query: A person wearing a muted red shirt and carrying a black backpack."
+                      ></div>
+                      <svg class="ttbps-flow-arrow ttbps-arrow-transductive" viewBox="0 0 112 46" aria-hidden="true" focusable="false">
+                        <path class="ttbps-arrow-base" d="M6 24 C34 18 72 30 104 22"></path>
+                        <path class="ttbps-arrow-highlight" d="M6 24 C34 18 72 30 104 22"></path>
+                        <path class="ttbps-arrow-head" d="M98 16 L106 22 L98 29"></path>
+                      </svg>
+                      <div class="ttbps-construction">
+                        <div class="ttbps-gallery-cue">
+                          <span>Current unlabeled gallery</span>
+                          <svg class="ttbps-context-arrow" viewBox="0 0 96 74" aria-hidden="true" focusable="false">
+                            <path class="ttbps-arrow-base" d="M48 6 C48 25 48 43 48 63"></path>
+                            <path class="ttbps-arrow-highlight" d="M48 6 C48 25 48 43 48 63"></path>
+                            <path class="ttbps-arrow-head" d="M42 57 L48 65 L54 57"></path>
+                          </svg>
+                        </div>
+                        <div class="ttbps-step ttbps-step-accent ttbps-construction-step">
+                          Gallery-Aware Query Construction
+                        </div>
+                      </div>
+                      <div class="ttbps-arrow-wrap ttbps-final-arrow-wrap">
+                        <svg class="ttbps-flow-arrow ttbps-arrow-transductive" viewBox="0 0 112 46" aria-hidden="true" focusable="false">
+                          <path class="ttbps-arrow-base" d="M6 24 C34 18 72 30 104 22"></path>
+                          <path class="ttbps-arrow-highlight" d="M6 24 C34 18 72 30 104 22"></path>
+                          <path class="ttbps-arrow-head" d="M98 16 L106 22 L98 29"></path>
+                        </svg>
+                        <span>final retrieval over full gallery</span>
+                      </div>
+                      <div class="ttbps-ranking ttbps-ranking-strong" aria-label="Ranking output">
+                        <span><strong>#1</strong></span>
+                        <span><strong>#2</strong></span>
+                        <span><strong>#3</strong></span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
-                <div class="pipeline-stage pipeline-stage-accent">Enriched Query</div>
-                <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
-                <div class="pipeline-stage pipeline-stage-accent">Complete-Gallery Retrieval</div>
-                <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
-                <div class="pipeline-stage pipeline-stage-accent">Ranking</div>
               </div>
             </div>
 
             <figcaption id="ttbps-caption">
-              Standard TBPS constructs the query independently. T-TBPS uses the unlabeled gallery as
-              inference context during query construction, then ranks over the full gallery.
+              Standard TBPS constructs the query independently of the gallery. T-TBPS instead uses
+              the current unlabeled gallery as inference context during query construction, then
+              performs final retrieval over the complete gallery.
             </figcaption>
           </figure>
         </div>
