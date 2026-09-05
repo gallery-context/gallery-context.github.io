@@ -50,52 +50,69 @@
           <div class="paper-metadata" aria-label="Author and publication metadata"><!-- TODO(public metadata): add author names once explicitly supplied by the project owner. --><!-- TODO(public metadata): add affiliation and venue once explicitly supplied by the project owner. --></div>
 
           <nav class="paper-links" aria-label="Project resources">
-            <a href="https://github.com/gallery-context/gallery-context.github.io" target="_blank" rel="noreferrer noopener">Code</a>
+            <a href="https://gallery-context.github.io/" target="_blank" rel="noreferrer noopener">
+              <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M4.25 1.75h5.25L13 5.25v9H4.25z"></path>
+                <path d="M9.5 1.75v3.5H13"></path>
+                <path d="M6 11.15 7.35 7.7l1.35 3.45M6.45 10.05h1.8"></path>
+              </svg>
+              <span>arXiv</span>
+            </a>
+            <a href="https://gallery-context.github.io/" target="_blank" rel="noreferrer noopener">
+              <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="m6.1 4.55-3.35 3.45 3.35 3.45"></path>
+                <path d="m9.9 4.55 3.35 3.45-3.35 3.45"></path>
+                <path d="m8.95 3.55-1.9 8.9"></path>
+              </svg>
+              <span>Code</span>
+            </a>
+            <a href="https://gallery-context.github.io/" target="_blank" rel="noreferrer noopener">
+              <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M4.25 1.75h7.5v12.5h-7.5z"></path>
+                <path d="M6.15 8.8h1.65v2H6.15z"></path>
+                <path d="M9.05 8.8h1.65v2H9.05z"></path>
+                <path d="M6.35 6.05h3.55"></path>
+              </svg>
+              <span>BibTeX</span>
+            </a>
           </nav>
         </div>
       </section>
 
       <section class="chapter overview-tldr" aria-labelledby="tldr-title">
         <div class="section-inner tldr-inner">
-          <h2 id="tldr-title" class="sr-only">TL;DR</h2>
-          <p class="tldr-copy">
-            <strong>TL;DR:</strong> The discriminative value of a textual cue depends on the current gallery.
-            T-TBPS lets the unlabeled gallery inform query construction, and GATE realizes this idea by
-            enriching the query with gallery context while keeping the underlying TBPS retriever frozen.
-          </p>
+          <div class="tldr-box">
+            <h2 id="tldr-title" class="section-kicker tldr-label">TL;DR</h2>
+            <p class="tldr-copy">
+              We study gallery-aware query construction for text-based person search. A controlled diagnostic finds reproducible sensitivity to cue-directed gallery composition, motivating T-TBPS and its GATE instantiation.
+            </p>
+          </div>
         </div>
       </section>
 
       <section class="chapter overview-highlights" id="highlights" aria-labelledby="highlights-title">
         <div class="section-inner highlights-inner">
           <header class="overview-heading">
-            <p class="section-kicker">Key results</p>
+            <p class="section-kicker">Research story</p>
             <h2 id="highlights-title">Highlights</h2>
           </header>
 
           <div class="highlight-grid">
             <article class="highlight-card">
-              <strong>2.84&ndash;15.66%</strong>
-              <span>Top-1 Flip Rate</span>
-              <p>Across 15/15 dataset &times; retriever combinations, changing cue-directed gallery composition produces non-zero decision sensitivity.</p>
+              <h3>Retrieval decisions are sensitive to gallery composition</h3>
+              <p>Under controlled cue-directed gallery interventions, changing part of the distractor population can alter Top-1 correctness while the query and target are kept fixed.</p>
             </article>
 
             <article class="highlight-card">
-              <strong>15 / 15</strong>
-              <span>In-domain gains</span>
-              <p>base-retriever &times; benchmark combinations improve in both R@1 and mAP when paired with GATE.</p>
+              <h3>T-TBPS makes query construction gallery-aware</h3>
+              <p>The current unlabeled gallery can inform how the text query is represented before retrieval over the complete gallery.</p>
             </article>
 
             <article class="highlight-card">
-              <strong>30 / 30</strong>
-              <span>Transfer gains</span>
-              <p>base-retriever &times; transfer settings improve in both R@1 and mAP without target-gallery labels or target-set optimization.</p>
+              <h3>The base retriever can stay frozen</h3>
+              <p>GATE realizes this setting through gallery-aware query enrichment while leaving the underlying TBPS retriever unchanged.</p>
             </article>
           </div>
-
-          <p class="overview-note">
-            The strongest GATE configuration reports the strongest in-domain results across all three evaluated benchmarks.
-          </p>
         </div>
       </section>
 
