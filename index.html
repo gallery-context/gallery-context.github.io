@@ -31,9 +31,9 @@
         </button>
         <div class="nav-links" id="nav-links">
           <a href="#hero">Overview</a>
+          <a href="#diagnostic">Diagnostic</a>
           <a href="#ttbps">T-TBPS</a>
-          <a href="#motivation">Motivation</a>
-          <a href="#method">Method</a>
+          <a href="#method">GATE / Method</a>
           <a href="#results">Results</a>
           <a href="#examples">Examples</a>
           <a href="#analysis">Analysis</a>
@@ -217,10 +217,180 @@
         </div>
       </section>
 
+      <section class="chapter diagnostic-chapter" id="diagnostic" aria-labelledby="diagnostic-title">
+        <div class="section-inner">
+          <div class="chapter-heading">
+            <p class="section-kicker">DIAGNOSTIC</p>
+            <h2 id="diagnostic-title">Should TBPS Queries Be Gallery-Independent?</h2>
+            <p>
+              The overview suggests that the same description can become more or less discriminative
+              depending on its competitors. We now test whether this sensitivity can be observed
+              systematically under controlled gallery interventions.
+            </p>
+          </div>
+
+          <figure
+            class="research-figure diagnostic-intervention"
+            aria-label="Controlled gallery intervention showing held-fixed retrieval variables on the left and two paired gallery trials on the right. Gallery A uses cue-A-directed distractors, Gallery B uses cue-B-directed distractors, and both pass through the same frozen retriever before decisions are compared."
+          >
+            <div class="diagnostic-figure-header">
+              <p class="section-kicker">CONTROLLED GALLERY INTERVENTION</p>
+              <p class="diagnostic-figure-lead">
+                Keep the retrieval problem fixed. Change only a cue-directed subset of distractors.
+              </p>
+            </div>
+
+            <div class="diagnostic-intervention-layout">
+              <div class="diagnostic-fixed">
+                <h3>HELD FIXED</h3>
+                <ul>
+                  <li><span>Query</span><b>same description</b></li>
+                  <li><span>Target identity</span><b>same target</b></li>
+                  <li><span>Positives</span><b>all positives</b></li>
+                  <li><span>Neutral fillers</span><b>shared set</b></li>
+                  <li><span>Gallery size</span><b>same size</b></li>
+                  <li><span>Evaluated retriever</span><b>same frozen model</b></li>
+                </ul>
+              </div>
+
+              <div class="diagnostic-trials">
+                <p class="diagnostic-trials-head">SAME RETRIEVAL PROBLEM</p>
+                <div class="diagnostic-paired-flow">
+                  <div class="diagnostic-gallery-node">
+                    <strong>Gallery A</strong>
+                    <span>cue-A-directed distractors</span>
+                  </div>
+
+                  <div class="diagnostic-gallery-node">
+                    <strong>Gallery B</strong>
+                    <span>cue-B-directed distractors</span>
+                  </div>
+
+                  <span class="diagnostic-down" aria-hidden="true">&darr;</span>
+                  <span class="diagnostic-down" aria-hidden="true">&darr;</span>
+                  <div class="diagnostic-retriever-node">SAME FROZEN RETRIEVER</div>
+                  <span class="diagnostic-down diagnostic-down--wide" aria-hidden="true">&darr;</span>
+                  <div class="diagnostic-compare-node">Compare decisions</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="diagnostic-intervened">
+              <p class="section-kicker">INTERVENED</p>
+              <p>Equal-sized cue-directed distractor subset</p>
+            </div>
+          </figure>
+
+          <section class="diagnostic-measurement" aria-labelledby="diagnostic-measurement-title">
+            <p class="section-kicker">MEASUREMENT</p>
+            <h3 id="diagnostic-measurement-title">When does the retrieval decision change?</h3>
+            <p>
+              We ask whether changing only the cue-directed distractor subset changes Top-1 correctness
+              for the same query&ndash;target retrieval problem.
+            </p>
+
+            <div class="diagnostic-flip-flow" aria-label="Paired outcome showing a Top-1 decision flip">
+              <div class="diagnostic-outcome">
+                <span>Gallery A</span>
+                <strong>Top-1 &#10003;</strong>
+              </div>
+              <div class="diagnostic-flip-arrow" aria-hidden="true">&rarr; DECISION FLIP &rarr;</div>
+              <div class="diagnostic-outcome">
+                <span>Gallery B</span>
+                <strong>Top-1 &#10005;</strong>
+              </div>
+            </div>
+
+            <p class="diagnostic-flip-definition">
+              Flip Rate measures how often paired gallery interventions change Top-1 correctness.
+            </p>
+          </section>
+
+          <section class="diagnostic-evidence" aria-label="Empirical evidence">
+            <div class="diagnostic-stats">
+              <article class="diagnostic-stat diagnostic-stat--primary">
+                <strong>15 / 15</strong>
+                <span>dataset &times; retriever combinations show non-zero decision sensitivity</span>
+              </article>
+              <article class="diagnostic-stat diagnostic-stat--secondary">
+                <strong>2.84&ndash;15.66%</strong>
+                <span>Top-1 correctness Flip Rate</span>
+              </article>
+              <article class="diagnostic-stat diagnostic-stat--tertiary">
+                <strong>624,440</strong>
+                <span>paired gallery interventions</span>
+              </article>
+            </div>
+
+            <p class="diagnostic-scale">
+              Across three benchmarks and five frozen retrievers, the diagnostic comprises &gt;3.1M
+              retriever-trial evaluations.
+            </p>
+
+            <div class="chart-panel">
+              <div id="diagnostic-heatmap" class="heatmap" aria-live="polite"></div>
+            </div>
+          </section>
+
+          <section class="diagnostic-interpretation" aria-labelledby="diagnostic-interpretation-title">
+            <p class="section-kicker">INTERPRETATION</p>
+            <h3 id="diagnostic-interpretation-title">What does the diagnostic establish?</h3>
+            <p class="diagnostic-claim">
+              Retrieval decisions are measurably sensitive to cue-directed changes in gallery
+              composition, even when the query, target, positives, gallery size, and evaluated
+              retriever are held fixed.
+            </p>
+            <p class="diagnostic-caveat">
+              This establishes gallery sensitivity, not a sole causal effect of cue prevalence:
+              the swapped subsets necessarily contain different distractor images and identities.
+            </p>
+          </section>
+
+          <details class="technical-details diagnostic-details">
+            <summary>Experimental protocol</summary>
+            <div class="details-grid">
+              <p>
+                The diagnostic uses a predefined 79-cue semantic catalog spanning clothing and
+                footwear color, garment and footwear type, sleeve length, carried items, worn
+                accessories, and clothing patterns. Cues are matched by deterministic, slot-aware
+                lexical rules that favor precision.
+              </p>
+              <p>
+                After compatibility pruning, 2,613 unordered cue-pair cases form the frozen master
+                case set. Each eligible case-query instance can produce five indexed paired trials
+                with gallery size 300, fixed seed 42, and a cue-density-shift admission threshold
+                of 0.1.
+              </p>
+              <p>
+                An off-the-shelf CLIP model is used only as a label-free construction instrument
+                for cue-directed distractors and neutral fillers. The evaluated retrievers do not
+                construct or admit their own trials.
+              </p>
+              <p>
+                Confidence intervals are computed with 1,000 query-cluster bootstrap resamples,
+                preserving all trials associated with each sampled query.
+              </p>
+            </div>
+          </details>
+
+          <div class="diagnostic-transition">
+            <p>
+              The current gallery is therefore not merely a retrieval pool; it contains information
+              about what is discriminative for the current search problem.
+            </p>
+            <div class="diagnostic-transition-flow" aria-label="Transition to T-TBPS">
+              <span>Gallery sensitivity</span>
+              <span aria-hidden="true">&rarr;</span>
+              <span>Gallery-aware query construction</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="chapter ttbps-overview" id="ttbps" aria-labelledby="ttbps-title">
         <div class="section-inner ttbps-inner">
           <div class="chapter-heading ttbps-heading">
-            <p class="section-kicker">Inference setting</p>
+            <p class="section-kicker">INFERENCE SETTING</p>
             <h2 id="ttbps-title">From TBPS to T-TBPS</h2>
             <p>
               T-TBPS lets the current unlabeled gallery inform query construction before final retrieval.
@@ -228,277 +398,82 @@
             </p>
           </div>
 
-          <figure
-            class="research-figure ttbps-visual"
-            data-ttbps-visual
-            aria-describedby="ttbps-caption"
-          >
-            <div class="ttbps-scroll-stage" data-ttbps-stage>
-              <div class="ttbps-panel" data-ttbps-panel>
-                <div class="ttbps-lanes" data-ttbps-lanes>
-                  <svg class="ttbps-query-trace" viewBox="0 0 24 180" aria-hidden="true" focusable="false">
-                    <path class="ttbps-query-trace-base" d="M12 4 C12 42 12 138 12 176"></path>
-                    <path class="ttbps-query-trace-active" d="M12 4 C12 42 12 138 12 176"></path>
+          <figure class="research-figure ttbps-section" aria-describedby="ttbps-caption">
+            <div class="ttbps-section__body">
+              <div class="ttbps-section__lane">
+                <p class="ttbps-section__label">STANDARD TBPS</p>
+                <div class="ttbps-section__flow ttbps-section__flow--standard" aria-label="Standard TBPS pipeline">
+                  <div class="ttbps-section__box ttbps-section__box--muted">Text Query</div>
+                  <svg class="ttbps-section__arrow ttbps-section__arrow--h" viewBox="0 0 56 20" aria-hidden="true" focusable="false">
+                    <path class="ttbps-section__arrow-line" d="M4 10H46"></path>
+                    <path class="ttbps-section__arrow-motion" d="M4 10H46"></path>
+                    <path class="ttbps-section__arrow-head" d="M40 5L46 10L40 15"></path>
                   </svg>
+                  <div class="ttbps-section__box ttbps-section__box--muted">Fixed Query Representation</div>
+                  <svg class="ttbps-section__arrow ttbps-section__arrow--h" viewBox="0 0 56 20" aria-hidden="true" focusable="false">
+                    <path class="ttbps-section__arrow-line" d="M4 10H46"></path>
+                    <path class="ttbps-section__arrow-motion" d="M4 10H46"></path>
+                    <path class="ttbps-section__arrow-head" d="M40 5L46 10L40 15"></path>
+                  </svg>
+                  <div class="ttbps-section__box ttbps-section__box--muted">Gallery Matching</div>
+                  <svg class="ttbps-section__arrow ttbps-section__arrow--h" viewBox="0 0 56 20" aria-hidden="true" focusable="false">
+                    <path class="ttbps-section__arrow-line" d="M4 10H46"></path>
+                    <path class="ttbps-section__arrow-motion" d="M4 10H46"></path>
+                    <path class="ttbps-section__arrow-head" d="M40 5L46 10L40 15"></path>
+                  </svg>
+                  <div class="ttbps-section__box ttbps-section__box--muted">Ranking</div>
+                </div>
+              </div>
 
-                  <div class="ttbps-query-card" data-ttbps-query-card aria-label="Shared text query">
-                    A person wearing a muted red shirt and carrying a black backpack.
+              <div class="ttbps-section__divider" aria-hidden="true"></div>
+
+              <div class="ttbps-section__lane ttbps-section__lane--accent">
+                <p class="ttbps-section__label ttbps-section__label--accent">T-TBPS</p>
+                <div class="ttbps-section__transductive-grid">
+                  <div class="ttbps-section__gallery-slot">
+                    <div class="ttbps-section__gallery-box">Current unlabeled gallery</div>
+                    <svg class="ttbps-section__arrow ttbps-section__arrow--v" viewBox="0 0 20 72" aria-hidden="true" focusable="false">
+                      <path class="ttbps-section__arrow-line" d="M10 4V58"></path>
+                      <path class="ttbps-section__arrow-motion" d="M10 4V58"></path>
+                      <path class="ttbps-section__arrow-head" d="M5 50L10 58L15 50"></path>
+                    </svg>
                   </div>
-
-                  <div class="ttbps-lane ttbps-standard-lane" aria-label="Standard TBPS pipeline">
-                    <p class="ttbps-lane-label">Standard TBPS</p>
-                    <div class="ttbps-row ttbps-standard-row">
-                      <div
-                        class="ttbps-query-dock"
-                        data-ttbps-query-dock="standard"
-                        aria-label="Text query: A person wearing a muted red shirt and carrying a black backpack."
-                      ></div>
-                      <svg class="ttbps-flow-arrow ttbps-arrow-standard" viewBox="0 0 112 46" aria-hidden="true" focusable="false">
-                        <path class="ttbps-arrow-base" d="M6 24 C34 18 72 30 104 22"></path>
-                        <path class="ttbps-arrow-highlight" d="M6 24 C34 18 72 30 104 22"></path>
-                        <path class="ttbps-arrow-head" d="M98 16 L106 22 L98 29"></path>
-                      </svg>
-                      <div class="ttbps-step ttbps-retrieval-muted" aria-label="Complete-gallery retrieval">
-                        <span>Complete-gallery retrieval</span>
-                      </div>
-                      <svg class="ttbps-flow-arrow ttbps-arrow-standard" viewBox="0 0 112 46" aria-hidden="true" focusable="false">
-                        <path class="ttbps-arrow-base" d="M6 24 C34 18 72 30 104 22"></path>
-                        <path class="ttbps-arrow-highlight" d="M6 24 C34 18 72 30 104 22"></path>
-                        <path class="ttbps-arrow-head" d="M98 16 L106 22 L98 29"></path>
-                      </svg>
-                      <div class="ttbps-ranking ttbps-ranking-muted" aria-label="Ranking output">
-                        <span><strong>#1</strong></span>
-                        <span><strong>#2</strong></span>
-                        <span><strong>#3</strong></span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="ttbps-lane ttbps-transductive-lane" aria-label="T-TBPS pipeline">
-                    <p class="ttbps-lane-label accent">T-TBPS</p>
-                    <div class="ttbps-row ttbps-transductive-row">
-                      <div
-                        class="ttbps-query-dock"
-                        data-ttbps-query-dock="transductive"
-                        aria-label="Text query: A person wearing a muted red shirt and carrying a black backpack."
-                      ></div>
-                      <svg class="ttbps-flow-arrow ttbps-arrow-transductive" viewBox="0 0 112 46" aria-hidden="true" focusable="false">
-                        <path class="ttbps-arrow-base" d="M6 24 C34 18 72 30 104 22"></path>
-                        <path class="ttbps-arrow-highlight" d="M6 24 C34 18 72 30 104 22"></path>
-                        <path class="ttbps-arrow-head" d="M98 16 L106 22 L98 29"></path>
-                      </svg>
-                      <div class="ttbps-construction">
-                        <div class="ttbps-gallery-cue">
-                          <span>Current unlabeled gallery</span>
-                          <svg class="ttbps-context-arrow" viewBox="0 0 96 74" aria-hidden="true" focusable="false">
-                            <path class="ttbps-arrow-base" d="M48 6 C48 25 48 43 48 63"></path>
-                            <path class="ttbps-arrow-highlight" d="M48 6 C48 25 48 43 48 63"></path>
-                            <path class="ttbps-arrow-head" d="M42 57 L48 65 L54 57"></path>
-                          </svg>
-                        </div>
-                        <div class="ttbps-step ttbps-step-accent ttbps-construction-step">
-                          Gallery-Aware Query Construction
-                        </div>
-                      </div>
-                      <div class="ttbps-arrow-wrap ttbps-final-arrow-wrap">
-                        <svg class="ttbps-flow-arrow ttbps-arrow-transductive" viewBox="0 0 112 46" aria-hidden="true" focusable="false">
-                          <path class="ttbps-arrow-base" d="M6 24 C34 18 72 30 104 22"></path>
-                          <path class="ttbps-arrow-highlight" d="M6 24 C34 18 72 30 104 22"></path>
-                          <path class="ttbps-arrow-head" d="M98 16 L106 22 L98 29"></path>
-                        </svg>
-                        <span>final retrieval over full gallery</span>
-                      </div>
-                      <div class="ttbps-ranking ttbps-ranking-strong" aria-label="Ranking output">
-                        <span><strong>#1</strong></span>
-                        <span><strong>#2</strong></span>
-                        <span><strong>#3</strong></span>
-                      </div>
-                    </div>
+                  <div class="ttbps-section__flow ttbps-section__flow--transductive" aria-label="T-TBPS pipeline">
+                    <div class="ttbps-section__box ttbps-section__box--accent">Text Query</div>
+                    <svg class="ttbps-section__arrow ttbps-section__arrow--h" viewBox="0 0 56 20" aria-hidden="true" focusable="false">
+                      <path class="ttbps-section__arrow-line" d="M4 10H46"></path>
+                      <path class="ttbps-section__arrow-motion" d="M4 10H46"></path>
+                      <path class="ttbps-section__arrow-head" d="M40 5L46 10L40 15"></path>
+                    </svg>
+                    <div class="ttbps-section__box ttbps-section__box--accent">Gallery-Aware Query Construction</div>
+                    <svg class="ttbps-section__arrow ttbps-section__arrow--h" viewBox="0 0 56 20" aria-hidden="true" focusable="false">
+                      <path class="ttbps-section__arrow-line" d="M4 10H46"></path>
+                      <path class="ttbps-section__arrow-motion" d="M4 10H46"></path>
+                      <path class="ttbps-section__arrow-head" d="M40 5L46 10L40 15"></path>
+                    </svg>
+                    <div class="ttbps-section__box ttbps-section__box--accent">Enriched Query</div>
+                    <svg class="ttbps-section__arrow ttbps-section__arrow--h" viewBox="0 0 56 20" aria-hidden="true" focusable="false">
+                      <path class="ttbps-section__arrow-line" d="M4 10H46"></path>
+                      <path class="ttbps-section__arrow-motion" d="M4 10H46"></path>
+                      <path class="ttbps-section__arrow-head" d="M40 5L46 10L40 15"></path>
+                    </svg>
+                    <div class="ttbps-section__box ttbps-section__box--accent">Complete-Gallery Retrieval</div>
+                    <svg class="ttbps-section__arrow ttbps-section__arrow--h" viewBox="0 0 56 20" aria-hidden="true" focusable="false">
+                      <path class="ttbps-section__arrow-line" d="M4 10H46"></path>
+                      <path class="ttbps-section__arrow-motion" d="M4 10H46"></path>
+                      <path class="ttbps-section__arrow-head" d="M40 5L46 10L40 15"></path>
+                    </svg>
+                    <div class="ttbps-section__box ttbps-section__box--accent">Ranking</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <figcaption id="ttbps-caption">
-              Standard TBPS constructs the query independently of the gallery. T-TBPS instead uses
-              the current unlabeled gallery as inference context during query construction, then
-              performs final retrieval over the complete gallery.
+            <figcaption id="ttbps-caption" class="ttbps-section__caption">
+              Standard TBPS constructs the query independently. T-TBPS uses the unlabeled gallery
+              as inference context during query construction, then ranks over the full gallery.
             </figcaption>
           </figure>
-        </div>
-      </section>
-
-      <section class="chapter" id="motivation" aria-labelledby="motivation-title">
-        <div class="section-inner">
-          <div class="chapter-heading">
-            <p class="section-kicker">Motivation and diagnostic</p>
-            <h2 id="motivation-title">Why the Gallery Matters</h2>
-            <p>
-              The central assumption being challenged is simple: should query construction always
-              remain independent of the search space? The diagnostic story moves from intuition to
-              controlled evidence.
-            </p>
-          </div>
-
-            <div class="chapter-flow" aria-label="Motivation chapter flow">
-            <span>different competitors</span>
-            <span>controlled swap</span>
-            <span>measurable decision sensitivity</span>
-          </div>
-
-          <article class="subsection paired-motivation" id="same-query" aria-labelledby="same-query-title">
-            <div class="subsection-copy">
-              <p class="subsection-label">Same query, different gallery</p>
-              <h3 id="same-query-title">A useful cue can depend on the candidate population</h3>
-              <p>
-                Consider the same description: a person wearing a black jacket and carrying a bag.
-                In one gallery, the jacket may be rare. In another, many distractors share that
-                jacket, so the bag or another local cue becomes more informative.
-              </p>
-            </div>
-
-            <figure
-              class="research-figure paired-gallery-figure"
-              role="img"
-              aria-label="Two schematic galleries use the same query and target. In Gallery A black jacket is rare, while in Gallery B black jackets are common and the bag becomes more informative."
-            >
-              <div class="same-query-label">Same text query: black jacket + bag</div>
-              <div class="paired-galleries">
-                <div class="gallery-panel">
-                  <div class="gallery-panel-title">
-                    <strong>Gallery A</strong>
-                    <span>black jacket rare</span>
-                  </div>
-                  <div class="person-grid cue-rare">
-                    <div class="person-card target" data-label="Target">
-                      <span class="person jacket bag"></span>
-                      <small>target</small>
-                    </div>
-                    <div class="person-card"><span class="person shirt"></span><small>neutral</small></div>
-                    <div class="person-card"><span class="person hoodie"></span><small>neutral</small></div>
-                    <div class="person-card"><span class="person coat"></span><small>neutral</small></div>
-                    <div class="person-card"><span class="person vest"></span><small>neutral</small></div>
-                    <div class="person-card"><span class="person light"></span><small>neutral</small></div>
-                  </div>
-                  <p class="cue-note good">Jacket cue separates the target.</p>
-                </div>
-
-                <div class="gallery-panel">
-                  <div class="gallery-panel-title">
-                    <strong>Gallery B</strong>
-                    <span>black jacket common</span>
-                  </div>
-                  <div class="person-grid cue-common">
-                    <div class="person-card target" data-label="Target">
-                      <span class="person jacket bag"></span>
-                      <small>target</small>
-                    </div>
-                    <div class="person-card distractor"><span class="person jacket"></span><small>jacket</small></div>
-                    <div class="person-card distractor"><span class="person jacket"></span><small>jacket</small></div>
-                    <div class="person-card distractor"><span class="person jacket"></span><small>jacket</small></div>
-                    <div class="person-card"><span class="person coat"></span><small>neutral</small></div>
-                    <div class="person-card"><span class="person shirt bag pale"></span><small>bag</small></div>
-                  </div>
-                  <p class="cue-note warn">Bag cue becomes more informative.</p>
-                </div>
-              </div>
-              <figcaption>
-                Schematic illustration only; it recreates the motivating logic rather than
-                redistributing benchmark images.
-              </figcaption>
-            </figure>
-          </article>
-
-          <article class="subsection diagnostic-subsection" id="diagnostic" aria-labelledby="diagnostic-title">
-            <div class="subsection-copy">
-              <p class="subsection-label">Controlled gallery intervention</p>
-              <h3 id="diagnostic-title">Keep the retrieval problem fixed, swap cue-directed distractors</h3>
-              <p>
-                The paired cue-swap diagnostic preserves the query, target identity, complete
-                positive image set, neutral fillers, gallery size, and evaluated retriever. Only an
-                equal-sized distractor subset is swapped to emphasize one query-mentioned cue versus
-                the other.
-              </p>
-            </div>
-
-            <div class="diagnostic-grid">
-              <figure
-                class="research-figure intervention-figure"
-                role="img"
-                aria-label="Controlled-variable diagram showing held fixed query, target identity, positive images, neutral fillers, gallery size, and evaluated retriever, with only the cue-directed distractor subset changed."
-              >
-                <div class="fixed-changed-layout">
-                  <div class="fixed-list">
-                    <h4>Held fixed</h4>
-                    <ul>
-                      <li><span>Text query</span><b>same full caption</b></li>
-                      <li><span>Target identity</span><b>same person</b></li>
-                      <li><span>Positive images</span><b>complete set</b></li>
-                      <li><span>Neutral fillers</span><b>shared set</b></li>
-                      <li><span>Gallery size</span><b>same cardinality</b></li>
-                      <li><span>Evaluated retriever</span><b>not used to build trials</b></li>
-                    </ul>
-                  </div>
-                  <div class="changed-block">
-                    <h4>Intervened</h4>
-                    <div class="split-path">
-                      <div class="cue-box">Distractors favor cue A</div>
-                      <div class="split-line" aria-hidden="true"></div>
-                      <div class="cue-box">Distractors favor cue B</div>
-                    </div>
-                  </div>
-                </div>
-              </figure>
-
-              <div class="diagnostic-result">
-                <div class="large-fact">
-                  <strong>15 / 15</strong>
-                  <span>dataset x retriever combinations exhibit non-zero decision sensitivity</span>
-                </div>
-                <div class="chart-panel">
-                  <div id="diagnostic-heatmap" class="heatmap" aria-live="polite"></div>
-                  <p class="chart-summary">
-                    Across 3 benchmarks and 5 frozen retrievers, the protocol yields 624,440 paired
-                    gallery interventions and more than 3.1 million retriever-trial evaluations.
-                    Top-1 correctness Flip Rate ranges from 2.84% to 15.66%.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <p class="careful-note">
-              Interpretation matters: this demonstrates sensitivity to cue-directed gallery
-              composition. Because the swapped distractor subsets also contain different images and
-              identities, it is not a sole-cause estimate of cue prevalence.
-            </p>
-
-            <details class="technical-details">
-              <summary>Technical details of the diagnostic protocol</summary>
-              <div class="details-grid">
-                <p>
-                  The diagnostic uses a predefined 79-cue semantic catalog spanning clothing and
-                  footwear color, garment and footwear type, sleeve length, carried items, worn
-                  accessories, and clothing patterns. Cues are matched by deterministic, slot-aware
-                  lexical rules that favor precision.
-                </p>
-                <p>
-                  After compatibility pruning, 2,613 unordered cue-pair cases form the frozen master
-                  case set. Each eligible case-query instance can produce five indexed paired trials
-                  with gallery size 300, fixed seed 42, and a cue-density-shift admission threshold
-                  of 0.1.
-                </p>
-                <p>
-                  An off-the-shelf CLIP model is used only as a label-free construction instrument
-                  for cue-directed distractors and neutral fillers. The evaluated retrievers do not
-                  construct or admit their own trials.
-                </p>
-                <p>
-                  Confidence intervals are computed with 1,000 query-cluster bootstrap resamples,
-                  preserving all trials associated with each sampled query.
-                </p>
-              </div>
-            </details>
-          </article>
         </div>
       </section>
 
