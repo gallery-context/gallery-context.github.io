@@ -510,99 +510,219 @@ function bindTransferGraph() {
   });
 }
 
-function renderQualitative(filter = "all") {
-  const container = document.querySelector("#qualitative-grid");
-  if (!container) return;
-  const selected = filter === "all"
-    ? qualitativeExamples
-    : qualitativeExamples.filter((item) => item.retriever === filter);
-  container.innerHTML = selected.map((item) => `
-    <section class="qual-model-row">
-      <div class="qual-model-heading">
-        <h3>${item.retriever}</h3>
-      </div>
-      <div class="qual-image-grid">
-        ${item.figures.map((figure) => `
-          <figure class="qual-figure">
-            <figcaption>${qualitativeDatasetLabels[figure.datasetKey]}</figcaption>
-            <button type="button" class="qual-image-button" aria-label="Open ${item.retriever} ${qualitativeDatasetLabels[figure.datasetKey]} retrieval figure" data-qual-src="${figure.src}" data-qual-alt="${item.retriever} ${qualitativeDatasetLabels[figure.datasetKey]} retrieval figure">
-              <img src="${figure.src}" alt="${item.retriever} ${qualitativeDatasetLabels[figure.datasetKey]} retrieval figure" loading="lazy" decoding="async">
-            </button>
-          </figure>
-        `).join("")}
-      </div>
-    </section>
-  `).join("");
-  bindQualitativeFigures();
+const qualitativeCropLayout = {
+  fullWidth: 2048,
+  fullHeight: 920,
+  rows: [
+    { y: 75, height: 240 },
+    { y: 370, height: 240 },
+    { y: 660, height: 240 }
+  ],
+  regions: {
+    query: { x: 0, width: 335 },
+    gate: { x: 400, width: 795 },
+    base: { x: 1260, width: 788 }
+  }
+};
+
+function getQualitativeFigure(retriever, datasetKey) {
+  return qualitativeExamples
+    .find((item) => item.retriever === retriever)
+    ?.figures.find((figure) => figure.datasetKey === datasetKey) || null;
 }
 
-function bindQualitativeTabs() {
-  const tabs = Array.from(document.querySelectorAll(".qual-tabs button"));
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-      tabs.forEach((button) => button.setAttribute("aria-selected", "false"));
-      tab.setAttribute("aria-selected", "true");
-      renderQualitative(tab.dataset.filter);
-    });
-  });
+function applyQualitativeCrop(cropElement, image, regionName, caseIndex) {
+  if (!cropElement || !image) return;
+  const region = qualitativeCropLayout.regions[regionName];
+  const row = qualitativeCropLayout.rows[caseIndex];
+  if (!region || !row) return;
+
+  const { fullWidth, fullHeight } = qualitativeCropLayout;
+  cropElement.style.setProperty("--qual-crop-image-width", `${(fullWidth / region.width * 100).toFixed(4)}%`);
+  cropElement.style.setProperty("--qual-crop-x", `${(-region.x / fullWidth * 100).toFixed(4)}%`);
+  cropElement.style.setProperty("--qual-crop-y", `${(-row.y / fullHeight * 100).toFixed(4)}%`);
+  cropElement.style.aspectRatio = `${region.width} / ${row.height}`;
 }
 
-function bindQualitativeFigures() {
+function bindQualitativeExplorer() {
+  const explorer = document.querySelector("[data-qual-explorer]");
+  const stage = explorer?.querySelector("[data-qual-stage]");
+  const overviewImage = explorer?.querySelector("[data-qual-overview-image]");
+  const rowFocus = explorer?.querySelector("[data-qual-row-focus]");
+  const stageKicker = explorer?.querySelector("[data-qual-stage-kicker]");
+  const baseLabel = explorer?.querySelector("[data-qual-base-label]");
+  const gateLabel = explorer?.querySelector("[data-qual-gate-label]");
+  const status = explorer?.querySelector("[data-qual-status]");
+  const retrieverTabs = explorer ? Array.from(explorer.querySelectorAll("[data-qual-retriever]")) : [];
+  const datasetTabs = explorer ? Array.from(explorer.querySelectorAll("[data-qual-dataset]")) : [];
+  const caseTabs = explorer ? Array.from(explorer.querySelectorAll("[data-qual-case]")) : [];
+  const cropElements = explorer ? Array.from(explorer.querySelectorAll("[data-qual-crop]")) : [];
+  const replayButton = explorer?.querySelector("[data-qual-replay]");
+  const originalButtons = explorer ? Array.from(explorer.querySelectorAll("[data-qual-open-original]")) : [];
   const lightbox = document.querySelector("#qualitative-lightbox");
   const lightboxImage = document.querySelector("#qualitative-lightbox-image");
-  if (!lightbox || !lightboxImage) return;
-  const closeButton = lightbox.querySelector("[data-qual-lightbox-close]");
-  let closeTimer = 0;
 
-  const closeLightbox = () => {
-    window.clearTimeout(closeTimer);
-    lightbox.setAttribute("aria-hidden", "true");
-    lightbox.dataset.open = "false";
-    closeTimer = window.setTimeout(() => {
-      lightbox.hidden = true;
-      lightboxImage.src = "";
-      lightboxImage.alt = "";
-    }, 160);
+  if (!explorer || !stage || !overviewImage || !rowFocus || !retrieverTabs.length || !datasetTabs.length || !caseTabs.length) return;
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let activeRetriever = retrieverTabs.find((tab) => tab.getAttribute("aria-selected") === "true")?.dataset.qualRetriever || "CLIP";
+  let activeDataset = datasetTabs.find((tab) => tab.getAttribute("aria-selected") === "true")?.dataset.qualDataset || "cuhk";
+  let activeCase = Number.parseInt(caseTabs.find((tab) => tab.getAttribute("aria-selected") === "true")?.dataset.qualCase || "0", 10);
+  let currentFigure = null;
+  let switchTimer = 0;
+  let motionTimer = 0;
+  let hasEnteredViewport = false;
+
+  const setSelected = (tabs, selected) => {
+    tabs.forEach((tab) => {
+      const isSelected = tab === selected;
+      tab.setAttribute("aria-selected", String(isSelected));
+      tab.tabIndex = isSelected ? 0 : -1;
+    });
   };
 
-  const openLightbox = (src, alt) => {
-    window.clearTimeout(closeTimer);
-    lightboxImage.src = src;
-    lightboxImage.alt = alt;
-    lightbox.setAttribute("aria-hidden", "false");
+  const playComparison = () => {
+    window.clearTimeout(motionTimer);
+    stage.classList.remove("is-playing");
+    if (reduceMotion) return;
+    void stage.offsetWidth;
+    stage.classList.add("is-playing");
+    motionTimer = window.setTimeout(() => stage.classList.remove("is-playing"), 2850);
+  };
+
+  const updateCropImages = (src) => {
+    cropElements.forEach((crop) => {
+      const image = crop.querySelector("[data-qual-crop-image]");
+      const regionName = crop.dataset.qualCrop;
+      if (!image || !regionName) return;
+      image.src = src;
+      applyQualitativeCrop(crop, image, regionName, activeCase);
+    });
+  };
+
+  const commitUpdate = (play = false) => {
+    const figure = getQualitativeFigure(activeRetriever, activeDataset);
+    if (!figure) return;
+    currentFigure = figure;
+
+    const datasetLabel = qualitativeDatasetLabels[activeDataset] || activeDataset;
+    const alt = `${activeRetriever} ${datasetLabel} qualitative retrieval figure`;
+    overviewImage.src = figure.src;
+    overviewImage.alt = alt;
+    stageKicker.textContent = `${activeRetriever} · ${datasetLabel}`;
+    baseLabel.textContent = activeRetriever;
+    gateLabel.textContent = `GATE–${activeRetriever}`;
+    updateCropImages(figure.src);
+
+    const row = qualitativeCropLayout.rows[activeCase];
+    rowFocus.style.setProperty("--qual-row-top", `${(row.y / qualitativeCropLayout.fullHeight * 100).toFixed(3)}%`);
+    rowFocus.style.setProperty("--qual-row-height", `${(row.height / qualitativeCropLayout.fullHeight * 100).toFixed(3)}%`);
+    rowFocus.querySelector("b").textContent = `CASE ${String(activeCase + 1).padStart(2, "0")}`;
+
+    if (status) {
+      status.textContent = `${activeRetriever}, ${datasetLabel}, case ${activeCase + 1} selected.`;
+    }
+
+    if (play && hasEnteredViewport) {
+      window.setTimeout(playComparison, reduceMotion ? 0 : 110);
+    }
+  };
+
+  const updateViewer = (play = false) => {
+    window.clearTimeout(switchTimer);
+    if (reduceMotion) {
+      commitUpdate(play);
+      return;
+    }
+    stage.classList.add("is-switching");
+    switchTimer = window.setTimeout(() => {
+      commitUpdate(play);
+      window.requestAnimationFrame(() => stage.classList.remove("is-switching"));
+    }, 120);
+  };
+
+  retrieverTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      activeRetriever = tab.dataset.qualRetriever || "CLIP";
+      setSelected(retrieverTabs, tab);
+      updateViewer(true);
+    });
+  });
+
+  datasetTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      activeDataset = tab.dataset.qualDataset || "cuhk";
+      setSelected(datasetTabs, tab);
+      updateViewer(true);
+    });
+  });
+
+  caseTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      activeCase = Number.parseInt(tab.dataset.qualCase || "0", 10);
+      setSelected(caseTabs, tab);
+      updateViewer(true);
+    });
+  });
+
+  replayButton?.addEventListener("click", playComparison);
+
+  const openOriginal = () => {
+    if (!currentFigure || !lightbox || !lightboxImage) return;
+    const datasetLabel = qualitativeDatasetLabels[activeDataset] || activeDataset;
+    lightboxImage.src = currentFigure.src;
+    lightboxImage.alt = `${activeRetriever} ${datasetLabel} qualitative retrieval figure`;
     lightbox.hidden = false;
+    lightbox.setAttribute("aria-hidden", "false");
     window.requestAnimationFrame(() => {
       lightbox.dataset.open = "true";
-      closeButton?.focus({ preventScroll: true });
+      lightbox.querySelector(".qual-lightbox-close")?.focus({ preventScroll: true });
     });
   };
 
-  const buttons = Array.from(document.querySelectorAll(".qual-image-button"));
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const src = button.dataset.qualSrc;
-      const alt = button.dataset.qualAlt || "";
-      if (src) openLightbox(src, alt);
+  originalButtons.forEach((button) => button.addEventListener("click", openOriginal));
+
+  if (lightbox && lightboxImage && lightbox.dataset.bound !== "true") {
+    lightbox.dataset.bound = "true";
+    let closeTimer = 0;
+    const closeLightbox = () => {
+      window.clearTimeout(closeTimer);
+      lightbox.dataset.open = "false";
+      lightbox.setAttribute("aria-hidden", "true");
+      closeTimer = window.setTimeout(() => {
+        lightbox.hidden = true;
+        lightboxImage.src = "";
+        lightboxImage.alt = "";
+      }, reduceMotion ? 0 : 160);
+    };
+
+    lightbox.addEventListener("click", (event) => {
+      const target = event.target;
+      if (target instanceof Element && target.closest("[data-qual-lightbox-close]")) closeLightbox();
     });
-  });
 
-  if (lightbox.dataset.bound === "true") return;
-  lightbox.dataset.bound = "true";
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !lightbox.hidden) closeLightbox();
+    });
+  }
 
-  lightbox.addEventListener("click", (event) => {
-    const target = event.target;
-    if (target instanceof HTMLElement && target.closest("[data-qual-lightbox-close]")) {
-      closeLightbox();
-    }
-  });
+  commitUpdate(false);
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && !lightbox.hidden) {
-      closeLightbox();
-    }
-  });
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    hasEnteredViewport = true;
+    return;
+  }
 
-  closeButton?.addEventListener("click", closeLightbox);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting || hasEnteredViewport) return;
+      hasEnteredViewport = true;
+      playComparison();
+      observer.disconnect();
+    });
+  }, { threshold: 0.34, rootMargin: "0px 0px -8% 0px" });
+
+  observer.observe(stage);
 }
 
 function bindNav() {
@@ -859,8 +979,7 @@ document.addEventListener("DOMContentLoaded", () => {
   bindTransferGraph();
   renderGroupedDeltas("#evidence-ablation", evidenceAblation, 1.9, 4.36);
   renderGroupedDeltas("#reasoning-ablation", reasoningAblation, 1.9, 4.36);
-  renderQualitative();
-  bindQualitativeTabs();
+  bindQualitativeExplorer();
   bindNav();
   bindActiveNav();
   bindTtbpsScrollFlow();

@@ -1106,24 +1106,143 @@
 
       <section class="chapter examples-chapter" id="examples" aria-labelledby="examples-title">
         <div class="section-inner">
-          <div class="chapter-heading">
+          <div class="chapter-heading qual-heading">
             <p class="section-kicker">Qualitative evidence</p>
             <h2 id="examples-title">Qualitative Retrieval Examples</h2>
             <p>
-              Selected retrieval examples compare the frozen base retriever with its GATE-enhanced
-              counterpart. Green borders indicate target-identity images and red borders indicate
-              distractors.
+              Inspect one retrieval case at a time. The text query stays fixed while the frozen base
+              ranking is compared with its GATE-enhanced counterpart. Green borders mark target-identity
+              images; red borders mark distractors.
             </p>
           </div>
-          <div class="qual-tabs" role="tablist" aria-label="Qualitative examples by retriever">
-            <button type="button" role="tab" aria-selected="true" data-filter="all">All</button>
-            <button type="button" role="tab" aria-selected="false" data-filter="CLIP">CLIP</button>
-            <button type="button" role="tab" aria-selected="false" data-filter="ITSELF">ITSELF</button>
-            <button type="button" role="tab" aria-selected="false" data-filter="DM-Adapter">DM-Adapter</button>
-            <button type="button" role="tab" aria-selected="false" data-filter="RDE">RDE</button>
-            <button type="button" role="tab" aria-selected="false" data-filter="IRRA">IRRA</button>
-          </div>
-          <div id="qualitative-grid" class="qual-model-list" aria-live="polite"></div>
+
+          <section class="qual-explorer" data-qual-explorer aria-label="Interactive qualitative retrieval explorer">
+            <div class="qual-control-bar">
+              <div class="qual-control-group">
+                <span class="qual-control-label">Retriever</span>
+                <div class="qual-tabs qual-tabs--retriever" role="tablist" aria-label="Qualitative retriever">
+                  <button type="button" role="tab" aria-selected="true" data-qual-retriever="CLIP">CLIP</button>
+                  <button type="button" role="tab" aria-selected="false" data-qual-retriever="ITSELF">ITSELF</button>
+                  <button type="button" role="tab" aria-selected="false" data-qual-retriever="DM-Adapter">DM-Adapter</button>
+                  <button type="button" role="tab" aria-selected="false" data-qual-retriever="RDE">RDE</button>
+                  <button type="button" role="tab" aria-selected="false" data-qual-retriever="IRRA">IRRA</button>
+                </div>
+              </div>
+
+              <div class="qual-control-group">
+                <span class="qual-control-label">Benchmark</span>
+                <div class="qual-tabs qual-tabs--dataset" role="tablist" aria-label="Qualitative benchmark">
+                  <button type="button" role="tab" aria-selected="true" data-qual-dataset="cuhk">CUHK-PEDES</button>
+                  <button type="button" role="tab" aria-selected="false" data-qual-dataset="icfg">ICFG-PEDES</button>
+                  <button type="button" role="tab" aria-selected="false" data-qual-dataset="rstp">RSTPReid</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="qual-stage" data-qual-stage>
+              <header class="qual-stage-head">
+                <div>
+                  <p class="qual-stage-kicker" data-qual-stage-kicker>CLIP · CUHK-PEDES</p>
+                  <h3>Same query. Same gallery. A different ranking after gallery-aware enrichment.</h3>
+                </div>
+                <button type="button" class="qual-original-button" data-qual-open-original>
+                  View original figure <span aria-hidden="true">↗</span>
+                </button>
+              </header>
+
+              <div class="qual-overview-shell">
+                <button type="button" class="qual-overview-button" data-qual-open-original aria-label="Open the complete qualitative figure">
+                  <img data-qual-overview-image src="assets/qualitative/[t]clip-cuhk.png" alt="CLIP CUHK-PEDES qualitative retrieval figure" loading="lazy" decoding="async">
+                  <span class="qual-row-focus" data-qual-row-focus aria-hidden="true"><b>CASE 01</b></span>
+                </button>
+                <div class="qual-overview-caption">
+                  <span>Original composite figure</span>
+                  <span>The highlighted row is expanded below.</span>
+                </div>
+              </div>
+
+              <div class="qual-case-toolbar">
+                <div class="qual-case-picker" role="tablist" aria-label="Qualitative case">
+                  <span>Case</span>
+                  <button type="button" role="tab" aria-selected="true" data-qual-case="0">01</button>
+                  <button type="button" role="tab" aria-selected="false" data-qual-case="1">02</button>
+                  <button type="button" role="tab" aria-selected="false" data-qual-case="2">03</button>
+                </div>
+                <button type="button" class="qual-replay-button" data-qual-replay>
+                  <span class="qual-replay-icon" aria-hidden="true">↻</span>
+                  Replay comparison
+                </button>
+              </div>
+
+              <div class="qual-focus-grid">
+                <article class="qual-query-panel">
+                  <div class="qual-panel-label">
+                    <span>Query</span>
+                    <small>held fixed</small>
+                  </div>
+                  <div class="qual-crop qual-crop--query" data-qual-crop="query">
+                    <img data-qual-crop-image alt="Selected text query crop" draggable="false">
+                  </div>
+                  <p>
+                    The exact same text query is used for both rankings. Only gallery-aware query
+                    enrichment changes the retrieval representation.
+                  </p>
+                </article>
+
+                <div class="qual-ranking-story">
+                  <article class="qual-ranking-panel qual-ranking-panel--base">
+                    <div class="qual-ranking-head">
+                      <div>
+                        <span class="qual-ranking-eyebrow">Frozen base</span>
+                        <strong data-qual-base-label>CLIP</strong>
+                      </div>
+                      <span class="qual-ranking-state">first-pass ranking</span>
+                    </div>
+                    <div class="qual-rank-labels" aria-hidden="true"><span>R1</span><span>R2</span><span>R3</span><span>R4</span><span>R5</span></div>
+                    <div class="qual-crop qual-crop--ranking" data-qual-crop="base">
+                      <img data-qual-crop-image alt="Selected frozen base ranking crop" draggable="false">
+                    </div>
+                  </article>
+
+                  <div class="qual-context-bridge" aria-label="Gallery-aware enrichment connects the base ranking to the GATE ranking">
+                    <div class="qual-context-line" aria-hidden="true"><span></span></div>
+                    <div class="qual-context-copy">
+                      <small>Gallery context</small>
+                      <strong>gallery-aware enrichment</strong>
+                    </div>
+                    <div class="qual-context-line qual-context-line--down" aria-hidden="true"><span></span></div>
+                  </div>
+
+                  <article class="qual-ranking-panel qual-ranking-panel--gate">
+                    <div class="qual-ranking-head">
+                      <div>
+                        <span class="qual-ranking-eyebrow">+ GATE</span>
+                        <strong data-qual-gate-label>GATE–CLIP</strong>
+                      </div>
+                      <span class="qual-ranking-state qual-ranking-state--accent">enriched ranking</span>
+                    </div>
+                    <div class="qual-rank-labels" aria-hidden="true"><span>R1</span><span>R2</span><span>R3</span><span>R4</span><span>R5</span></div>
+                    <div class="qual-crop qual-crop--ranking" data-qual-crop="gate">
+                      <img data-qual-crop-image alt="Selected GATE-enhanced ranking crop" draggable="false">
+                    </div>
+                  </article>
+                </div>
+              </div>
+
+              <footer class="qual-stage-footer">
+                <div class="qual-legend" aria-label="Qualitative figure legend">
+                  <span><i class="qual-legend-dot qual-legend-dot--target"></i> target identity</span>
+                  <span><i class="qual-legend-dot qual-legend-dot--distractor"></i> distractor</span>
+                </div>
+                <p>
+                  <strong>What to inspect.</strong> Follow which green target images move toward earlier ranks
+                  and which red distractors are displaced after the same query is enriched with gallery context.
+                </p>
+              </footer>
+              <p class="sr-only" data-qual-status aria-live="polite"></p>
+            </div>
+          </section>
+
           <div id="qualitative-lightbox" class="qual-lightbox" aria-hidden="true" data-open="false" hidden>
             <div class="qual-lightbox-backdrop" data-qual-lightbox-close></div>
             <div class="qual-lightbox-panel" role="dialog" aria-modal="true" aria-label="Qualitative figure preview">
