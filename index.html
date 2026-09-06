@@ -1389,6 +1389,10 @@
             <span><b>01</b> Evidence</span>
             <i aria-hidden="true"></i>
             <span><b>02</b> Reasoning</span>
+            <i aria-hidden="true"></i>
+            <span><b>03</b> Interpretation</span>
+            <i aria-hidden="true"></i>
+            <span><b>04</b> Discussion</span>
           </nav>
 
           <article class="analysisx-panel analysisx-evidence" id="evidence-ablation-section" data-analysis-evidence aria-labelledby="evidence-ablation-title">
@@ -1574,55 +1578,269 @@
             </div>
           </article>
 
+          <article class="analysisx-panel analysisx-interpretation" id="analysis-interpretation" aria-labelledby="analysis-interpretation-title">
+            <header class="analysisx-panel__head analysisx-panel__head--compact">
+              <div>
+                <p class="subsection-label">03 / Interpretation</p>
+                <h3 id="analysis-interpretation-title">What do these ablations tell us?</h3>
+                <p>
+                  The evidence and reasoning studies point to one shared conclusion: gallery-aware
+                  retrieval is useful when context is selected deliberately and its structure is preserved.
+                </p>
+              </div>
+              <span class="analysisx-concept-badge">ABLATION → INTERPRETATION</span>
+            </header>
+
+            <div class="analysisx-interpretation-grid" aria-label="Three conclusions from the ablations">
+              <article class="analysisx-insight analysisx-insight--selective">
+                <div class="analysisx-insight__icon" aria-hidden="true">
+                  <span></span><span></span><span></span><b></b>
+                </div>
+                <span>SELECTIVE CONTEXT</span>
+                <strong>More evidence ≠ better evidence.</strong>
+                <p>Provider gains are non-monotonic. Useful context depends on the current retrieval problem, not on maximizing the number of evidence slots.</p>
+              </article>
+
+              <i class="analysisx-insight-flow" aria-hidden="true"></i>
+
+              <article class="analysisx-insight analysisx-insight--structured">
+                <div class="analysisx-insight__icon analysisx-insight__icon--matrix" aria-hidden="true">
+                  <span></span><span></span><span></span><span></span><b></b>
+                </div>
+                <span>STRUCTURED CONTEXT</span>
+                <strong>Seeing the gallery ≠ reasoning about it.</strong>
+                <p>Generic pooling underuses the evidence. Preserving candidate rank and evidence-slot semantics gives the reasoning stage something meaningful to compare.</p>
+              </article>
+
+              <i class="analysisx-insight-flow" aria-hidden="true"></i>
+
+              <article class="analysisx-insight analysisx-insight--adapt">
+                <div class="analysisx-insight__icon analysisx-insight__icon--residual" aria-hidden="true">
+                  <span>q</span><b>+</b><span>Δq</span><em>→</em><span>q̃</span>
+                </div>
+                <span>INFERENCE ADAPTATION</span>
+                <strong>Adapt the query, keep the retriever.</strong>
+                <p>The learned retrieval space remains the anchor. The gain comes from using the current gallery to deploy that representation more effectively at inference.</p>
+              </article>
+            </div>
+          </article>
+
+          <article class="analysisx-panel analysisx-discussion" id="analysis-discussion" aria-labelledby="analysis-discussion-title">
+            <header class="analysisx-panel__head analysisx-panel__head--compact">
+              <div>
+                <p class="subsection-label">04 / Discussion</p>
+                <h3 id="analysis-discussion-title">From GATE to a broader search-space-aware inference view</h3>
+                <p>
+                  GATE provides one concrete inference pattern. T-TBPS is the broader setting: once the
+                  unlabeled search space is available, it may participate in constructing the representation used to search it.
+                </p>
+              </div>
+              <span class="analysisx-concept-badge">GATE ⊂ T-TBPS</span>
+            </header>
+
+            <div class="analysisx-discussion-stack">
+              <section class="analysisx-discussion-band analysisx-discussion-band--gate" aria-labelledby="analysis-gate-discussion-title">
+                <header class="analysisx-discussion-band__head">
+                  <div>
+                    <span>GATE · ONE REALIZATION</span>
+                    <strong id="analysis-gate-discussion-title">Understanding the mechanism</strong>
+                    <p>GATE follows a specific inference pattern: observe the current competition, preserve the frozen retrieval signal as an anchor, and return to a complete-gallery search.</p>
+                  </div>
+                  <small>SUPPLEMENTARY · D.2</small>
+                </header>
+
+                <div class="analysisx-mechanism-sequence" aria-label="Three conceptual properties of GATE">
+                  <article class="analysisx-mechanism-step analysisx-mechanism-step--competition">
+                    <div class="analysisx-competition-viz" aria-hidden="true">
+                      <div class="analysisx-competition-query">q</div>
+                      <i></i>
+                      <div class="analysisx-competition-ranks"><span>#1</span><span>#2</span><span>#3</span><span>…</span><span>#M</span></div>
+                      <b>CURRENT COMPETITION</b>
+                    </div>
+                    <div>
+                      <span>01 / COMPETITION EVIDENCE</span>
+                      <strong>Top-M describes what the frozen retriever currently finds plausible.</strong>
+                      <p>Membership does not imply relevance. Even an incorrect high-ranked candidate can characterize a plausible alternative that the current query must distinguish from.</p>
+                    </div>
+                  </article>
+
+                  <i class="analysisx-mechanism-arrow" aria-hidden="true"></i>
+
+                  <article class="analysisx-mechanism-step analysisx-mechanism-step--adaptation">
+                    <div class="analysisx-anchor-viz" aria-hidden="true">
+                      <span>u<sub>q</sub></span><b>+</b><span>γΔq</span><i>→</i><strong>ũ<sub>q</sub></strong>
+                    </div>
+                    <div>
+                      <span>02 / QUERY-SIDE CORRECTION</span>
+                      <strong>Gallery context adapts the query without reconstructing the retrieval space.</strong>
+                      <p>The frozen query remains an explicit reference representation, while gallery reasoning contributes a controlled residual correction on the query side.</p>
+                    </div>
+                  </article>
+
+                  <i class="analysisx-mechanism-arrow" aria-hidden="true"></i>
+
+                  <article class="analysisx-mechanism-step analysisx-mechanism-step--global">
+                    <div class="analysisx-local-global-viz" aria-hidden="true">
+                      <span>Top-M</span><i></i><span>reason</span><i></i><span>Δq</span><b>→</b><strong>FULL GALLERY</strong>
+                    </div>
+                    <div>
+                      <span>03 / LOCAL OBSERVATION → GLOBAL SEARCH</span>
+                      <strong>Top-M is an evidence interface, not the final candidate set.</strong>
+                      <p>The first ranking exposes local competition; after query enrichment, the actual retrieval evaluates the complete gallery again.</p>
+                    </div>
+                  </article>
+                </div>
+
+                <div class="analysisx-discussion-chips" aria-label="GATE inference properties">
+                  <span>NO GALLERY LABELS</span><span>NO PSEUDO-LABELS</span><span>NO TEST-TIME UPDATES</span><span>NOT TOP-M RE-RANKING</span>
+                </div>
+              </section>
+
+              <section class="analysisx-discussion-band analysisx-discussion-band--ttbps" aria-labelledby="analysis-ttbps-discussion-title">
+                <header class="analysisx-discussion-band__head">
+                  <div>
+                    <span>T-TBPS · INFERENCE SETTING</span>
+                    <strong id="analysis-ttbps-discussion-title">Beyond one method</strong>
+                    <p>T-TBPS is broader than GATE. It changes when the search space may enter inference, without prescribing one evidence representation or one contextualization mechanism.</p>
+                  </div>
+                  <small>SUPPLEMENTARY · D.1–D.3</small>
+                </header>
+
+                <article class="analysisx-boundary-shift analysisx-boundary-shift--wide">
+                  <div class="analysisx-boundary-shift__label"><span>01 / FROM GALLERY-INDEPENDENT TO SEARCH-SPACE-AWARE INFERENCE</span><strong>The gallery moves upstream.</strong></div>
+                  <div class="analysisx-boundary-compare" aria-label="Standard TBPS versus T-TBPS information flow">
+                    <div>
+                      <span>STANDARD TBPS</span>
+                      <div class="analysisx-boundary-flow"><b>query</b><i></i><strong>encode</strong><i></i><em>score gallery</em></div>
+                      <small>The query representation is determined before the current gallery enters the computation.</small>
+                    </div>
+                    <div class="analysisx-boundary-compare__active">
+                      <span>T-TBPS</span>
+                      <div class="analysisx-boundary-flow"><b>query</b><i></i><strong>construct</strong><i></i><em>retrieve gallery</em></div>
+                      <div class="analysisx-gallery-injection" aria-hidden="true"><span>gallery</span><i></i></div>
+                      <small>The current unlabeled gallery may inform the representation used to search that same space.</small>
+                    </div>
+                  </div>
+                  <p class="analysisx-boundary-question">Once the search space is available, what information from that space should influence the representation used to search it?</p>
+                </article>
+
+                <article class="analysisx-setting-method analysisx-setting-method--wide">
+                  <span>02 / SETTING ≠ METHOD</span>
+                  <div class="analysisx-setting-method__flow">
+                    <div><small>INFERENCE SETTING</small><strong>T-TBPS</strong><p>Allows the current unlabeled gallery to participate in query construction before final retrieval.</p></div>
+                    <i aria-hidden="true"></i>
+                    <div><small>ONE REALIZATION</small><strong>GATE</strong><p>Observes current competition, reasons over structured evidence, corrects the query, and searches globally again.</p></div>
+                  </div>
+                </article>
+
+                <article class="analysisx-design-axes analysisx-design-axes--wide">
+                  <span>03 / TWO OPEN DESIGN AXES</span>
+                  <div class="analysisx-axis-row">
+                    <b>WHAT GALLERY EVIDENCE?</b>
+                    <div><span>global</span><span>spatial</span><span>gallery-relative</span><span>local</span><span>relational</span><span>learned</span><em>…</em></div>
+                  </div>
+                  <div class="analysisx-axis-row">
+                    <b>HOW SHOULD THE QUERY REASON?</b>
+                    <div><span>pooling</span><span>structured</span><span>adaptive</span><span>query-conditioned</span><em>…</em></div>
+                  </div>
+                  <p>GATE instantiates these axes through Evidence Providers and QCRS-Mixer, but neither component defines T-TBPS. Future methods can advance evidence, reasoning, or the base retriever independently or jointly.</p>
+                </article>
+              </section>
+            </div>
+
+            <div class="analysisx-discussion-closing">
+              <span>CONCEPTUAL PAYOFF</span>
+              <strong>Use the search space not only as something to rank, but also as context for deciding how to search it.</strong>
+            </div>
+          </article>
+
         </div>
       </section>
 
-      <section class="chapter scope-chapter" id="scope" aria-labelledby="scope-title">
+      <section class="chapter scope-chapter scope2-chapter" id="scope" aria-labelledby="scope-title">
         <div class="section-inner">
-          <div class="chapter-heading">
-            <p class="section-kicker">Scope</p>
-            <h2 id="scope-title">Limitations and Takeaway</h2>
+          <header class="chapter-heading scope2-heading">
+            <p class="section-kicker">Scope / Limitations</p>
+            <h2 id="scope-title">Where does search-space-aware inference apply?</h2>
             <p>
-              T-TBPS intentionally changes the inference information boundary by using the current
-              unlabeled target gallery. That opens useful context, but it also defines where the
-              setting applies most naturally.
+              The paper makes three boundaries explicit. They define the setting and the reach of the diagnostic;
+              they are not claims that every retrieval scenario should become transductive.
             </p>
+          </header>
+
+          <div class="scope2-boundaries" id="limitations" aria-label="Scope and limitations from the paper">
+            <article class="scope2-boundary scope2-boundary--gallery">
+              <div class="scope2-boundary__index"><span>01</span><b>SEARCH-SPACE AVAILABILITY</b></div>
+              <div class="scope2-boundary__main">
+                <strong>The current unlabeled gallery must be available before final retrieval.</strong>
+                <p>T-TBPS is therefore most natural for fixed or slowly changing databases, and less direct for fully streaming galleries whose candidate population changes continuously.</p>
+              </div>
+              <div class="scope2-boundary__signal" aria-hidden="true">
+                <span>fixed</span><i></i><span>slowly changing</span><i class="is-faded"></i><span class="is-muted">streaming</span>
+              </div>
+            </article>
+
+            <article class="scope2-boundary scope2-boundary--protocol">
+              <div class="scope2-boundary__index"><span>02</span><b>INFERENCE BOUNDARY</b></div>
+              <div class="scope2-boundary__main">
+                <strong>T-TBPS intentionally changes what information is available during inference.</strong>
+                <p>The unlabeled target gallery may inform query construction. Target identity labels and target supervision remain excluded, so this should be compared as a distinct inference setting rather than silently treated as standard TBPS.</p>
+              </div>
+              <div class="scope2-protocol-chips" aria-label="Allowed and excluded information">
+                <span class="is-allowed">UNLABELED GALLERY ✓</span>
+                <span>IDENTITY LABELS ×</span>
+                <span>TARGET SUPERVISION ×</span>
+              </div>
+            </article>
+
+            <article class="scope2-boundary scope2-boundary--diagnostic">
+              <div class="scope2-boundary__index"><span>03</span><b>DIAGNOSTIC SCOPE</b></div>
+              <div class="scope2-boundary__main">
+                <strong>The controlled intervention establishes one form of gallery dependence—not all of them.</strong>
+                <p>It shows reproducible sensitivity to cue-directed distractor composition, but does not characterize every possible dependence on gallery structure and does not imply that every query benefits equally from gallery-aware interpretation.</p>
+              </div>
+              <div class="scope2-diagnostic-viz" aria-hidden="true">
+                <span>CONTROLLED<br>INTERVENTION</span><i></i><strong>SUPPORTED CLAIM</strong><i class="is-dashed"></i><span class="is-muted">ALL GALLERY<br>DEPENDENCE</span>
+              </div>
+            </article>
           </div>
 
-          <div class="limitation-grid" id="limitations" aria-label="Limitations">
-            <div>
-              <h3>Gallery availability</h3>
-              <p>The current unlabeled gallery must be available before final retrieval.</p>
-            </div>
-            <div>
-              <h3>Gallery dynamics</h3>
-              <p>
-                The setting is most natural for fixed or slowly changing galleries, and less direct
-                for fully streaming galleries.
-              </p>
-            </div>
-            <div>
-              <h3>Diagnostic scope</h3>
-              <p>
-                The cue-swap diagnostic establishes sensitivity to cue-directed gallery composition,
-                but does not show that every query benefits equally.
-              </p>
-            </div>
-            <div>
-              <h3>Inference boundary</h3>
-              <p>
-                T-TBPS intentionally changes standard TBPS by letting the current unlabeled target
-                gallery inform query construction.
-              </p>
-            </div>
+          <div class="scope2-summary">
+            <span>READING THE CLAIM CORRECTLY</span>
+            <p>T-TBPS expands the inference context under a clearly stated protocol; the diagnostic motivates that expansion without claiming universal benefit or exhaustive causality.</p>
           </div>
+        </div>
+      </section>
 
-          <div class="closing-takeaway" id="takeaway">
-            <p class="section-kicker">Closing takeaway</p>
-            <p>
-              The gallery is not only the destination of retrieval. It can be a source of context for
-              deciding how the query should search.
-            </p>
+      <section class="chapter closing-chapter" id="takeaway" aria-labelledby="takeaway-title">
+        <div class="section-inner">
+          <div class="closing2-shell">
+            <div class="closing2-copy">
+              <p class="section-kicker">Closing Takeaway</p>
+              <h2 id="takeaway-title">The gallery can inform <em>how</em> a query searches—not only <em>what</em> it ranks.</h2>
+              <p>
+                T-TBPS turns the current unlabeled gallery into inference context before final retrieval.
+                GATE shows that this idea can improve existing frozen retrievers without gallery identity labels,
+                test-time optimization, or modification of the learned retrieval space.
+              </p>
+            </div>
+
+            <div class="closing2-evidence" aria-label="Experimental breadth summarized in the paper conclusion">
+              <div><strong>5</strong><span>frozen retrievers</span></div>
+              <i aria-hidden="true"></i>
+              <div><strong>3</strong><span>benchmarks</span></div>
+              <i aria-hidden="true"></i>
+              <div><strong>6 / 6</strong><span>transfer directions</span></div>
+            </div>
+
+            <div class="closing2-direction">
+              <span>COMPLEMENTARY DIRECTION TO REPRESENTATION LEARNING</span>
+              <div class="closing2-axes">
+                <article><small>AXIS 01</small><strong>Stronger gallery evidence</strong><p>What should the current search space reveal?</p></article>
+                <i aria-hidden="true">×</i>
+                <article><small>AXIS 02</small><strong>More capable query-conditioned reasoning</strong><p>How should that evidence change the way a query is deployed?</p></article>
+              </div>
+            </div>
           </div>
         </div>
       </section>
