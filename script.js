@@ -13,41 +13,28 @@ const benchmarkResults = [
     dataset: "CUHK-PEDES",
     r1: 77.39,
     map: 72.49,
-    deltaR1: 0.47,
+    priorR1: 76.53,
+    priorMap: 70.90,
+    deltaR1: 0.86,
     deltaMap: 1.59
   },
   {
     dataset: "ICFG-PEDES",
     r1: 69.64,
     map: 48.23,
-    deltaR1: 0.45,
+    priorR1: 68.51,
+    priorMap: 44.14,
+    deltaR1: 1.13,
     deltaMap: 4.09
   },
   {
     dataset: "RSTPReid",
     r1: 68.50,
     map: 55.24,
+    priorR1: 67.50,
+    priorMap: 53.13,
     deltaR1: 1.00,
     deltaMap: 2.11
-  }
-];
-
-const differentSettingGroups = [
-  {
-    title: "ALBEF-based methods",
-    items: ["ALBEF family", "Image-language pretraining"]
-  },
-  {
-    title: "External tools / ReID pre-training",
-    items: ["External tools", "ReID-domain pretraining"]
-  },
-  {
-    title: "CLIP-based TBPS methods",
-    items: ["Frozen CLIP host", "T-TBPS inference"]
-  },
-  {
-    title: "GATE + ITSELF",
-    items: ["Best reported frontier"]
   }
 ];
 
@@ -59,28 +46,19 @@ const retrieverDeltas = [
   { name: "ITSELF", deltas: [{ r1: 0.47, map: 3.15 }, { r1: 0.45, map: 4.45 }, { r1: 1.25, map: 2.22 }] }
 ];
 
-const rankingAverageGains = [
-  { dataset: "CUHK-PEDES", r1: 0.44, map: 2.53 },
-  { dataset: "ICFG-PEDES", r1: 0.72, map: 4.33 },
-  { dataset: "RSTPReid", r1: 1.50, map: 2.27 }
-];
-
-const transferDirections = [
-  ["CUHK-PEDES", "ICFG-PEDES"],
-  ["CUHK-PEDES", "RSTPReid"],
-  ["ICFG-PEDES", "CUHK-PEDES"],
-  ["ICFG-PEDES", "RSTPReid"],
-  ["RSTPReid", "CUHK-PEDES"],
-  ["RSTPReid", "ICFG-PEDES"]
+const hostAverageGains = [
+  { dataset: "CUHK", r1: 0.44, map: 2.53 },
+  { dataset: "ICFG", r1: 0.72, map: 4.33 },
+  { dataset: "RSTP", r1: 1.50, map: 2.27 }
 ];
 
 const transfers = [
-  { direction: "CUHK -> ICFG", avgR1: 0.35, avgMap: 2.64, maxR1: 0.50, maxMap: 3.83 },
-  { direction: "ICFG -> CUHK", avgR1: 0.56, avgMap: 1.55, maxR1: 1.27, maxMap: 3.28 },
-  { direction: "ICFG -> RSTP", avgR1: 0.79, avgMap: 2.20, maxR1: 2.26, maxMap: 5.13 },
-  { direction: "RSTP -> ICFG", avgR1: 1.04, avgMap: 3.85, maxR1: 2.27, maxMap: 4.62 },
-  { direction: "CUHK -> RSTP", avgR1: 0.64, avgMap: 1.62, maxR1: 1.35, maxMap: 3.37 },
-  { direction: "RSTP -> CUHK", avgR1: 0.38, avgMap: 0.89, maxR1: 0.65, maxMap: 1.29 }
+  { direction: "CUHK → ICFG", avgR1: 0.35, avgMap: 2.64, maxR1: 0.50, maxMap: 3.83 },
+  { direction: "ICFG → CUHK", avgR1: 0.56, avgMap: 1.55, maxR1: 1.27, maxMap: 3.28 },
+  { direction: "ICFG → RSTP", avgR1: 0.79, avgMap: 2.20, maxR1: 2.26, maxMap: 5.13 },
+  { direction: "RSTP → ICFG", avgR1: 1.04, avgMap: 3.85, maxR1: 2.27, maxMap: 4.62 },
+  { direction: "CUHK → RSTP", avgR1: 0.64, avgMap: 1.62, maxR1: 1.35, maxMap: 3.37 },
+  { direction: "RSTP → CUHK", avgR1: 0.38, avgMap: 0.89, maxR1: 0.65, maxMap: 1.29 }
 ];
 
 const evidenceAblation = [
@@ -167,32 +145,26 @@ function renderBenchmarkCards() {
   if (!container) return;
   container.innerHTML = benchmarkResults.map((item) => `
     <article class="benchmark-card">
-      <h3>${item.dataset}</h3>
+      <div class="benchmark-card__head">
+        <h3>${item.dataset}</h3>
+        <span>GATE<sub>ITSELF</sub></span>
+      </div>
       <div class="metric-row">
         <div class="metric-box">
-          <span>R@1</span>
+          <div class="metric-box__head">
+            <span>R@1</span>
+            <em>${formatDelta(item.deltaR1)}</em>
+          </div>
           <strong>${item.r1.toFixed(2)}</strong>
+          <small>prior best ${item.priorR1.toFixed(2)}</small>
         </div>
         <div class="metric-box">
-          <span>mAP</span>
+          <div class="metric-box__head">
+            <span>mAP</span>
+            <em>${formatDelta(item.deltaMap)}</em>
+          </div>
           <strong>${item.map.toFixed(2)}</strong>
-        </div>
-      </div>
-      <p class="gain-line">vs best non-GATE result: ${formatDelta(item.deltaR1)} R@1 / ${formatDelta(item.deltaMap)} mAP</p>
-    </article>
-  `).join("");
-}
-
-function renderComparisonLadder() {
-  const container = document.querySelector("#comparison-ladder");
-  if (!container) return;
-  container.innerHTML = differentSettingGroups.map((group, index) => `
-    <article class="comparison-step ${index === differentSettingGroups.length - 1 ? "comparison-step--final" : ""}">
-      <div class="comparison-step__index">0${index + 1}</div>
-      <div class="comparison-step__body">
-        <strong>${group.title}</strong>
-        <div class="comparison-step__items">
-          ${group.items.map((item) => `<span>${item}</span>`).join("")}
+          <small>prior best ${item.priorMap.toFixed(2)}</small>
         </div>
       </div>
     </article>
@@ -209,12 +181,13 @@ function renderRetrieverDeltas() {
       ${row.deltas.map((value) => `
         <div class="retriever-matrix__cell">
           <strong>${formatDelta(value.r1)} / ${formatDelta(value.map)}</strong>
-          <span>ΔR@1 / ΔmAP</span>
+          <span>R@1 / mAP</span>
         </div>
       `).join("")}
     </div>
   `).join("");
   container.innerHTML = `
+    <div class="retriever-matrix__legend">Each cell shows ΔR@1 / ΔmAP after adding GATE</div>
     <div class="retriever-matrix__header">
       <div></div>
       ${header}
@@ -223,35 +196,15 @@ function renderRetrieverDeltas() {
   `;
 }
 
-function tile(status, index) {
-  if (status === "…" || status === "...") {
-    return '<span class="result-tile ellipsis" aria-hidden="true">…</span>';
-  }
-  const isTarget = status === "T";
-  const label = isTarget ? "target" : "distractor";
-  return `<span class="result-tile ${label}" aria-label="Rank ${index + 1}: ${label}">${status}</span>`;
-}
-
-function renderRankingStrips() {
-  const frozen = document.querySelector("#ranking-frozen");
-  const enriched = document.querySelector("#ranking-enriched");
-  if (frozen) {
-    frozen.innerHTML = ["D", "T", "D", "T", "D", "T"].map(tile).join("");
-  }
-  if (enriched) {
-    enriched.innerHTML = ["T", "T", "D", "T", "D", "…"].map(tile).join("");
-  }
-}
-
 function renderRankingGains() {
   const container = document.querySelector("#ranking-gains");
   if (!container) return;
-  container.innerHTML = rankingAverageGains.map((item) => `
-    <article class="ranking-gain">
+  container.innerHTML = hostAverageGains.map((item) => `
+    <div class="ranking-gain">
       <strong>${item.dataset}</strong>
       <span>${formatDelta(item.r1)} R@1</span>
-      <span>${formatDelta(item.map)} mAP</span>
-    </article>
+      <b>${formatDelta(item.map)} mAP</b>
+    </div>
   `).join("");
 }
 
@@ -287,11 +240,11 @@ function renderGroupedDeltas(containerSelector, rows, maxR1, maxMap) {
 function renderTransferDirections() {
   const container = document.querySelector("#transfer-directions");
   if (!container) return;
-  container.innerHTML = transferDirections.map(([source, target]) => `
+  container.innerHTML = transfers.map((item) => `
     <div class="transfer-direction">
-      <span>${source}</span>
-      <strong>&rarr;</strong>
-      <span>${target}</span>
+      <strong>${item.direction}</strong>
+      <span>${formatDelta(item.avgR1)} R@1</span>
+      <b>${formatDelta(item.avgMap)} mAP</b>
     </div>
   `).join("");
 }
@@ -507,9 +460,7 @@ function bindTtbpsScrollFlow() {
 document.addEventListener("DOMContentLoaded", () => {
   renderDiagnosticHeatmap();
   renderBenchmarkCards();
-  renderComparisonLadder();
   renderRetrieverDeltas();
-  renderRankingStrips();
   renderRankingGains();
   renderTransferDirections();
   renderGroupedDeltas("#evidence-ablation", evidenceAblation, 1.9, 4.36);
