@@ -9,33 +9,9 @@ const diagnostic = [
 ];
 
 const benchmarkResults = [
-  {
-    dataset: "CUHK-PEDES",
-    r1: 77.39,
-    map: 72.49,
-    priorR1: 76.53,
-    priorMap: 70.90,
-    deltaR1: 0.86,
-    deltaMap: 1.59
-  },
-  {
-    dataset: "ICFG-PEDES",
-    r1: 69.64,
-    map: 48.23,
-    priorR1: 68.51,
-    priorMap: 44.14,
-    deltaR1: 1.13,
-    deltaMap: 4.09
-  },
-  {
-    dataset: "RSTPReid",
-    r1: 68.50,
-    map: 55.24,
-    priorR1: 67.50,
-    priorMap: 53.13,
-    deltaR1: 1.00,
-    deltaMap: 2.11
-  }
+  { dataset: "CUHK-PEDES", r1: 77.39, map: 72.49, deltaR1: 0.86, deltaMap: 1.59 },
+  { dataset: "ICFG-PEDES", r1: 69.64, map: 48.23, deltaR1: 1.13, deltaMap: 4.09 },
+  { dataset: "RSTPReid", r1: 68.50, map: 55.24, deltaR1: 1.00, deltaMap: 2.11 }
 ];
 
 const retrieverDeltas = [
@@ -156,23 +132,17 @@ function renderBenchmarkCards() {
         <div class="metric-box">
           <div class="metric-box__head">
             <span>R@1</span>
-            <em>${formatDelta(item.deltaR1)}</em>
+            <em>Δ ${formatDelta(item.deltaR1)}</em>
           </div>
           <strong>${item.r1.toFixed(2)}</strong>
-          <small>prior frontier ${item.priorR1.toFixed(2)}</small>
         </div>
         <div class="metric-box">
           <div class="metric-box__head">
             <span>mAP</span>
-            <em>${formatDelta(item.deltaMap)}</em>
+            <em>Δ ${formatDelta(item.deltaMap)}</em>
           </div>
           <strong>${item.map.toFixed(2)}</strong>
-          <small>prior frontier ${item.priorMap.toFixed(2)}</small>
         </div>
-      </div>
-      <div class="benchmark-card__footer">
-        <span>Previous frontier: ${item.priorR1.toFixed(2)} R@1 / ${item.priorMap.toFixed(2)} mAP</span>
-        <strong>${formatDelta(item.deltaR1)} / ${formatDelta(item.deltaMap)}</strong>
       </div>
     </article>
   `).join("");
@@ -246,37 +216,14 @@ function renderGroupedDeltas(containerSelector, rows, maxR1, maxMap) {
 
 function renderTransferDirections() {
   const container = document.querySelector("#transfer-directions");
-  if (container) {
-    container.innerHTML = transfers.map((item) => `
-      <div class="transfer-direction">
-        <strong>${item.direction}</strong>
-        <span>${formatDelta(item.avgR1)} R@1</span>
-        <b>${formatDelta(item.avgMap)} mAP</b>
-      </div>
-    `).join("");
-  }
-
-  const lookup = Object.fromEntries(transfers.map((item) => [item.direction, item]));
-  const edgeGroups = {
-    "#transfer-edge-ci": ["CUHK → ICFG", "ICFG → CUHK"],
-    "#transfer-edge-cr": ["CUHK → RSTP", "RSTP → CUHK"],
-    "#transfer-edge-ir": ["ICFG → RSTP", "RSTP → ICFG"]
-  };
-
-  Object.entries(edgeGroups).forEach(([selector, directions]) => {
-    const edgeContainer = document.querySelector(selector);
-    if (!edgeContainer) return;
-    edgeContainer.innerHTML = directions.map((direction) => {
-      const item = lookup[direction];
-      return `
-        <div class="transfer-edge__row">
-          <strong>${direction}</strong>
-          <span>${formatDelta(item.avgMap)} mAP</span>
-          <small>${formatDelta(item.avgR1)} R@1</small>
-        </div>
-      `;
-    }).join("");
-  });
+  if (!container) return;
+  container.innerHTML = transfers.map((item) => `
+    <div class="transfer-direction">
+      <strong>${item.direction}</strong>
+      <span>${formatDelta(item.avgR1)} R@1</span>
+      <b>${formatDelta(item.avgMap)} mAP</b>
+    </div>
+  `).join("");
 }
 
 function renderQualitative(filter = "all") {

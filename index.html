@@ -854,7 +854,10 @@
               <div class="results-stage__rail" aria-hidden="true">
                 <div class="results-stage__node">
                   <span class="results-stage__index">01</span>
-                  <strong>3 / 3</strong>
+                  <div class="results-stage__stat">
+                    <strong>3</strong>
+                    <span>benchmarks</span>
+                  </div>
                   <span class="results-stage__tag">FRONTIER</span>
                 </div>
               </div>
@@ -865,27 +868,48 @@
                   <h3 id="frontier-title">GATE establishes a new frontier on all three benchmarks</h3>
                   <p>
                     GATE<sub>ITSELF</sub> reaches the best reported R@1 and mAP on
-                    CUHK-PEDES, ICFG-PEDES, and RSTPReid. The comparison is presented under the
-                    same benchmark protocol, while the competing frontier spans different training
-                    resources and method families.
+                    CUHK-PEDES, ICFG-PEDES, and RSTPReid. Each card reports the resulting score
+                    together with the improvement margin, keeping the comparison focused on the
+                    achieved frontier rather than repeating the earlier score.
                   </p>
                 </div>
 
                 <div id="benchmark-frontier" class="benchmark-grid" aria-label="Benchmark frontier comparison"></div>
 
-                <div class="frontier-context frontier-context--backbone" aria-label="Benchmark comparison context">
-                  <p class="frontier-context__takeaway">
-                    <strong>Takeaway.</strong> The frontier shift is not confined to a narrow regime:
-                    the gallery-aware correction moves a CLIP-based frozen host beyond the previous
-                    reported frontier on every benchmark.
-                  </p>
-                  <div class="frontier-context__chips">
-                    <span>Same benchmark protocol</span>
-                    <span>Different training/resource regimes</span>
-                    <span>CLIP-based frozen host</span>
-                    <span>Gallery-aware inference</span>
+                <section class="frontier-takeaway" aria-labelledby="frontier-takeaway-title">
+                  <div class="frontier-takeaway__copy">
+                    <p class="frontier-takeaway__eyebrow">Takeaway</p>
+                    <h4 id="frontier-takeaway-title">A stronger frontier without depending on a stronger host.</h4>
+                    <p>
+                      Gallery-aware query correction moves the frozen ITSELF host to the best reported
+                      R@1 and mAP across all three benchmarks, while keeping the underlying retriever fixed.
+                    </p>
                   </div>
-                </div>
+
+                  <div class="frontier-proof-grid" aria-label="Frontier supporting evidence">
+                    <article class="frontier-proof">
+                      <span>Across benchmarks</span>
+                      <strong>Best R@1 + mAP on 3 / 3</strong>
+                      <p>The frontier shift is consistent across CUHK-PEDES, ICFG-PEDES, and RSTPReid.</p>
+                    </article>
+                    <article class="frontier-proof">
+                      <span>Frozen host</span>
+                      <strong>No retriever update</strong>
+                      <p>GATE enriches the query at inference while the host TBPS retriever remains frozen.</p>
+                    </article>
+                    <article class="frontier-proof">
+                      <span>Across settings</span>
+                      <strong>Not limited to matched training regimes</strong>
+                      <p>The reported frontier also spans methods with different backbones and training resources.</p>
+                    </article>
+                  </div>
+
+                  <p class="frontier-cross-setting">
+                    <strong>Cross-setting comparison.</strong> GATE still exceeds the reported benchmark scores
+                    of competing settings that use alternative vision-language backbones such as ALBEF or
+                    additional pretraining datasets, while its host retriever remains frozen.
+                  </p>
+                </section>
               </div>
             </article>
 
@@ -893,7 +917,10 @@
               <div class="results-stage__rail" aria-hidden="true">
                 <div class="results-stage__node">
                   <span class="results-stage__index">02</span>
-                  <strong>15 / 15</strong>
+                  <div class="results-stage__stat">
+                    <strong>5</strong>
+                    <span>frozen hosts</span>
+                  </div>
                   <span class="results-stage__tag">GENERALITY</span>
                 </div>
               </div>
@@ -913,8 +940,8 @@
                   <aside class="retriever-side" aria-label="Retriever-level result summary">
                     <div class="results-count-card">
                       <div class="results-count-card__eyebrow">All frozen hosts improve</div>
-                      <strong>15 / 15 ↑</strong>
-                      <span>retriever × benchmark combinations improve</span>
+                      <strong>5 hosts</strong>
+                      <span>15 / 15 dataset × retriever combinations improve</span>
                     </div>
                     <div class="ranking-insight">
                       <p class="ranking-insight__eyebrow">Ranking refinement</p>
@@ -934,7 +961,10 @@
               <div class="results-stage__rail" aria-hidden="true">
                 <div class="results-stage__node">
                   <span class="results-stage__index">03</span>
-                  <strong>30 / 30</strong>
+                  <div class="results-stage__stat">
+                    <strong>6</strong>
+                    <span>directed routes</span>
+                  </div>
                   <span class="results-stage__tag">TRANSFER</span>
                 </div>
               </div>
@@ -953,8 +983,8 @@
                   <aside class="transfer-side" aria-label="Cross-domain transfer summary">
                     <div class="results-count-card results-count-card--transfer">
                       <div class="results-count-card__eyebrow">Every transfer route improves</div>
-                      <strong>30 / 30 ↑</strong>
-                      <span>6 transfer directions × 5 frozen retrievers improve</span>
+                      <strong>6 routes</strong>
+                      <span>30 / 30 route × retriever transfer settings improve</span>
                     </div>
                     <div class="transfer-range" aria-label="Cross-domain gain range">
                       <div>
@@ -980,38 +1010,40 @@
 
                   <figure
                     class="research-figure transfer-figure"
-                    role="img"
-                    aria-label="Three benchmark nodes connected by all six directed source-to-target transfer routes, with average gains shown on each route."
+                    aria-label="Three benchmark nodes connected by all six directed source-to-target transfer routes. Exact average gains are listed below the topology map."
                   >
                     <div class="transfer-figure__header">
                       <div>
                         <p class="transfer-figure__eyebrow">All six directed routes</p>
                         <strong>Cross-domain gains remain positive across the entire transfer graph</strong>
                       </div>
-                      <span class="transfer-figure__badge">Data-carrying transfer map</span>
+                      <span class="transfer-figure__badge">Full transfer graph</span>
                     </div>
-                    <div class="transfer-triangle">
+
+                    <div class="transfer-map" aria-hidden="true">
+                      <svg class="transfer-map__svg" viewBox="0 0 640 310" preserveAspectRatio="xMidYMid meet" focusable="false">
+                        <defs>
+                          <marker id="transfer-arrow" markerWidth="8" markerHeight="8" refX="6.4" refY="3.5" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L7,3.5 L0,7 Z"></path>
+                          </marker>
+                        </defs>
+                        <path class="transfer-route" d="M170 72 C270 48 370 48 470 72"></path>
+                        <path class="transfer-route" d="M470 94 C370 118 270 118 170 94"></path>
+                        <path class="transfer-route" d="M148 126 C178 171 228 210 278 232"></path>
+                        <path class="transfer-route" d="M290 214 C238 188 192 151 158 111"></path>
+                        <path class="transfer-route" d="M492 126 C462 171 412 210 362 232"></path>
+                        <path class="transfer-route" d="M350 214 C402 188 448 151 482 111"></path>
+                      </svg>
+
                       <div class="dataset-node cuhk"><span>CUHK</span><small>PEDES</small></div>
                       <div class="dataset-node icfg"><span>ICFG</span><small>PEDES</small></div>
-                      <div class="dataset-node rstp"><span>RSTP</span><small>Reid</small></div>
-
-                      <div class="transfer-edge transfer-edge--ci">
-                        <span class="transfer-edge__track" aria-hidden="true"></span>
-                        <div id="transfer-edge-ci" class="transfer-edge__labels" aria-label="Transfer gains between CUHK-PEDES and ICFG-PEDES"></div>
-                      </div>
-                      <div class="transfer-edge transfer-edge--cr">
-                        <span class="transfer-edge__track" aria-hidden="true"></span>
-                        <div id="transfer-edge-cr" class="transfer-edge__labels" aria-label="Transfer gains between CUHK-PEDES and RSTPReid"></div>
-                      </div>
-                      <div class="transfer-edge transfer-edge--ir">
-                        <span class="transfer-edge__track" aria-hidden="true"></span>
-                        <div id="transfer-edge-ir" class="transfer-edge__labels" aria-label="Transfer gains between ICFG-PEDES and RSTPReid"></div>
-                      </div>
+                      <div class="dataset-node rstp"><span>RSTP</span><small>ReID</small></div>
                     </div>
+
                     <div id="transfer-directions" class="transfer-directions" aria-label="Average gains for each transfer direction"></div>
                     <figcaption>
-                      Each edge label reports the average gain for one transfer direction; all six
-                      source → target routes improve across all five frozen retrievers.
+                      The map shows transfer topology only; exact average gains are listed below.
+                      All six source → target routes improve across all five frozen retrievers.
                     </figcaption>
                   </figure>
                 </div>
