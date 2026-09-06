@@ -38,19 +38,35 @@ const transfers = [
 ];
 
 const evidenceAblation = [
-  { name: "Global", values: [{ r1: 0.49, map: 1.83 }, { r1: 0.33, map: 4.36 }, { r1: 1.90, map: 2.65 }] },
-  { name: "Vertical", values: [{ r1: 0.11, map: 1.61 }, { r1: 0.28, map: 2.91 }, { r1: 0.80, map: 1.84 }] },
-  { name: "Horizontal", values: [{ r1: 0.19, map: 1.36 }, { r1: 0.29, map: 3.21 }, { r1: 1.35, map: 1.57 }] },
-  { name: "Grid", values: [{ r1: 0.18, map: 2.48 }, { r1: 0.28, map: 2.86 }, { r1: 0.90, map: 1.65 }] },
-  { name: "Centroid", values: [{ r1: 0.06, map: 0.17 }, { r1: 0.06, map: 0.11 }, { r1: 1.05, map: 0.13 }] },
-  { name: "Residual", values: [{ r1: 0.11, map: 0.50 }, { r1: 0.26, map: 2.54 }, { r1: 0.60, map: 0.87 }] },
-  { name: "Global + Grid", values: [{ r1: 0.23, map: 2.30 }, { r1: 0.19, map: 4.19 }, { r1: 0.57, map: 2.44 }] }
+  { name: "Global", group: "individual", family: "Semantic", values: [{ r1: 0.49, map: 1.83 }, { r1: 0.33, map: 4.36 }, { r1: 1.90, map: 2.65 }] },
+  { name: "Vertical", group: "individual", family: "Spatial", values: [{ r1: 0.11, map: 1.61 }, { r1: 0.28, map: 2.91 }, { r1: 0.80, map: 1.84 }] },
+  { name: "Horizontal", group: "individual", family: "Spatial", values: [{ r1: 0.19, map: 1.36 }, { r1: 0.29, map: 3.21 }, { r1: 1.35, map: 1.57 }] },
+  { name: "Grid", group: "individual", family: "Spatial", values: [{ r1: 0.18, map: 2.48 }, { r1: 0.28, map: 2.86 }, { r1: 0.90, map: 1.65 }] },
+  { name: "Centroid", group: "individual", family: "Gallery-relative", values: [{ r1: 0.06, map: 0.17 }, { r1: 0.06, map: 0.11 }, { r1: 1.05, map: 0.13 }] },
+  { name: "Residual", group: "individual", family: "Gallery-relative", values: [{ r1: 0.11, map: 0.50 }, { r1: 0.26, map: 2.54 }, { r1: 0.60, map: 0.87 }] },
+  { name: "G + Vertical", group: "combined", partner: "Vertical", values: [{ r1: 0.34, map: 1.67 }, { r1: 0.37, map: 3.56 }, { r1: 1.00, map: 2.23 }] },
+  { name: "G + Horizontal", group: "combined", partner: "Horizontal", values: [{ r1: 0.16, map: 2.46 }, { r1: 0.33, map: 2.46 }, { r1: 0.85, map: 2.04 }] },
+  { name: "G + Grid", group: "combined", partner: "Grid", values: [{ r1: 0.23, map: 2.30 }, { r1: 0.19, map: 4.19 }, { r1: 0.57, map: 2.44 }] },
+  { name: "G + Centroid", group: "combined", partner: "Centroid", values: [{ r1: 0.24, map: 1.91 }, { r1: 0.45, map: 3.86 }, { r1: 0.65, map: 1.87 }] },
+  { name: "G + Residual", group: "combined", partner: "Residual", values: [{ r1: 0.15, map: 1.21 }, { r1: 0.35, map: 3.88 }, { r1: 0.90, map: 1.89 }] }
+];
+
+const reasoningClipBaseline = [
+  { r1: 74.66, map: 67.63 },
+  { r1: 66.04, map: 41.02 },
+  { r1: 61.35, map: 49.29 }
 ];
 
 const reasoningAblation = [
-  { name: "MeanPool", values: [{ r1: 0.03, map: 0.04 }, { r1: 0.17, map: 0.47 }, { r1: 1.00, map: 0.02 }] },
-  { name: "Flat-MLP", values: [{ r1: 0.08, map: 1.56 }, { r1: 0.22, map: 1.98 }, { r1: 0.40, map: 0.42 }] },
-  { name: "QCRS-Mixer", values: [{ r1: 0.49, map: 1.83 }, { r1: 0.33, map: 4.36 }, { r1: 1.90, map: 2.65 }] }
+  { key: "meanpool", name: "MeanPool", tag: "GENERIC AGGREGATION", scores: [{ r1: 74.69, map: 67.67 }, { r1: 66.21, map: 41.49 }, { r1: 62.35, map: 49.31 }] },
+  { key: "flatmlp", name: "Flat-MLP", tag: "FLATTENED AGGREGATION", scores: [{ r1: 74.74, map: 69.19 }, { r1: 66.26, map: 43.00 }, { r1: 61.75, map: 49.71 }] },
+  { key: "wo-film", name: "w/o FiLM", tag: "COMPONENT ABLATION", removed: "film", scores: [{ r1: 74.92, map: 70.94 }, { r1: 66.34, map: 43.44 }, { r1: 62.00, map: 51.37 }] },
+  { key: "wo-rankemb", name: "w/o R-Emb.", tag: "COMPONENT ABLATION", removed: "rankemb", scores: [{ r1: 74.69, map: 68.40 }, { r1: 66.20, map: 44.52 }, { r1: 61.80, map: 50.87 }] },
+  { key: "wo-slotemb", name: "w/o S-Emb.", tag: "COMPONENT ABLATION", removed: "slotemb", scores: [{ r1: 74.77, map: 69.76 }, { r1: 66.24, map: 43.35 }, { r1: 62.15, map: 51.30 }] },
+  { key: "wo-slotmix", name: "w/o SlotMix", tag: "COMPONENT ABLATION", removed: "slotmix", scores: [{ r1: 74.84, map: 69.01 }, { r1: 66.26, map: 44.69 }, { r1: 61.90, map: 49.65 }] },
+  { key: "wo-rankmix", name: "w/o RankMix", tag: "COMPONENT ABLATION", removed: "rankmix", scores: [{ r1: 74.79, map: 70.59 }, { r1: 66.15, map: 44.25 }, { r1: 62.15, map: 51.34 }] },
+  { key: "wo-chanmix", name: "w/o ChanMix", tag: "COMPONENT ABLATION", removed: "chanmix", scores: [{ r1: 74.85, map: 70.21 }, { r1: 66.31, map: 45.02 }, { r1: 61.85, map: 50.76 }] },
+  { key: "qcrs", name: "QCRS-Mixer", tag: "COMPLETE STRUCTURE", scores: [{ r1: 75.15, map: 69.46 }, { r1: 66.37, map: 45.38 }, { r1: 63.25, map: 51.94 }] }
 ];
 
 const qualitativeDatasetLabels = {
@@ -114,6 +130,25 @@ function renderDiagnosticHeatmap() {
       <tbody>${rows}</tbody>
     </table>
   `;
+}
+
+
+function renderDiagnosticSensitivityMatrix() {
+  const container = document.querySelector("#diagnostic-sensitivity-matrix");
+  if (!container) return;
+
+  const shortDatasets = ["CUHK", "ICFG", "RSTP"];
+  const header = shortDatasets.map((name) => `<div class="diagx-matrix__head">${name}</div>`).join("");
+  const rows = diagnostic.map((row) => `
+    <div class="diagx-matrix__label">${row.retriever}</div>
+    ${row.values.map((value, index) => `
+      <div class="diagx-matrix__cell" title="${row.retriever} · ${datasets[index]}: ${value.toFixed(2)}% Flip Rate">
+        <i aria-hidden="true"></i><strong>${value.toFixed(2)}</strong>
+      </div>
+    `).join("")}
+  `).join("");
+
+  container.innerHTML = `<div class="diagx-matrix__corner"></div>${header}${rows}`;
 }
 
 function renderBenchmarkCards() {
@@ -768,74 +803,126 @@ function bindActiveNav() {
   window.addEventListener("resize", updateActiveNav);
 }
 
-function bindTtbpsScrollFlow() {
-  const figure = document.querySelector("[data-ttbps-visual]");
-  const stage = figure?.querySelector("[data-ttbps-stage]");
-  const panel = figure?.querySelector("[data-ttbps-panel]");
-  const lanes = figure?.querySelector("[data-ttbps-lanes]");
-  const queryCard = figure?.querySelector("[data-ttbps-query-card]");
-  const standardDock = figure?.querySelector('[data-ttbps-query-dock="standard"]');
-  const transductiveDock = figure?.querySelector('[data-ttbps-query-dock="transductive"]');
-
-  if (!figure || !stage || !panel || !lanes || !queryCard || !standardDock || !transductiveDock) return;
+function bindDiagnosticStory() {
+  const figure = document.querySelector("[data-diagnostic-visual]");
+  const replay = figure?.querySelector("[data-diagnostic-replay]");
+  const matrix = document.querySelector("#diagnostic-sensitivity-matrix");
+  const count = document.querySelector("[data-diagnostic-count]");
+  if (!figure) return;
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
-  let rafId = 0;
+  let playTimer = 0;
 
-  function applyLayout(progress) {
-    const lanesRect = lanes.getBoundingClientRect();
-    const standardRect = standardDock.getBoundingClientRect();
-    const transductiveRect = transductiveDock.getBoundingClientRect();
-    const standardX = standardRect.left - lanesRect.left;
-    const eased = progress * progress * (3 - 2 * progress);
-    const cardWidth = clamp(Math.round(Math.max(standardRect.width, 420)), 300, Math.round(lanesRect.width - standardX - 8));
-    figure.style.setProperty("--ttbps-card-x", `${Math.round(standardX)}px`);
-    figure.style.setProperty("--ttbps-card-width", `${cardWidth}px`);
+  const play = () => {
+    window.clearTimeout(playTimer);
+    figure.classList.remove("is-playing");
+    if (reduceMotion) return;
+    void figure.offsetWidth;
+    figure.classList.add("is-playing");
+    playTimer = window.setTimeout(() => figure.classList.remove("is-playing"), 1900);
+  };
 
-    const cardHeight = queryCard.getBoundingClientRect().height;
-    const standardCenter = standardRect.top + standardRect.height / 2 - lanesRect.top;
-    const transductiveCenter = transductiveRect.top + transductiveRect.height / 2 - lanesRect.top;
-    const cardY = standardCenter - cardHeight / 2 + (transductiveCenter - standardCenter) * eased;
-    const flowOffset = (1 - eased) * 124;
+  replay?.addEventListener("click", play);
 
-    figure.style.setProperty("--ttbps-card-y", `${cardY.toFixed(2)}px`);
-    figure.style.setProperty("--ttbps-trace-offset", `${flowOffset.toFixed(2)}`);
-    figure.style.setProperty("--ttbps-standard-focus", `${(1 - eased * 0.42).toFixed(3)}`);
-    figure.style.setProperty("--ttbps-transductive-focus", `${(0.7 + eased * 0.3).toFixed(3)}`);
-    figure.dataset.ttbpsPhase = progress < 0.38 ? "standard" : progress > 0.68 ? "transductive" : "transition";
-    queryCard.setAttribute("data-ttbps-progress", progress.toFixed(3));
+  const finishCount = () => {
+    if (!count) return;
+    const target = Number.parseInt(count.dataset.diagnosticCount || "0", 10);
+    count.textContent = new Intl.NumberFormat("en-US").format(target);
+    count.dataset.diagnosticAnimated = "true";
+  };
+
+  const animateCount = () => {
+    if (!count || count.dataset.diagnosticAnimated === "true") return;
+    if (reduceMotion) {
+      finishCount();
+      return;
+    }
+    const target = Number.parseInt(count.dataset.diagnosticCount || "0", 10);
+    const formatter = new Intl.NumberFormat("en-US");
+    const start = performance.now();
+    const duration = 760;
+    count.dataset.diagnosticAnimated = "true";
+    const tick = (now) => {
+      const progress = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      count.textContent = formatter.format(Math.round(target * eased));
+      if (progress < 1) window.requestAnimationFrame(tick);
+      else count.textContent = formatter.format(target);
+    };
+    window.requestAnimationFrame(tick);
+  };
+
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    matrix?.classList.add("is-visible");
+    finishCount();
+    return;
   }
 
-  function update() {
-    rafId = 0;
-    const viewport = window.innerHeight || document.documentElement.clientHeight;
-    const stageRect = stage.getBoundingClientRect();
-    const start = viewport * 0.82;
-    const travel = Math.max(viewport * 0.9, stageRect.height - viewport * 0.12);
-    const progress = clamp((start - stageRect.top) / travel, 0, 1);
-    applyLayout(reduceMotion ? 0 : progress);
+  const figureObserver = new IntersectionObserver((entries) => {
+    if (!entries.some((entry) => entry.isIntersecting)) return;
+    play();
+    figureObserver.disconnect();
+  }, { threshold: 0.34, rootMargin: "0px 0px -8% 0px" });
+  figureObserver.observe(figure);
+
+  if (matrix) {
+    const matrixObserver = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      matrix.classList.add("is-visible");
+      matrixObserver.disconnect();
+    }, { threshold: 0.4, rootMargin: "0px 0px -8% 0px" });
+    matrixObserver.observe(matrix);
   }
 
-  function scheduleUpdate() {
-    if (rafId) return;
-    rafId = window.requestAnimationFrame(update);
+  if (count) {
+    const countObserver = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      animateCount();
+      countObserver.disconnect();
+    }, { threshold: 0.55, rootMargin: "0px 0px -8% 0px" });
+    countObserver.observe(count);
   }
+}
 
-  update();
+function bindTtbpsScrollFlow() {
+  const figure = document.querySelector("[data-ttbps-visual]");
+  const buttons = figure ? Array.from(figure.querySelectorAll("[data-ttbps-mode-button]")) : [];
+  if (!figure || buttons.length === 0) return;
 
-  if (reduceMotion) return;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let switchTimer = 0;
 
-  window.addEventListener("scroll", scheduleUpdate, { passive: true });
-  window.addEventListener("resize", scheduleUpdate);
-  if ("ResizeObserver" in window) {
-    const observer = new ResizeObserver(scheduleUpdate);
-    observer.observe(stage);
-    observer.observe(panel);
-    observer.observe(lanes);
-    observer.observe(standardDock);
-    observer.observe(transductiveDock);
-  }
+  const setMode = (mode, animate = true) => {
+    const nextMode = mode === "transductive" ? "transductive" : "standard";
+    figure.dataset.ttbpsMode = nextMode;
+
+    buttons.forEach((button) => {
+      const selected = button.dataset.ttbpsModeButton === nextMode;
+      button.setAttribute("aria-selected", String(selected));
+      button.tabIndex = selected ? 0 : -1;
+    });
+
+    if (!animate || reduceMotion) return;
+    window.clearTimeout(switchTimer);
+    figure.classList.remove("is-switching");
+    void figure.offsetWidth;
+    figure.classList.add("is-switching");
+    switchTimer = window.setTimeout(() => figure.classList.remove("is-switching"), 420);
+  };
+
+  buttons.forEach((button, index) => {
+    button.addEventListener("click", () => setMode(button.dataset.ttbpsModeButton, true));
+    button.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      event.preventDefault();
+      const direction = event.key === "ArrowRight" ? 1 : -1;
+      const next = (index + direction + buttons.length) % buttons.length;
+      buttons[next].focus();
+      setMode(buttons[next].dataset.ttbpsModeButton, true);
+    });
+  });
+
+  setMode(figure.dataset.ttbpsMode || "standard", false);
 }
 
 
@@ -969,19 +1056,352 @@ function bindGateMethodExplorer() {
   }
 }
 
+
+function formatSignedDelta(value) {
+  const sign = value > 0 ? "+" : value < 0 ? "−" : "±";
+  return `${sign}${Math.abs(value).toFixed(2)}`;
+}
+
+function bindAnalysisEvidenceLab() {
+  const lab = document.querySelector("[data-analysis-evidence]");
+  if (!lab) return;
+
+  const datasetTabs = Array.from(lab.querySelectorAll("[data-analysis-evidence-dataset]"));
+  const metricTabs = Array.from(lab.querySelectorAll("[data-analysis-evidence-metric]"));
+  const providerTabs = Array.from(lab.querySelectorAll("[data-analysis-provider]"));
+  const chart = lab.querySelector("#analysis-evidence-chart");
+  const context = lab.querySelector("[data-analysis-evidence-context]");
+  const winnerName = lab.querySelector("[data-analysis-evidence-winner]");
+  const winnerValue = lab.querySelector("[data-analysis-evidence-winner-value]");
+  const winnerNote = lab.querySelector("[data-analysis-evidence-winner-note]");
+  const bestIndividual = lab.querySelector("[data-analysis-best-individual]");
+  const bestCombined = lab.querySelector("[data-analysis-best-combined]");
+  const providerChip = lab.querySelector("[data-analysis-provider-chip]");
+  const providerName = lab.querySelector("[data-analysis-provider-name]");
+  const providerValue = lab.querySelector("[data-analysis-provider-value]");
+  const comboName = lab.querySelector("[data-analysis-combo-name]");
+  const comboValue = lab.querySelector("[data-analysis-combo-value]");
+  const dumbbellBase = lab.querySelector("[data-analysis-dumbbell-base]");
+  const dumbbellCombo = lab.querySelector("[data-analysis-dumbbell-combo]");
+  const dumbbellLink = lab.querySelector("[data-analysis-dumbbell-link]");
+  const compare = lab.querySelector("[data-analysis-global-compare]");
+  const verdictLabel = lab.querySelector("[data-analysis-global-verdict-label]");
+  const verdictValue = lab.querySelector("[data-analysis-global-verdict-value]");
+  const verdictCopy = lab.querySelector("[data-analysis-global-verdict-copy]");
+  if (!chart || !datasetTabs.length || !metricTabs.length || !providerTabs.length) return;
+
+  const shortDatasets = ["CUHK", "ICFG", "RSTP"];
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let datasetIndex = 0;
+  let metric = "map";
+  let provider = "Vertical";
+  let motionTimer = 0;
+
+  const metricLabel = () => metric === "map" ? "mAP" : "R@1";
+  const selectedValue = (row) => row.values[datasetIndex][metric];
+
+  const setSelected = (tabs, active) => {
+    tabs.forEach((tab) => {
+      const selected = tab === active;
+      tab.setAttribute("aria-selected", String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+    });
+  };
+
+  const animateRefresh = (element) => {
+    if (!element || reduceMotion) return;
+    window.clearTimeout(motionTimer);
+    element.classList.remove("is-refreshing");
+    void element.offsetWidth;
+    element.classList.add("is-refreshing");
+    motionTimer = window.setTimeout(() => element.classList.remove("is-refreshing"), 360);
+  };
+
+  const renderChart = () => {
+    const groups = [
+      { key: "individual", label: "INDIVIDUAL PROVIDERS" },
+      { key: "combined", label: "GLOBAL + PROVIDER" }
+    ];
+    const visibleValues = evidenceAblation.map(selectedValue);
+    const maxValue = Math.max(metric === "map" ? 4.5 : 2.0, Math.ceil(Math.max(...visibleValues) * 10) / 10);
+    const half = maxValue / 2;
+    const winner = evidenceAblation.reduce((best, row) => selectedValue(row) > selectedValue(best) ? row : best, evidenceAblation[0]);
+    const individualRows = evidenceAblation.filter((row) => row.group === "individual");
+    const combinedRows = evidenceAblation.filter((row) => row.group === "combined");
+    const bestInd = individualRows.reduce((best, row) => selectedValue(row) > selectedValue(best) ? row : best, individualRows[0]);
+    const bestComb = combinedRows.reduce((best, row) => selectedValue(row) > selectedValue(best) ? row : best, combinedRows[0]);
+
+    const groupMarkup = groups.map((group) => {
+      const rows = evidenceAblation
+        .filter((row) => row.group === group.key)
+        .slice()
+        .sort((a, b) => selectedValue(b) - selectedValue(a));
+      return `
+        <section class="analysisx-dot-group">
+          <header><span>${group.label}</span><small>${rows.length} configurations</small></header>
+          ${rows.map((row) => {
+            const value = selectedValue(row);
+            const position = Math.max(0, Math.min(100, value / maxValue * 100));
+            const isWinner = row === winner;
+            return `
+              <div class="analysisx-dot-row${isWinner ? " is-winner" : ""}" style="--analysis-dot-pos:${position.toFixed(2)}%">
+                <div class="analysisx-dot-label"><strong>${row.name}</strong>${row.family ? `<small>${row.family}</small>` : ""}</div>
+                <div class="analysisx-dot-track" aria-hidden="true"><span></span><i></i></div>
+                <b>${formatDelta(value)}</b>
+              </div>
+            `;
+          }).join("")}
+        </section>
+      `;
+    }).join("");
+
+    chart.innerHTML = `
+      <div class="analysisx-dot-scale" aria-hidden="true"><span>0</span><span>+${half.toFixed(1)}</span><span>+${maxValue.toFixed(1)}</span></div>
+      ${groupMarkup}
+    `;
+
+    if (context) context.textContent = `${datasets[datasetIndex]} · ${metricLabel()}`;
+    if (winnerName) winnerName.textContent = winner.name;
+    if (winnerValue) winnerValue.textContent = `${formatDelta(selectedValue(winner))} ${metricLabel()}`;
+    if (winnerNote) {
+      winnerNote.textContent = winner.group === "individual"
+        ? "On this view, the strongest result comes from an individual provider rather than a Global combination."
+        : "On this view, a Global-combined provider is strongest — but this pattern does not hold across every benchmark and metric.";
+    }
+    if (bestIndividual) bestIndividual.textContent = `${bestInd.name} · ${formatDelta(selectedValue(bestInd))}`;
+    if (bestCombined) bestCombined.textContent = `${bestComb.name} · ${formatDelta(selectedValue(bestComb))}`;
+    animateRefresh(chart);
+  };
+
+  const renderGlobalComparison = () => {
+    const base = evidenceAblation.find((row) => row.group === "individual" && row.name === provider);
+    const combo = evidenceAblation.find((row) => row.group === "combined" && row.partner === provider);
+    if (!base || !combo) return;
+
+    const baseValue = selectedValue(base);
+    const comboMetricValue = selectedValue(combo);
+    const delta = comboMetricValue - baseValue;
+    const allValues = evidenceAblation.map(selectedValue);
+    const maxValue = Math.max(metric === "map" ? 4.5 : 2.0, Math.max(...allValues));
+    const basePos = Math.max(0, Math.min(100, baseValue / maxValue * 100));
+    const comboPos = Math.max(0, Math.min(100, comboMetricValue / maxValue * 100));
+    const left = Math.min(basePos, comboPos);
+    const right = Math.max(basePos, comboPos);
+    const verdict = delta > 0.005 ? "helps" : delta < -0.005 ? "hurts" : "neutral";
+
+    if (providerChip) providerChip.textContent = provider;
+    if (providerName) providerName.textContent = provider;
+    if (providerValue) providerValue.textContent = formatDelta(baseValue);
+    if (comboName) comboName.textContent = `G + ${provider}`;
+    if (comboValue) comboValue.textContent = formatDelta(comboMetricValue);
+    if (dumbbellBase) dumbbellBase.style.left = `${basePos.toFixed(2)}%`;
+    if (dumbbellCombo) dumbbellCombo.style.left = `${comboPos.toFixed(2)}%`;
+    if (dumbbellLink) {
+      dumbbellLink.style.left = `${left.toFixed(2)}%`;
+      dumbbellLink.style.width = `${Math.max(1.5, right - left).toFixed(2)}%`;
+    }
+    if (compare) {
+      compare.dataset.verdict = verdict;
+      if (!reduceMotion) {
+        compare.classList.remove("is-merging");
+        void compare.offsetWidth;
+        compare.classList.add("is-merging");
+      }
+    }
+    if (verdictLabel) verdictLabel.textContent = verdict === "helps" ? "HELPS" : verdict === "hurts" ? "HURTS" : "NEAR-EQUAL";
+    if (verdictValue) verdictValue.textContent = formatSignedDelta(delta);
+    if (verdictCopy) verdictCopy.textContent = `Adding Global changes ${metricLabel()} by ${formatSignedDelta(delta)} points on ${shortDatasets[datasetIndex]}.`;
+  };
+
+  const render = () => {
+    renderChart();
+    renderGlobalComparison();
+  };
+
+  datasetTabs.forEach((tab) => tab.addEventListener("click", () => {
+    datasetIndex = Number.parseInt(tab.dataset.analysisEvidenceDataset || "0", 10);
+    setSelected(datasetTabs, tab);
+    render();
+  }));
+
+  metricTabs.forEach((tab) => tab.addEventListener("click", () => {
+    metric = tab.dataset.analysisEvidenceMetric === "r1" ? "r1" : "map";
+    setSelected(metricTabs, tab);
+    render();
+  }));
+
+  providerTabs.forEach((tab) => tab.addEventListener("click", () => {
+    provider = tab.dataset.analysisProvider || "Vertical";
+    setSelected(providerTabs, tab);
+    renderGlobalComparison();
+  }));
+
+  render();
+}
+
+function bindAnalysisReasoningLab() {
+  const lab = document.querySelector("[data-analysis-reasoning]");
+  if (!lab) return;
+
+  const architectureTabs = Array.from(lab.querySelectorAll("[data-analysis-reasoning-key]"));
+  const componentChoices = Array.from(lab.querySelectorAll("[data-analysis-component-choice]"));
+  const componentNodes = Array.from(lab.querySelectorAll("[data-analysis-component], [data-analysis-component-button]"));
+  const reset = lab.querySelector("[data-analysis-reasoning-reset]");
+  const scene = lab.querySelector("[data-analysis-mixer-scene]");
+  const scoreGrid = lab.querySelector("#analysis-reasoning-scores");
+  const tag = lab.querySelector("[data-analysis-reasoning-tag]");
+  const name = lab.querySelector("[data-analysis-reasoning-name]");
+  const copy = lab.querySelector("[data-analysis-reasoning-copy]");
+  const note = lab.querySelector("[data-analysis-reasoning-note]");
+  if (!architectureTabs.length || !scoreGrid) return;
+
+  const componentToKey = {
+    film: "wo-film",
+    rankemb: "wo-rankemb",
+    slotemb: "wo-slotemb",
+    slotmix: "wo-slotmix",
+    rankmix: "wo-rankmix",
+    chanmix: "wo-chanmix"
+  };
+
+  const descriptions = {
+    meanpool: "Uniform pooling collapses the evidence into one vector before any structured reasoning.",
+    flatmlp: "Flat-MLP keeps more capacity than pooling, but flattens rank and slot relations before reasoning.",
+    qcrs: "Query conditioning, rank/slot embeddings, and all three mixer passes are active.",
+    "wo-film": "FiLM is removed, so the same cached evidence is no longer explicitly modulated by the current query before mixing.",
+    "wo-rankemb": "Rank embeddings are removed, weakening the explicit encoding of the frozen retriever's candidate order.",
+    "wo-slotemb": "Slot embeddings are removed, weakening the explicit identity of each evidence source.",
+    "wo-slotmix": "SlotMix is removed, so complementary evidence within each candidate is not explicitly consolidated first.",
+    "wo-rankmix": "RankMix is removed, so agreement and contrast across ordered candidates are not explicitly modeled.",
+    "wo-chanmix": "ChanMix is removed, leaving out the final channel-wise refinement after structural interactions."
+  };
+
+  const notes = {
+    meanpool: "MeanPool yields almost no mAP improvement on CUHK and RSTP, showing that access to evidence alone is insufficient.",
+    flatmlp: "Flattened aggregation is stronger than MeanPool but remains below complete QCRS across all three benchmarks in R@1.",
+    qcrs: "The complete model gives the best R@1 on all three benchmarks and the best mAP on ICFG and RSTP.",
+    "wo-film": "Individual component effects are non-monotonic: removing FiLM raises CUHK mAP, but the complete model remains stronger overall across benchmarks.",
+    "wo-rankemb": "Removing rank embeddings reduces the balanced cross-benchmark result, especially on CUHK and RSTP R@1.",
+    "wo-slotemb": "Slot identity matters differently across benchmarks; the complete model remains the strongest overall configuration.",
+    "wo-slotmix": "Without SlotMix, CUHK and RSTP ranking quality drops, even though ICFG mAP remains competitive.",
+    "wo-rankmix": "RankMix is not uniformly dominant per metric, but the full composition produces the strongest overall benchmark balance.",
+    "wo-chanmix": "Channel mixing contributes to the complete configuration even though some single-metric ablations can be locally competitive."
+  };
+
+  let activeKey = "qcrs";
+
+  const render = () => {
+    const row = reasoningAblation.find((item) => item.key === activeKey) || reasoningAblation[reasoningAblation.length - 1];
+    const isQcrsFamily = activeKey === "qcrs" || Boolean(row.removed);
+
+    architectureTabs.forEach((tab) => {
+      const key = tab.dataset.analysisReasoningKey;
+      const selected = key === activeKey || (key === "qcrs" && isQcrsFamily);
+      tab.setAttribute("aria-selected", String(selected));
+      tab.classList.toggle("analysisx-arch--active", selected);
+      tab.tabIndex = selected ? 0 : -1;
+    });
+
+    componentChoices.forEach((button) => {
+      const component = button.dataset.analysisComponentChoice;
+      const selected = row.removed === component;
+      button.classList.toggle("is-active", selected);
+      button.setAttribute("aria-pressed", String(selected));
+    });
+
+    componentNodes.forEach((node) => {
+      const component = node.dataset.analysisComponent || node.dataset.analysisComponentButton;
+      node.classList.toggle("is-removed", Boolean(row.removed) && component === row.removed);
+    });
+
+    if (scene) scene.classList.toggle("is-baseline-mode", !isQcrsFamily);
+    if (tag) tag.textContent = row.tag;
+    if (name) name.textContent = row.name;
+    if (copy) copy.textContent = descriptions[activeKey] || descriptions.qcrs;
+    if (note) note.textContent = notes[activeKey] || notes.qcrs;
+
+    scoreGrid.innerHTML = row.scores.map((score, index) => {
+      const base = reasoningClipBaseline[index];
+      const deltaR1 = score.r1 - base.r1;
+      const deltaMap = score.map - base.map;
+      return `
+        <div class="analysisx-score-card">
+          <span>${["CUHK", "ICFG", "RSTP"][index]}</span>
+          <strong>${score.r1.toFixed(2)} <i>/</i> ${score.map.toFixed(2)}</strong>
+          <small>Δ ${formatSignedDelta(deltaR1)} R@1 · ${formatSignedDelta(deltaMap)} mAP</small>
+        </div>
+      `;
+    }).join("");
+  };
+
+  architectureTabs.forEach((tab) => tab.addEventListener("click", () => {
+    activeKey = tab.dataset.analysisReasoningKey || "qcrs";
+    render();
+  }));
+
+  componentChoices.forEach((button) => button.addEventListener("click", () => {
+    const component = button.dataset.analysisComponentChoice;
+    activeKey = componentToKey[component] || "qcrs";
+    render();
+  }));
+
+  componentNodes.forEach((node) => {
+    if (!(node instanceof HTMLButtonElement)) return;
+    node.addEventListener("click", () => {
+      const component = node.dataset.analysisComponentButton;
+      activeKey = componentToKey[component] || "qcrs";
+      render();
+    });
+  });
+
+  reset?.addEventListener("click", () => {
+    activeKey = "qcrs";
+    render();
+  });
+
+  render();
+}
+
+function bindAnalysisMotion() {
+  const section = document.querySelector("#analysis");
+  if (!section) return;
+  const panels = Array.from(section.querySelectorAll(".analysisx-panel"));
+  if (!panels.length) return;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    panels.forEach((panel) => panel.classList.add("is-visible"));
+    return;
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" });
+  panels.forEach((panel) => observer.observe(panel));
+}
+
+function bindAnalysisSection() {
+  bindAnalysisEvidenceLab();
+  bindAnalysisReasoningLab();
+  bindAnalysisMotion();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderDiagnosticHeatmap();
+  renderDiagnosticSensitivityMatrix();
   renderBenchmarkCards();
   renderRetrieverDeltas();
   renderRankingGains();
   renderTransferDirections();
   bindResultsMotion();
   bindTransferGraph();
-  renderGroupedDeltas("#evidence-ablation", evidenceAblation, 1.9, 4.36);
-  renderGroupedDeltas("#reasoning-ablation", reasoningAblation, 1.9, 4.36);
+  bindAnalysisSection();
   bindQualitativeExplorer();
   bindNav();
   bindActiveNav();
+  bindDiagnosticStory();
   bindTtbpsScrollFlow();
   bindGateMethodExplorer();
 });
