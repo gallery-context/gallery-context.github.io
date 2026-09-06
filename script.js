@@ -120,7 +120,7 @@ function renderBenchmarkCards() {
   const container = document.querySelector("#benchmark-frontier");
   if (!container) return;
   container.innerHTML = benchmarkResults.map((item) => `
-    <article class="benchmark-card">
+    <article class="benchmark-card" data-result-reveal>
       <div class="benchmark-card__head">
         <div>
           <div class="benchmark-card__eyebrow">Benchmark</div>
@@ -132,16 +132,16 @@ function renderBenchmarkCards() {
         <div class="metric-box">
           <div class="metric-box__head">
             <span>R@1</span>
-            <em>Δ ${formatDelta(item.deltaR1)}</em>
+            <em data-result-reveal>Δ ${formatDelta(item.deltaR1)}</em>
           </div>
-          <strong>${item.r1.toFixed(2)}</strong>
+          <strong data-result-count="${item.r1}" data-result-decimals="2">${item.r1.toFixed(2)}</strong>
         </div>
         <div class="metric-box">
           <div class="metric-box__head">
             <span>mAP</span>
-            <em>Δ ${formatDelta(item.deltaMap)}</em>
+            <em data-result-reveal>Δ ${formatDelta(item.deltaMap)}</em>
           </div>
-          <strong>${item.map.toFixed(2)}</strong>
+          <strong data-result-count="${item.map}" data-result-decimals="2">${item.map.toFixed(2)}</strong>
         </div>
       </div>
     </article>
@@ -156,7 +156,7 @@ function renderRetrieverDeltas() {
     <div class="retriever-matrix__row">
       <div class="retriever-matrix__label">${row.name}</div>
       ${row.deltas.map((value) => `
-        <div class="retriever-matrix__cell">
+        <div class="retriever-matrix__cell" data-result-reveal>
           <strong>${formatDelta(value.r1)} / ${formatDelta(value.map)}</strong>
           <span>R@1 / mAP</span>
         </div>
@@ -177,7 +177,7 @@ function renderRankingGains() {
   const container = document.querySelector("#ranking-gains");
   if (!container) return;
   container.innerHTML = hostAverageGains.map((item) => `
-    <div class="ranking-gain">
+    <div class="ranking-gain" data-result-reveal>
       <strong>${item.dataset}</strong>
       <span>${formatDelta(item.r1)} R@1</span>
       <b>${formatDelta(item.map)} mAP</b>
@@ -217,13 +217,297 @@ function renderGroupedDeltas(containerSelector, rows, maxR1, maxMap) {
 function renderTransferDirections() {
   const container = document.querySelector("#transfer-directions");
   if (!container) return;
-  container.innerHTML = transfers.map((item) => `
-    <div class="transfer-direction">
+  container.innerHTML = transfers.map((item) => {
+    const [source, target] = item.direction.split(" → ");
+    return `
+      <button
+        type="button"
+        class="transfer-direction"
+        data-transfer-direction="${item.direction}"
+        data-transfer-source="${source}"
+        data-transfer-target="${target}"
+        aria-pressed="false"
+        data-result-reveal
+      >
+        <strong>${item.direction}</strong>
+        <span>${formatDelta(item.avgR1)} R@1</span>
+        <b>${formatDelta(item.avgMap)} mAP</b>
+      </button>
+    `;
+  }).join("");
+}
+
+
+function bindResultsMotion() {
+  const results = document.querySelector("#results");
+  if (!results) return;
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const revealTargets = Array.from(results.querySelectorAll("[data-result-reveal]"));
+  const countTargets = Array.from(results.querySelectorAll("[data-result-count]"));
+  const stages = Array.from(results.querySelectorAll(".results-stage"));
+  const transferFigure = results.querySelector(".transfer-figure");
+
+  revealTargets.forEach((element) => element.classList.add("result-motion-ready"));
+  countTargets.forEach((element) => element.classList.add("result-count-ready"));
+
+  const finishCount = (element) => {
+    const target = Number.parseFloat(element.dataset.resultCount || "0");
+    const decimals = Number.parseInt(element.dataset.resultDecimals || "0", 10);
+    element.textContent = target.toFixed(decimals);
+    element.classList.add("is-revealed");
+    element.dataset.resultAnimated = "true";
+  };
+
+  const animateCount = (element) => {
+    if (element.dataset.resultAnimated === "true") return;
+    if (reduceMotion) {
+      finishCount(element);
+      return;
+    }
+
+    const target = Number.parseFloat(element.dataset.resultCount || "0");
+    const decimals = Number.parseInt(element.dataset.resultDecimals || "0", 10);
+    const duration = target > 10 ? 680 : 520;
+    const start = performance.now();
+    element.dataset.resultAnimated = "true";
+    element.classList.add("is-revealed");
+
+    const tick = (now) => {
+      const progress = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      element.textContent = (target * eased).toFixed(decimals);
+      if (progress < 1) window.requestAnimationFrame(tick);
+      else element.textContent = target.toFixed(decimals);
+    };
+
+    window.requestAnimationFrame(tick);
+  };
+
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    revealTargets.forEach((element) => element.classList.add("is-revealed"));
+    countTargets.forEach(finishCount);
+    stages.forEach((stage) => stage.classList.add("is-visible"));
+    transferFigure?.classList.add("is-visible");
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const element = entry.target;
+      if (element.matches("[data-result-count]")) animateCount(element);
+      else element.classList.add("is-revealed");
+      observer.unobserve(element);
+    });
+  }, { threshold: 0.3, rootMargin: "0px 0px -8% 0px" });
+
+  [...revealTargets, ...countTargets].forEach((element) => observer.observe(element));
+
+  const stageObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add("is-visible");
+    });
+  }, { threshold: 0.18, rootMargin: "0px 0px -12% 0px" });
+
+  stages.forEach((stage) => stageObserver.observe(stage));
+  if (transferFigure) stageObserver.observe(transferFigure);
+}
+
+function bindTransferGraph() {
+  const figure = document.querySelector("#results .transfer-figure");
+  const map = figure?.querySelector("[data-transfer-map]");
+  const paths = figure ? Array.from(figure.querySelectorAll("[data-transfer-route]")) : [];
+  const nodes = figure ? Array.from(figure.querySelectorAll("[data-transfer-node]")) : [];
+  const cards = figure ? Array.from(figure.querySelectorAll("[data-transfer-direction]")) : [];
+  const tooltip = figure?.querySelector("[data-transfer-tooltip]");
+  if (!figure || !map || !paths.length || !nodes.length || !cards.length) return;
+
+  const transferByDirection = new Map(transfers.map((item) => [item.direction, item]));
+  let locked = null;
+
+  const setPressed = (element, pressed) => {
+    if (element.hasAttribute("aria-pressed")) element.setAttribute("aria-pressed", String(pressed));
+  };
+
+  const hideTooltip = () => {
+    if (!tooltip) return;
+    tooltip.setAttribute("aria-hidden", "true");
+    tooltip.classList.remove("is-visible");
+  };
+
+  const showTooltip = (direction) => {
+    if (!tooltip) return;
+    const item = transferByDirection.get(direction);
+    const path = paths.find((candidate) => candidate.dataset.transferRoute === direction);
+    if (!item || !path) return;
+
+    const svg = path.ownerSVGElement;
+    const length = path.getTotalLength();
+    const point = path.getPointAtLength(length * 0.5);
+    const viewBox = svg.viewBox.baseVal;
+    const x = ((point.x - viewBox.x) / viewBox.width) * map.clientWidth;
+    const y = ((point.y - viewBox.y) / viewBox.height) * map.clientHeight;
+
+    tooltip.innerHTML = `
       <strong>${item.direction}</strong>
       <span>${formatDelta(item.avgR1)} R@1</span>
       <b>${formatDelta(item.avgMap)} mAP</b>
-    </div>
-  `).join("");
+    `;
+    tooltip.style.left = `${x}px`;
+    tooltip.style.top = `${y}px`;
+    tooltip.setAttribute("aria-hidden", "false");
+    window.requestAnimationFrame(() => tooltip.classList.add("is-visible"));
+  };
+
+  const clearVisualState = () => {
+    figure.removeAttribute("data-transfer-mode");
+    figure.removeAttribute("data-transfer-locked");
+    [...paths, ...nodes, ...cards].forEach((element) => {
+      element.classList.remove("is-active", "is-dimmed", "is-source", "is-target", "is-connected");
+      setPressed(element, false);
+    });
+    hideTooltip();
+  };
+
+  const applyRoute = (direction, isLocked = false) => {
+    const item = transferByDirection.get(direction);
+    if (!item) return;
+    const [source, target] = direction.split(" → ");
+    figure.dataset.transferMode = "route";
+    figure.dataset.transferLocked = String(isLocked);
+
+    paths.forEach((path) => {
+      const active = path.dataset.transferRoute === direction;
+      path.classList.toggle("is-active", active);
+      path.classList.toggle("is-dimmed", !active);
+      setPressed(path, active && isLocked);
+    });
+
+    nodes.forEach((node) => {
+      const name = node.dataset.transferNode;
+      const connected = name === source || name === target;
+      node.classList.toggle("is-active", connected);
+      node.classList.toggle("is-source", name === source);
+      node.classList.toggle("is-target", name === target);
+      node.classList.toggle("is-dimmed", !connected);
+      setPressed(node, false);
+    });
+
+    cards.forEach((card) => {
+      const active = card.dataset.transferDirection === direction;
+      card.classList.toggle("is-active", active);
+      card.classList.toggle("is-dimmed", !active);
+      setPressed(card, active && isLocked);
+    });
+
+    showTooltip(direction);
+  };
+
+  const applyNode = (dataset, isLocked = false) => {
+    figure.dataset.transferMode = "node";
+    figure.dataset.transferLocked = String(isLocked);
+    hideTooltip();
+
+    paths.forEach((path) => {
+      const connected = path.dataset.source === dataset || path.dataset.target === dataset;
+      path.classList.toggle("is-connected", connected);
+      path.classList.toggle("is-active", connected);
+      path.classList.toggle("is-dimmed", !connected);
+      setPressed(path, false);
+    });
+
+    nodes.forEach((node) => {
+      const active = node.dataset.transferNode === dataset;
+      node.classList.toggle("is-active", active);
+      node.classList.toggle("is-dimmed", false);
+      node.classList.remove("is-source", "is-target");
+      setPressed(node, active && isLocked);
+    });
+
+    cards.forEach((card) => {
+      const connected = card.dataset.transferSource === dataset || card.dataset.transferTarget === dataset;
+      card.classList.toggle("is-active", connected);
+      card.classList.toggle("is-dimmed", !connected);
+      setPressed(card, false);
+    });
+  };
+
+  const reset = () => {
+    locked = null;
+    clearVisualState();
+  };
+
+  const previewRoute = (direction) => {
+    if (!locked) applyRoute(direction, false);
+  };
+
+  const previewNode = (dataset) => {
+    if (!locked) applyNode(dataset, false);
+  };
+
+  const endPreview = () => {
+    if (!locked) clearVisualState();
+  };
+
+  const toggleLock = (type, key) => {
+    if (locked?.type === type && locked.key === key) {
+      reset();
+      return;
+    }
+    locked = { type, key };
+    if (type === "route") applyRoute(key, true);
+    else applyNode(key, true);
+  };
+
+  cards.forEach((card) => {
+    const direction = card.dataset.transferDirection;
+    card.addEventListener("pointerenter", () => previewRoute(direction));
+    card.addEventListener("pointerleave", endPreview);
+    card.addEventListener("focus", () => previewRoute(direction));
+    card.addEventListener("blur", endPreview);
+    card.addEventListener("click", () => toggleLock("route", direction));
+  });
+
+  paths.forEach((path) => {
+    const direction = path.dataset.transferRoute;
+    path.addEventListener("pointerenter", () => previewRoute(direction));
+    path.addEventListener("pointerleave", endPreview);
+    path.addEventListener("focus", () => previewRoute(direction));
+    path.addEventListener("blur", endPreview);
+    path.addEventListener("click", (event) => {
+      event.stopPropagation();
+      toggleLock("route", direction);
+    });
+    path.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggleLock("route", direction);
+      }
+    });
+  });
+
+  nodes.forEach((node) => {
+    const dataset = node.dataset.transferNode;
+    node.addEventListener("pointerenter", () => previewNode(dataset));
+    node.addEventListener("pointerleave", endPreview);
+    node.addEventListener("focus", () => previewNode(dataset));
+    node.addEventListener("blur", endPreview);
+    node.addEventListener("click", (event) => {
+      event.stopPropagation();
+      toggleLock("node", dataset);
+    });
+  });
+
+  map.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    if (!target.closest("[data-transfer-route], [data-transfer-node]")) reset();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && locked) reset();
+  });
 }
 
 function renderQualitative(filter = "all") {
@@ -440,6 +724,7 @@ function bindGateMethodExplorer() {
   const carousel = explorer?.querySelector("[data-gate-carousel]");
   const slides = explorer ? Array.from(explorer.querySelectorAll("[data-gate-slide]")) : [];
   const tabs = explorer ? Array.from(explorer.querySelectorAll("[data-gate-tab]")) : [];
+  const overviewLinks = Array.from(document.querySelectorAll("#method [data-gate-overview-target]"));
   const prev = explorer?.querySelector("[data-gate-prev]");
   const next = explorer?.querySelector("[data-gate-next]");
   const counter = explorer?.querySelector("[data-gate-counter]");
@@ -461,6 +746,10 @@ function bindGateMethodExplorer() {
     slides.forEach((slide, slideIndex) => {
       slide.classList.toggle("is-active", slideIndex === activeIndex);
     });
+    overviewLinks.forEach((link) => {
+      const targetIndex = Number.parseInt(link.dataset.gateOverviewTarget || "-1", 10);
+      link.classList.toggle("is-linked-active", targetIndex === activeIndex && explorer.open);
+    });
     if (counter) counter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
     if (prev) prev.disabled = activeIndex === 0;
     if (next) next.disabled = activeIndex === slides.length - 1;
@@ -472,6 +761,18 @@ function bindGateMethodExplorer() {
     if (!slide) return;
     carousel.scrollTo({ left: slide.offsetLeft, behavior });
     setActive(targetIndex);
+  }
+
+  function openFromOverview(index, hash) {
+    const targetIndex = clampIndex(index);
+    explorer.open = true;
+    window.requestAnimationFrame(() => {
+      goTo(targetIndex, "auto");
+      explorer.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (hash && window.history?.replaceState) {
+        window.history.replaceState(null, "", hash);
+      }
+    });
   }
 
   function detectActiveFromScroll() {
@@ -497,6 +798,14 @@ function bindGateMethodExplorer() {
     rafId = window.requestAnimationFrame(detectActiveFromScroll);
   }
 
+  overviewLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      const index = Number.parseInt(link.dataset.gateOverviewTarget || "0", 10);
+      openFromOverview(index, link.getAttribute("href"));
+    });
+  });
+
   tabs.forEach((tab, index) => {
     tab.addEventListener("click", () => goTo(index));
   });
@@ -520,6 +829,7 @@ function bindGateMethodExplorer() {
   });
 
   explorer.addEventListener("toggle", () => {
+    overviewLinks.forEach((link) => link.classList.remove("is-linked-active"));
     if (!explorer.open) return;
     window.requestAnimationFrame(() => {
       carousel.scrollLeft = slides[activeIndex]?.offsetLeft || 0;
@@ -530,7 +840,13 @@ function bindGateMethodExplorer() {
     });
   });
 
-  setActive(0);
+  const initialHashIndex = slides.findIndex((slide) => `#${slide.id}` === window.location.hash);
+  if (initialHashIndex >= 0) {
+    explorer.open = true;
+    window.requestAnimationFrame(() => goTo(initialHashIndex, "auto"));
+  } else {
+    setActive(0);
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -539,6 +855,8 @@ document.addEventListener("DOMContentLoaded", () => {
   renderRetrieverDeltas();
   renderRankingGains();
   renderTransferDirections();
+  bindResultsMotion();
+  bindTransferGraph();
   renderGroupedDeltas("#evidence-ablation", evidenceAblation, 1.9, 4.36);
   renderGroupedDeltas("#reasoning-ablation", reasoningAblation, 1.9, 4.36);
   renderQualitative();
