@@ -118,111 +118,171 @@
         </div>
       </section>
 
-      <section class="chapter overview-highlights" id="highlights" aria-labelledby="highlights-title">
+      <section class="chapter overview-highlights research-story" id="highlights" aria-labelledby="highlights-title">
         <div class="section-inner highlights-inner">
-          <header class="overview-heading">
+          <header class="overview-heading rs-heading">
             <p class="section-kicker">Research story</p>
             <h2 id="highlights-title">From Observation to Method</h2>
-            <p class="overview-bridge">If the gallery changes what makes a description discriminative, why construct the query in isolation? We trace this observation from controlled evidence, to the T-TBPS setting, to GATE as a plug-and-play realization.</p>
+            <p class="overview-bridge">If the gallery changes what makes a description discriminative, why construct the query in isolation? Keep the description and target fixed, change only the surrounding competitors, and the value of each cue changes with the gallery.</p>
           </header>
 
-          <figure class="overview-observation research-figure" aria-label="Observation figure comparing the same query and target across two galleries. Gallery A repeats red shirts, while Gallery B repeats black backpacks.">
-            <div class="overview-figure-intro">
-              <p class="overview-figure-kicker">SAME QUERY · SAME TARGET</p>
-              <p class="overview-figure-query">
-                A person in a <span class="overview-query-mark red">red shirt</span> with a
-                <span class="overview-query-mark backpack">black backpack</span>
-              </p>
+          <figure class="research-figure rs-observation" aria-labelledby="rs-observation-title">
+            <header class="rs-query-anchor">
+              <div class="rs-query-anchor__copy">
+                <span class="rs-eyebrow">SAME QUERY · SAME TARGET</span>
+                <p id="rs-observation-title">A person in a <mark class="rs-query-mark rs-query-mark--red">red shirt</mark> with a <mark class="rs-query-mark rs-query-mark--bag">black backpack</mark>.</p>
+              </div>
+              <div class="rs-locks" aria-label="Variables held fixed in the thought experiment">
+                <span><i aria-hidden="true"></i> query fixed</span>
+                <span><i aria-hidden="true"></i> target fixed</span>
+              </div>
+            </header>
+
+            <div class="rs-gallery-comparison">
+              <article class="rs-gallery rs-gallery--a" aria-label="Gallery A: red shirts are common while the black backpack is more distinctive">
+                <header class="rs-gallery__head">
+                  <div><span>CONTEXT A</span><strong>Gallery A</strong></div>
+                  <small>red-shirt crowd</small>
+                </header>
+
+                <div class="rs-people" aria-label="Target and three red-shirt distractors">
+                  <figure class="rs-person rs-person--target">
+                    <span>target</span>
+                    <img src="assets/overview/target.png" alt="Target person" loading="eager" decoding="async">
+                  </figure>
+                  <figure class="rs-person"><img src="assets/overview/a_red_01.png" alt="Red-shirt distractor" loading="eager" decoding="async"></figure>
+                  <figure class="rs-person"><img src="assets/overview/a_red_02.png" alt="Red-shirt distractor" loading="eager" decoding="async"></figure>
+                  <figure class="rs-person"><img src="assets/overview/a_red_03.png" alt="Red-shirt distractor" loading="eager" decoding="async"></figure>
+                </div>
+
+                <div class="rs-cues" aria-label="Qualitative cue prevalence in Gallery A">
+                  <div class="rs-cue rs-cue--red" style="--rs-cue-level: 84%">
+                    <div class="rs-cue__meta"><span>red shirt</span><b>COMMON</b></div>
+                    <div class="rs-cue__track" aria-hidden="true"><i></i></div>
+                  </div>
+                  <div class="rs-cue rs-cue--bag" style="--rs-cue-level: 34%">
+                    <div class="rs-cue__meta"><span>black backpack</span><b>DISTINCTIVE</b></div>
+                    <div class="rs-cue__track" aria-hidden="true"><i></i></div>
+                  </div>
+                </div>
+              </article>
+
+              <aside class="rs-cue-swap" aria-label="The gallery changes which query cue is distinctive">
+                <div class="rs-cue-swap__title"><span>GALLERY CHANGES</span><strong>cue value swaps</strong></div>
+
+                <div class="rs-swap-lane rs-swap-lane--red">
+                  <div class="rs-swap-lane__label">red shirt</div>
+                  <div class="rs-swap-lane__flow">
+                    <span>common</span>
+                    <i class="rs-swap-track" aria-hidden="true"></i>
+                    <span>distinctive</span>
+                  </div>
+                </div>
+
+                <div class="rs-swap-lane rs-swap-lane--bag">
+                  <div class="rs-swap-lane__label">black backpack</div>
+                  <div class="rs-swap-lane__flow">
+                    <span>distinctive</span>
+                    <i class="rs-swap-track" aria-hidden="true"></i>
+                    <span>common</span>
+                  </div>
+                </div>
+
+                <small class="rs-cue-swap__note">Same words. Different competitors.</small>
+              </aside>
+
+              <article class="rs-gallery rs-gallery--b" aria-label="Gallery B: black backpacks are common while the red shirt is more distinctive">
+                <header class="rs-gallery__head">
+                  <div><span>CONTEXT B</span><strong>Gallery B</strong></div>
+                  <small>backpack crowd</small>
+                </header>
+
+                <div class="rs-people" aria-label="Target and three backpack distractors">
+                  <figure class="rs-person rs-person--target">
+                    <span>target</span>
+                    <img src="assets/overview/target.png" alt="Target person" loading="eager" decoding="async">
+                  </figure>
+                  <figure class="rs-person"><img src="assets/overview/b_bag_01.png" alt="Backpack distractor" loading="eager" decoding="async"></figure>
+                  <figure class="rs-person"><img src="assets/overview/b_bag_02.png" alt="Backpack distractor" loading="eager" decoding="async"></figure>
+                  <figure class="rs-person"><img src="assets/overview/b_bag_03.png" alt="Backpack distractor" loading="eager" decoding="async"></figure>
+                </div>
+
+                <div class="rs-cues" aria-label="Qualitative cue prevalence in Gallery B">
+                  <div class="rs-cue rs-cue--red" style="--rs-cue-level: 34%">
+                    <div class="rs-cue__meta"><span>red shirt</span><b>DISTINCTIVE</b></div>
+                    <div class="rs-cue__track" aria-hidden="true"><i></i></div>
+                  </div>
+                  <div class="rs-cue rs-cue--bag" style="--rs-cue-level: 84%">
+                    <div class="rs-cue__meta"><span>black backpack</span><b>COMMON</b></div>
+                    <div class="rs-cue__track" aria-hidden="true"><i></i></div>
+                  </div>
+                </div>
+              </article>
             </div>
 
-            <div class="overview-galleries">
-              <div class="overview-gallery" aria-label="Gallery A: red shirts are common and the black backpack is distinctive.">
-                <div class="overview-gallery-head">
-                  <strong>Gallery A</strong>
-                </div>
-                <div class="overview-gallery-people">
-                  <div class="overview-gallery-person target">
-                    <img src="assets/overview/target.png" alt="Target person" />
-                  </div>
-                  <div class="overview-gallery-person">
-                    <img src="assets/overview/a_red_01.png" alt="" />
-                  </div>
-                  <div class="overview-gallery-person">
-                    <img src="assets/overview/a_red_02.png" alt="" />
-                  </div>
-                  <div class="overview-gallery-person">
-                    <img src="assets/overview/a_red_03.png" alt="" />
-                  </div>
-                </div>
-                <div class="overview-cue-summary">
-                  <div class="overview-cue-row overview-cue-red overview-cue-common">
-                    <span class="overview-cue-name">red shirt</span>
-                    <span class="overview-cue-leader" aria-hidden="true"></span>
-                    <span class="overview-cue-state">COMMON</span>
-                  </div>
-                  <div class="overview-cue-row overview-cue-bag overview-cue-distinctive">
-                    <span class="overview-cue-name">black backpack</span>
-                    <span class="overview-cue-leader" aria-hidden="true"></span>
-                    <span class="overview-cue-state">DISTINCTIVE</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="overview-gallery" aria-label="Gallery B: black backpacks are common and the red shirt is distinctive.">
-                <div class="overview-gallery-head">
-                  <strong>Gallery B</strong>
-                </div>
-                <div class="overview-gallery-people">
-                  <div class="overview-gallery-person target">
-                    <img src="assets/overview/target.png" alt="Target person" />
-                  </div>
-                  <div class="overview-gallery-person">
-                    <img src="assets/overview/b_bag_01.png" alt="" />
-                  </div>
-                  <div class="overview-gallery-person">
-                    <img src="assets/overview/b_bag_02.png" alt="" />
-                  </div>
-                  <div class="overview-gallery-person">
-                    <img src="assets/overview/b_bag_03.png" alt="" />
-                  </div>
-                </div>
-                <div class="overview-cue-summary">
-                  <div class="overview-cue-row overview-cue-red overview-cue-distinctive">
-                    <span class="overview-cue-name">red shirt</span>
-                    <span class="overview-cue-leader" aria-hidden="true"></span>
-                    <span class="overview-cue-state">DISTINCTIVE</span>
-                  </div>
-                  <div class="overview-cue-row overview-cue-bag overview-cue-common">
-                    <span class="overview-cue-name">black backpack</span>
-                    <span class="overview-cue-leader" aria-hidden="true"></span>
-                    <span class="overview-cue-state">COMMON</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="overview-conclusion">
-              <span class="overview-conclusion-rule" aria-hidden="true"></span>
-              <p>Gallery context changes what is discriminative.</p>
+            <div class="rs-punchline">
+              <span>CORE OBSERVATION</span>
+              <p>Gallery context changes <strong>what is discriminative.</strong></p>
+              <small>The cue bars are a qualitative illustration of prevalence, not model scores.</small>
             </div>
           </figure>
 
-          <div class="highlight-grid">
-            <article class="highlight-card">
-              <h3>Retrieval decisions are sensitive to gallery composition</h3>
-              <p>Under controlled cue-directed gallery interventions, changing part of the distractor population can alter Top-1 correctness while the query and target are kept fixed.</p>
-            </article>
+          <section class="rs-trajectory" aria-labelledby="rs-trajectory-title">
+            <header class="rs-trajectory__head">
+              <span class="rs-eyebrow">RESEARCH TRAJECTORY</span>
+              <h3 id="rs-trajectory-title">One observation becomes a testable setting, then a method.</h3>
+            </header>
 
-            <article class="highlight-card">
-              <h3>T-TBPS makes query construction gallery-aware</h3>
-              <p>The current unlabeled gallery can inform how the text query is represented before retrieval over the complete gallery.</p>
-            </article>
+            <div class="rs-trajectory-grid">
+              <article class="rs-stage rs-stage--observe">
+                <div class="rs-stage__top"><span>01</span><b>OBSERVATION</b></div>
+                <div class="rs-stage__viz rs-stage__viz--observe" aria-hidden="true">
+                  <div><i></i><i></i><i></i><i></i></div>
+                  <span></span>
+                  <div><i></i><i></i><i></i><i></i></div>
+                </div>
+                <h4>Gallery composition can change the retrieval decision.</h4>
+                <p>First, measure the sensitivity under controlled cue-directed interventions.</p>
+                <a href="#diagnostic">DIAGNOSTIC <span aria-hidden="true">↓</span></a>
+              </article>
 
-            <article class="highlight-card">
-              <h3>The base retriever can stay frozen</h3>
-              <p>GATE realizes this setting through gallery-aware query enrichment while leaving the underlying TBPS retriever unchanged.</p>
-            </article>
-          </div>
+              <div class="rs-flow-arrow" aria-hidden="true"><i></i><span>therefore</span><i></i></div>
+
+              <article class="rs-stage rs-stage--reframe">
+                <div class="rs-stage__top"><span>02</span><b>IMPLICATION</b></div>
+                <div class="rs-stage__viz rs-stage__viz--reframe" aria-hidden="true">
+                  <div class="rs-mini-query">q</div>
+                  <span class="rs-mini-plus">+</span>
+                  <div class="rs-mini-gallery"><i></i><i></i><i></i></div>
+                  <span class="rs-mini-arrow">→</span>
+                  <div class="rs-mini-context">q*</div>
+                </div>
+                <h4>Let the current gallery inform query construction.</h4>
+                <p>T-TBPS changes the inference information boundary without requiring gallery labels.</p>
+                <a href="#ttbps">T-TBPS <span aria-hidden="true">↓</span></a>
+              </article>
+
+              <div class="rs-flow-arrow" aria-hidden="true"><i></i><span>realized by</span><i></i></div>
+
+              <article class="rs-stage rs-stage--realize">
+                <div class="rs-stage__top"><span>03</span><b>REALIZATION</b></div>
+                <div class="rs-stage__viz rs-stage__viz--realize" aria-hidden="true">
+                  <div class="rs-mini-query">q</div>
+                  <span class="rs-mini-plus">+</span>
+                  <div class="rs-mini-delta">Δq</div>
+                  <span class="rs-mini-arrow">→</span>
+                  <div class="rs-mini-context">q̃</div>
+                </div>
+                <h4>Enrich the query while keeping the host retriever frozen.</h4>
+                <p>GATE turns gallery context into a controlled residual correction before full-gallery retrieval.</p>
+                <a href="#method">GATE <span aria-hidden="true">↓</span></a>
+              </article>
+            </div>
+
+            <div class="rs-progress" aria-hidden="true">
+              <span class="is-active"></span><i></i><span></span><i></i><span></span>
+            </div>
+          </section>
         </div>
       </section>
 
@@ -1329,10 +1389,6 @@
             <span><b>01</b> Evidence</span>
             <i aria-hidden="true"></i>
             <span><b>02</b> Reasoning</span>
-            <i aria-hidden="true"></i>
-            <span><b>03</b> Boundary</span>
-            <i aria-hidden="true"></i>
-            <span><b>04</b> Beyond GATE</span>
           </nav>
 
           <article class="analysisx-panel analysisx-evidence" id="evidence-ablation-section" data-analysis-evidence aria-labelledby="evidence-ablation-title">
@@ -1384,7 +1440,7 @@
                 <p data-analysis-evidence-winner-note>On this view, the strongest result comes from an individual provider rather than a Global combination.</p>
                 <div class="analysisx-winner-split">
                   <div><small>best individual</small><b data-analysis-best-individual>Grid · +2.48</b></div>
-                  <div><small>best G + provider</small><b data-analysis-best-combined>G + Horizontal · +2.46</b></div>
+                  <div><small>best Global + provider</small><b data-analysis-best-combined>Global + Horizontal · +2.46</b></div>
                 </div>
               </aside>
             </div>
@@ -1416,7 +1472,7 @@
                   </div>
                   <div class="analysisx-dumbbell__labels">
                     <div><span data-analysis-provider-name>Vertical</span><strong data-analysis-provider-value>+1.61</strong></div>
-                    <div><span data-analysis-combo-name>G + Vertical</span><strong data-analysis-combo-value>+1.67</strong></div>
+                    <div><span data-analysis-combo-name>Global + Vertical</span><strong data-analysis-combo-value>+1.67</strong></div>
                   </div>
                 </div>
                 <div class="analysisx-global-verdict">
@@ -1504,73 +1560,20 @@
               </section>
 
               <aside class="analysisx-reasoning-readout" aria-live="polite">
-                <span data-analysis-reasoning-tag>COMPLETE STRUCTURE</span>
-                <h4 data-analysis-reasoning-name>QCRS-Mixer</h4>
-                <p data-analysis-reasoning-copy>Query conditioning, rank/slot embeddings, and all three mixer passes are active.</p>
-                <div id="analysis-reasoning-scores" class="analysisx-score-grid"></div>
-                <p class="analysisx-readout-note" data-analysis-reasoning-note>The complete model provides the strongest and most balanced cross-benchmark result.</p>
+                <div class="analysisx-reasoning-readout__summary">
+                  <span data-analysis-reasoning-tag>COMPLETE STRUCTURE</span>
+                  <h4 data-analysis-reasoning-name>QCRS-Mixer</h4>
+                  <p data-analysis-reasoning-copy>Query conditioning, rank/slot embeddings, and all three mixer passes are active.</p>
+                  <p class="analysisx-readout-note" data-analysis-reasoning-note>The complete model provides the strongest and most balanced cross-benchmark result.</p>
+                </div>
+                <div class="analysisx-reasoning-readout__results">
+                  <span class="analysisx-reasoning-results-label">SELECTED CONFIGURATION · R@1 / mAP</span>
+                  <div id="analysis-reasoning-scores" class="analysisx-score-grid"></div>
+                </div>
               </aside>
             </div>
           </article>
 
-          <article class="analysisx-panel analysisx-boundary" id="is-is-not" aria-labelledby="is-is-not-title">
-            <header class="analysisx-panel__head analysisx-panel__head--compact">
-              <div>
-                <p class="subsection-label">03 / Boundary</p>
-                <h3 id="is-is-not-title">Keep the inference boundary explicit</h3>
-                <p>GATE changes how the query uses the gallery, not the identity of the host retriever or the final search space.</p>
-              </div>
-            </header>
-
-            <div class="analysisx-invariant-strip" aria-label="GATE inference invariants">
-              <article><span>01</span><strong>Frozen host</strong><p>The base retriever stays fixed.</p><small>no retriever update</small></article>
-              <i aria-hidden="true"></i>
-              <article><span>02</span><strong>Unlabeled gallery</strong><p>Current candidates supply context only.</p><small>no labels · no pseudo-labels</small></article>
-              <i aria-hidden="true"></i>
-              <article><span>03</span><strong>Top-M = context</strong><p>Top-M exposes evidence to GATE.</p><small>not a final shortlist</small></article>
-              <i aria-hidden="true"></i>
-              <article><span>04</span><strong>Residual correction</strong><p>Gallery context nudges the query.</p><small>not query replacement or TTO</small></article>
-              <i aria-hidden="true"></i>
-              <article><span>05</span><strong>Full-gallery retrieval</strong><p>Every gallery image remains eligible.</p><small>not Top-M re-ranking</small></article>
-            </div>
-          </article>
-
-          <article class="analysisx-panel analysisx-design" id="design-space" aria-labelledby="design-space-title">
-            <header class="analysisx-panel__head analysisx-panel__head--compact">
-              <div>
-                <p class="subsection-label">04 / Beyond GATE</p>
-                <h3 id="design-space-title">T-TBPS is a broader design space</h3>
-                <p>
-                  GATE is one realization. Future methods can change both what the gallery exposes
-                  and how the query reasons over that context.
-                </p>
-              </div>
-              <span class="analysisx-concept-badge">CONCEPTUAL · NOT QUANTITATIVE</span>
-            </header>
-
-            <figure class="analysisx-design-map" aria-label="Conceptual T-TBPS design space organized by gallery evidence and query reasoning">
-              <div class="analysisx-design-corner">Gallery evidence ↓<br>Query reasoning →</div>
-              <div class="analysisx-design-col">Pooling</div>
-              <div class="analysisx-design-col analysisx-design-col--focus">Structured</div>
-              <div class="analysisx-design-col">Adaptive</div>
-
-              <div class="analysisx-design-row"><strong>Global</strong><small>whole-image semantics</small></div>
-              <div class="analysisx-design-cell"><span class="analysisx-design-ghost">MeanPool</span></div>
-              <div class="analysisx-design-cell analysisx-design-cell--gate"><span>GATE</span><small>default evidence</small></div>
-              <div class="analysisx-design-cell"><span class="analysisx-design-future">future</span></div>
-
-              <div class="analysisx-design-row"><strong>Local</strong><small>regional appearance</small></div>
-              <div class="analysisx-design-cell"><span class="analysisx-design-ghost">flatten / pool</span></div>
-              <div class="analysisx-design-cell analysisx-design-cell--tested"><span>GATE</span><small>provider ablations</small></div>
-              <div class="analysisx-design-cell"><span class="analysisx-design-future">future</span></div>
-
-              <div class="analysisx-design-row"><strong>Relational</strong><small>gallery-relative context</small></div>
-              <div class="analysisx-design-cell"><span class="analysisx-design-ghost">aggregate</span></div>
-              <div class="analysisx-design-cell analysisx-design-cell--tested"><span>GATE</span><small>provider ablations</small></div>
-              <div class="analysisx-design-cell"><span class="analysisx-design-future">future</span></div>
-            </figure>
-            <p class="analysisx-closing-claim">The central opportunity is not a single provider or mixer: it is making query construction search-space-aware.</p>
-          </article>
         </div>
       </section>
 

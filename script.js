@@ -44,11 +44,11 @@ const evidenceAblation = [
   { name: "Grid", group: "individual", family: "Spatial", values: [{ r1: 0.18, map: 2.48 }, { r1: 0.28, map: 2.86 }, { r1: 0.90, map: 1.65 }] },
   { name: "Centroid", group: "individual", family: "Gallery-relative", values: [{ r1: 0.06, map: 0.17 }, { r1: 0.06, map: 0.11 }, { r1: 1.05, map: 0.13 }] },
   { name: "Residual", group: "individual", family: "Gallery-relative", values: [{ r1: 0.11, map: 0.50 }, { r1: 0.26, map: 2.54 }, { r1: 0.60, map: 0.87 }] },
-  { name: "G + Vertical", group: "combined", partner: "Vertical", values: [{ r1: 0.34, map: 1.67 }, { r1: 0.37, map: 3.56 }, { r1: 1.00, map: 2.23 }] },
-  { name: "G + Horizontal", group: "combined", partner: "Horizontal", values: [{ r1: 0.16, map: 2.46 }, { r1: 0.33, map: 2.46 }, { r1: 0.85, map: 2.04 }] },
-  { name: "G + Grid", group: "combined", partner: "Grid", values: [{ r1: 0.23, map: 2.30 }, { r1: 0.19, map: 4.19 }, { r1: 0.57, map: 2.44 }] },
-  { name: "G + Centroid", group: "combined", partner: "Centroid", values: [{ r1: 0.24, map: 1.91 }, { r1: 0.45, map: 3.86 }, { r1: 0.65, map: 1.87 }] },
-  { name: "G + Residual", group: "combined", partner: "Residual", values: [{ r1: 0.15, map: 1.21 }, { r1: 0.35, map: 3.88 }, { r1: 0.90, map: 1.89 }] }
+  { name: "Global + Vertical", group: "combined", partner: "Vertical", values: [{ r1: 0.34, map: 1.67 }, { r1: 0.37, map: 3.56 }, { r1: 1.00, map: 2.23 }] },
+  { name: "Global + Horizontal", group: "combined", partner: "Horizontal", values: [{ r1: 0.16, map: 2.46 }, { r1: 0.33, map: 2.46 }, { r1: 0.85, map: 2.04 }] },
+  { name: "Global + Grid", group: "combined", partner: "Grid", values: [{ r1: 0.23, map: 2.30 }, { r1: 0.19, map: 4.19 }, { r1: 0.57, map: 2.44 }] },
+  { name: "Global + Centroid", group: "combined", partner: "Centroid", values: [{ r1: 0.24, map: 1.91 }, { r1: 0.45, map: 3.86 }, { r1: 0.65, map: 1.87 }] },
+  { name: "Global + Residual", group: "combined", partner: "Residual", values: [{ r1: 0.15, map: 1.21 }, { r1: 0.35, map: 3.88 }, { r1: 0.90, map: 1.89 }] }
 ];
 
 const reasoningClipBaseline = [
@@ -1192,7 +1192,7 @@ function bindAnalysisEvidenceLab() {
     if (providerChip) providerChip.textContent = provider;
     if (providerName) providerName.textContent = provider;
     if (providerValue) providerValue.textContent = formatDelta(baseValue);
-    if (comboName) comboName.textContent = `G + ${provider}`;
+    if (comboName) comboName.textContent = `Global + ${provider}`;
     if (comboValue) comboValue.textContent = formatDelta(comboMetricValue);
     if (dumbbellBase) dumbbellBase.style.left = `${basePos.toFixed(2)}%`;
     if (dumbbellCombo) dumbbellCombo.style.left = `${comboPos.toFixed(2)}%`;
