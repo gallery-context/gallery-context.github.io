@@ -844,131 +844,177 @@
             <p class="section-kicker">Quantitative evidence</p>
             <h2 id="results-title">Results</h2>
             <p>
-              GATE moves the benchmark frontier, improves every frozen host retriever, and retains
-              the gain when transferred to unseen target benchmarks.
+              The results are organized as a three-step story: a new benchmark frontier,
+              retriever-agnostic gains across frozen hosts, and robust cross-domain transfer.
             </p>
           </div>
 
-          <div class="results-stack">
-            <article class="result-block result-block--frontier" aria-labelledby="frontier-title">
-              <div class="results-hero-claim" aria-label="State-of-the-art result summary">
-                <div class="results-hero-claim__number">3 / 3</div>
-                <div class="results-hero-claim__copy">
-                  <span>benchmarks</span>
-                  <strong>new state-of-the-art frontier</strong>
+          <div class="results-story" aria-label="Three-part quantitative results story">
+            <article class="results-stage results-stage--frontier" aria-labelledby="frontier-title">
+              <div class="results-stage__rail" aria-hidden="true">
+                <div class="results-stage__node">
+                  <span class="results-stage__index">01</span>
+                  <strong>3 / 3</strong>
+                  <span class="results-stage__tag">FRONTIER</span>
                 </div>
               </div>
 
-              <div class="result-copy result-copy--frontier">
-                <p class="subsection-label">01 / State of the art</p>
-                <h3 id="frontier-title">GATE sets a new state of the art on all three benchmarks</h3>
-                <p>
-                  GATE<sub>ITSELF</sub> reaches the best reported R@1 and mAP on CUHK-PEDES,
-                  ICFG-PEDES, and RSTPReid. The comparison remains notable across different method
-                  families and training-resource regimes.
-                </p>
-              </div>
-
-              <div id="benchmark-frontier" class="benchmark-grid" aria-label="Benchmark frontier comparison"></div>
-
-              <div class="frontier-context" aria-label="Benchmark comparison context">
-                <p>
-                  GATE<sub>ITSELF</sub> remains CLIP-based while the comparison set includes
-                  ALBEF-based methods and methods using external tools or additional ReID-domain
-                  pre-training.
-                </p>
-                <div class="frontier-context__chips">
-                  <span>CLIP-based host</span>
-                  <span>Frozen retriever</span>
-                  <span>Gallery-aware inference</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="result-block result-block--retrievers" id="retrievers" aria-labelledby="retrievers-title">
-              <div class="result-copy">
-                <p class="subsection-label">02 / General across frozen hosts</p>
-                <h3 id="retrievers-title">The gain is systematic across host retrievers</h3>
-                <p>
-                  Across CLIP, IRRA, RDE, DM-Adapter, and ITSELF, every dataset × retriever pairing
-                  improves in both R@1 and mAP after adding GATE.
-                </p>
-              </div>
-
-              <div class="retriever-panel">
-                <div id="retriever-matrix" class="retriever-matrix" role="table" aria-label="Retriever by benchmark improvement matrix"></div>
-                <aside class="retriever-side" aria-label="Retriever-level result summary">
-                  <div class="results-count-card">
-                    <strong>15 / 15 ↑</strong>
-                    <span>retriever × benchmark combinations improve</span>
-                  </div>
-                  <div class="ranking-insight">
-                    <p class="ranking-insight__eyebrow">Ranking refinement</p>
-                    <strong>mAP gains exceed R@1 gains on all three benchmarks.</strong>
-                    <p>
-                      The improvement is broader than isolated Top-1 corrections: gallery-aware
-                      enrichment consistently improves the ranked list as a whole.
-                    </p>
-                    <div id="ranking-gains" class="ranking-gains" aria-label="Average gains by benchmark"></div>
-                  </div>
-                </aside>
-              </div>
-            </article>
-
-            <article class="result-block result-block--transfer" id="cross-domain" aria-labelledby="cross-domain-title">
-              <div class="result-copy">
-                <p class="subsection-label">03 / Cross-domain transfer</p>
-                <h3 id="cross-domain-title">The benefit persists on unseen target benchmarks</h3>
-                <p>
-                  Train on one benchmark, transfer the frozen retriever and GATE directly to
-                  another, and evaluate without adapting to the target benchmark.
-                </p>
-              </div>
-
-              <div class="transfer-panel">
-                <aside class="transfer-side" aria-label="Cross-domain transfer summary">
-                  <div class="results-count-card results-count-card--transfer">
-                    <strong>30 / 30 ↑</strong>
-                    <span>6 transfer directions × 5 frozen retrievers improve</span>
-                  </div>
-                  <div class="transfer-range" aria-label="Cross-domain gain range">
-                    <div>
-                      <span>Average mAP gain</span>
-                      <strong>+0.89 to +3.85</strong>
-                    </div>
-                    <div>
-                      <span>Best single mAP gain</span>
-                      <strong>+5.13</strong>
-                    </div>
-                  </div>
-                  <div class="transfer-constraints" aria-label="Transfer constraints">
-                    <span>No target labels</span>
-                    <span>No pseudo-labels</span>
-                    <span>No target-set optimization</span>
-                    <span>No parameter updates</span>
-                  </div>
-                  <p class="transfer-interpretation">
-                    The effect therefore does not depend on fitting GATE to a particular target
-                    gallery or benchmark.
+              <div class="results-stage__body">
+                <div class="result-copy result-copy--frontier">
+                  <p class="subsection-label">01 / Frontier</p>
+                  <h3 id="frontier-title">GATE establishes a new frontier on all three benchmarks</h3>
+                  <p>
+                    GATE<sub>ITSELF</sub> reaches the best reported R@1 and mAP on
+                    CUHK-PEDES, ICFG-PEDES, and RSTPReid. The comparison is presented under the
+                    same benchmark protocol, while the competing frontier spans different training
+                    resources and method families.
                   </p>
-                </aside>
+                </div>
 
-                <figure
-                  class="research-figure transfer-figure"
-                  role="img"
-                  aria-label="Three benchmark nodes connected by all six directed source-to-target transfer routes."
-                >
-                  <div class="transfer-triangle">
-                    <div class="dataset-node cuhk">CUHK-PEDES</div>
-                    <div class="dataset-node icfg">ICFG-PEDES</div>
-                    <div class="dataset-node rstp">RSTPReid</div>
-                    <span class="transfer-line line-ci"></span>
-                    <span class="transfer-line line-cr"></span>
-                    <span class="transfer-line line-ir"></span>
+                <div id="benchmark-frontier" class="benchmark-grid" aria-label="Benchmark frontier comparison"></div>
+
+                <div class="frontier-context frontier-context--backbone" aria-label="Benchmark comparison context">
+                  <p class="frontier-context__takeaway">
+                    <strong>Takeaway.</strong> The frontier shift is not confined to a narrow regime:
+                    the gallery-aware correction moves a CLIP-based frozen host beyond the previous
+                    reported frontier on every benchmark.
+                  </p>
+                  <div class="frontier-context__chips">
+                    <span>Same benchmark protocol</span>
+                    <span>Different training/resource regimes</span>
+                    <span>CLIP-based frozen host</span>
+                    <span>Gallery-aware inference</span>
                   </div>
-                  <div id="transfer-directions" class="transfer-directions" aria-label="Average gains for each transfer direction"></div>
-                  <figcaption>All six directed source → target routes improve across all five frozen retrievers.</figcaption>
-                </figure>
+                </div>
+              </div>
+            </article>
+
+            <article class="results-stage results-stage--generality" id="retrievers" aria-labelledby="retrievers-title">
+              <div class="results-stage__rail" aria-hidden="true">
+                <div class="results-stage__node">
+                  <span class="results-stage__index">02</span>
+                  <strong>15 / 15</strong>
+                  <span class="results-stage__tag">GENERALITY</span>
+                </div>
+              </div>
+
+              <div class="results-stage__body">
+                <div class="result-copy">
+                  <p class="subsection-label">02 / Generalizes across frozen retrievers</p>
+                  <h3 id="retrievers-title">The gain is systematic across all five frozen hosts</h3>
+                  <p>
+                    Across CLIP, IRRA, RDE, DM-Adapter, and ITSELF, every dataset × retriever
+                    pairing improves in both R@1 and mAP after adding GATE.
+                  </p>
+                </div>
+
+                <div class="retriever-panel">
+                  <div id="retriever-matrix" class="retriever-matrix" role="table" aria-label="Retriever by benchmark improvement matrix"></div>
+                  <aside class="retriever-side" aria-label="Retriever-level result summary">
+                    <div class="results-count-card">
+                      <div class="results-count-card__eyebrow">All frozen hosts improve</div>
+                      <strong>15 / 15 ↑</strong>
+                      <span>retriever × benchmark combinations improve</span>
+                    </div>
+                    <div class="ranking-insight">
+                      <p class="ranking-insight__eyebrow">Ranking refinement</p>
+                      <strong>mAP gains exceed R@1 gains on all three benchmarks.</strong>
+                      <p>
+                        The effect is broader than isolated Top-1 corrections: gallery-aware
+                        enrichment consistently improves the ranked list as a whole.
+                      </p>
+                      <div id="ranking-gains" class="ranking-gains" aria-label="Average gains by benchmark"></div>
+                    </div>
+                  </aside>
+                </div>
+              </div>
+            </article>
+
+            <article class="results-stage results-stage--transfer" id="cross-domain" aria-labelledby="cross-domain-title">
+              <div class="results-stage__rail" aria-hidden="true">
+                <div class="results-stage__node">
+                  <span class="results-stage__index">03</span>
+                  <strong>30 / 30</strong>
+                  <span class="results-stage__tag">TRANSFER</span>
+                </div>
+              </div>
+
+              <div class="results-stage__body">
+                <div class="result-copy">
+                  <p class="subsection-label">03 / Cross-domain transfer</p>
+                  <h3 id="cross-domain-title">The benefit persists on unseen target benchmarks</h3>
+                  <p>
+                    Train on one benchmark, transfer the frozen retriever and GATE directly to
+                    another, and evaluate without adapting to the target benchmark.
+                  </p>
+                </div>
+
+                <div class="transfer-panel">
+                  <aside class="transfer-side" aria-label="Cross-domain transfer summary">
+                    <div class="results-count-card results-count-card--transfer">
+                      <div class="results-count-card__eyebrow">Every transfer route improves</div>
+                      <strong>30 / 30 ↑</strong>
+                      <span>6 transfer directions × 5 frozen retrievers improve</span>
+                    </div>
+                    <div class="transfer-range" aria-label="Cross-domain gain range">
+                      <div>
+                        <span>Average mAP gain</span>
+                        <strong>+0.89 to +3.85</strong>
+                      </div>
+                      <div>
+                        <span>Best single mAP gain</span>
+                        <strong>+5.13</strong>
+                      </div>
+                    </div>
+                    <div class="transfer-constraints" aria-label="Transfer constraints">
+                      <span>No target labels</span>
+                      <span>No pseudo-labels</span>
+                      <span>No target tuning</span>
+                      <span>No parameter updates</span>
+                    </div>
+                    <p class="transfer-interpretation">
+                      <strong>Takeaway.</strong> The effect therefore does not depend on fitting
+                      GATE to a particular target gallery or target benchmark.
+                    </p>
+                  </aside>
+
+                  <figure
+                    class="research-figure transfer-figure"
+                    role="img"
+                    aria-label="Three benchmark nodes connected by all six directed source-to-target transfer routes, with average gains shown on each route."
+                  >
+                    <div class="transfer-figure__header">
+                      <div>
+                        <p class="transfer-figure__eyebrow">All six directed routes</p>
+                        <strong>Cross-domain gains remain positive across the entire transfer graph</strong>
+                      </div>
+                      <span class="transfer-figure__badge">Data-carrying transfer map</span>
+                    </div>
+                    <div class="transfer-triangle">
+                      <div class="dataset-node cuhk"><span>CUHK</span><small>PEDES</small></div>
+                      <div class="dataset-node icfg"><span>ICFG</span><small>PEDES</small></div>
+                      <div class="dataset-node rstp"><span>RSTP</span><small>Reid</small></div>
+
+                      <div class="transfer-edge transfer-edge--ci">
+                        <span class="transfer-edge__track" aria-hidden="true"></span>
+                        <div id="transfer-edge-ci" class="transfer-edge__labels" aria-label="Transfer gains between CUHK-PEDES and ICFG-PEDES"></div>
+                      </div>
+                      <div class="transfer-edge transfer-edge--cr">
+                        <span class="transfer-edge__track" aria-hidden="true"></span>
+                        <div id="transfer-edge-cr" class="transfer-edge__labels" aria-label="Transfer gains between CUHK-PEDES and RSTPReid"></div>
+                      </div>
+                      <div class="transfer-edge transfer-edge--ir">
+                        <span class="transfer-edge__track" aria-hidden="true"></span>
+                        <div id="transfer-edge-ir" class="transfer-edge__labels" aria-label="Transfer gains between ICFG-PEDES and RSTPReid"></div>
+                      </div>
+                    </div>
+                    <div id="transfer-directions" class="transfer-directions" aria-label="Average gains for each transfer direction"></div>
+                    <figcaption>
+                      Each edge label reports the average gain for one transfer direction; all six
+                      source → target routes improve across all five frozen retrievers.
+                    </figcaption>
+                  </figure>
+                </div>
               </div>
             </article>
           </div>

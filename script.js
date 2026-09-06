@@ -146,8 +146,11 @@ function renderBenchmarkCards() {
   container.innerHTML = benchmarkResults.map((item) => `
     <article class="benchmark-card">
       <div class="benchmark-card__head">
-        <h3>${item.dataset}</h3>
-        <span>GATE<sub>ITSELF</sub></span>
+        <div>
+          <div class="benchmark-card__eyebrow">Benchmark</div>
+          <h3>${item.dataset}</h3>
+        </div>
+        <span class="benchmark-card__model">GATE<sub>ITSELF</sub></span>
       </div>
       <div class="metric-row">
         <div class="metric-box">
@@ -156,7 +159,7 @@ function renderBenchmarkCards() {
             <em>${formatDelta(item.deltaR1)}</em>
           </div>
           <strong>${item.r1.toFixed(2)}</strong>
-          <small>prior best ${item.priorR1.toFixed(2)}</small>
+          <small>prior frontier ${item.priorR1.toFixed(2)}</small>
         </div>
         <div class="metric-box">
           <div class="metric-box__head">
@@ -164,8 +167,12 @@ function renderBenchmarkCards() {
             <em>${formatDelta(item.deltaMap)}</em>
           </div>
           <strong>${item.map.toFixed(2)}</strong>
-          <small>prior best ${item.priorMap.toFixed(2)}</small>
+          <small>prior frontier ${item.priorMap.toFixed(2)}</small>
         </div>
+      </div>
+      <div class="benchmark-card__footer">
+        <span>Previous frontier: ${item.priorR1.toFixed(2)} R@1 / ${item.priorMap.toFixed(2)} mAP</span>
+        <strong>${formatDelta(item.deltaR1)} / ${formatDelta(item.deltaMap)}</strong>
       </div>
     </article>
   `).join("");
@@ -239,14 +246,37 @@ function renderGroupedDeltas(containerSelector, rows, maxR1, maxMap) {
 
 function renderTransferDirections() {
   const container = document.querySelector("#transfer-directions");
-  if (!container) return;
-  container.innerHTML = transfers.map((item) => `
-    <div class="transfer-direction">
-      <strong>${item.direction}</strong>
-      <span>${formatDelta(item.avgR1)} R@1</span>
-      <b>${formatDelta(item.avgMap)} mAP</b>
-    </div>
-  `).join("");
+  if (container) {
+    container.innerHTML = transfers.map((item) => `
+      <div class="transfer-direction">
+        <strong>${item.direction}</strong>
+        <span>${formatDelta(item.avgR1)} R@1</span>
+        <b>${formatDelta(item.avgMap)} mAP</b>
+      </div>
+    `).join("");
+  }
+
+  const lookup = Object.fromEntries(transfers.map((item) => [item.direction, item]));
+  const edgeGroups = {
+    "#transfer-edge-ci": ["CUHK → ICFG", "ICFG → CUHK"],
+    "#transfer-edge-cr": ["CUHK → RSTP", "RSTP → CUHK"],
+    "#transfer-edge-ir": ["ICFG → RSTP", "RSTP → ICFG"]
+  };
+
+  Object.entries(edgeGroups).forEach(([selector, directions]) => {
+    const edgeContainer = document.querySelector(selector);
+    if (!edgeContainer) return;
+    edgeContainer.innerHTML = directions.map((direction) => {
+      const item = lookup[direction];
+      return `
+        <div class="transfer-edge__row">
+          <strong>${direction}</strong>
+          <span>${formatDelta(item.avgMap)} mAP</span>
+          <small>${formatDelta(item.avgR1)} R@1</small>
+        </div>
+      `;
+    }).join("");
+  });
 }
 
 function renderQualitative(filter = "all") {
