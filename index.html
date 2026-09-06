@@ -16,6 +16,15 @@
     >
     <link rel="stylesheet" href="tokens.css">
     <link rel="stylesheet" href="styles.css">
+
+    <script>
+      window.MathJax = {
+        tex: { inlineMath: [["\\(", "\\)"], ["$", "$" ]], displayMath: [["\\[", "\\]"]], processEscapes: true },
+        chtml: { scale: 0.94 },
+        options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -479,364 +488,416 @@
 
       <section class="chapter method-chapter" id="method" aria-labelledby="method-title">
         <div class="section-inner">
-          <div class="chapter-heading method-heading">
+          <div class="chapter-heading method-heading gate2-heading">
             <p class="section-kicker">One realization of T-TBPS</p>
-            <h2 id="method-title">GATE: Turn Gallery Context into Query Correction</h2>
+            <h2 id="method-title">GATE: Gallery-Aware Query Enrichment</h2>
             <p>
-              GATE observes the current gallery, reasons over structured evidence from competing
-              candidates, and applies a small residual correction to the frozen query.
+              GATE keeps the host TBPS retriever frozen, uses the current unlabeled gallery as query-specific context,
+              and predicts a controlled residual correction before retrieving over the complete gallery.
             </p>
           </div>
 
-          <div class="method-layout">
-            <figure
-              class="research-figure gate-method-figure"
-              role="img"
-              aria-label="GATE starts from a frozen base retriever, observes the current gallery, constructs rank-slot evidence, reasons with QCRS-Mixer, applies a residual query correction, and retrieves again over the full gallery."
-            >
-              <div class="gate-method__pipeline">
-                <article class="gate-method__stage gate-method__stage--observe">
-                  <div class="gate-method__stage-head">
-                    <span class="gate-method__stage-index">01</span>
-                    <span class="gate-method__stage-label">OBSERVE THE COMPETITION</span>
-                  </div>
-                  <div class="gate-method__query">
-                    <span class="gate-method__eyebrow">Query</span>
-                    <p>A man in a red shirt carrying a backpack.</p>
-                  </div>
-                  <div class="gate-method__retriever">
-                    <span class="gate-method__mini-eyebrow">Frozen base retriever</span>
-                    <p>The frozen retriever identifies which gallery candidates are currently competing with the query.</p>
-                  </div>
-                  <div class="gate-method__candidate-pool">
-                    <div class="gate-method__mini-eyebrow gate-method__mini-eyebrow--context">Top-M context pool</div>
-                    <div class="gate-method__candidate-row" aria-label="Top-M gallery candidates">
-                      <div class="gate-method__candidate-card gate-method__candidate-card--top">
-                        <span class="gate-method__candidate-rank">#1</span>
-                        <img src="assets/overview/target.png" alt="Rank 1 candidate, man in a red shirt with a backpack" loading="lazy" decoding="async">
-                      </div>
-                      <div class="gate-method__candidate-card">
-                        <span class="gate-method__candidate-rank">#2</span>
-                        <img src="assets/overview/a_red_01.png" alt="Rank 2 candidate, man in a red shirt with a backpack" loading="lazy" decoding="async">
-                      </div>
-                      <div class="gate-method__candidate-card">
-                        <span class="gate-method__candidate-rank">#3</span>
-                        <img src="assets/overview/b_bag_01.png" alt="Rank 3 candidate, man in a backpack and red shirt" loading="lazy" decoding="async">
-                      </div>
-                      <div class="gate-method__candidate-card gate-method__candidate-card--tail">
-                        <span class="gate-method__candidate-rank">#M</span>
-                        <img src="assets/overview/a_red_03.png" alt="Rank M candidate, another competing gallery image" loading="lazy" decoding="async">
-                      </div>
-                    </div>
-                  </div>
-                </article>
+          <div class="gate2-bridge" aria-label="Transition from T-TBPS to GATE">
+            <div><span>T-TBPS asks</span><strong>How can the current gallery inform query construction?</strong></div>
+            <span class="gate2-bridge__arrow" aria-hidden="true">→</span>
+            <div><span>GATE answers</span><strong>Observe → Construct Evidence → Reason → Enrich → Retrieve</strong></div>
+          </div>
 
-                <svg class="gate-method__connector gate-method__connector--h" viewBox="0 0 56 20" aria-hidden="true" focusable="false">
-                  <path class="gate-method__connector-line" d="M4 10H46"></path>
-                  <path class="gate-method__connector-motion" d="M4 10H46"></path>
-                  <path class="gate-method__connector-head" d="M40 5L46 10L40 15"></path>
-                </svg>
+          <section class="gate2-overview" aria-labelledby="gate2-overview-title">
+            <header class="gate2-overview__header">
+              <div>
+                <p class="gate2-eyebrow">GATE / OVERVIEW</p>
+                <h3 id="gate2-overview-title">See the complete mechanism before opening the internals</h3>
+              </div>
+              <p>
+                The first gallery scan selects relevant evidence. QCRS reasons over that evidence. The resulting
+                context corrects the query, and the second scan ranks the full gallery.
+              </p>
+            </header>
 
-                <article class="gate-method__stage gate-method__stage--evidence">
-                  <div class="gate-method__stage-head">
-                    <span class="gate-method__stage-index">02</span>
-                    <span class="gate-method__stage-label">CONSTRUCT EVIDENCE</span>
-                  </div>
-                  <p class="gate-method__lede">Each ranked candidate contributes aligned evidence slots.</p>
-                  <div class="gate-method__slot-chips" aria-hidden="true">
-                    <span>Semantic</span>
-                    <span>Spatial</span>
-                    <span>Gallery-relative</span>
-                    <span>Rank cue</span>
-                  </div>
-                  <div class="gate-method__matrix-shell gate-method__matrix-shell--compact">
-                    <table class="gate-method__matrix gate-method__matrix--compact">
-                      <caption class="sr-only">Structured rank by slot evidence</caption>
-                      <thead>
-                        <tr>
-                          <th scope="col">Rank</th>
-                          <th scope="col">Semantic</th>
-                          <th scope="col">Spatial</th>
-                          <th scope="col">Gallery-relative</th>
-                          <th scope="col">Rank cue</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr class="gate-method__rank-row gate-method__rank-row--top">
-                          <th scope="row"><span>#1</span></th>
-                          <td class="gate-method__matrix-cell gate-method__matrix-cell--semantic"><span class="gate-method__matrix-signal"></span></td>
-                          <td class="gate-method__matrix-cell gate-method__matrix-cell--spatial"><span class="gate-method__matrix-signal"></span></td>
-                          <td class="gate-method__matrix-cell gate-method__matrix-cell--gallery"><span class="gate-method__matrix-signal"></span></td>
-                          <td class="gate-method__matrix-cell gate-method__matrix-cell--rank"><span class="gate-method__matrix-signal"></span></td>
-                        </tr>
-                        <tr class="gate-method__rank-row gate-method__rank-row--mid">
-                          <th scope="row"><span>#2</span></th>
-                          <td class="gate-method__matrix-cell gate-method__matrix-cell--semantic"><span class="gate-method__matrix-signal"></span></td>
-                          <td class="gate-method__matrix-cell gate-method__matrix-cell--spatial"><span class="gate-method__matrix-signal"></span></td>
-                          <td class="gate-method__matrix-cell gate-method__matrix-cell--gallery"><span class="gate-method__matrix-signal"></span></td>
-                          <td class="gate-method__matrix-cell gate-method__matrix-cell--rank"><span class="gate-method__matrix-signal"></span></td>
-                        </tr>
-                        <tr class="gate-method__rank-row gate-method__rank-row--mid">
-                          <th scope="row"><span>#3</span></th>
-                          <td class="gate-method__matrix-cell gate-method__matrix-cell--semantic"><span class="gate-method__matrix-signal"></span></td>
-                          <td class="gate-method__matrix-cell gate-method__matrix-cell--spatial"><span class="gate-method__matrix-signal"></span></td>
-                          <td class="gate-method__matrix-cell gate-method__matrix-cell--gallery"><span class="gate-method__matrix-signal"></span></td>
-                          <td class="gate-method__matrix-cell gate-method__matrix-cell--rank"><span class="gate-method__matrix-signal"></span></td>
-                        </tr>
-                        <tr class="gate-method__rank-row gate-method__rank-row--ellipsis">
-                          <th scope="row">…</th>
-                          <td colspan="4">More competing candidates in the Top-M pool</td>
-                        </tr>
-                        <tr class="gate-method__rank-row gate-method__rank-row--tail">
-                          <th scope="row"><span>#M</span></th>
-                          <td class="gate-method__matrix-cell gate-method__matrix-cell--semantic"><span class="gate-method__matrix-signal"></span></td>
-                          <td class="gate-method__matrix-cell gate-method__matrix-cell--spatial"><span class="gate-method__matrix-signal"></span></td>
-                          <td class="gate-method__matrix-cell gate-method__matrix-cell--gallery"><span class="gate-method__matrix-signal"></span></td>
-                          <td class="gate-method__matrix-cell gate-method__matrix-cell--rank"><span class="gate-method__matrix-signal"></span></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </article>
+            <figure class="gate2-overview__figure" aria-label="Overview of GATE from frozen retrieval to complete-gallery retrieval">
+              <div class="gate2-overview__source">
+                <span class="gate2-mini-label">Text query</span>
+                <strong>u<sub>q</sub></strong>
+                <small>Frozen text representation</small>
+              </div>
 
-                <svg class="gate-method__connector gate-method__connector--h" viewBox="0 0 56 20" aria-hidden="true" focusable="false">
-                  <path class="gate-method__connector-line" d="M4 10H46"></path>
-                  <path class="gate-method__connector-motion" d="M4 10H46"></path>
-                  <path class="gate-method__connector-head" d="M40 5L46 10L40 15"></path>
-                </svg>
+              <div class="gate2-overview__arrow" aria-hidden="true">→</div>
 
-                <article class="gate-method__stage gate-method__stage--qcrs">
-                  <div class="gate-method__stage-head">
-                    <span class="gate-method__stage-index">03</span>
-                    <span class="gate-method__stage-label">REASON WITH QCRS</span>
-                  </div>
-                  <div class="gate-method__qcrs">
-                    <div class="gate-method__qcrs-main">
-                      <div class="gate-method__qcrs-heading">
-                        <strong>QCRS-Mixer</strong>
-                        <span>Query-Conditioned Rank-Slot Mixer</span>
-                      </div>
-                      <p class="gate-method__lede gate-method__lede--strong">Reason within candidates, then across competing candidates.</p>
-                      <div class="gate-method__matrix-shell gate-method__matrix-shell--focus">
-                        <div class="gate-method__sweep gate-method__sweep--rows" aria-hidden="true"></div>
-                        <div class="gate-method__sweep gate-method__sweep--cols" aria-hidden="true"></div>
-                        <table class="gate-method__matrix gate-method__matrix--focus">
-                          <caption class="sr-only">QCRS rank by slot reasoning matrix</caption>
-                          <thead>
-                            <tr>
-                              <th scope="col">Rank</th>
-                              <th scope="col">Semantic</th>
-                              <th scope="col">Spatial</th>
-                              <th scope="col">Gallery-relative</th>
-                              <th scope="col">Rank cue</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr class="gate-method__rank-row gate-method__rank-row--top">
-                              <th scope="row"><span>#1</span></th>
-                              <td class="gate-method__matrix-cell gate-method__matrix-cell--semantic"><span class="gate-method__matrix-signal"></span></td>
-                              <td class="gate-method__matrix-cell gate-method__matrix-cell--spatial"><span class="gate-method__matrix-signal"></span></td>
-                              <td class="gate-method__matrix-cell gate-method__matrix-cell--gallery"><span class="gate-method__matrix-signal"></span></td>
-                              <td class="gate-method__matrix-cell gate-method__matrix-cell--rank"><span class="gate-method__matrix-signal"></span></td>
-                            </tr>
-                            <tr class="gate-method__rank-row gate-method__rank-row--mid">
-                              <th scope="row"><span>#2</span></th>
-                              <td class="gate-method__matrix-cell gate-method__matrix-cell--semantic"><span class="gate-method__matrix-signal"></span></td>
-                              <td class="gate-method__matrix-cell gate-method__matrix-cell--spatial"><span class="gate-method__matrix-signal"></span></td>
-                              <td class="gate-method__matrix-cell gate-method__matrix-cell--gallery"><span class="gate-method__matrix-signal"></span></td>
-                              <td class="gate-method__matrix-cell gate-method__matrix-cell--rank"><span class="gate-method__matrix-signal"></span></td>
-                            </tr>
-                            <tr class="gate-method__rank-row gate-method__rank-row--mid">
-                              <th scope="row"><span>#3</span></th>
-                              <td class="gate-method__matrix-cell gate-method__matrix-cell--semantic"><span class="gate-method__matrix-signal"></span></td>
-                              <td class="gate-method__matrix-cell gate-method__matrix-cell--spatial"><span class="gate-method__matrix-signal"></span></td>
-                              <td class="gate-method__matrix-cell gate-method__matrix-cell--gallery"><span class="gate-method__matrix-signal"></span></td>
-                              <td class="gate-method__matrix-cell gate-method__matrix-cell--rank"><span class="gate-method__matrix-signal"></span></td>
-                            </tr>
-                            <tr class="gate-method__rank-row gate-method__rank-row--ellipsis">
-                              <th scope="row">…</th>
-                              <td colspan="4">More competing candidates in the Top-M pool</td>
-                            </tr>
-                            <tr class="gate-method__rank-row gate-method__rank-row--tail">
-                              <th scope="row"><span>#M</span></th>
-                              <td class="gate-method__matrix-cell gate-method__matrix-cell--semantic"><span class="gate-method__matrix-signal"></span></td>
-                              <td class="gate-method__matrix-cell gate-method__matrix-cell--spatial"><span class="gate-method__matrix-signal"></span></td>
-                              <td class="gate-method__matrix-cell gate-method__matrix-cell--gallery"><span class="gate-method__matrix-signal"></span></td>
-                              <td class="gate-method__matrix-cell gate-method__matrix-cell--rank"><span class="gate-method__matrix-signal"></span></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <div class="gate-method__mix-label gate-method__mix-label--rows">SLOT MIXING <span>within candidate</span></div>
-                        <div class="gate-method__mix-label gate-method__mix-label--cols">RANK MIXING <span>across candidates</span></div>
-                      </div>
-                    </div>
-                    <aside class="gate-method__context-card">
-                      <span class="gate-method__context-eyebrow">Gallery context</span>
-                      <p>Structured evidence resolves into a compact gallery context representation.</p>
-                      <div class="gate-method__context-chips" aria-hidden="true">
-                        <span>Semantic</span>
-                        <span>Spatial</span>
-                        <span>Gallery-relative</span>
-                      </div>
-                    </aside>
-                  </div>
-                </article>
+              <div class="gate2-overview__stage gate2-overview__stage--frozen">
+                <span>01 / OBSERVE</span>
+                <strong>Frozen host retriever</strong>
+                <small>Complete-gallery scan → ordered Top-M</small>
+              </div>
 
-                <svg class="gate-method__connector gate-method__connector--h" viewBox="0 0 56 20" aria-hidden="true" focusable="false">
-                  <path class="gate-method__connector-line" d="M4 10H46"></path>
-                  <path class="gate-method__connector-motion" d="M4 10H46"></path>
-                  <path class="gate-method__connector-head" d="M40 5L46 10L40 15"></path>
-                </svg>
+              <div class="gate2-overview__arrow" aria-hidden="true">→</div>
 
-                <article class="gate-method__stage gate-method__stage--residual">
-                  <div class="gate-method__stage-head">
-                    <span class="gate-method__stage-index">04</span>
-                    <span class="gate-method__stage-label">RESIDUAL ENRICHMENT</span>
-                  </div>
-                  <div class="gate-method__residual">
-                    <div class="gate-method__residual-copy">
-                      <strong>Enrich, don&apos;t replace.</strong>
-                      <p>Gallery context predicts a residual correction while preserving the frozen query representation.</p>
-                    </div>
-                    <div class="gate-method__residual-path" aria-label="Residual query enrichment">
-                      <div class="gate-method__residual-lane gate-method__residual-lane--query">
-                        <span class="gate-method__residual-label">Original query q</span>
-                        <span class="gate-method__residual-rule" aria-hidden="true"></span>
-                      </div>
-                      <div class="gate-method__residual-sum" aria-hidden="true">⊕</div>
-                      <div class="gate-method__residual-lane gate-method__residual-lane--delta">
-                        <span class="gate-method__residual-label">Gallery-aware correction &Delta;q</span>
-                        <span class="gate-method__residual-rule" aria-hidden="true"></span>
-                      </div>
-                      <div class="gate-method__residual-output">
-                        <span>Enriched query q&#771;</span>
-                        <small>q&#771; = N(q + &gamma;&Delta;q)</small>
-                      </div>
-                    </div>
-                  </div>
-                </article>
+              <div class="gate2-overview__stage gate2-overview__stage--evidence">
+                <span>02 / EVIDENCE</span>
+                <strong>Evidence Cache + gather</strong>
+                <small>Query-specific tensor M × S × d</small>
+              </div>
 
-                <svg class="gate-method__connector gate-method__connector--h" viewBox="0 0 56 20" aria-hidden="true" focusable="false">
-                  <path class="gate-method__connector-line" d="M4 10H46"></path>
-                  <path class="gate-method__connector-motion" d="M4 10H46"></path>
-                  <path class="gate-method__connector-head" d="M40 5L46 10L40 15"></path>
-                </svg>
+              <div class="gate2-overview__arrow" aria-hidden="true">→</div>
 
-                <article class="gate-method__stage gate-method__stage--final">
-                  <div class="gate-method__stage-head">
-                    <span class="gate-method__stage-label">FULL-GALLERY RETRIEVAL</span>
-                  </div>
-                  <div class="gate-method__final">
-                    <div class="gate-method__final-note">Top-M is context, not the candidate set.</div>
-                    <div class="gate-method__final-grid">
-                      <div class="gate-method__final-path">
-                        <div class="gate-method__final-node gate-method__final-node--context">
-                          <span class="gate-method__final-label">Top-M context</span>
-                          <div class="gate-method__final-mini-row" aria-label="Top-M context thumbnails">
-                            <div class="gate-method__candidate-card gate-method__candidate-card--mini gate-method__candidate-card--top">
-                              <img src="assets/overview/target.png" alt="Top-M context thumbnail, man in a red shirt with a backpack" loading="lazy" decoding="async">
-                            </div>
-                            <div class="gate-method__candidate-card gate-method__candidate-card--mini">
-                              <img src="assets/overview/a_red_01.png" alt="Top-M context thumbnail, man in a red shirt with a backpack" loading="lazy" decoding="async">
-                            </div>
-                            <div class="gate-method__candidate-card gate-method__candidate-card--mini">
-                              <img src="assets/overview/b_bag_01.png" alt="Top-M context thumbnail, man in a red shirt with a backpack" loading="lazy" decoding="async">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="gate-method__final-node gate-method__final-node--gate">GATE</div>
-                        <div class="gate-method__final-node gate-method__final-node--query">
-                          <span class="gate-method__final-label">Enriched query q&#771;</span>
-                          <small>Residual correction applied</small>
-                        </div>
-                      </div>
-                      <div class="gate-method__gallery-panel">
-                        <span class="gate-method__gallery-eyebrow">FULL GALLERY</span>
-                        <div class="gate-method__gallery-grid" aria-label="Full gallery retrieval candidates">
-                          <div class="gate-method__candidate-card gate-method__candidate-card--gallery gate-method__candidate-card--top">
-                            <span class="gate-method__candidate-rank">#1</span>
-                            <img src="assets/overview/target.png" alt="Full-gallery candidate 1, man in a red shirt with a backpack" loading="lazy" decoding="async">
-                          </div>
-                          <div class="gate-method__candidate-card gate-method__candidate-card--gallery">
-                            <span class="gate-method__candidate-rank">#2</span>
-                            <img src="assets/overview/a_red_02.png" alt="Full-gallery candidate 2, man in a red shirt with a backpack" loading="lazy" decoding="async">
-                          </div>
-                          <div class="gate-method__candidate-card gate-method__candidate-card--gallery">
-                            <span class="gate-method__candidate-rank">#3</span>
-                            <img src="assets/overview/b_bag_02.png" alt="Full-gallery candidate 3, man in a red shirt with a backpack" loading="lazy" decoding="async">
-                          </div>
-                          <div class="gate-method__candidate-card gate-method__candidate-card--gallery">
-                            <span class="gate-method__candidate-rank">#4</span>
-                            <img src="assets/overview/a_red_03.png" alt="Full-gallery candidate 4, man in a red shirt with a backpack" loading="lazy" decoding="async">
-                          </div>
-                          <div class="gate-method__candidate-card gate-method__candidate-card--gallery">
-                            <span class="gate-method__candidate-rank">#5</span>
-                            <img src="assets/overview/b_bag_03.png" alt="Full-gallery candidate 5, man in a red shirt with a backpack" loading="lazy" decoding="async">
-                          </div>
-                          <div class="gate-method__candidate-card gate-method__candidate-card--gallery">
-                            <span class="gate-method__candidate-rank">#6</span>
-                            <img src="assets/overview/a_red_01.png" alt="Full-gallery candidate 6, man in a red shirt with a backpack" loading="lazy" decoding="async">
-                          </div>
-                        </div>
-                        <p>The enriched query is evaluated again against the complete gallery.</p>
-                      </div>
-                    </div>
-                  </div>
-                </article>
+              <div class="gate2-overview__stage gate2-overview__stage--reason">
+                <span>03 / REASON</span>
+                <strong>QCRS-Mixer</strong>
+                <small>Query condition · Slot ↔ · Rank ↕ · Channel</small>
+              </div>
+
+              <div class="gate2-overview__arrow" aria-hidden="true">→</div>
+
+              <div class="gate2-overview__stage gate2-overview__stage--enrich">
+                <span>04 / ENRICH</span>
+                <strong>Residual correction</strong>
+                <small>u<sub>q</sub> + γΔq → ũ<sub>q</sub></small>
+              </div>
+
+              <div class="gate2-overview__arrow" aria-hidden="true">→</div>
+
+              <div class="gate2-overview__stage gate2-overview__stage--retrieve">
+                <span>05 / RETRIEVE</span>
+                <strong>Complete gallery</strong>
+                <small>Top-M was context, not the candidate set</small>
               </div>
             </figure>
 
-            <div class="gate-method__summary-strip" aria-label="GATE mechanism summary">
-              <div class="gate-method__summary-item">
-                <span class="gate-method__summary-key">Reusable evidence</span>
-                <strong>CACHE</strong>
+            <div class="gate2-overview__facts" aria-label="Default GATE configuration">
+              <div><span>Default evidence</span><strong>Global Semantic · S = 1</strong></div>
+              <div><span>Context pool</span><strong>M = 64</strong></div>
+              <div><span>QCRS</span><strong>1 block · d<sub>m</sub> = 256</strong></div>
+              <div><span>Residual gate</span><strong>γ = 0.3 · fixed scalar</strong></div>
+              <div><span>Added parameters</span><strong>+1.96M</strong></div>
+              <div><span>Evaluation</span><strong>No test labels · full gallery</strong></div>
+            </div>
+          </section>
+
+          <details class="gate2-explorer" data-gate-explorer>
+            <summary>
+              <span>
+                <span class="gate2-eyebrow">OPTIONAL DEEP DIVE</span>
+                <strong>Explore GATE step by step</strong>
+                <small>Open this only if you want the architecture, equations, and implementation details.</small>
+              </span>
+              <span class="gate2-explorer__summary-action">Explore →</span>
+            </summary>
+
+            <div class="gate2-explorer__body">
+              <nav class="gate2-tabs" aria-label="Detailed GATE stages">
+                <button type="button" class="is-active" data-gate-tab="0" aria-current="step"><span>01</span>Observe</button>
+                <button type="button" data-gate-tab="1"><span>02</span>Evidence</button>
+                <button type="button" data-gate-tab="2"><span>03</span>Reason</button>
+                <button type="button" data-gate-tab="3"><span>04</span>Enrich</button>
+                <button type="button" data-gate-tab="4"><span>05</span>Retrieve</button>
+              </nav>
+
+              <div class="gate2-carousel-shell">
+                <button class="gate2-carousel-control gate2-carousel-control--prev" type="button" data-gate-prev aria-label="Previous GATE stage">←</button>
+                <div class="gate2-carousel" data-gate-carousel tabindex="0" aria-label="Detailed GATE method slides">
+                  <article class="gate2-slide gate2-slide--observe" data-gate-slide="0" aria-labelledby="gate2-slide-observe-title">
+                    <header class="gate2-slide__header">
+                      <div class="gate2-slide__index">01 / OBSERVE</div>
+                      <div>
+                        <h3 id="gate2-slide-observe-title">Use the frozen ranking to expose the current competition</h3>
+                        <p>
+                          The host retriever scores the complete gallery with its original scoring rule. GATE keeps the
+                          ordered Top-M indices because retrieval rank is part of the context consumed by QCRS.
+                        </p>
+                      </div>
+                    </header>
+
+                    <div class="gate2-slide__grid gate2-slide__grid--observe">
+                      <div class="gate2-visual-card">
+                        <div class="gate2-query-card">
+                          <span>TEXT QUERY</span>
+                          <p>“A man in a red shirt carrying a backpack.”</p>
+                        </div>
+                        <div class="gate2-down-arrow" aria-hidden="true">↓</div>
+                        <div class="gate2-frozen-card"><span>FROZEN</span><strong>Host TBPS retriever</strong><small>Native scoring rule is preserved.</small></div>
+                        <div class="gate2-down-arrow" aria-hidden="true">↓</div>
+                        <div class="gate2-candidate-row" aria-label="Ordered Top-M candidates">
+                          <figure class="gate2-candidate gate2-candidate--accent"><span>#1</span><img src="assets/overview/target.png" alt="Rank 1 candidate" loading="lazy" decoding="async"></figure>
+                          <figure class="gate2-candidate"><span>#2</span><img src="assets/overview/a_red_01.png" alt="Rank 2 candidate" loading="lazy" decoding="async"></figure>
+                          <figure class="gate2-candidate"><span>#3</span><img src="assets/overview/b_bag_01.png" alt="Rank 3 candidate" loading="lazy" decoding="async"></figure>
+                          <div class="gate2-candidate-ellipsis" aria-hidden="true">···</div>
+                          <figure class="gate2-candidate gate2-candidate--tail"><span>#M</span><img src="assets/overview/a_red_03.png" alt="Rank M candidate" loading="lazy" decoding="async"></figure>
+                        </div>
+                      </div>
+
+                      <div class="gate2-detail-stack">
+                        <div class="gate2-equation-card">
+                          <span class="gate2-mini-label">Ordered evidence pool</span>
+                          <div class="gate2-math">
+                            \[
+                            I_q^M = \operatorname{TopMIndices}\!\left(\{u_q^\top a_j\}_{j=1}^{N_g}\right)
+                            = (i_{q,1},\ldots,i_{q,M}).
+                            \]
+                          </div>
+                        </div>
+                        <ul class="gate2-keypoints">
+                          <li><strong>Complete-gallery first scan.</strong> Selection is produced by the frozen host, not a learned selector.</li>
+                          <li><strong>Ordered, not pooled.</strong> Rank 1 through rank M remain distinguishable.</li>
+                          <li><strong>Context, not pseudo-labels.</strong> Top-M candidates are not assumed to be positives.</li>
+                          <li><strong>Context, not re-ranking.</strong> Images outside Top-M remain eligible later.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="gate2-slide gate2-slide--evidence" data-gate-slide="1" aria-labelledby="gate2-slide-evidence-title">
+                    <header class="gate2-slide__header">
+                      <div class="gate2-slide__index">02 / EVIDENCE</div>
+                      <div>
+                        <h3 id="gate2-slide-evidence-title">Construct a reusable, aligned Evidence Cache</h3>
+                        <p>
+                          Evidence Providers are deterministic, parameter-free readouts from frozen features or current-gallery
+                          structure. Slot semantics stay aligned across every gallery image and every retrieval rank.
+                        </p>
+                      </div>
+                    </header>
+
+                    <div class="gate2-slide__grid gate2-slide__grid--evidence">
+                      <div class="gate2-detail-stack">
+                        <div class="gate2-equation-card">
+                          <span class="gate2-mini-label">Cache organization</span>
+                          <div class="gate2-math">
+                            \[
+                            B_j=[b_{j,1};\ldots;b_{j,S}]\in\mathbb{R}^{S\times d_e},\qquad
+                            B=[B_1;\ldots;B_{N_g}]\in\mathbb{R}^{N_g\times S\times d_e}.
+                            \]
+                          </div>
+                        </div>
+                        <div class="gate2-provider-truth">
+                          <span>DEFAULT / MAIN EXPERIMENTS</span>
+                          <strong>Global Semantic only · S = 1</strong>
+                          <p>Vertical, horizontal, grid, centroid, and residual providers are evaluated as evidence ablations rather than automatically concatenated into the default model.</p>
+                        </div>
+                        <div class="gate2-provider-grid">
+                          <article><span>SEMANTIC</span><strong>Global</strong><div class="gate2-math gate2-math--small">\(b_j^{\mathrm{glob}}=\mathcal{N}(t_j^{\mathrm{cls}})\)</div></article>
+                          <article><span>SPATIAL</span><strong>Vertical / Horizontal / Grid</strong><div class="gate2-math gate2-math--small">\(b_{j,s}^{\mathrm{app}}=\mathcal{N}\!\left(\frac{1}{|\Omega_s|}\sum_{n\in\Omega_s}t_{j,n}\right)\)</div></article>
+                          <article><span>GALLERY-RELATIVE</span><strong>Centroid / Residual</strong><div class="gate2-math gate2-math--small">\(b_j^{\mathrm{clus}}=\mathcal{N}(\mu_{\kappa_j}),\; b_j^{\mathrm{res}}=\mathcal{N}(\phi_j-\mu_{\kappa_j})\)</div></article>
+                        </div>
+                      </div>
+
+                      <div class="gate2-structure-card">
+                        <div class="gate2-structure-card__head"><span>QUERY-SPECIFIC GATHER</span><strong>M × S × d</strong></div>
+                        <div class="gate2-rank-slot" role="img" aria-label="Rank by evidence slot tensor">
+                          <div class="gate2-rank-slot__corner">Rank ↓ / Slot →</div>
+                          <div class="gate2-rank-slot__head">S1</div><div class="gate2-rank-slot__head">S2</div><div class="gate2-rank-slot__head">…</div><div class="gate2-rank-slot__head">S</div>
+                          <div class="gate2-rank-slot__rank">#1</div><i></i><i></i><i></i><i></i>
+                          <div class="gate2-rank-slot__rank">#2</div><i></i><i></i><i></i><i></i>
+                          <div class="gate2-rank-slot__rank">#3</div><i></i><i></i><i></i><i></i>
+                          <div class="gate2-rank-slot__rank">⋮</div><b>ordered candidates</b>
+                          <div class="gate2-rank-slot__rank">#M</div><i></i><i></i><i></i><i></i>
+                        </div>
+                        <div class="gate2-equation-card gate2-equation-card--compact">
+                          <div class="gate2-math">
+                            \[
+                            \bar B_q[r,s,:]=\Pi\!\left(b_{i_{q,r},s}\right),\qquad
+                            \bar B_q\in\mathbb{R}^{M\times S\times d}.
+                            \]
+                          </div>
+                        </div>
+                        <div class="gate2-slot-counts">
+                          <span><b>Global</b> 1 slot</span><span><b>Grid</b> 9 slots</span><span><b>Vertical/Horizontal</b> 12 slots</span><span><b>Centroid/Residual</b> 1 slot</span>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="gate2-slide gate2-slide--reason" data-gate-slide="2" aria-labelledby="gate2-slide-reason-title">
+                    <header class="gate2-slide__header">
+                      <div class="gate2-slide__index">03 / REASON</div>
+                      <div>
+                        <h3 id="gate2-slide-reason-title">QCRS keeps rank and slot semantics separate while making evidence query-specific</h3>
+                        <p>
+                          A slot slice contains complementary evidence for one candidate; a rank slice contains the same
+                          evidence type across competing candidates. QCRS conditions first, then mixes slot → rank → channel.
+                        </p>
+                      </div>
+                    </header>
+
+                    <div class="gate2-qcrs-detail">
+                      <section class="gate2-qcrs-column">
+                        <div class="gate2-qcrs-step"><span>1 / QUERY CONDITION</span><strong>FiLM modulation</strong></div>
+                        <div class="gate2-equation-card">
+                          <div class="gate2-math">
+                            \[
+                            q_q=W_q u_q+b_q,\qquad [\rho_q;\beta_q]=\operatorname{MLP}_{\mathrm{cond}}(q_q).
+                            \]
+                            \[
+                            z_{q,r,s}=W_{\mathrm{in}}\bar b_{q,r,s}+e_r^{\mathrm{rank}}+e_s^{\mathrm{slot}},
+                            \]
+                            \[
+                            H^{(0)}_{q,r,s}=\operatorname{LN}(z_{q,r,s})\odot\bigl(1+\tanh(\rho_q)\bigr)+\beta_q.
+                            \]
+                          </div>
+                        </div>
+                        <p class="gate2-technical-note">Rank embeddings preserve frozen retrieval order; slot embeddings identify the evidence source.</p>
+                      </section>
+
+                      <section class="gate2-qcrs-core">
+                        <div class="gate2-qcrs-step"><span>2 / STRUCTURED MIXING</span><strong>Slot ↔ Rank ↕ Channel</strong></div>
+                        <div class="gate2-qcrs-matrix">
+                          <div class="gate2-qcrs-matrix__label gate2-qcrs-matrix__label--slot">SLOT MIXING ↔<small>within candidate</small></div>
+                          <div class="gate2-qcrs-matrix__label gate2-qcrs-matrix__label--rank">RANK MIXING ↕<small>across candidates</small></div>
+                          <div class="gate2-rank-slot gate2-rank-slot--qcrs" aria-hidden="true">
+                            <div class="gate2-rank-slot__corner"></div><div class="gate2-rank-slot__head">S1</div><div class="gate2-rank-slot__head">S2</div><div class="gate2-rank-slot__head">…</div><div class="gate2-rank-slot__head">S</div>
+                            <div class="gate2-rank-slot__rank">#1</div><i></i><i></i><i></i><i></i>
+                            <div class="gate2-rank-slot__rank">#2</div><i></i><i></i><i></i><i></i>
+                            <div class="gate2-rank-slot__rank">#3</div><i></i><i></i><i></i><i></i>
+                            <div class="gate2-rank-slot__rank">#M</div><i></i><i></i><i></i><i></i>
+                          </div>
+                        </div>
+                        <div class="gate2-equation-card gate2-equation-card--compact">
+                          <div class="gate2-math">
+                            \[
+                            F_a(X)=X+\operatorname{MLP}_a(\operatorname{LN}(X)),\quad a\in\{\mathrm{slot},\mathrm{rank},\mathrm{chan}\},
+                            \]
+                            \[
+                            H_q^{(k+1)}=F_{\mathrm{chan}}\!\left(F_{\mathrm{rank}}\!\left(F_{\mathrm{slot}}(H_q^{(k)})\right)\right).
+                            \]
+                          </div>
+                        </div>
+                      </section>
+
+                      <section class="gate2-qcrs-column">
+                        <div class="gate2-qcrs-step"><span>3 / READOUT</span><strong>Gallery context g<sub>q</sub></strong></div>
+                        <div class="gate2-equation-card">
+                          <div class="gate2-math">
+                            \[
+                            Z_q=\operatorname{LN}(H_q^{(D)}),\qquad
+                            z_{q,k}=\operatorname{vec}_{r,s}(Z_q[:,:,k]),
+                            \]
+                            \[
+                            o_{q,k}=\operatorname{MLP}_{\mathrm{readout}}(z_{q,k}),\qquad
+                            g_q=W_{\mathrm{out}}[o_{q,1},\ldots,o_{q,d_m}]^\top.
+                            \]
+                          </div>
+                        </div>
+                        <div class="gate2-impl-mini">
+                          <span><b>D</b> = 1 block</span><span><b>d<sub>m</sub></b> = 256</span><span><b>Slot hidden</b> 32</span><span><b>Rank hidden</b> 128</span><span><b>Channel hidden</b> 512</span><span><b>Readout hidden</b> 256</span>
+                        </div>
+                      </section>
+                    </div>
+                  </article>
+
+                  <article class="gate2-slide gate2-slide--enrich" data-gate-slide="3" aria-labelledby="gate2-slide-enrich-title">
+                    <header class="gate2-slide__header">
+                      <div class="gate2-slide__index">04 / ENRICH</div>
+                      <div>
+                        <h3 id="gate2-slide-enrich-title">Predict a scalar-gated residual correction instead of replacing the frozen query</h3>
+                        <p>
+                          The residual head sees the original query, the gallery context, and their channel-wise agreement.
+                          An explicit identity path keeps the host representation as the anchor.
+                        </p>
+                      </div>
+                    </header>
+
+                    <div class="gate2-slide__grid gate2-slide__grid--enrich">
+                      <div class="gate2-residual-visual">
+                        <div class="gate2-vector-card gate2-vector-card--query"><span>ORIGINAL QUERY</span><strong>u<sub>q</sub></strong><small>identity path</small></div>
+                        <div class="gate2-residual-plus" aria-hidden="true">+</div>
+                        <div class="gate2-vector-card gate2-vector-card--delta"><span>CONTROLLED UPDATE</span><strong>γΔq</strong><small>γ = 0.3, fixed</small></div>
+                        <div class="gate2-residual-arrow" aria-hidden="true">→</div>
+                        <div class="gate2-vector-card gate2-vector-card--enriched"><span>ENRICHED QUERY</span><strong>ũ<sub>q</sub></strong><small>same retrieval space</small></div>
+                      </div>
+
+                      <div class="gate2-detail-stack">
+                        <div class="gate2-equation-card">
+                          <span class="gate2-mini-label">Residual fusion head</span>
+                          <div class="gate2-math">
+                            \[
+                            h_q=[u_q;g_q;u_q\odot g_q]\in\mathbb{R}^{3d},
+                            \]
+                            \[
+                            r_q=\operatorname{LN}(W_1h_q+b_1),\qquad
+                            \Delta q=W_2\operatorname{GELU}(r_q)+b_2,
+                            \]
+                            \[
+                            \tilde u_q=\mathcal{N}(u_q+\gamma\Delta q),\qquad \gamma\ge 0.
+                            \]
+                          </div>
+                        </div>
+                        <ul class="gate2-keypoints">
+                          <li><strong>Exact fusion order:</strong> Linear → affine LayerNorm → GELU → Linear.</li>
+                          <li><strong>Static gate:</strong> γ is a fixed scalar, not a learned query-dependent gating network.</li>
+                          <li><strong>Default:</strong> γ = 0.3; the supplement also reports comparable behavior at γ = 0.1.</li>
+                          <li><strong>Preserved anchor:</strong> the identity path through u<sub>q</sub> prevents gallery context from replacing the frozen representation.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="gate2-slide gate2-slide--retrieve" data-gate-slide="4" aria-labelledby="gate2-slide-retrieve-title">
+                    <header class="gate2-slide__header">
+                      <div class="gate2-slide__index">05 / RETRIEVE</div>
+                      <div>
+                        <h3 id="gate2-slide-retrieve-title">Use the enriched query for a second complete-gallery scan</h3>
+                        <p>
+                          The final score keeps the original host signal as an explicit anchor and interpolates it with the
+                          enriched query. Every gallery image is scored; Top-M never limits the final candidate set.
+                        </p>
+                      </div>
+                    </header>
+
+                    <div class="gate2-slide__grid gate2-slide__grid--retrieve">
+                      <div class="gate2-full-gallery-visual">
+                        <div class="gate2-context-pool">
+                          <span>INITIAL SCAN</span><strong>Top-M context</strong>
+                          <div class="gate2-context-pool__thumbs">
+                            <img src="assets/overview/target.png" alt="" loading="lazy" decoding="async"><img src="assets/overview/a_red_01.png" alt="" loading="lazy" decoding="async"><img src="assets/overview/b_bag_01.png" alt="" loading="lazy" decoding="async">
+                          </div>
+                        </div>
+                        <div class="gate2-not-equal" aria-hidden="true">≠</div>
+                        <div class="gate2-final-gallery">
+                          <div class="gate2-final-gallery__head"><span>FINAL CANDIDATE SET</span><strong>Complete gallery</strong></div>
+                          <div class="gate2-final-gallery__grid">
+                            <figure class="gate2-candidate gate2-candidate--accent"><span>#1</span><img src="assets/overview/target.png" alt="Final rank 1 candidate" loading="lazy" decoding="async"></figure>
+                            <figure class="gate2-candidate"><span>#2</span><img src="assets/overview/a_red_02.png" alt="Final rank 2 candidate" loading="lazy" decoding="async"></figure>
+                            <figure class="gate2-candidate"><span>#3</span><img src="assets/overview/b_bag_02.png" alt="Final rank 3 candidate" loading="lazy" decoding="async"></figure>
+                            <figure class="gate2-candidate"><span>#4</span><img src="assets/overview/a_red_03.png" alt="Final rank 4 candidate" loading="lazy" decoding="async"></figure>
+                            <figure class="gate2-candidate"><span>#5</span><img src="assets/overview/b_bag_03.png" alt="Final rank 5 candidate" loading="lazy" decoding="async"></figure>
+                            <figure class="gate2-candidate"><span>…</span><img src="assets/overview/a_red_01.png" alt="Additional final candidate" loading="lazy" decoding="async"></figure>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="gate2-detail-stack">
+                        <div class="gate2-equation-card">
+                          <span class="gate2-mini-label">Complete-gallery inference score</span>
+                          <div class="gate2-math">
+                            \[
+                            s_{\mathrm{GATE}}(q,j)=\Big[(1-\eta)u_q+\eta\tilde u_q\Big]^\top a_j,
+                            \qquad j\in\{1,\ldots,N_g\},\quad \eta\in[0,1].
+                            \]
+                          </div>
+                        </div>
+                        <ul class="gate2-keypoints">
+                          <li><strong>η is inference-only.</strong> It balances the frozen score and enriched score and is not trainable.</li>
+                          <li><strong>No target optimization.</strong> No test-gallery identity labels, pseudo-labels, prompt updates, encoder updates, or target-set optimization.</li>
+                          <li><strong>Two scans, two roles.</strong> The first scan gathers context; the second scan produces the actual full-gallery ranking.</li>
+                          <li><strong>Reasoning cost after Top-M:</strong> QCRS operates on M × S × d<sub>m</sub>, independent of N<sub>g</sub> once the indices are known.</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="gate2-retrieve-callout"><strong>GATE IS NOT TOP-M RE-RANKING.</strong><span>Top-M is an evidence interface. Final retrieval scores all N<sub>g</sub> gallery entries.</span></div>
+                  </article>
+                </div>
+                <button class="gate2-carousel-control gate2-carousel-control--next" type="button" data-gate-next aria-label="Next GATE stage">→</button>
               </div>
-              <div class="gate-method__summary-item">
-                <span class="gate-method__summary-key">Structured reasoning</span>
-                <strong>RANK &times; SLOT</strong>
-              </div>
-              <div class="gate-method__summary-item">
-                <span class="gate-method__summary-key">Residual correction</span>
-                <strong>q + &Delta;q</strong>
-              </div>
-              <div class="gate-method__summary-item">
-                <span class="gate-method__summary-key">Global retrieval</span>
-                <strong>FULL GALLERY</strong>
+
+              <div class="gate2-carousel-footer">
+                <span data-gate-counter>01 / 05</span>
+                <p>Swipe horizontally, use the arrows, or select a stage above. Vertical page scrolling is never captured.</p>
               </div>
             </div>
-
-            <details class="technical-details gate-method__details">
-              <summary>Architecture &amp; implementation details</summary>
-              <dl class="gate-method__spec">
-                <div class="gate-method__spec-item">
-                  <dt>Context pool</dt>
-                  <dd>M = 64</dd>
-                </div>
-                <div class="gate-method__spec-item">
-                  <dt>Residual scale</dt>
-                  <dd>&gamma; = 0.3</dd>
-                </div>
-                <div class="gate-method__spec-item">
-                  <dt>Trainable params</dt>
-                  <dd>1.96M</dd>
-                </div>
-                <div class="gate-method__spec-item">
-                  <dt>Base retriever</dt>
-                  <dd>Frozen</dd>
-                </div>
-                <div class="gate-method__spec-item">
-                  <dt>Test labels</dt>
-                  <dd>None</dd>
-                </div>
-                <div class="gate-method__spec-item">
-                  <dt>Final candidate set</dt>
-                  <dd>Full gallery</dd>
-                </div>
-              </dl>
-            </details>
-          </div>
+          </details>
         </div>
       </section>
+
 
       <section class="chapter results-chapter" id="results" aria-labelledby="results-title">
         <div class="section-inner">

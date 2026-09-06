@@ -434,6 +434,105 @@ function bindTtbpsScrollFlow() {
   }
 }
 
+
+function bindGateMethodExplorer() {
+  const explorer = document.querySelector("[data-gate-explorer]");
+  const carousel = explorer?.querySelector("[data-gate-carousel]");
+  const slides = explorer ? Array.from(explorer.querySelectorAll("[data-gate-slide]")) : [];
+  const tabs = explorer ? Array.from(explorer.querySelectorAll("[data-gate-tab]")) : [];
+  const prev = explorer?.querySelector("[data-gate-prev]");
+  const next = explorer?.querySelector("[data-gate-next]");
+  const counter = explorer?.querySelector("[data-gate-counter]");
+
+  if (!explorer || !carousel || slides.length === 0) return;
+
+  const clampIndex = (index) => Math.max(0, Math.min(slides.length - 1, index));
+  let activeIndex = 0;
+  let rafId = 0;
+
+  function setActive(index) {
+    activeIndex = clampIndex(index);
+    tabs.forEach((tab, tabIndex) => {
+      const active = tabIndex === activeIndex;
+      tab.classList.toggle("is-active", active);
+      if (active) tab.setAttribute("aria-current", "step");
+      else tab.removeAttribute("aria-current");
+    });
+    slides.forEach((slide, slideIndex) => {
+      slide.classList.toggle("is-active", slideIndex === activeIndex);
+    });
+    if (counter) counter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+    if (prev) prev.disabled = activeIndex === 0;
+    if (next) next.disabled = activeIndex === slides.length - 1;
+  }
+
+  function goTo(index, behavior = "smooth") {
+    const targetIndex = clampIndex(index);
+    const slide = slides[targetIndex];
+    if (!slide) return;
+    carousel.scrollTo({ left: slide.offsetLeft, behavior });
+    setActive(targetIndex);
+  }
+
+  function detectActiveFromScroll() {
+    rafId = 0;
+    const carouselRect = carousel.getBoundingClientRect();
+    const center = carouselRect.left + carouselRect.width / 2;
+    let bestIndex = 0;
+    let bestDistance = Number.POSITIVE_INFINITY;
+    slides.forEach((slide, index) => {
+      const rect = slide.getBoundingClientRect();
+      const slideCenter = rect.left + rect.width / 2;
+      const distance = Math.abs(slideCenter - center);
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        bestIndex = index;
+      }
+    });
+    setActive(bestIndex);
+  }
+
+  function scheduleDetect() {
+    if (rafId) return;
+    rafId = window.requestAnimationFrame(detectActiveFromScroll);
+  }
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => goTo(index));
+  });
+  prev?.addEventListener("click", () => goTo(activeIndex - 1));
+  next?.addEventListener("click", () => goTo(activeIndex + 1));
+  carousel.addEventListener("scroll", scheduleDetect, { passive: true });
+  carousel.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      goTo(activeIndex + 1);
+    } else if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      goTo(activeIndex - 1);
+    } else if (event.key === "Home") {
+      event.preventDefault();
+      goTo(0);
+    } else if (event.key === "End") {
+      event.preventDefault();
+      goTo(slides.length - 1);
+    }
+  });
+
+  explorer.addEventListener("toggle", () => {
+    if (!explorer.open) return;
+    window.requestAnimationFrame(() => {
+      carousel.scrollLeft = slides[activeIndex]?.offsetLeft || 0;
+      setActive(activeIndex);
+      if (window.MathJax?.typesetPromise) {
+        window.MathJax.typesetPromise([explorer]).catch(() => {});
+      }
+    });
+  });
+
+  setActive(0);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderDiagnosticHeatmap();
   renderBenchmarkCards();
@@ -447,4 +546,5 @@ document.addEventListener("DOMContentLoaded", () => {
   bindNav();
   bindActiveNav();
   bindTtbpsScrollFlow();
+  bindGateMethodExplorer();
 });
