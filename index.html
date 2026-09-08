@@ -235,21 +235,21 @@
 
             <div class="rs-trajectory-grid">
               <article class="rs-stage rs-stage--observe">
-                <div class="rs-stage__top"><span>01</span><b>OBSERVATION</b></div>
+                <div class="rs-stage__top"><span>01</span><b>TEST</b></div>
                 <div class="rs-stage__viz rs-stage__viz--observe" aria-hidden="true">
                   <div><i></i><i></i><i></i><i></i></div>
                   <span></span>
                   <div><i></i><i></i><i></i><i></i></div>
                 </div>
-                <h4>Gallery composition can change the retrieval decision.</h4>
-                <p>First, measure the sensitivity under controlled cue-directed interventions.</p>
+                <h4>Test the observation under controlled interventions.</h4>
+                <p>Measure whether gallery changes alter retrieval.</p>
                 <a href="#diagnostic">DIAGNOSTIC <span aria-hidden="true">↓</span></a>
               </article>
 
               <div class="rs-flow-arrow" aria-hidden="true"><i></i><span>therefore</span><i></i></div>
 
               <article class="rs-stage rs-stage--reframe">
-                <div class="rs-stage__top"><span>02</span><b>IMPLICATION</b></div>
+                <div class="rs-stage__top"><span>02</span><b>SETTING</b></div>
                 <div class="rs-stage__viz rs-stage__viz--reframe" aria-hidden="true">
                   <div class="rs-mini-query">q</div>
                   <span class="rs-mini-plus">+</span>
@@ -257,15 +257,15 @@
                   <span class="rs-mini-arrow">→</span>
                   <div class="rs-mini-context">q*</div>
                 </div>
-                <h4>Let the current gallery inform query construction.</h4>
-                <p>T-TBPS changes the inference information boundary without requiring gallery labels.</p>
+                <h4>Let the current gallery participate in query construction.</h4>
+                <p>Define T-TBPS as the new inference setting.</p>
                 <a href="#ttbps">T-TBPS <span aria-hidden="true">↓</span></a>
               </article>
 
               <div class="rs-flow-arrow" aria-hidden="true"><i></i><span>realized by</span><i></i></div>
 
               <article class="rs-stage rs-stage--realize">
-                <div class="rs-stage__top"><span>03</span><b>REALIZATION</b></div>
+                <div class="rs-stage__top"><span>03</span><b>METHOD</b></div>
                 <div class="rs-stage__viz rs-stage__viz--realize" aria-hidden="true">
                   <div class="rs-mini-query">q</div>
                   <span class="rs-mini-plus">+</span>
@@ -273,8 +273,8 @@
                   <span class="rs-mini-arrow">→</span>
                   <div class="rs-mini-context">q̃</div>
                 </div>
-                <h4>Enrich the query while keeping the host retriever frozen.</h4>
-                <p>GATE turns gallery context into a controlled residual correction before full-gallery retrieval.</p>
+                <h4>Turn gallery evidence into a query correction.</h4>
+                <p>Realize the setting with GATE.</p>
                 <a href="#method">GATE <span aria-hidden="true">↓</span></a>
               </article>
             </div>
@@ -291,11 +291,7 @@
           <div class="chapter-heading diagx-heading">
             <p class="section-kicker">DIAGNOSTIC</p>
             <h2 id="diagnostic-title">Should TBPS Queries Be Gallery-Independent?</h2>
-            <p>
-              The overview suggests that the same description can become more or less discriminative
-              depending on its competitors. We test that idea directly by changing only a cue-directed
-              subset of distractors while keeping the retrieval problem fixed.
-            </p>
+            <p>We test the observation directly with controlled cue-directed gallery interventions.</p>
           </div>
 
           <figure
@@ -437,13 +433,12 @@
 
           <section class="diagx-interpretation" aria-labelledby="diagx-interpretation-title">
             <article class="diagx-interpretation__claim">
-              <span>WHAT THIS ESTABLISHES</span>
-              <h3 id="diagx-interpretation-title">The gallery contains information about what is discriminative for the current search.</h3>
-              <p>Retrieval decisions are measurably sensitive to cue-directed gallery changes even when the query, target, positives, gallery size, and evaluated retriever are held fixed.</p>
+              <span>EMPIRICAL TAKEAWAY</span>
+              <h3 id="diagx-interpretation-title">Controlled gallery changes alter retrieval decisions.</h3>
             </article>
             <article class="diagx-interpretation__limit">
-              <span>WHAT THIS DOES NOT CLAIM</span>
-              <p>This establishes gallery sensitivity, not a sole causal effect of cue prevalence: the swapped subsets necessarily contain different distractor images and identities.</p>
+              <span>BOUNDARY</span>
+              <p>The intervention establishes gallery sensitivity, not a sole causal effect of cue prevalence.</p>
             </article>
           </section>
 
@@ -479,8 +474,8 @@
 
           <div class="diagx-transition" aria-label="Transition from the diagnostic to T-TBPS">
             <div class="diagx-transition__source">
-              <span>DIAGNOSTIC</span>
-              <strong>Gallery composition changes the retrieval decision.</strong>
+              <span>FROM THE DIAGNOSTIC</span>
+              <strong>Gallery sensitivity is measurable.</strong>
             </div>
             <div class="diagx-transition__flow" aria-hidden="true"><i></i><b>therefore</b><i></i></div>
             <div class="diagx-transition__target">
@@ -574,11 +569,6 @@
               </div>
             </div>
 
-            <div class="ttbx-mode-note" aria-live="polite">
-              <span class="ttbx-copy-standard"><b>Standard TBPS:</b> gallery information enters only at matching time.</span>
-              <span class="ttbx-copy-transductive"><b>T-TBPS:</b> gallery information enters during query construction and the enriched query still retrieves over the full gallery.</span>
-            </div>
-
             <figcaption id="ttbps-caption">
               T-TBPS is an inference setting, not a specific architecture: it permits unlabeled gallery context during query construction while retaining complete-gallery retrieval.
             </figcaption>
@@ -596,9 +586,9 @@
           </div>
 
           <div class="ttbx-method-bridge" aria-label="T-TBPS setting and GATE method distinction">
-            <div><span>SETTING</span><strong>T-TBPS</strong><p>Defines the extra inference context that may be used.</p></div>
+            <div><span>SETTING</span><strong>T-TBPS</strong></div>
             <div class="ttbx-method-bridge__arrow" aria-hidden="true"><i></i><b>one realization</b><i></i></div>
-            <div><span>METHOD</span><strong>GATE</strong><p>One way to turn gallery context into query enrichment.</p></div>
+            <div><span>METHOD</span><strong>GATE</strong></div>
           </div>
         </div>
       </section>
@@ -609,28 +599,16 @@
           <div class="chapter-heading method-heading gate2-heading">
             <p class="section-kicker">One realization of T-TBPS</p>
             <h2 id="method-title">GATE: Gallery-Aware Query Enrichment</h2>
-            <p>
-              GATE keeps the host TBPS retriever frozen, uses the current unlabeled gallery as query-specific context,
-              and predicts a controlled residual correction before retrieving over the complete gallery.
-            </p>
-          </div>
-
-          <div class="gate2-bridge" aria-label="Transition from T-TBPS to GATE">
-            <div><span>T-TBPS asks</span><strong>How can the current gallery inform query construction?</strong></div>
-            <span class="gate2-bridge__connector" aria-hidden="true">into</span>
-            <div><span>GATE answers</span><strong>Observe → Construct Evidence → Reason → Enrich → Retrieve</strong></div>
+            <p>GATE realizes T-TBPS through five stages while keeping the host retriever frozen.</p>
           </div>
 
           <section class="gate2-overview" aria-labelledby="gate2-overview-title">
             <header class="gate2-overview__header">
               <div>
                 <p class="gate2-eyebrow">GATE / OVERVIEW</p>
-                <h3 id="gate2-overview-title">Understand the full mechanism before opening the internals</h3>
+                <h3 id="gate2-overview-title">Five stages from live competition to an enriched query</h3>
               </div>
-              <p>
-                GATE reads the current gallery, turns its strongest competitors into evidence, reasons about what matters
-                for this query, refines the query representation, and then searches the complete gallery again.
-              </p>
+              <p>Observe → Evidence → Reason → Enrich → Retrieve.</p>
             </header>
 
             <figure class="gate2-overview__figure" aria-label="Conceptual overview of GATE from a natural-language query to complete-gallery retrieval">
@@ -706,10 +684,7 @@
                       <div class="gate2-slide__index">01 / OBSERVE</div>
                       <div>
                         <h3 id="gate2-slide-observe-title">Use the frozen first-pass ranking to expose the current competition</h3>
-                        <p>
-                          GATE starts by running the host retriever exactly as usual on the complete gallery, then keeps the
-                          ordered Top-M candidates as query-specific context for the later reasoning stages.
-                        </p>
+                        <p>Run the frozen host once and keep the ordered Top-M candidates as query-specific context.</p>
                       </div>
                     </header>
 
@@ -729,24 +704,18 @@
                           <div class="gate2-candidate-ellipsis" aria-hidden="true">···</div>
                           <figure class="gate2-candidate gate2-candidate--tail"><span>#M</span><img src="assets/overview/a_red_03.png" alt="Rank M candidate" loading="lazy" decoding="async"></figure>
                         </div>
-                        <div class="gate2-story-strip">
-                          <article><span>1</span><strong>Scan</strong><p>Run the standard full-gallery retrieval once.</p></article>
-                          <article><span>2</span><strong>Keep order</strong><p>Preserve rank 1 through rank M rather than pooling.</p></article>
-                          <article><span>3</span><strong>Reuse as context</strong><p>These candidates become the evidence interface for GATE.</p></article>
+                        <div class="gate2-story-strip gate2-story-strip--micro">
+                          <article><span>1</span><strong>Scan</strong></article>
+                          <article><span>2</span><strong>Preserve rank</strong></article>
+                          <article><span>3</span><strong>Pass as context</strong></article>
                         </div>
                       </div>
 
-                      <div class="gate2-detail-stack">
+                      <div class="gate2-detail-stack gate2-detail-stack--compressed">
                         <div class="gate2-word-card">
-                          <span class="gate2-mini-label">Why this matters</span>
-                          <p>The first scan reveals what the gallery is currently confusing with the query. GATE does not guess this competition in advance — it reads it from the live retrieval result.</p>
+                          <span class="gate2-mini-label">TAKEAWAY</span>
+                          <p>Top-M candidates describe the current competition; they are context, not assumed positives.</p>
                         </div>
-                        <ul class="gate2-keypoints">
-                          <li><strong>Complete-gallery first pass.</strong> Candidate selection comes directly from the frozen host retriever.</li>
-                          <li><strong>Ordered context.</strong> Rank carries information, so GATE keeps the Top-M as an ordered list.</li>
-                          <li><strong>Not pseudo-labeling.</strong> Top-M images are context, not assumed positives.</li>
-                          <li><strong>Not final retrieval.</strong> Images outside Top-M still remain eligible later.</li>
-                        </ul>
                         <details class="gate2-equation-details">
                           <summary>Show the exact formulation</summary>
                           <div class="gate2-equation-card">
@@ -763,10 +732,7 @@
                       <div class="gate2-slide__index">02 / EVIDENCE</div>
                       <div>
                         <h3 id="gate2-slide-evidence-title">Turn the current competitors into an aligned evidence cube</h3>
-                        <p>
-                          Deterministic Evidence Providers read frozen features or gallery structure and extract aligned cues from
-                          each candidate. GATE then gathers them into a query-specific evidence cube indexed by retrieval rank and evidence slot.
-                        </p>
+                        <p>Gather aligned provider outputs into a query-specific cube indexed by retrieval rank and evidence slot.</p>
                       </div>
                     </header>
 
@@ -803,10 +769,10 @@
                           <div class="gate2-evidence-badges"><span>ordered</span><span>aligned</span><span>query-specific gather</span></div>
                         </div>
 
-                        <div class="gate2-story-strip gate2-story-strip--evidence">
-                          <article><span>1</span><strong>Read aligned cues</strong><p>Each provider extracts the same kind of cue from every candidate.</p></article>
-                          <article><span>2</span><strong>Preserve semantics</strong><p>Slot 1 always means the same evidence source across candidates.</p></article>
-                          <article><span>3</span><strong>Assemble the cube</strong><p>The gathered evidence becomes structured input for the reasoning stage.</p></article>
+                        <div class="gate2-story-strip gate2-story-strip--evidence gate2-story-strip--micro">
+                          <article><span>1</span><strong>Read aligned cues</strong></article>
+                          <article><span>2</span><strong>Preserve slots</strong></article>
+                          <article><span>3</span><strong>Assemble cube</strong></article>
                         </div>
                       </div>
 
@@ -819,7 +785,7 @@
                         <div class="gate2-provider-truth">
                           <span>DEFAULT / MAIN EXPERIMENTS</span>
                           <strong>Global Semantic only</strong>
-                          <p>Other providers are still important for analysis, but they are evaluated as evidence ablations rather than concatenated into the default configuration.</p>
+                          <p>Other providers are evaluated as evidence ablations rather than concatenated by default.</p>
                         </div>
                         <details class="gate2-equation-details">
                           <summary>Show the exact formulation</summary>
@@ -837,10 +803,7 @@
                       <div class="gate2-slide__index">03 / REASON</div>
                       <div>
                         <h3 id="gate2-slide-reason-title">Reason over the evidence cube with query-conditioned structured mixing</h3>
-                        <p>
-                          QCRS keeps two useful structures separate: slot structure within each candidate and rank structure across
-                          candidates. The query conditions the evidence first, then the mixer integrates information across these axes.
-                        </p>
+                        <p>Condition evidence on the query, then mix slot structure within candidates and rank structure across candidates.</p>
                       </div>
                     </header>
 
@@ -877,10 +840,10 @@
                       </div>
 
                       <div class="gate2-detail-stack">
-                        <div class="gate2-story-strip gate2-story-strip--stack">
-                          <article><span>1</span><strong>Condition</strong><p>The query modulates the evidence so different queries can interpret the same gallery differently.</p></article>
-                          <article><span>2</span><strong>Mix structure</strong><p>Slot mixing compares cues within each candidate, then rank mixing compares those cues across candidates.</p></article>
-                          <article><span>3</span><strong>Read out context</strong><p>The result is a gallery-context vector that summarizes what the current gallery is telling us about the query.</p></article>
+                        <div class="gate2-story-strip gate2-story-strip--stack gate2-story-strip--micro">
+                          <article><span>1</span><strong>Condition</strong></article>
+                          <article><span>2</span><strong>Slot → Rank → Channel</strong></article>
+                          <article><span>3</span><strong>Read out context</strong></article>
                         </div>
                         <details class="gate2-equation-details">
                           <summary>Show the exact formulation</summary>
@@ -897,10 +860,7 @@
                       <div class="gate2-slide__index">04 / ENRICH</div>
                       <div>
                         <h3 id="gate2-slide-enrich-title">Predict a controlled residual correction instead of replacing the query</h3>
-                        <p>
-                          GATE fuses the original query and the gallery-context readout to predict a residual update. The frozen
-                          query remains the anchor, while the residual only nudges it in a gallery-aware direction.
-                        </p>
+                        <p>Predict a small residual correction while preserving the original query as the anchor.</p>
                       </div>
                     </header>
 
@@ -914,10 +874,10 @@
                       </div>
 
                       <div class="gate2-detail-stack">
-                        <div class="gate2-story-strip gate2-story-strip--stack">
-                          <article><span>1</span><strong>Fuse inputs</strong><p>Combine the original query, the gallery context, and their agreement signal.</p></article>
-                          <article><span>2</span><strong>Predict a residual</strong><p>The update is additive rather than a full replacement of the host representation.</p></article>
-                          <article><span>3</span><strong>Keep it controlled</strong><p>A fixed scalar keeps the gallery-aware correction deliberately modest.</p></article>
+                        <div class="gate2-story-strip gate2-story-strip--stack gate2-story-strip--micro">
+                          <article><span>1</span><strong>Fuse</strong></article>
+                          <article><span>2</span><strong>Predict Δq</strong></article>
+                          <article><span>3</span><strong>Scale update</strong></article>
                         </div>
                         <details class="gate2-equation-details">
                           <summary>Show the exact formulation</summary>
@@ -935,10 +895,7 @@
                       <div class="gate2-slide__index">05 / RETRIEVE</div>
                       <div>
                         <h3 id="gate2-slide-retrieve-title">Use the enriched query for a second complete-gallery search</h3>
-                        <p>
-                          The Top-M list was only an evidence interface. Final retrieval still scores every gallery image, so GATE
-                          stays faithful to the full-gallery TBPS objective rather than collapsing into Top-M re-ranking.
-                        </p>
+                        <p>Top-M provides context; the enriched query then scores the complete gallery again.</p>
                       </div>
                     </header>
 
@@ -964,17 +921,11 @@
                         </div>
                       </div>
 
-                      <div class="gate2-detail-stack">
+                      <div class="gate2-detail-stack gate2-detail-stack--compressed">
                         <div class="gate2-word-card">
-                          <span class="gate2-mini-label">Retrieval role split</span>
-                          <p>The first pass only reveals context. The second pass is the actual answer, and it scores all gallery images with the enriched query still anchored by the original host signal.</p>
+                          <span class="gate2-mini-label">TAKEAWAY</span>
+                          <p><strong>Top-M evidence ≠ final search space.</strong> Final retrieval ranks every gallery image.</p>
                         </div>
-                        <ul class="gate2-keypoints">
-                          <li><strong>Two scans, two roles.</strong> One scan gathers context; the second produces the final ranking.</li>
-                          <li><strong>Full-gallery inference.</strong> Top-M never limits the final candidate set.</li>
-                          <li><strong>No test labels.</strong> There are no gallery identity labels, pseudo-labels, or target-set optimization at inference time.</li>
-                          <li><strong>Host-compatible.</strong> The enriched query stays in the same retrieval space as the original TBPS retriever.</li>
-                        </ul>
                         <details class="gate2-equation-details">
                           <summary>Show the exact formulation</summary>
                           <div class="gate2-equation-card">
@@ -985,7 +936,6 @@
                       </div>
                     </div>
 
-                    <div class="gate2-retrieve-callout"><strong>GATE IS NOT TOP-M RE-RANKING.</strong><span>Top-M is only the interface used to gather evidence. Final retrieval still ranks the full gallery.</span></div>
                   </article>
                 </div>
                 <button class="gate2-carousel-control gate2-carousel-control--next" type="button" data-gate-next aria-label="Next GATE stage">→</button>
@@ -1029,12 +979,7 @@
                 <div class="result-copy result-copy--frontier">
                   <p class="subsection-label">01 / Frontier</p>
                   <h3 id="frontier-title">GATE establishes a new frontier on all three benchmarks</h3>
-                  <p>
-                    GATE<sub>ITSELF</sub> reaches the best reported R@1 and mAP on
-                    CUHK-PEDES, ICFG-PEDES, and RSTPReid. Each card reports the resulting score
-                    together with the improvement margin, keeping the comparison focused on the
-                    achieved frontier rather than repeating the earlier score.
-                  </p>
+                  <p>GATE<sub>ITSELF</sub> reaches the best reported R@1 and mAP on all three benchmarks.</p>
                 </div>
 
                 <div id="benchmark-frontier" class="benchmark-grid" aria-label="Benchmark frontier comparison"></div>
@@ -1043,10 +988,7 @@
                   <div class="frontier-takeaway__copy">
                     <p class="frontier-takeaway__eyebrow">Takeaway</p>
                     <h4 id="frontier-takeaway-title">A stronger frontier without depending on a stronger host.</h4>
-                    <p>
-                      Gallery-aware query correction moves the frozen ITSELF host to the best reported
-                      R@1 and mAP across all three benchmarks, while keeping the underlying retriever fixed.
-                    </p>
+                    <p>Best reported R@1 and mAP on 3 / 3 benchmarks with the ITSELF host frozen.</p>
                   </div>
 
                   <div class="frontier-proof-grid" aria-label="Frontier supporting evidence">
@@ -1060,18 +1002,8 @@
                       <strong>No retriever update</strong>
                       <p>GATE enriches the query at inference while the host TBPS retriever remains frozen.</p>
                     </article>
-                    <article class="frontier-proof">
-                      <span>Across settings</span>
-                      <strong>Not limited to matched training regimes</strong>
-                      <p>The reported frontier also spans methods with different backbones and training resources.</p>
-                    </article>
                   </div>
 
-                  <p class="frontier-cross-setting">
-                    <strong>Cross-setting comparison.</strong> GATE still exceeds the reported benchmark scores
-                    of competing settings that use alternative vision-language backbones such as ALBEF or
-                    additional pretraining datasets, while its host retriever remains frozen.
-                  </p>
                 </section>
               </div>
             </article>
@@ -1092,10 +1024,7 @@
                 <div class="result-copy">
                   <p class="subsection-label">02 / Generalizes across frozen retrievers</p>
                   <h3 id="retrievers-title">The gain is systematic across all five frozen hosts</h3>
-                  <p>
-                    Across CLIP, IRRA, RDE, DM-Adapter, and ITSELF, every dataset × retriever
-                    pairing improves in both R@1 and mAP after adding GATE.
-                  </p>
+                  <p>Every dataset × retriever pairing improves in both R@1 and mAP.</p>
                 </div>
 
                 <div class="retriever-panel">
@@ -1109,10 +1038,6 @@
                     <div class="ranking-insight">
                       <p class="ranking-insight__eyebrow">Ranking refinement</p>
                       <strong>mAP gains exceed R@1 gains on all three benchmarks.</strong>
-                      <p>
-                        The effect is broader than isolated Top-1 corrections: gallery-aware
-                        enrichment consistently improves the ranked list as a whole.
-                      </p>
                       <div id="ranking-gains" class="ranking-gains" aria-label="Average gains by benchmark"></div>
                     </div>
                   </aside>
@@ -1165,10 +1090,6 @@
                       <span>No target tuning</span>
                       <span>No parameter updates</span>
                     </div>
-                    <p class="transfer-interpretation">
-                      <strong>Takeaway.</strong> The effect therefore does not depend on fitting
-                      GATE to a particular target gallery or target benchmark.
-                    </p>
                   </aside>
 
                   <figure
@@ -1177,8 +1098,8 @@
                   >
                     <div class="transfer-figure__header">
                       <div>
-                        <p class="transfer-figure__eyebrow">All six directed routes</p>
-                        <strong>Cross-domain gains remain positive across the entire transfer graph</strong>
+                        <p class="transfer-figure__eyebrow">Cross-domain transfer graph</p>
+                        <strong>Train on one benchmark, evaluate directly on another</strong>
                       </div>
                       <span class="transfer-figure__badge">Full transfer graph</span>
                     </div>
@@ -1210,10 +1131,7 @@
                     </div>
 
                     <div id="transfer-directions" class="transfer-directions" aria-label="Average gains for each transfer direction"></div>
-                    <figcaption>
-                      The map shows transfer topology only; exact average gains are listed below.
-                      All six source → target routes improve across all five frozen retrievers.
-                    </figcaption>
+                    <figcaption>The map shows transfer topology; exact average gains are listed below.</figcaption>
                   </figure>
                 </div>
               </div>
@@ -1227,11 +1145,7 @@
           <div class="chapter-heading qual-heading">
             <p class="section-kicker">Qualitative evidence</p>
             <h2 id="examples-title">Qualitative Retrieval Examples</h2>
-            <p>
-              Inspect one retrieval case at a time. The text query stays fixed while the frozen base
-              ranking is compared with its GATE-enhanced counterpart. Green borders mark target-identity
-              images; red borders mark distractors.
-            </p>
+            <p>Select a case to compare the frozen base ranking with GATE. Green marks targets; red marks distractors.</p>
           </div>
 
           <section class="qual-explorer" data-qual-explorer aria-label="Interactive qualitative retrieval explorer">
@@ -1261,7 +1175,7 @@
               <header class="qual-stage-head">
                 <div>
                   <p class="qual-stage-kicker" data-qual-stage-kicker>CLIP · CUHK-PEDES</p>
-                  <h3>Same query. Same gallery. A different ranking after gallery-aware enrichment.</h3>
+                  <h3>Same query. Same gallery. Different ranking.</h3>
                 </div>
                 <button type="button" class="qual-original-button" data-qual-open-original>
                   View original figure <span aria-hidden="true">↗</span>
@@ -1274,8 +1188,8 @@
                   <span class="qual-row-focus" data-qual-row-focus aria-hidden="true"><b>CASE 01</b></span>
                 </button>
                 <div class="qual-overview-caption">
-                  <span>Original composite figure</span>
-                  <span>The highlighted row is expanded below.</span>
+                  <span>Original figure</span>
+                  <span>Highlighted row expanded below</span>
                 </div>
               </div>
 
@@ -1301,10 +1215,6 @@
                   <div class="qual-crop qual-crop--query" data-qual-crop="query">
                     <img data-qual-crop-image alt="Selected text query crop" draggable="false">
                   </div>
-                  <p>
-                    The exact same text query is used for both rankings. Only gallery-aware query
-                    enrichment changes the retrieval representation.
-                  </p>
                 </article>
 
                 <div class="qual-ranking-story">
@@ -1352,10 +1262,7 @@
                   <span><i class="qual-legend-dot qual-legend-dot--target"></i> target identity</span>
                   <span><i class="qual-legend-dot qual-legend-dot--distractor"></i> distractor</span>
                 </div>
-                <p>
-                  <strong>What to inspect.</strong> Follow which green target images move toward earlier ranks
-                  and which red distractors are displaced after the same query is enriched with gallery context.
-                </p>
+                <p><strong>Inspect:</strong> target rank movement and displaced distractors.</p>
               </footer>
               <p class="sr-only" data-qual-status aria-live="polite"></p>
             </div>
@@ -1378,11 +1285,7 @@
           <div class="chapter-heading analysisx-heading">
             <p class="section-kicker">Interpretation</p>
             <h2 id="analysis-title">Analysis</h2>
-            <p>
-              The ablations ask two complementary questions: which gallery evidence is useful, and
-              how should that evidence be reasoned over? The answer is not “use more features,” but
-              “use the right context while preserving its structure.”
-            </p>
+            <p>Two ablations ask which gallery evidence is useful and how that evidence should be reasoned over.</p>
           </div>
 
           <nav class="analysisx-story" aria-label="Analysis story">
@@ -1485,10 +1388,7 @@
                   <p data-analysis-global-verdict-copy>Adding Global changes the selected metric by +0.06 points.</p>
                 </div>
               </div>
-              <p class="analysisx-evidence-takeaway">
-                The important pattern is non-monotonicity: more slots are not a guarantee of better context.
-                What matters is which evidence is useful for the current retrieval problem.
-              </p>
+              <p class="analysisx-evidence-takeaway"><strong>More evidence is not monotonically better.</strong></p>
             </section>
           </article>
 
@@ -1568,8 +1468,7 @@
                   <span data-analysis-reasoning-tag>COMPLETE STRUCTURE</span>
                   <h4 data-analysis-reasoning-name>QCRS-Mixer</h4>
                   <p data-analysis-reasoning-copy>Query conditioning, rank/slot embeddings, and all three mixer passes are active.</p>
-                  <p class="analysisx-readout-note" data-analysis-reasoning-note>The complete model provides the strongest and most balanced cross-benchmark result.</p>
-                </div>
+                  </div>
                 <div class="analysisx-reasoning-readout__results">
                   <span class="analysisx-reasoning-results-label">SELECTED CONFIGURATION · R@1 / mAP</span>
                   <div id="analysis-reasoning-scores" class="analysisx-score-grid"></div>
@@ -1578,62 +1477,36 @@
             </div>
           </article>
 
-          <article class="analysisx-panel analysisx-interpretation" id="analysis-interpretation" aria-labelledby="analysis-interpretation-title">
+          <article class="analysisx-panel analysisx-interpretation analysisx-interpretation--compressed" id="analysis-interpretation" aria-labelledby="analysis-interpretation-title">
             <header class="analysisx-panel__head analysisx-panel__head--compact">
               <div>
                 <p class="subsection-label">03 / Interpretation</p>
-                <h3 id="analysis-interpretation-title">What do these ablations tell us?</h3>
-                <p>
-                  The evidence and reasoning studies point to one shared conclusion: gallery-aware
-                  retrieval is useful when context is selected deliberately and its structure is preserved.
-                </p>
+                <h3 id="analysis-interpretation-title">What the ablations say</h3>
               </div>
-              <span class="analysisx-concept-badge">ABLATION → INTERPRETATION</span>
+              <span class="analysisx-concept-badge">ABLATION → SYNTHESIS</span>
             </header>
 
-            <div class="analysisx-interpretation-grid" aria-label="Three conclusions from the ablations">
+            <div class="analysisx-interpretation-grid analysisx-interpretation-grid--compressed" aria-label="Synthesis from the evidence and reasoning ablations">
               <article class="analysisx-insight analysisx-insight--selective">
-                <div class="analysisx-insight__icon" aria-hidden="true">
-                  <span></span><span></span><span></span><b></b>
-                </div>
-                <span>SELECTIVE CONTEXT</span>
-                <strong>More evidence ≠ better evidence.</strong>
-                <p>Provider gains are non-monotonic. Useful context depends on the current retrieval problem, not on maximizing the number of evidence slots.</p>
+                <div class="analysisx-insight__icon" aria-hidden="true"><span></span><span></span><span></span><b></b></div>
+                <span>SELECTIVE EVIDENCE</span>
+                <strong>More ≠ better.</strong>
               </article>
-
-              <i class="analysisx-insight-flow" aria-hidden="true"></i>
-
               <article class="analysisx-insight analysisx-insight--structured">
-                <div class="analysisx-insight__icon analysisx-insight__icon--matrix" aria-hidden="true">
-                  <span></span><span></span><span></span><span></span><b></b>
-                </div>
-                <span>STRUCTURED CONTEXT</span>
-                <strong>Seeing the gallery ≠ reasoning about it.</strong>
-                <p>Generic pooling underuses the evidence. Preserving candidate rank and evidence-slot semantics gives the reasoning stage something meaningful to compare.</p>
-              </article>
-
-              <i class="analysisx-insight-flow" aria-hidden="true"></i>
-
-              <article class="analysisx-insight analysisx-insight--adapt">
-                <div class="analysisx-insight__icon analysisx-insight__icon--residual" aria-hidden="true">
-                  <span>q</span><b>+</b><span>Δq</span><em>→</em><span>q̃</span>
-                </div>
-                <span>INFERENCE ADAPTATION</span>
-                <strong>Adapt the query, keep the retriever.</strong>
-                <p>The learned retrieval space remains the anchor. The gain comes from using the current gallery to deploy that representation more effectively at inference.</p>
+                <div class="analysisx-insight__icon analysisx-insight__icon--matrix" aria-hidden="true"><span></span><span></span><span></span><span></span><b></b></div>
+                <span>STRUCTURED REASONING</span>
+                <strong>Seeing ≠ reasoning.</strong>
               </article>
             </div>
+
+            <p class="analysisx-synthesis-line">Gallery-aware query adaptation works best when context is <strong>selective</strong> and <strong>structured</strong>.</p>
           </article>
 
           <article class="analysisx-panel analysisx-discussion" id="analysis-discussion" aria-labelledby="analysis-discussion-title">
             <header class="analysisx-panel__head analysisx-panel__head--compact">
               <div>
                 <p class="subsection-label">04 / Discussion</p>
-                <h3 id="analysis-discussion-title">From GATE to a broader search-space-aware inference view</h3>
-                <p>
-                  GATE provides one concrete inference pattern. T-TBPS is the broader setting: once the
-                  unlabeled search space is available, it may participate in constructing the representation used to search it.
-                </p>
+                <h3 id="analysis-discussion-title">What does GATE teach us beyond GATE?</h3>
               </div>
               <span class="analysisx-concept-badge">GATE ⊂ T-TBPS</span>
             </header>
@@ -1642,97 +1515,38 @@
               <section class="analysisx-discussion-band analysisx-discussion-band--gate" aria-labelledby="analysis-gate-discussion-title">
                 <header class="analysisx-discussion-band__head">
                   <div>
-                    <span>GATE · ONE REALIZATION</span>
-                    <strong id="analysis-gate-discussion-title">Understanding the mechanism</strong>
-                    <p>GATE follows a specific inference pattern: observe the current competition, preserve the frozen retrieval signal as an anchor, and return to a complete-gallery search.</p>
+                    <span>UNDERSTANDING THE MECHANISM</span>
+                    <strong id="analysis-gate-discussion-title">High-ranked mistakes can still be useful evidence.</strong>
+                    <p>The frozen retriever's current competition reveals plausible alternatives the query must distinguish from; evidence need not be treated as predicted positives to be useful.</p>
                   </div>
                 </header>
 
-                <div class="analysisx-mechanism-sequence" aria-label="Three conceptual properties of GATE">
+                <div class="analysisx-mechanism-sequence analysisx-mechanism-sequence--compressed">
                   <article class="analysisx-mechanism-step analysisx-mechanism-step--competition">
                     <div class="analysisx-competition-viz" aria-hidden="true">
-                      <div class="analysisx-competition-query">q</div>
-                      <i></i>
+                      <div class="analysisx-competition-query">q</div><i></i>
                       <div class="analysisx-competition-ranks"><span>#1</span><span>#2</span><span>#3</span><span>…</span><span>#M</span></div>
                       <b>CURRENT COMPETITION</b>
                     </div>
                     <div>
-                      <span>01 / COMPETITION EVIDENCE</span>
-                      <strong>Top-M describes what the frozen retriever currently finds plausible.</strong>
-                      <p>Membership does not imply relevance. Even an incorrect high-ranked candidate can characterize a plausible alternative that the current query must distinguish from.</p>
+                      <span>COMPETITION AS SIGNAL</span>
+                      <strong>The useful signal is the structure of plausible alternatives, not only likely positives.</strong>
                     </div>
                   </article>
-
-                  <i class="analysisx-mechanism-arrow" aria-hidden="true"></i>
-
-                  <article class="analysisx-mechanism-step analysisx-mechanism-step--adaptation">
-                    <div class="analysisx-anchor-viz" aria-hidden="true">
-                      <span>u<sub>q</sub></span><b>+</b><span>γΔq</span><i>→</i><strong>ũ<sub>q</sub></strong>
-                    </div>
-                    <div>
-                      <span>02 / QUERY-SIDE CORRECTION</span>
-                      <strong>Gallery context adapts the query without reconstructing the retrieval space.</strong>
-                      <p>The frozen query remains an explicit reference representation, while gallery reasoning contributes a controlled residual correction on the query side.</p>
-                    </div>
-                  </article>
-
-                  <i class="analysisx-mechanism-arrow" aria-hidden="true"></i>
-
-                  <article class="analysisx-mechanism-step analysisx-mechanism-step--global">
-                    <div class="analysisx-local-global-viz" aria-hidden="true">
-                      <span>Top-M</span><i></i><span>reason</span><i></i><span>Δq</span><b>→</b><strong>FULL GALLERY</strong>
-                    </div>
-                    <div>
-                      <span>03 / LOCAL OBSERVATION → GLOBAL SEARCH</span>
-                      <strong>Top-M is an evidence interface, not the final candidate set.</strong>
-                      <p>The first ranking exposes local competition; after query enrichment, the actual retrieval evaluates the complete gallery again.</p>
-                    </div>
-                  </article>
-                </div>
-
-                <div class="analysisx-discussion-chips" aria-label="GATE inference properties">
-                  <span>NO GALLERY LABELS</span><span>NO PSEUDO-LABELS</span><span>NO TEST-TIME UPDATES</span><span>NOT TOP-M RE-RANKING</span>
                 </div>
               </section>
 
               <section class="analysisx-discussion-band analysisx-discussion-band--ttbps" aria-labelledby="analysis-ttbps-discussion-title">
                 <header class="analysisx-discussion-band__head">
                   <div>
-                    <span>T-TBPS · INFERENCE SETTING</span>
-                    <strong id="analysis-ttbps-discussion-title">Beyond one method</strong>
-                    <p>T-TBPS is broader than GATE. It changes when the search space may enter inference, without prescribing one evidence representation or one contextualization mechanism.</p>
+                    <span>BEYOND ONE METHOD</span>
+                    <strong id="analysis-ttbps-discussion-title">T-TBPS leaves evidence and reasoning open.</strong>
+                    <p>GATE fixes one choice of gallery evidence and one reasoning mechanism; the setting itself prescribes neither.</p>
                   </div>
                 </header>
 
-                <article class="analysisx-boundary-shift analysisx-boundary-shift--wide">
-                  <div class="analysisx-boundary-shift__label"><span>01 / FROM GALLERY-INDEPENDENT TO SEARCH-SPACE-AWARE INFERENCE</span><strong>The gallery moves upstream.</strong></div>
-                  <div class="analysisx-boundary-compare" aria-label="Standard TBPS versus T-TBPS information flow">
-                    <div>
-                      <span>STANDARD TBPS</span>
-                      <div class="analysisx-boundary-flow"><b>query</b><i></i><strong>encode</strong><i></i><em>score gallery</em></div>
-                      <small>The query representation is determined before the current gallery enters the computation.</small>
-                    </div>
-                    <div class="analysisx-boundary-compare__active">
-                      <span>T-TBPS</span>
-                      <div class="analysisx-boundary-flow"><b>query</b><i></i><strong>construct</strong><i></i><em>retrieve gallery</em></div>
-                      <div class="analysisx-gallery-injection" aria-hidden="true"><span>gallery</span><i></i></div>
-                      <small>The current unlabeled gallery may inform the representation used to search that same space.</small>
-                    </div>
-                  </div>
-                  <p class="analysisx-boundary-question">Once the search space is available, what information from that space should influence the representation used to search it?</p>
-                </article>
-
-                <article class="analysisx-setting-method analysisx-setting-method--wide">
-                  <span>02 / SETTING ≠ METHOD</span>
-                  <div class="analysisx-setting-method__flow">
-                    <div><small>INFERENCE SETTING</small><strong>T-TBPS</strong><p>Allows the current unlabeled gallery to participate in query construction before final retrieval.</p></div>
-                    <i aria-hidden="true"></i>
-                    <div><small>ONE REALIZATION</small><strong>GATE</strong><p>Observes current competition, reasons over structured evidence, corrects the query, and searches globally again.</p></div>
-                  </div>
-                </article>
-
                 <article class="analysisx-design-axes analysisx-design-axes--wide">
-                  <span>03 / TWO OPEN DESIGN AXES</span>
+                  <span>TWO OPEN DESIGN AXES</span>
                   <div class="analysisx-axis-row">
                     <b>WHAT GALLERY EVIDENCE?</b>
                     <div><span>global</span><span>spatial</span><span>gallery-relative</span><span>local</span><span>relational</span><span>learned</span><em>…</em></div>
@@ -1741,7 +1555,6 @@
                     <b>HOW SHOULD THE QUERY REASON?</b>
                     <div><span>pooling</span><span>structured</span><span>adaptive</span><span>query-conditioned</span><em>…</em></div>
                   </div>
-                  <p>GATE instantiates these axes through Evidence Providers and QCRS-Mixer, but neither component defines T-TBPS. Future methods can advance evidence, reasoning, or the base retriever independently or jointly.</p>
                 </article>
               </section>
             </div>
@@ -1760,10 +1573,7 @@
           <header class="chapter-heading scope2-heading">
             <p class="section-kicker">Scope / Limitations</p>
             <h2 id="scope-title">Where does search-space-aware inference apply?</h2>
-            <p>
-              The paper makes three boundaries explicit. They define the setting and the reach of the diagnostic;
-              they are not claims that every retrieval scenario should become transductive.
-            </p>
+            <p>Three boundaries define where the setting and diagnostic apply.</p>
           </header>
 
           <div class="scope2-boundaries" id="limitations" aria-label="Scope and limitations from the paper">
@@ -1803,10 +1613,6 @@
             </article>
           </div>
 
-          <div class="scope2-summary">
-            <span>READING THE CLAIM CORRECTLY</span>
-            <p>T-TBPS expands the inference context under a clearly stated protocol; the diagnostic motivates that expansion without claiming universal benefit or exhaustive causality.</p>
-          </div>
         </div>
       </section>
 
@@ -1816,11 +1622,7 @@
             <div class="closing2-copy">
               <p class="section-kicker">Closing Takeaway</p>
               <h2 id="takeaway-title">The gallery can inform <em>how</em> a query searches—not only <em>what</em> it ranks.</h2>
-              <p>
-                T-TBPS turns the current unlabeled gallery into inference context before final retrieval.
-                GATE shows that this idea can improve existing frozen retrievers without gallery identity labels,
-                test-time optimization, or modification of the learned retrieval space.
-              </p>
+              <p>T-TBPS makes the unlabeled search space available during query construction; GATE demonstrates the value of doing so across frozen retrievers, benchmarks, and transfer settings.</p>
             </div>
 
             <div class="closing2-evidence" aria-label="Experimental breadth summarized in the paper conclusion">
@@ -1831,14 +1633,6 @@
               <div><strong>6 / 6</strong><span>transfer directions</span></div>
             </div>
 
-            <div class="closing2-direction">
-              <span>COMPLEMENTARY DIRECTION TO REPRESENTATION LEARNING</span>
-              <div class="closing2-axes">
-                <article><small>AXIS 01</small><strong>Stronger gallery evidence</strong><p>What should the current search space reveal?</p></article>
-                <i aria-hidden="true">×</i>
-                <article><small>AXIS 02</small><strong>More capable query-conditioned reasoning</strong><p>How should that evidence change the way a query is deployed?</p></article>
-              </div>
-            </div>
           </div>
         </div>
       </section>
