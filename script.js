@@ -928,129 +928,106 @@ function bindTtbpsScrollFlow() {
 
 function bindGateMethodExplorer() {
   const explorer = document.querySelector("[data-gate-explorer]");
-  const carousel = explorer?.querySelector("[data-gate-carousel]");
-  const slides = explorer ? Array.from(explorer.querySelectorAll("[data-gate-slide]")) : [];
+  const panels = explorer ? Array.from(explorer.querySelectorAll("[data-gate-panel]")) : [];
   const tabs = explorer ? Array.from(explorer.querySelectorAll("[data-gate-tab]")) : [];
   const overviewLinks = Array.from(document.querySelectorAll("#method [data-gate-overview-target]"));
   const prev = explorer?.querySelector("[data-gate-prev]");
   const next = explorer?.querySelector("[data-gate-next]");
   const counter = explorer?.querySelector("[data-gate-counter]");
 
-  if (!explorer || !carousel || slides.length === 0) return;
+  if (!explorer || panels.length === 0 || tabs.length !== panels.length) return;
 
-  const clampIndex = (index) => Math.max(0, Math.min(slides.length - 1, index));
+  const clampIndex = (index) => Math.max(0, Math.min(panels.length - 1, index));
   let activeIndex = 0;
-  let rafId = 0;
 
-  function setActive(index) {
+  const typesetPanel = (panel) => {
+    if (!panel || !window.MathJax?.typesetPromise) return;
+    window.MathJax.typesetPromise([panel]).catch(() => {});
+  };
+
+  function setActive(index, { focus = false, updateHash = false } = {}) {
     activeIndex = clampIndex(index);
+
     tabs.forEach((tab, tabIndex) => {
       const active = tabIndex === activeIndex;
       tab.classList.toggle("is-active", active);
-      if (active) tab.setAttribute("aria-current", "step");
-      else tab.removeAttribute("aria-current");
+      tab.setAttribute("aria-selected", String(active));
+      tab.tabIndex = active ? 0 : -1;
     });
-    slides.forEach((slide, slideIndex) => {
-      slide.classList.toggle("is-active", slideIndex === activeIndex);
+
+    panels.forEach((panel, panelIndex) => {
+      const active = panelIndex === activeIndex;
+      panel.classList.toggle("is-active", active);
+      panel.hidden = !active;
+      panel.setAttribute("aria-hidden", String(!active));
     });
+
     overviewLinks.forEach((link) => {
       const targetIndex = Number.parseInt(link.dataset.gateOverviewTarget || "-1", 10);
-      link.classList.toggle("is-linked-active", targetIndex === activeIndex && explorer.open);
+      link.classList.toggle("is-linked-active", explorer.open && targetIndex === activeIndex);
     });
-    if (counter) counter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+
+    if (counter) {
+      counter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(panels.length).padStart(2, "0")}`;
+    }
     if (prev) prev.disabled = activeIndex === 0;
-    if (next) next.disabled = activeIndex === slides.length - 1;
+    if (next) next.disabled = activeIndex === panels.length - 1;
+
+    const activePanel = panels[activeIndex];
+    typesetPanel(activePanel);
+    if (focus) activePanel?.focus({ preventScroll: true });
+
+    if (updateHash && activePanel?.id && window.history?.replaceState) {
+      window.history.replaceState(null, "", `#${activePanel.id}`);
+    }
   }
 
-  function goTo(index, behavior = "smooth") {
-    const targetIndex = clampIndex(index);
-    const slide = slides[targetIndex];
-    if (!slide) return;
-    carousel.scrollTo({ left: slide.offsetLeft, behavior });
-    setActive(targetIndex);
-  }
-
-  function openFromOverview(index, hash) {
-    const targetIndex = clampIndex(index);
+  function openAt(index, { scroll = true, updateHash = true } = {}) {
     explorer.open = true;
+    setActive(index, { updateHash });
     window.requestAnimationFrame(() => {
-      goTo(targetIndex, "auto");
-      explorer.scrollIntoView({ behavior: "smooth", block: "start" });
-      if (hash && window.history?.replaceState) {
-        window.history.replaceState(null, "", hash);
-      }
+      if (scroll) explorer.scrollIntoView({ behavior: "smooth", block: "start" });
     });
-  }
-
-  function detectActiveFromScroll() {
-    rafId = 0;
-    const carouselRect = carousel.getBoundingClientRect();
-    const center = carouselRect.left + carouselRect.width / 2;
-    let bestIndex = 0;
-    let bestDistance = Number.POSITIVE_INFINITY;
-    slides.forEach((slide, index) => {
-      const rect = slide.getBoundingClientRect();
-      const slideCenter = rect.left + rect.width / 2;
-      const distance = Math.abs(slideCenter - center);
-      if (distance < bestDistance) {
-        bestDistance = distance;
-        bestIndex = index;
-      }
-    });
-    setActive(bestIndex);
-  }
-
-  function scheduleDetect() {
-    if (rafId) return;
-    rafId = window.requestAnimationFrame(detectActiveFromScroll);
   }
 
   overviewLinks.forEach((link) => {
     link.addEventListener("click", (event) => {
       event.preventDefault();
       const index = Number.parseInt(link.dataset.gateOverviewTarget || "0", 10);
-      openFromOverview(index, link.getAttribute("href"));
+      openAt(index, { scroll: true, updateHash: true });
     });
   });
 
   tabs.forEach((tab, index) => {
-    tab.addEventListener("click", () => goTo(index));
-  });
-  prev?.addEventListener("click", () => goTo(activeIndex - 1));
-  next?.addEventListener("click", () => goTo(activeIndex + 1));
-  carousel.addEventListener("scroll", scheduleDetect, { passive: true });
-  carousel.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowRight") {
+    tab.addEventListener("click", () => setActive(index, { updateHash: true }));
+    tab.addEventListener("keydown", (event) => {
+      let nextIndex = null;
+      if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
+      if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length;
+      if (event.key === "Home") nextIndex = 0;
+      if (event.key === "End") nextIndex = tabs.length - 1;
+      if (nextIndex === null) return;
       event.preventDefault();
-      goTo(activeIndex + 1);
-    } else if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      goTo(activeIndex - 1);
-    } else if (event.key === "Home") {
-      event.preventDefault();
-      goTo(0);
-    } else if (event.key === "End") {
-      event.preventDefault();
-      goTo(slides.length - 1);
-    }
-  });
-
-  explorer.addEventListener("toggle", () => {
-    overviewLinks.forEach((link) => link.classList.remove("is-linked-active"));
-    if (!explorer.open) return;
-    window.requestAnimationFrame(() => {
-      carousel.scrollLeft = slides[activeIndex]?.offsetLeft || 0;
-      setActive(activeIndex);
-      if (window.MathJax?.typesetPromise) {
-        window.MathJax.typesetPromise([explorer]).catch(() => {});
-      }
+      setActive(nextIndex, { updateHash: true });
+      tabs[nextIndex].focus();
     });
   });
 
-  const initialHashIndex = slides.findIndex((slide) => `#${slide.id}` === window.location.hash);
+  prev?.addEventListener("click", () => setActive(activeIndex - 1, { updateHash: true }));
+  next?.addEventListener("click", () => setActive(activeIndex + 1, { updateHash: true }));
+
+  explorer.addEventListener("toggle", () => {
+    if (!explorer.open) {
+      overviewLinks.forEach((link) => link.classList.remove("is-linked-active"));
+      return;
+    }
+    setActive(activeIndex);
+  });
+
+  const initialHashIndex = panels.findIndex((panel) => `#${panel.id}` === window.location.hash);
   if (initialHashIndex >= 0) {
     explorer.open = true;
-    window.requestAnimationFrame(() => goTo(initialHashIndex, "auto"));
+    setActive(initialHashIndex);
   } else {
     setActive(0);
   }
