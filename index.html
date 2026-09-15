@@ -1,1671 +1,1218 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta
-      name="description"
-      content="Overview for The Gallery as Context: Transductive Text-Based Person Search."
-    >
-    <title>The Gallery as Context: Transductive Text-Based Person Search</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    >
-    <link rel="stylesheet" href="tokens.css">
-    <link rel="stylesheet" href="styles.css">
+<!DOCTYPE html>
 
-    <script>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Overview for The Gallery as Context: Transductive Text-Based Person Search." name="description"/>
+<title>The Gallery as Context: Transductive Text-Based Person Search</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="tokens.css" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
+<script>
       window.MathJax = {
         tex: { inlineMath: [["\\(", "\\)"], ["$", "$" ]], displayMath: [["\\[", "\\]"]], processEscapes: true },
         chtml: { scale: 0.94 },
         options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
       };
     </script>
-    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  </head>
-  <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-
-    <header class="site-header" aria-label="Site header">
-      <nav class="site-nav" aria-label="Primary navigation">
-        <a class="brand" href="#hero" aria-label="The Gallery as Context home">
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header aria-label="Site header" class="site-header">
+<nav aria-label="Primary navigation" class="site-nav">
+<a aria-label="The Gallery as Context home" class="brand" href="#hero">
           The Gallery as Context
         </a>
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
-          <span class="nav-toggle-lines" aria-hidden="true"></span>
-          <span class="sr-only">Toggle navigation</span>
-        </button>
-        <div class="nav-links" id="nav-links">
-          <a href="#hero">Overview</a>
-          <a href="#diagnostic">Diagnostic</a>
-          <a href="#ttbps">T-TBPS</a>
-          <a href="#method">GATE / Method</a>
-          <a href="#results">Results</a>
-          <a href="#examples">Examples</a>
-          <a href="#analysis">Analysis</a>
-          <a href="#scope">Scope</a>
-        </div>
-      </nav>
-    </header>
-
-    <main id="main">
-      <section class="chapter paper-hero" id="hero" aria-labelledby="hero-title">
-        <div class="section-inner paper-header">
-          <h1 id="hero-title">The Gallery as Context: Transductive Text-Based Person Search</h1>
-
-          <div class="paper-metadata" aria-label="Author and publication metadata"><!-- TODO(public metadata): add author names once explicitly supplied by the project owner. --><!-- TODO(public metadata): add affiliation and venue once explicitly supplied by the project owner. --></div>
-
-          <nav class="paper-links" aria-label="Project resources">
-            <a href="https://gallery-context.github.io/" target="_blank" rel="noreferrer noopener">
-              <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-                <path d="M4.25 1.75h5.25L13 5.25v9H4.25z"></path>
-                <path d="M9.5 1.75v3.5H13"></path>
-                <path d="M6 11.15 7.35 7.7l1.35 3.45M6.45 10.05h1.8"></path>
-              </svg>
-              <span>arXiv</span>
-            </a>
-            <a href="https://gallery-context.github.io/" target="_blank" rel="noreferrer noopener">
-              <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-                <path d="m6.1 4.55-3.35 3.45 3.35 3.45"></path>
-                <path d="m9.9 4.55 3.35 3.45-3.35 3.45"></path>
-                <path d="m8.95 3.55-1.9 8.9"></path>
-              </svg>
-              <span>Code</span>
-            </a>
-            <a href="https://gallery-context.github.io/" target="_blank" rel="noreferrer noopener">
-              <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-                <path d="M4.25 1.75h7.5v12.5h-7.5z"></path>
-                <path d="M6.15 8.8h1.65v2H6.15z"></path>
-                <path d="M9.05 8.8h1.65v2H9.05z"></path>
-                <path d="M6.35 6.05h3.55"></path>
-              </svg>
-              <span>BibTeX</span>
-            </a>
-            <a href="https://gallery-context.github.io/" target="_blank" rel="noreferrer noopener">
-              <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-                <path d="M3.25 2.75h9.5v10.5h-9.5z"></path>
-                <path d="M5.05 5.1h5.9"></path>
-                <path d="M5.05 7.1h5.9"></path>
-                <path d="M5.05 9.1h3.6"></path>
-              </svg>
-              <span>Blog</span>
-            </a>
-            <a href="https://gallery-context.github.io/" target="_blank" rel="noreferrer noopener">
-              <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-                <path d="M3.4 4.1h9.2v6.1H3.4z"></path>
-                <path d="M5.1 10.2v1.6"></path>
-                <path d="M10.9 10.2v1.6"></path>
-                <path d="M4.7 12.2h6.6"></path>
-                <path d="M5.05 6.1h5.15"></path>
-              </svg>
-              <span>Slides</span>
-            </a>
-          </nav>
-        </div>
-      </section>
-
-      <section class="chapter overview-tldr" aria-labelledby="tldr-title">
-        <div class="section-inner tldr-inner">
-          <div class="tldr-box">
-            <h2 id="tldr-title" class="section-kicker tldr-label">TL;DR</h2>
-            <p class="tldr-copy">
-              We study gallery-aware query construction for text-based person search. A controlled diagnostic finds reproducible sensitivity to cue-directed gallery composition, motivating T-TBPS and its GATE instantiation.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="overview-video" aria-labelledby="overview-video-title">
-        <div class="section-inner overview-video-inner">
-          <h2 id="overview-video-title" class="sr-only">One-minute project overview</h2>
-          <figure class="overview-video-figure">
-            <video
-              class="overview-video-player"
-              controls
-              playsinline
-              preload="metadata"
-              aria-describedby="overview-video-caption"
-            >
-              <source src="assets/video/overview.mp4" type="video/mp4">
+<button aria-controls="nav-links" aria-expanded="false" class="nav-toggle" type="button">
+<span aria-hidden="true" class="nav-toggle-lines"></span>
+<span class="sr-only">Toggle navigation</span>
+</button>
+<div class="nav-links" id="nav-links">
+<a href="#hero">Overview</a>
+<a href="#diagnostic">Diagnostic</a>
+<a href="#ttbps">T-TBPS</a>
+<a href="#method">GATE / Method</a>
+<a href="#results">Results</a>
+<a href="#examples">Examples</a>
+<a href="#analysis">Analysis</a>
+<a href="#scope">Scope</a>
+</div>
+</nav>
+</header>
+<main id="main">
+<section aria-labelledby="hero-title" class="chapter paper-hero" id="hero">
+<div class="section-inner paper-header">
+<h1 id="hero-title">The Gallery as Context: Transductive Text-Based Person Search</h1>
+<div aria-label="Author and publication metadata" class="paper-metadata"><!-- TODO(public metadata): add author names once explicitly supplied by the project owner. --><!-- TODO(public metadata): add affiliation and venue once explicitly supplied by the project owner. --></div>
+<nav aria-label="Project resources" class="paper-links">
+<a href="https://gallery-context.github.io/" rel="noreferrer noopener" target="_blank">
+<svg aria-hidden="true" focusable="false" viewbox="0 0 16 16">
+<path d="M4.25 1.75h5.25L13 5.25v9H4.25z"></path>
+<path d="M9.5 1.75v3.5H13"></path>
+<path d="M6 11.15 7.35 7.7l1.35 3.45M6.45 10.05h1.8"></path>
+</svg>
+<span>arXiv</span>
+</a>
+<a href="https://gallery-context.github.io/" rel="noreferrer noopener" target="_blank">
+<svg aria-hidden="true" focusable="false" viewbox="0 0 16 16">
+<path d="m6.1 4.55-3.35 3.45 3.35 3.45"></path>
+<path d="m9.9 4.55 3.35 3.45-3.35 3.45"></path>
+<path d="m8.95 3.55-1.9 8.9"></path>
+</svg>
+<span>Code</span>
+</a>
+<a href="https://gallery-context.github.io/" rel="noreferrer noopener" target="_blank">
+<svg aria-hidden="true" focusable="false" viewbox="0 0 16 16">
+<path d="M4.25 1.75h7.5v12.5h-7.5z"></path>
+<path d="M6.15 8.8h1.65v2H6.15z"></path>
+<path d="M9.05 8.8h1.65v2H9.05z"></path>
+<path d="M6.35 6.05h3.55"></path>
+</svg>
+<span>BibTeX</span>
+</a>
+<a href="https://gallery-context.github.io/" rel="noreferrer noopener" target="_blank">
+<svg aria-hidden="true" focusable="false" viewbox="0 0 16 16">
+<path d="M3.25 2.75h9.5v10.5h-9.5z"></path>
+<path d="M5.05 5.1h5.9"></path>
+<path d="M5.05 7.1h5.9"></path>
+<path d="M5.05 9.1h3.6"></path>
+</svg>
+<span>Blog</span>
+</a>
+<a href="https://gallery-context.github.io/" rel="noreferrer noopener" target="_blank">
+<svg aria-hidden="true" focusable="false" viewbox="0 0 16 16">
+<path d="M3.4 4.1h9.2v6.1H3.4z"></path>
+<path d="M5.1 10.2v1.6"></path>
+<path d="M10.9 10.2v1.6"></path>
+<path d="M4.7 12.2h6.6"></path>
+<path d="M5.05 6.1h5.15"></path>
+</svg>
+<span>Slides</span>
+</a>
+</nav>
+</div>
+</section>
+<section aria-labelledby="tldr-title" class="chapter overview-tldr">
+<div class="section-inner tldr-inner">
+<div class="tldr-box">
+<h2 class="section-kicker tldr-label" id="tldr-title">TL;DR</h2>
+<p class="tldr-copy">We let the current gallery help determine what matters for the search.</p>
+</div>
+</div>
+</section>
+<section aria-labelledby="overview-video-title" class="overview-video">
+<div class="section-inner overview-video-inner">
+<h2 class="sr-only" id="overview-video-title">One-minute project overview</h2>
+<figure class="overview-video-figure">
+<video aria-describedby="overview-video-caption" class="overview-video-player" controls="" playsinline="" preload="metadata">
+<source src="assets/video/overview.mp4" type="video/mp4"/>
               Your browser does not support the video tag.
             </video>
-            <figcaption id="overview-video-caption" class="overview-video-caption">
-              <span aria-hidden="true">▶</span> A 1-minute overview of why the gallery should be treated as context.
-            </figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section class="chapter overview-highlights research-story" id="highlights" aria-labelledby="highlights-title">
-        <div class="section-inner highlights-inner">
-          <header class="overview-heading rs-heading">
-            <p class="section-kicker">Research story</p>
-            <h2 id="highlights-title">From Observation to Method</h2>
-            <p class="overview-bridge">If the gallery changes what makes a description discriminative, why construct the query in isolation? Keep the description and target fixed, change only the surrounding competitors, and the value of each cue changes with the gallery.</p>
-          </header>
-
-          <figure class="research-figure rs-observation" aria-labelledby="rs-observation-title">
-            <header class="rs-query-anchor">
-              <div class="rs-query-anchor__copy">
-                <span class="rs-eyebrow">SAME QUERY · SAME TARGET</span>
-                <p id="rs-observation-title">A person in a <mark class="rs-query-mark rs-query-mark--red">red shirt</mark> with a <mark class="rs-query-mark rs-query-mark--bag">black backpack</mark>.</p>
-              </div>
-              <div class="rs-locks" aria-label="Variables held fixed in the thought experiment">
-                <span><i aria-hidden="true"></i> query fixed</span>
-                <span><i aria-hidden="true"></i> target fixed</span>
-              </div>
-            </header>
-
-            <div class="rs-gallery-comparison">
-              <article class="rs-gallery rs-gallery--a" aria-label="Gallery A: red shirts are common while the black backpack is more distinctive">
-                <header class="rs-gallery__head">
-                  <div><span>CONTEXT A</span><strong>Gallery A</strong></div>
-                  <small>red-shirt crowd</small>
-                </header>
-
-                <div class="rs-people" aria-label="Target and three red-shirt distractors">
-                  <figure class="rs-person rs-person--target">
-                    <span>target</span>
-                    <img src="assets/overview/target.png" alt="Target person" loading="eager" decoding="async">
-                  </figure>
-                  <figure class="rs-person"><img src="assets/overview/a_red_01.png" alt="Red-shirt distractor" loading="eager" decoding="async"></figure>
-                  <figure class="rs-person"><img src="assets/overview/a_red_02.png" alt="Red-shirt distractor" loading="eager" decoding="async"></figure>
-                  <figure class="rs-person"><img src="assets/overview/a_red_03.png" alt="Red-shirt distractor" loading="eager" decoding="async"></figure>
-                </div>
-
-                <div class="rs-cues" aria-label="Qualitative cue prevalence in Gallery A">
-                  <div class="rs-cue rs-cue--red" style="--rs-cue-level: 84%">
-                    <div class="rs-cue__meta"><span>red shirt</span><b>COMMON</b></div>
-                    <div class="rs-cue__track" aria-hidden="true"><i></i></div>
-                  </div>
-                  <div class="rs-cue rs-cue--bag" style="--rs-cue-level: 34%">
-                    <div class="rs-cue__meta"><span>black backpack</span><b>DISTINCTIVE</b></div>
-                    <div class="rs-cue__track" aria-hidden="true"><i></i></div>
-                  </div>
-                </div>
-              </article>
-
-              <aside class="rs-cue-swap" aria-label="The gallery changes which query cue is distinctive">
-                <div class="rs-cue-swap__title"><span>GALLERY CHANGES</span><strong>cue value swaps</strong></div>
-
-                <div class="rs-swap-lane rs-swap-lane--red">
-                  <div class="rs-swap-lane__label">red shirt</div>
-                  <div class="rs-swap-lane__flow">
-                    <span>common</span>
-                    <i class="rs-swap-track" aria-hidden="true"></i>
-                    <span>distinctive</span>
-                  </div>
-                </div>
-
-                <div class="rs-swap-lane rs-swap-lane--bag">
-                  <div class="rs-swap-lane__label">black backpack</div>
-                  <div class="rs-swap-lane__flow">
-                    <span>distinctive</span>
-                    <i class="rs-swap-track" aria-hidden="true"></i>
-                    <span>common</span>
-                  </div>
-                </div>
-
-                <small class="rs-cue-swap__note">Same words. Different competitors.</small>
-              </aside>
-
-              <article class="rs-gallery rs-gallery--b" aria-label="Gallery B: black backpacks are common while the red shirt is more distinctive">
-                <header class="rs-gallery__head">
-                  <div><span>CONTEXT B</span><strong>Gallery B</strong></div>
-                  <small>backpack crowd</small>
-                </header>
-
-                <div class="rs-people" aria-label="Target and three backpack distractors">
-                  <figure class="rs-person rs-person--target">
-                    <span>target</span>
-                    <img src="assets/overview/target.png" alt="Target person" loading="eager" decoding="async">
-                  </figure>
-                  <figure class="rs-person"><img src="assets/overview/b_bag_01.png" alt="Backpack distractor" loading="eager" decoding="async"></figure>
-                  <figure class="rs-person"><img src="assets/overview/b_bag_02.png" alt="Backpack distractor" loading="eager" decoding="async"></figure>
-                  <figure class="rs-person"><img src="assets/overview/b_bag_03.png" alt="Backpack distractor" loading="eager" decoding="async"></figure>
-                </div>
-
-                <div class="rs-cues" aria-label="Qualitative cue prevalence in Gallery B">
-                  <div class="rs-cue rs-cue--red" style="--rs-cue-level: 34%">
-                    <div class="rs-cue__meta"><span>red shirt</span><b>DISTINCTIVE</b></div>
-                    <div class="rs-cue__track" aria-hidden="true"><i></i></div>
-                  </div>
-                  <div class="rs-cue rs-cue--bag" style="--rs-cue-level: 84%">
-                    <div class="rs-cue__meta"><span>black backpack</span><b>COMMON</b></div>
-                    <div class="rs-cue__track" aria-hidden="true"><i></i></div>
-                  </div>
-                </div>
-              </article>
-            </div>
-
-            <div class="rs-punchline">
-              <span>CORE OBSERVATION</span>
-              <p>Gallery context changes <strong>what is discriminative.</strong></p>
-              <small>The cue bars are a qualitative illustration of prevalence, not model scores.</small>
-            </div>
-          </figure>
-
-          <section class="rs-trajectory" aria-labelledby="rs-trajectory-title">
-            <header class="rs-trajectory__head">
-              <span class="rs-eyebrow">RESEARCH TRAJECTORY</span>
-              <h3 id="rs-trajectory-title">One observation becomes a testable setting, then a method.</h3>
-            </header>
-
-            <div class="rs-trajectory-grid">
-              <article class="rs-stage rs-stage--observe">
-                <div class="rs-stage__top"><span>01</span><b>TEST</b></div>
-                <div class="rs-stage__viz rs-stage__viz--observe" aria-hidden="true">
-                  <div><i></i><i></i><i></i><i></i></div>
-                  <span></span>
-                  <div><i></i><i></i><i></i><i></i></div>
-                </div>
-                <h4>Test the observation under controlled interventions.</h4>
-                <p>Measure whether gallery changes alter retrieval.</p>
-                <a href="#diagnostic">DIAGNOSTIC <span aria-hidden="true">↓</span></a>
-              </article>
-
-              <div class="rs-flow-arrow" aria-hidden="true"><i></i><span>therefore</span><i></i></div>
-
-              <article class="rs-stage rs-stage--reframe">
-                <div class="rs-stage__top"><span>02</span><b>SETTING</b></div>
-                <div class="rs-stage__viz rs-stage__viz--reframe" aria-hidden="true">
-                  <div class="rs-mini-query">q</div>
-                  <span class="rs-mini-plus">+</span>
-                  <div class="rs-mini-gallery"><i></i><i></i><i></i></div>
-                  <span class="rs-mini-arrow">→</span>
-                  <div class="rs-mini-context">q*</div>
-                </div>
-                <h4>Let the current gallery participate in query construction.</h4>
-                <p>Define T-TBPS as the new inference setting.</p>
-                <a href="#ttbps">T-TBPS <span aria-hidden="true">↓</span></a>
-              </article>
-
-              <div class="rs-flow-arrow" aria-hidden="true"><i></i><span>realized by</span><i></i></div>
-
-              <article class="rs-stage rs-stage--realize">
-                <div class="rs-stage__top"><span>03</span><b>METHOD</b></div>
-                <div class="rs-stage__viz rs-stage__viz--realize" aria-hidden="true">
-                  <div class="rs-mini-query">q</div>
-                  <span class="rs-mini-plus">+</span>
-                  <div class="rs-mini-delta">Δq</div>
-                  <span class="rs-mini-arrow">→</span>
-                  <div class="rs-mini-context">q̃</div>
-                </div>
-                <h4>Turn gallery evidence into a query correction.</h4>
-                <p>Realize the setting with GATE.</p>
-                <a href="#method">GATE <span aria-hidden="true">↓</span></a>
-              </article>
-            </div>
-
-            <div class="rs-progress" aria-hidden="true">
-              <span class="is-active"></span><i></i><span></span><i></i><span></span>
-            </div>
-          </section>
-        </div>
-      </section>
-
-      <section class="chapter diagnostic-chapter diagx-chapter" id="diagnostic" aria-labelledby="diagnostic-title">
-        <div class="section-inner">
-          <div class="chapter-heading diagx-heading">
-            <p class="section-kicker">DIAGNOSTIC</p>
-            <h2 id="diagnostic-title">Should TBPS Queries Be Gallery-Independent?</h2>
-            <p>We test the observation directly with controlled cue-directed gallery interventions.</p>
-          </div>
-
-          <figure
-            class="research-figure diagx-experiment"
-            data-diagnostic-visual
-            aria-labelledby="diagx-experiment-title"
-          >
-            <header class="diagx-experiment__head">
-              <div>
-                <p class="section-kicker">CONTROLLED GALLERY INTERVENTION</p>
-                <h3 id="diagx-experiment-title">Same query. Same target. Change only the competitors.</h3>
-              </div>
-              <button class="diagx-replay" type="button" data-diagnostic-replay>
-                <span aria-hidden="true">↻</span> Replay intervention
+<figcaption class="overview-video-caption" id="overview-video-caption">1-minute project overview</figcaption>
+</figure>
+</div>
+</section>
+<section aria-labelledby="highlights-title" class="chapter overview-highlights research-story" id="highlights">
+<div class="section-inner highlights-inner">
+<header class="overview-heading rs-heading">
+<h2 id="highlights-title">The Gallery Changes What Matters</h2>
+</header>
+<figure aria-labelledby="rs-observation-title" class="research-figure rs-observation">
+<header class="rs-query-anchor">
+<div class="rs-query-anchor__copy">
+<span class="rs-eyebrow">SAME QUERY · SAME TARGET</span>
+<p id="rs-observation-title">A person in a <mark class="rs-query-mark rs-query-mark--red">red shirt</mark> with a <mark class="rs-query-mark rs-query-mark--bag">black backpack</mark>.</p>
+</div>
+</header>
+<div class="rs-gallery-comparison">
+<article aria-label="Gallery A: red shirts are common while the black backpack is more distinctive" class="rs-gallery rs-gallery--a">
+<header class="rs-gallery__head">
+<div><span>CONTEXT A</span><strong>Gallery A</strong></div>
+<small>red-shirt crowd</small>
+</header>
+<div aria-label="Target and three red-shirt distractors" class="rs-people">
+<figure class="rs-person rs-person--target">
+<span>target</span>
+<img alt="Target person" decoding="async" loading="eager" src="assets/overview/target.png"/>
+</figure>
+<figure class="rs-person"><img alt="Red-shirt distractor" decoding="async" loading="eager" src="assets/overview/a_red_01.png"/></figure>
+<figure class="rs-person"><img alt="Red-shirt distractor" decoding="async" loading="eager" src="assets/overview/a_red_02.png"/></figure>
+<figure class="rs-person"><img alt="Red-shirt distractor" decoding="async" loading="eager" src="assets/overview/a_red_03.png"/></figure>
+</div>
+<div aria-label="Qualitative cue prevalence in Gallery A" class="rs-cues">
+<div class="rs-cue rs-cue--red" style="--rs-cue-level: 84%">
+<div class="rs-cue__meta"><span>red shirt</span><b>COMMON</b></div>
+<div aria-hidden="true" class="rs-cue__track"><i></i></div>
+</div>
+<div class="rs-cue rs-cue--bag" style="--rs-cue-level: 34%">
+<div class="rs-cue__meta"><span>black backpack</span><b>DISTINCTIVE</b></div>
+<div aria-hidden="true" class="rs-cue__track"><i></i></div>
+</div>
+</div>
+</article>
+<aside aria-label="The gallery changes which query cue is distinctive" class="rs-cue-swap">
+<div class="rs-swap-lane rs-swap-lane--red">
+<div class="rs-swap-lane__label">red shirt</div>
+<div class="rs-swap-lane__flow">
+<span>common</span>
+<i aria-hidden="true" class="rs-swap-track"></i>
+<span>distinctive</span>
+</div>
+</div>
+<div class="rs-swap-lane rs-swap-lane--bag">
+<div class="rs-swap-lane__label">black backpack</div>
+<div class="rs-swap-lane__flow">
+<span>distinctive</span>
+<i aria-hidden="true" class="rs-swap-track"></i>
+<span>common</span>
+</div>
+</div>
+</aside>
+<article aria-label="Gallery B: black backpacks are common while the red shirt is more distinctive" class="rs-gallery rs-gallery--b">
+<header class="rs-gallery__head">
+<div><span>CONTEXT B</span><strong>Gallery B</strong></div>
+<small>backpack crowd</small>
+</header>
+<div aria-label="Target and three backpack distractors" class="rs-people">
+<figure class="rs-person rs-person--target">
+<span>target</span>
+<img alt="Target person" decoding="async" loading="eager" src="assets/overview/target.png"/>
+</figure>
+<figure class="rs-person"><img alt="Backpack distractor" decoding="async" loading="eager" src="assets/overview/b_bag_01.png"/></figure>
+<figure class="rs-person"><img alt="Backpack distractor" decoding="async" loading="eager" src="assets/overview/b_bag_02.png"/></figure>
+<figure class="rs-person"><img alt="Backpack distractor" decoding="async" loading="eager" src="assets/overview/b_bag_03.png"/></figure>
+</div>
+<div aria-label="Qualitative cue prevalence in Gallery B" class="rs-cues">
+<div class="rs-cue rs-cue--red" style="--rs-cue-level: 34%">
+<div class="rs-cue__meta"><span>red shirt</span><b>DISTINCTIVE</b></div>
+<div aria-hidden="true" class="rs-cue__track"><i></i></div>
+</div>
+<div class="rs-cue rs-cue--bag" style="--rs-cue-level: 84%">
+<div class="rs-cue__meta"><span>black backpack</span><b>COMMON</b></div>
+<div aria-hidden="true" class="rs-cue__track"><i></i></div>
+</div>
+</div>
+</article>
+</div>
+<div class="rs-punchline">
+<p>Gallery context changes <strong>what is discriminative.</strong></p>
+</div>
+</figure>
+</div>
+</section>
+<section aria-labelledby="diagnostic-title" class="chapter diagnostic-chapter diagx-chapter" id="diagnostic">
+<div class="section-inner">
+<div class="chapter-heading diagx-heading">
+<p class="section-kicker">DIAGNOSTIC</p>
+<h2 id="diagnostic-title">Should TBPS Queries Be Gallery-Independent?</h2>
+</div>
+<figure aria-labelledby="diagx-experiment-title" class="research-figure diagx-experiment" data-diagnostic-visual="">
+<header class="diagx-experiment__head">
+<div>
+<h3 id="diagx-experiment-title">Same query. Same target. Change only the competitors.</h3>
+</div>
+<button class="diagx-replay" data-diagnostic-replay="" type="button">
+<span aria-hidden="true">↻</span> Replay intervention
               </button>
-            </header>
-
-            <div class="diagx-query-lock" aria-label="Variables held fixed across paired gallery trials">
-              <div class="diagx-query-lock__query">
-                <span>TEXT QUERY · FIXED</span>
-                <p>A person in a <strong>red shirt</strong> with a <strong>black backpack</strong>.</p>
-              </div>
-              <div class="diagx-lock-pills" aria-label="Held-fixed variables">
-                <span>Target <b>locked</b></span>
-                <span>Positives <b>locked</b></span>
-                <span>Neutral fillers <b>locked</b></span>
-                <span>Gallery size <b>locked</b></span>
-                <span>Frozen retriever <b>locked</b></span>
-              </div>
-            </div>
-
-            <div class="diagx-gallery-stage" aria-label="Paired gallery intervention">
-              <article class="diagx-gallery diagx-gallery--a">
-                <div class="diagx-gallery__head">
-                  <div><span>TRIAL A</span><strong>Gallery A</strong></div>
-                  <small>red-shirt distractors</small>
-                </div>
-                <div class="diagx-people">
-                  <figure class="diagx-person diagx-person--target">
-                    <span>TARGET</span>
-                    <img src="assets/overview/target.png" alt="Target person" loading="lazy" decoding="async">
-                  </figure>
-                  <figure class="diagx-person diagx-person--swap"><img src="assets/overview/a_red_01.png" alt="Red-shirt distractor" loading="lazy" decoding="async"></figure>
-                  <figure class="diagx-person diagx-person--swap"><img src="assets/overview/a_red_02.png" alt="Red-shirt distractor" loading="lazy" decoding="async"></figure>
-                  <figure class="diagx-person diagx-person--swap"><img src="assets/overview/a_red_03.png" alt="Red-shirt distractor" loading="lazy" decoding="async"></figure>
-                </div>
-                <div class="diagx-cue-readout"><span>red shirt</span><b>common</b><span>black backpack</span><b>more distinctive</b></div>
-              </article>
-
-              <div class="diagx-swap" aria-hidden="true">
-                <span class="diagx-swap__label">ONLY THIS SUBSET CHANGES</span>
-                <svg viewBox="0 0 96 44" focusable="false">
-                  <path d="M8 13H78"></path><path d="m70 6 9 7-9 7"></path>
-                  <path d="M88 31H18"></path><path d="m26 24-9 7 9 7"></path>
-                </svg>
-              </div>
-
-              <article class="diagx-gallery diagx-gallery--b">
-                <div class="diagx-gallery__head">
-                  <div><span>TRIAL B</span><strong>Gallery B</strong></div>
-                  <small>backpack distractors</small>
-                </div>
-                <div class="diagx-people">
-                  <figure class="diagx-person diagx-person--target">
-                    <span>TARGET</span>
-                    <img src="assets/overview/target.png" alt="Target person" loading="lazy" decoding="async">
-                  </figure>
-                  <figure class="diagx-person diagx-person--swap"><img src="assets/overview/b_bag_01.png" alt="Backpack distractor" loading="lazy" decoding="async"></figure>
-                  <figure class="diagx-person diagx-person--swap"><img src="assets/overview/b_bag_02.png" alt="Backpack distractor" loading="lazy" decoding="async"></figure>
-                  <figure class="diagx-person diagx-person--swap"><img src="assets/overview/b_bag_03.png" alt="Backpack distractor" loading="lazy" decoding="async"></figure>
-                </div>
-                <div class="diagx-cue-readout"><span>red shirt</span><b>more distinctive</b><span>black backpack</span><b>common</b></div>
-              </article>
-            </div>
-
-            <div class="diagx-retriever-band">
-              <span class="diagx-retriever-band__line" aria-hidden="true"></span>
-              <div><small>SAME MODEL</small><strong>Frozen TBPS retriever</strong></div>
-              <span class="diagx-retriever-band__line" aria-hidden="true"></span>
-            </div>
-
-            <p class="diagx-outcome-label">ILLUSTRATIVE PAIRED OUTCOME</p>
-            <div class="diagx-outcome-stage" aria-label="Example of a Top-1 correctness flip">
-              <article class="diagx-rank-card diagx-rank-card--good">
-                <span>GALLERY A · TOP-1</span>
-                <div><img src="assets/overview/target.png" alt="Target ranked first in Gallery A" loading="lazy" decoding="async"><strong>#1</strong></div>
-                <b>correct ✓</b>
-              </article>
-              <div class="diagx-flip-core">
-                <span>DECISION</span>
-                <strong>FLIP</strong>
-                <small>Top-1 correctness changes</small>
-              </div>
-              <article class="diagx-rank-card diagx-rank-card--bad">
-                <span>GALLERY B · TOP-1</span>
-                <div><img src="assets/overview/b_bag_02.png" alt="Distractor ranked first in Gallery B" loading="lazy" decoding="async"><strong>#1</strong></div>
-                <b>incorrect ×</b>
-              </article>
-            </div>
-
-            <figcaption>
-              Flip Rate measures how often paired gallery interventions change Top-1 correctness for the same query–target retrieval problem.
-            </figcaption>
-          </figure>
-
-          <section class="diagx-evidence" aria-labelledby="diagx-evidence-title">
-            <header class="diagx-evidence__head">
-              <div>
-                <p class="section-kicker">EMPIRICAL SIGNAL</p>
-                <h3 id="diagx-evidence-title">Gallery sensitivity appears in every evaluated dataset × retriever combination.</h3>
-              </div>
-              <p>Across three benchmarks and five frozen retrievers, the diagnostic comprises 624,440 paired gallery interventions and &gt;3.1M retriever-trial evaluations.</p>
-            </header>
-
-            <div class="diagx-evidence-grid">
-              <article class="diagx-matrix-card">
-                <div class="diagx-card-head"><span>SENSITIVITY MATRIX</span><strong>15 / 15</strong></div>
-                <div id="diagnostic-sensitivity-matrix" class="diagx-matrix" aria-label="All fifteen dataset by retriever combinations exhibit non-zero Flip Rate"></div>
-                <p>Every cell is non-zero; values are Flip Rate percentages.</p>
-              </article>
-
-              <article class="diagx-range-card">
-                <div class="diagx-card-head"><span>OBSERVED RANGE</span><strong>2.84–15.66%</strong></div>
-                <div class="diagx-range-track" aria-label="Observed Flip Rate range from 2.84 percent to 15.66 percent">
-                  <span class="diagx-range-track__axis"><i>0%</i><i>20%</i></span>
-                  <span class="diagx-range-track__bar"><b></b></span>
-                  <div class="diagx-range-track__labels"><span>2.84%</span><span>15.66%</span></div>
-                </div>
-                <p>The effect is not confined to a single retriever or benchmark.</p>
-              </article>
-
-              <article class="diagx-scale-card">
-                <div class="diagx-scale-number"><strong data-diagnostic-count="624440">624,440</strong><span>paired interventions</span></div>
-                <div class="diagx-scale-divider"></div>
-                <div class="diagx-scale-number"><strong>&gt;3.1M</strong><span>retriever × trial evaluations</span></div>
-              </article>
-            </div>
-          </section>
-
-          <section class="diagx-interpretation" aria-labelledby="diagx-interpretation-title">
-            <article class="diagx-interpretation__claim">
-              <span>EMPIRICAL TAKEAWAY</span>
-              <h3 id="diagx-interpretation-title">Controlled gallery changes alter retrieval decisions.</h3>
-            </article>
-            <article class="diagx-interpretation__limit">
-              <span>BOUNDARY</span>
-              <p>The intervention establishes gallery sensitivity, not a sole causal effect of cue prevalence.</p>
-            </article>
-          </section>
-
-          <details class="technical-details diagx-details">
-            <summary>Experimental protocol and exact Flip Rates</summary>
-            <div class="details-grid">
-              <p>
+</header>
+<div aria-label="Variables held fixed across paired gallery trials" class="diagx-query-lock">
+<div class="diagx-query-lock__query">
+<span>TEXT QUERY · FIXED</span>
+<p>A person in a <strong>red shirt</strong> with a <strong>black backpack</strong>.</p>
+</div>
+<div aria-label="Held-fixed variables" class="diagx-lock-pills"><span class="diagx-fixed-chip">Fixed: query · target · gallery size · retriever</span><span class="diagx-changed-chip">Changed: competitors</span></div>
+</div>
+<div aria-label="Paired gallery intervention" class="diagx-gallery-stage">
+<article class="diagx-gallery diagx-gallery--a">
+<div class="diagx-gallery__head">
+<div><span>TRIAL A</span><strong>Gallery A</strong></div>
+<small>red-shirt distractors</small>
+</div>
+<div class="diagx-people">
+<figure class="diagx-person diagx-person--target">
+<span>TARGET</span>
+<img alt="Target person" decoding="async" loading="lazy" src="assets/overview/target.png"/>
+</figure>
+<figure class="diagx-person diagx-person--swap"><img alt="Red-shirt distractor" decoding="async" loading="lazy" src="assets/overview/a_red_01.png"/></figure>
+<figure class="diagx-person diagx-person--swap"><img alt="Red-shirt distractor" decoding="async" loading="lazy" src="assets/overview/a_red_02.png"/></figure>
+<figure class="diagx-person diagx-person--swap"><img alt="Red-shirt distractor" decoding="async" loading="lazy" src="assets/overview/a_red_03.png"/></figure>
+</div>
+</article>
+<div aria-hidden="true" class="diagx-swap">
+<span class="diagx-swap__label">ONLY THIS SUBSET CHANGES</span>
+<svg focusable="false" viewbox="0 0 96 44">
+<path d="M8 13H78"></path><path d="m70 6 9 7-9 7"></path>
+<path d="M88 31H18"></path><path d="m26 24-9 7 9 7"></path>
+</svg>
+</div>
+<article class="diagx-gallery diagx-gallery--b">
+<div class="diagx-gallery__head">
+<div><span>TRIAL B</span><strong>Gallery B</strong></div>
+<small>backpack distractors</small>
+</div>
+<div class="diagx-people">
+<figure class="diagx-person diagx-person--target">
+<span>TARGET</span>
+<img alt="Target person" decoding="async" loading="lazy" src="assets/overview/target.png"/>
+</figure>
+<figure class="diagx-person diagx-person--swap"><img alt="Backpack distractor" decoding="async" loading="lazy" src="assets/overview/b_bag_01.png"/></figure>
+<figure class="diagx-person diagx-person--swap"><img alt="Backpack distractor" decoding="async" loading="lazy" src="assets/overview/b_bag_02.png"/></figure>
+<figure class="diagx-person diagx-person--swap"><img alt="Backpack distractor" decoding="async" loading="lazy" src="assets/overview/b_bag_03.png"/></figure>
+</div>
+</article>
+</div>
+<div aria-label="Example of a Top-1 correctness flip" class="diagx-outcome-stage">
+<article class="diagx-rank-card diagx-rank-card--good">
+<span>GALLERY A · TOP-1</span>
+<div><img alt="Target ranked first in Gallery A" decoding="async" loading="lazy" src="assets/overview/target.png"/><strong>#1</strong></div>
+<b>correct ✓</b>
+</article>
+<div class="diagx-flip-core">
+<span>DECISION</span>
+<strong>FLIP</strong>
+</div>
+<article class="diagx-rank-card diagx-rank-card--bad">
+<span>GALLERY B · TOP-1</span>
+<div><img alt="Distractor ranked first in Gallery B" decoding="async" loading="lazy" src="assets/overview/b_bag_02.png"/><strong>#1</strong></div>
+<b>incorrect ×</b>
+</article>
+</div>
+</figure>
+<section aria-labelledby="diagx-evidence-title" class="diagx-evidence">
+<header class="diagx-evidence__head">
+<div>
+<h3 class="sr-only" id="diagx-evidence-title">Gallery sensitivity across evaluated settings</h3>
+</div>
+</header>
+<div class="diagx-evidence-grid">
+<article class="diagx-matrix-card">
+<div class="diagx-card-head"><span>SENSITIVITY MATRIX</span><strong>15 / 15</strong></div>
+<div aria-label="All fifteen dataset by retriever combinations exhibit non-zero Flip Rate" class="diagx-matrix" id="diagnostic-sensitivity-matrix"></div>
+</article>
+<article class="diagx-range-card">
+<div class="diagx-card-head"><span>OBSERVED RANGE</span><strong>2.84–15.66%</strong></div>
+<div aria-label="Observed Flip Rate range from 2.84 percent to 15.66 percent" class="diagx-range-track">
+<span class="diagx-range-track__axis"><i>0%</i><i>20%</i></span>
+<span class="diagx-range-track__bar"><b></b></span>
+<div class="diagx-range-track__labels"><span>2.84%</span><span>15.66%</span></div>
+</div>
+</article>
+<article class="diagx-scale-card">
+<div class="diagx-scale-number"><strong data-diagnostic-count="624440">624,440</strong><span>paired interventions</span></div>
+<div class="diagx-scale-divider"></div>
+<div class="diagx-scale-number"><strong>&gt;3.1M</strong><span>retriever × trial evaluations</span></div>
+</article>
+</div>
+</section>
+<details class="technical-details diagx-details">
+<summary>Experimental details &amp; diagnostic scope</summary><p class="diagx-boundary-note">Scope: The intervention establishes gallery sensitivity, not a sole causal effect of cue prevalence.</p>
+<div class="details-grid">
+<p>
                 The diagnostic uses a predefined 79-cue semantic catalog spanning clothing and
                 footwear color, garment and footwear type, sleeve length, carried items, worn
                 accessories, and clothing patterns. Cues are matched by deterministic, slot-aware
                 lexical rules that favor precision.
               </p>
-              <p>
+<p>
                 After compatibility pruning, 2,613 unordered cue-pair cases form the frozen master
                 case set. Each eligible case-query instance can produce five indexed paired trials
                 with gallery size 300, fixed seed 42, and a cue-density-shift admission threshold
                 of 0.1.
               </p>
-              <p>
+<p>
                 An off-the-shelf CLIP model is used only as a label-free construction instrument
                 for cue-directed distractors and neutral fillers. The evaluated retrievers do not
                 construct or admit their own trials.
               </p>
-              <p>
+<p>
                 Confidence intervals are computed with 1,000 query-cluster bootstrap resamples,
                 preserving all trials associated with each sampled query.
               </p>
-            </div>
-            <div class="chart-panel diagx-heatmap-detail">
-              <div id="diagnostic-heatmap" class="heatmap" aria-live="polite"></div>
-            </div>
-          </details>
-
-          <div class="diagx-transition" aria-label="Transition from the diagnostic to T-TBPS">
-            <div class="diagx-transition__source">
-              <span>FROM THE DIAGNOSTIC</span>
-              <strong>Gallery sensitivity is measurable.</strong>
-            </div>
-            <div class="diagx-transition__flow" aria-hidden="true"><i></i><b>therefore</b><i></i></div>
-            <div class="diagx-transition__target">
-              <span>DESIGN CONSEQUENCE</span>
-              <strong>Let the current gallery inform query construction.</strong>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="chapter ttbps-overview ttbx-chapter" id="ttbps" aria-labelledby="ttbps-title">
-        <div class="section-inner ttbps-inner">
-          <div class="chapter-heading ttbx-heading">
-            <p class="section-kicker">INFERENCE SETTING</p>
-            <h2 id="ttbps-title">From TBPS to T-TBPS</h2>
-            <p>
-              T-TBPS changes the information available during query construction: the current unlabeled gallery can act as inference context before final retrieval over that same complete gallery.
-            </p>
-          </div>
-
-          <figure class="research-figure ttbx-explorer" data-ttbps-visual aria-describedby="ttbps-caption" data-ttbps-mode="standard">
-            <header class="ttbx-explorer__head">
-              <div>
-                <span class="ttbx-eyebrow">SAME SEARCH PROBLEM · DIFFERENT INFORMATION FLOW</span>
-                <p>Keep the text query and gallery fixed. Toggle only whether the gallery participates in query construction.</p>
-              </div>
-              <div class="ttbx-toggle" role="tablist" aria-label="Compare TBPS inference settings">
-                <button type="button" role="tab" aria-selected="true" data-ttbps-mode-button="standard">Standard TBPS</button>
-                <button type="button" role="tab" aria-selected="false" data-ttbps-mode-button="transductive">T-TBPS</button>
-              </div>
-            </header>
-
-            <div class="ttbx-workbench">
-              <article class="ttbx-query-card">
-                <span>TEXT QUERY</span>
-                <p>A person in a <strong>red shirt</strong> with a <strong>black backpack</strong>.</p>
-                <small>identical in both modes</small>
-              </article>
-
-              <div class="ttbx-query-arrow" aria-hidden="true"><i></i></div>
-
-              <article class="ttbx-core" aria-live="polite">
-                <span class="ttbx-core__eyebrow">QUERY CONSTRUCTION</span>
-                <div class="ttbx-core__icon" aria-hidden="true"><i></i><i></i><i></i></div>
-                <strong class="ttbx-copy-standard">Fixed query representation</strong>
-                <strong class="ttbx-copy-transductive">Gallery-aware query construction</strong>
-                <p class="ttbx-copy-standard">The query is formed independently of the current gallery.</p>
-                <p class="ttbx-copy-transductive">The unlabeled gallery can inform how the query is represented.</p>
-                <div class="ttbx-output-chip">
-                  <span class="ttbx-copy-standard">QUERY</span>
-                  <span class="ttbx-copy-transductive">ENRICHED QUERY</span>
-                </div>
-              </article>
-
-              <div class="ttbx-context-channel" aria-hidden="true">
-                <div class="ttbx-context-channel__blocked"><span>×</span><b>not used during query construction</b></div>
-                <div class="ttbx-context-channel__active"><i></i><i></i><i></i><b>gallery context</b></div>
-              </div>
-
-              <article class="ttbx-gallery-card">
-                <div class="ttbx-gallery-card__head"><span>CURRENT GALLERY</span><strong>unlabeled</strong></div>
-                <div class="ttbx-gallery-strip">
-                  <figure><img src="assets/overview/target.png" alt="Gallery person" loading="lazy" decoding="async"></figure>
-                  <figure><img src="assets/overview/a_red_01.png" alt="Gallery person" loading="lazy" decoding="async"></figure>
-                  <figure><img src="assets/overview/b_bag_01.png" alt="Gallery person" loading="lazy" decoding="async"></figure>
-                  <figure><img src="assets/overview/a_red_02.png" alt="Gallery person" loading="lazy" decoding="async"></figure>
-                  <figure><img src="assets/overview/b_bag_02.png" alt="Gallery person" loading="lazy" decoding="async"></figure>
-                  <figure><img src="assets/overview/a_red_03.png" alt="Gallery person" loading="lazy" decoding="async"></figure>
-                </div>
-                <small>same full gallery in both modes</small>
-              </article>
-            </div>
-
-            <div class="ttbx-retrieval-flow" aria-label="Final retrieval remains over the complete gallery">
-              <div class="ttbx-down-flow" aria-hidden="true"><i></i></div>
-              <div class="ttbx-retrieval-core">
-                <span>FINAL SEARCH</span>
-                <strong>Complete-gallery retrieval</strong>
-                <small>the gallery context never narrows the final candidate set</small>
-              </div>
-              <div class="ttbx-down-flow" aria-hidden="true"><i></i></div>
-              <div class="ttbx-ranking-strip">
-                <span>RANKING</span>
-                <div>
-                  <figure><b>#1</b><img src="assets/overview/target.png" alt="Ranked gallery candidate" loading="lazy" decoding="async"></figure>
-                  <figure><b>#2</b><img src="assets/overview/a_red_01.png" alt="Ranked gallery candidate" loading="lazy" decoding="async"></figure>
-                  <figure><b>#3</b><img src="assets/overview/b_bag_01.png" alt="Ranked gallery candidate" loading="lazy" decoding="async"></figure>
-                  <figure><b>#4</b><img src="assets/overview/a_red_02.png" alt="Ranked gallery candidate" loading="lazy" decoding="async"></figure>
-                  <figure><b>…</b><img src="assets/overview/b_bag_03.png" alt="Additional ranked gallery candidate" loading="lazy" decoding="async"></figure>
-                </div>
-              </div>
-            </div>
-
-            <figcaption id="ttbps-caption">
+</div>
+<div class="chart-panel diagx-heatmap-detail">
+<div aria-live="polite" class="heatmap" id="diagnostic-heatmap"></div>
+</div>
+</details>
+<div aria-label="Transition from the diagnostic to T-TBPS" class="diagx-transition"><span>Gallery sensitivity</span><b>→</b><strong>Let the gallery inform the query</strong></div>
+</div>
+</section>
+<section aria-labelledby="ttbps-title" class="chapter ttbps-overview ttbx-chapter" id="ttbps">
+<div class="section-inner ttbps-inner">
+<div class="chapter-heading ttbx-heading">
+<p class="section-kicker">INFERENCE SETTING</p>
+<h2 id="ttbps-title">From TBPS to T-TBPS</h2>
+</div>
+<figure aria-describedby="ttbps-caption" class="research-figure ttbx-explorer" data-ttbps-mode="standard" data-ttbps-visual="">
+<header class="ttbx-explorer__head">
+<div aria-label="Compare TBPS inference settings" class="ttbx-toggle" role="tablist">
+<button aria-selected="true" data-ttbps-mode-button="standard" role="tab" type="button">Standard TBPS</button>
+<button aria-selected="false" data-ttbps-mode-button="transductive" role="tab" type="button">T-TBPS</button>
+</div>
+</header>
+<div class="ttbx-workbench">
+<article class="ttbx-query-card">
+<span>TEXT QUERY</span>
+<p>A person in a <strong>red shirt</strong> with a <strong>black backpack</strong>.</p>
+</article>
+<div aria-hidden="true" class="ttbx-query-arrow"><i></i></div>
+<article aria-live="polite" class="ttbx-core">
+<span class="ttbx-core__eyebrow">QUERY CONSTRUCTION</span>
+<div aria-hidden="true" class="ttbx-core__icon"><i></i><i></i><i></i></div>
+<strong class="ttbx-copy-standard">Fixed query representation</strong>
+<strong class="ttbx-copy-transductive">Gallery-aware query construction</strong>
+<div class="ttbx-output-chip">
+<span class="ttbx-copy-standard">QUERY</span>
+<span class="ttbx-copy-transductive">ENRICHED QUERY</span>
+</div>
+</article>
+<div aria-hidden="true" class="ttbx-context-channel">
+<div class="ttbx-context-channel__blocked"><span>×</span><b>not used</b></div>
+<div class="ttbx-context-channel__active"><i></i><i></i><i></i><b>gallery context</b></div>
+</div>
+<article class="ttbx-gallery-card">
+<div class="ttbx-gallery-card__head"><span>CURRENT GALLERY</span><strong>unlabeled</strong></div>
+<div class="ttbx-gallery-strip">
+<figure><img alt="Gallery person" decoding="async" loading="lazy" src="assets/overview/target.png"/></figure>
+<figure><img alt="Gallery person" decoding="async" loading="lazy" src="assets/overview/a_red_01.png"/></figure>
+<figure><img alt="Gallery person" decoding="async" loading="lazy" src="assets/overview/b_bag_01.png"/></figure>
+<figure><img alt="Gallery person" decoding="async" loading="lazy" src="assets/overview/a_red_02.png"/></figure>
+<figure><img alt="Gallery person" decoding="async" loading="lazy" src="assets/overview/b_bag_02.png"/></figure>
+<figure><img alt="Gallery person" decoding="async" loading="lazy" src="assets/overview/a_red_03.png"/></figure>
+</div>
+<small>same full gallery in both modes</small>
+</article>
+</div>
+<div aria-label="Final retrieval remains over the complete gallery" class="ttbx-retrieval-flow">
+<div aria-hidden="true" class="ttbx-down-flow"><i></i></div>
+<div class="ttbx-retrieval-core">
+<span>FINAL SEARCH</span>
+<strong>Complete-gallery retrieval</strong>
+</div>
+<div aria-hidden="true" class="ttbx-down-flow"><i></i></div>
+<div class="ttbx-ranking-strip">
+<span>RANKING</span>
+<div>
+<figure><b>#1</b><img alt="Ranked gallery candidate" decoding="async" loading="lazy" src="assets/overview/target.png"/></figure>
+<figure><b>#2</b><img alt="Ranked gallery candidate" decoding="async" loading="lazy" src="assets/overview/a_red_01.png"/></figure>
+<figure><b>#3</b><img alt="Ranked gallery candidate" decoding="async" loading="lazy" src="assets/overview/b_bag_01.png"/></figure>
+<figure><b>#4</b><img alt="Ranked gallery candidate" decoding="async" loading="lazy" src="assets/overview/a_red_02.png"/></figure>
+<figure><b>…</b><img alt="Additional ranked gallery candidate" decoding="async" loading="lazy" src="assets/overview/b_bag_03.png"/></figure>
+</div>
+</div>
+</div>
+<figcaption id="ttbps-caption">
               T-TBPS is an inference setting, not a specific architecture: it permits unlabeled gallery context during query construction while retaining complete-gallery retrieval.
             </figcaption>
-          </figure>
-
-          <div class="ttbx-compare" aria-label="What changes and what stays fixed between Standard TBPS and T-TBPS">
-            <div class="ttbx-compare__head"><span>INFORMATION BOUNDARY</span><strong>What changes — and what does not</strong></div>
-            <div class="ttbx-compare__grid" role="table">
-              <div class="ttbx-compare__row ttbx-compare__row--head" role="row"><span role="columnheader"></span><b role="columnheader">Standard TBPS</b><b role="columnheader">T-TBPS</b></div>
-              <div class="ttbx-compare__row" role="row"><span role="rowheader">Text query</span><b>✓</b><b>✓</b></div>
-              <div class="ttbx-compare__row" role="row"><span role="rowheader">Current gallery</span><b>retrieval only</b><b class="ttbx-accent">query context + retrieval</b></div>
-              <div class="ttbx-compare__row" role="row"><span role="rowheader">Gallery labels</span><b>none</b><b>none</b></div>
-              <div class="ttbx-compare__row" role="row"><span role="rowheader">Final candidates</span><b>complete gallery</b><b>complete gallery</b></div>
-            </div>
-          </div>
-
-          <div class="ttbx-method-bridge" aria-label="T-TBPS setting and GATE method distinction">
-            <div><span>SETTING</span><strong>T-TBPS</strong></div>
-            <div class="ttbx-method-bridge__arrow" aria-hidden="true"><i></i><b>one realization</b><i></i></div>
-            <div><span>METHOD</span><strong>GATE</strong></div>
-          </div>
-        </div>
-      </section>
-
-
-      <section class="chapter method-chapter" id="method" aria-labelledby="method-title">
-        <div class="section-inner">
-          <div class="chapter-heading method-heading gate2-heading">
-            <p class="section-kicker">One realization of T-TBPS</p>
-            <h2 id="method-title">GATE: Gallery-Aware Query Enrichment</h2>
-            <p>GATE realizes T-TBPS through five stages while keeping the host retriever frozen.</p>
-          </div>
-
-          <section class="gate2-overview" aria-labelledby="gate2-overview-title">
-            <header class="gate2-overview__header">
-              <div>
-                <p class="gate2-eyebrow">GATE / OVERVIEW</p>
-                <h3 id="gate2-overview-title">Five stages from live competition to an enriched query</h3>
-              </div>
-              <p>Observe → Evidence → Reason → Enrich → Retrieve.</p>
-            </header>
-
-            <figure class="gate2-overview__figure" aria-label="Conceptual overview of GATE from a natural-language query to complete-gallery retrieval">
-              <div class="gate2-overview__source">
-                <span class="gate2-mini-label">Natural-language query</span>
-                <p class="gate2-overview__query-copy">A person in a <strong>red shirt</strong> with a <strong>black backpack</strong></p>
-                <small>The original request remains the anchor while gallery context only refines how the query is interpreted.</small>
-              </div>
-
-              <div class="gate2-overview__stage-grid">
-                <a class="gate2-overview__stage gate2-overview__stage--frozen" href="#gate2-slide-observe" data-gate-overview-target="0">
-                  <span>01 / OBSERVE</span>
-                  <strong>Run a frozen first pass</strong>
-                  <small>Expose the candidates currently competing with the query.</small>
-                  <em>Open deep dive</em>
-                </a>
-
-                <a class="gate2-overview__stage gate2-overview__stage--evidence" href="#gate2-slide-evidence" data-gate-overview-target="1">
-                  <span>02 / EVIDENCE</span>
-                  <strong>Assemble an evidence cube</strong>
-                  <small>Turn aligned cues from the top candidates into structured evidence.</small>
-                  <em>Open deep dive</em>
-                </a>
-
-                <a class="gate2-overview__stage gate2-overview__stage--reason" href="#gate2-slide-reason" data-gate-overview-target="2">
-                  <span>03 / REASON</span>
-                  <strong>Reason over ranks and slots</strong>
-                  <small>Make the evidence query-specific and compare candidates coherently.</small>
-                  <em>Open deep dive</em>
-                </a>
-
-                <a class="gate2-overview__stage gate2-overview__stage--enrich" href="#gate2-slide-enrich" data-gate-overview-target="3">
-                  <span>04 / ENRICH</span>
-                  <strong>Predict a controlled update</strong>
-                  <small>Refine the original query without replacing its frozen anchor.</small>
-                  <em>Open deep dive</em>
-                </a>
-
-                <a class="gate2-overview__stage gate2-overview__stage--retrieve" href="#gate2-slide-retrieve" data-gate-overview-target="4">
-                  <span>05 / RETRIEVE</span>
-                  <strong>Rank the full gallery again</strong>
-                  <small>Use the enriched query for the final complete-gallery search.</small>
-                  <em>Open deep dive</em>
-                </a>
-              </div>
-            </figure>
-          </section>
-
-          <details class="gate2-explorer" data-gate-explorer>
-            <summary>
-              <span>
-                <span class="gate2-eyebrow">GATE / DEEP DIVE</span>
-                <strong>Explore GATE step by step</strong>
-                <small>Visual walkthroughs for each stage. Exact formulations are tucked into expandable notes.</small>
-              </span>
-              <span class="gate2-explorer__summary-action">Explore →</span>
-            </summary>
-
-            <div class="gate2-explorer__body">
-              <nav class="gate2-tabs" aria-label="Detailed GATE stages">
-                <button type="button" class="is-active" data-gate-tab="0" aria-current="step"><span>01</span>Observe</button>
-                <button type="button" data-gate-tab="1"><span>02</span>Evidence</button>
-                <button type="button" data-gate-tab="2"><span>03</span>Reason</button>
-                <button type="button" data-gate-tab="3"><span>04</span>Enrich</button>
-                <button type="button" data-gate-tab="4"><span>05</span>Retrieve</button>
-              </nav>
-
-              <div class="gate2-carousel-shell">
-                <button class="gate2-carousel-control gate2-carousel-control--prev" type="button" data-gate-prev aria-label="Previous GATE stage">←</button>
-                <div class="gate2-carousel" data-gate-carousel tabindex="0" aria-label="Detailed GATE method slides">
-                  <article class="gate2-slide gate2-slide--observe" id="gate2-slide-observe" data-gate-slide="0" aria-labelledby="gate2-slide-observe-title">
-                    <header class="gate2-slide__header">
-                      <div class="gate2-slide__index">01 / OBSERVE</div>
-                      <div>
-                        <h3 id="gate2-slide-observe-title">Use the frozen first-pass ranking to expose the current competition</h3>
-                        <p>Run the frozen host once and keep the ordered Top-M candidates as query-specific context.</p>
-                      </div>
-                    </header>
-
-                    <div class="gate2-slide__grid">
-                      <div class="gate2-visual-card gate2-visual-card--observe">
-                        <div class="gate2-query-card">
-                          <span>NATURAL QUERY</span>
-                          <p>“A person in a red shirt with a black backpack.”</p>
-                        </div>
-                        <div class="gate2-down-arrow" aria-hidden="true">↓</div>
-                        <div class="gate2-frozen-card"><span>FROZEN FIRST PASS</span><strong>Host TBPS retriever</strong><small>The native scoring rule stays untouched.</small></div>
-                        <div class="gate2-down-arrow" aria-hidden="true">↓</div>
-                        <div class="gate2-candidate-row" aria-label="Ordered Top-M candidates">
-                          <figure class="gate2-candidate gate2-candidate--accent"><span>#1</span><img src="assets/overview/target.png" alt="Rank 1 candidate" loading="lazy" decoding="async"></figure>
-                          <figure class="gate2-candidate"><span>#2</span><img src="assets/overview/a_red_01.png" alt="Rank 2 candidate" loading="lazy" decoding="async"></figure>
-                          <figure class="gate2-candidate"><span>#3</span><img src="assets/overview/b_bag_01.png" alt="Rank 3 candidate" loading="lazy" decoding="async"></figure>
-                          <div class="gate2-candidate-ellipsis" aria-hidden="true">···</div>
-                          <figure class="gate2-candidate gate2-candidate--tail"><span>#M</span><img src="assets/overview/a_red_03.png" alt="Rank M candidate" loading="lazy" decoding="async"></figure>
-                        </div>
-                        <div class="gate2-story-strip gate2-story-strip--micro">
-                          <article><span>1</span><strong>Scan</strong></article>
-                          <article><span>2</span><strong>Preserve rank</strong></article>
-                          <article><span>3</span><strong>Pass as context</strong></article>
-                        </div>
-                      </div>
-
-                      <div class="gate2-detail-stack gate2-detail-stack--compressed">
-                        <div class="gate2-word-card">
-                          <span class="gate2-mini-label">TAKEAWAY</span>
-                          <p>Top-M candidates describe the current competition; they are context, not assumed positives.</p>
-                        </div>
-                        <details class="gate2-equation-details">
-                          <summary>Show the exact formulation</summary>
-                          <div class="gate2-equation-card">
-                            <span class="gate2-mini-label">Ordered evidence pool</span>
-                            <div class="gate2-math"><p>I<sub>q</sub><sup>M</sup> = TopMIndices({u<sub>q</sub><sup>T</sup>a<sub>j</sub>} across the full gallery) = (i<sub>q,1</sub>, ..., i<sub>q,M</sub>).</p></div>
-                          </div>
-                        </details>
-                      </div>
-                    </div>
-                  </article>
-
-                  <article class="gate2-slide gate2-slide--evidence" id="gate2-slide-evidence" data-gate-slide="1" aria-labelledby="gate2-slide-evidence-title">
-                    <header class="gate2-slide__header">
-                      <div class="gate2-slide__index">02 / EVIDENCE</div>
-                      <div>
-                        <h3 id="gate2-slide-evidence-title">Turn the current competitors into an aligned evidence cube</h3>
-                        <p>Gather aligned provider outputs into a query-specific cube indexed by retrieval rank and evidence slot.</p>
-                      </div>
-                    </header>
-
-                    <div class="gate2-slide__grid gate2-slide__grid--evidence">
-                      <div class="gate2-evidence-scene">
-                        <div class="gate2-evidence-inputs">
-                          <article class="gate2-evidence-source-card">
-                            <figure class="gate2-candidate gate2-candidate--accent"><span>#1</span><img src="assets/overview/target.png" alt="Top ranked candidate" loading="lazy" decoding="async"></figure>
-                            <div class="gate2-evidence-chip-row"><span>red shirt</span><span>black backpack</span><span>full body</span></div>
-                          </article>
-                          <article class="gate2-evidence-source-card">
-                            <figure class="gate2-candidate"><span>#2</span><img src="assets/overview/a_red_01.png" alt="Another candidate" loading="lazy" decoding="async"></figure>
-                            <div class="gate2-evidence-chip-row"><span>red shirt</span><span>no backpack</span><span>distractor</span></div>
-                          </article>
-                          <article class="gate2-evidence-source-card">
-                            <figure class="gate2-candidate"><span>#3</span><img src="assets/overview/b_bag_01.png" alt="Another candidate" loading="lazy" decoding="async"></figure>
-                            <div class="gate2-evidence-chip-row"><span>dark pants</span><span>backpack</span><span>shared cue</span></div>
-                          </article>
-                        </div>
-
-                        <div class="gate2-evidence-assembler" aria-hidden="true">
-                          <span></span><span></span><span></span>
-                        </div>
-
-                        <div class="gate2-evidence-cube-card">
-                          <div class="gate2-evidence-cube" role="img" aria-label="Evidence cube organized by rank and evidence slot">
-                            <div class="gate2-evidence-cube__layer gate2-evidence-cube__layer--back"></div>
-                            <div class="gate2-evidence-cube__layer gate2-evidence-cube__layer--mid"></div>
-                            <div class="gate2-evidence-cube__layer gate2-evidence-cube__layer--front"></div>
-                            <span class="gate2-evidence-cube__axis gate2-evidence-cube__axis--rank">rank</span>
-                            <span class="gate2-evidence-cube__axis gate2-evidence-cube__axis--slot">slot</span>
-                            <span class="gate2-evidence-cube__axis gate2-evidence-cube__axis--channel">features</span>
-                          </div>
-                          <div class="gate2-evidence-badges"><span>ordered</span><span>aligned</span><span>query-specific gather</span></div>
-                        </div>
-
-                        <div class="gate2-story-strip gate2-story-strip--evidence gate2-story-strip--micro">
-                          <article><span>1</span><strong>Read aligned cues</strong></article>
-                          <article><span>2</span><strong>Preserve slots</strong></article>
-                          <article><span>3</span><strong>Assemble cube</strong></article>
-                        </div>
-                      </div>
-
-                      <div class="gate2-detail-stack">
-                        <div class="gate2-provider-grid">
-                          <article><span>Semantic</span><strong>Global appearance</strong><p>The whole-image visual signature of a candidate.</p></article>
-                          <article><span>Spatial</span><strong>Regional cues</strong><p>Upper/lower or grid-aligned appearance when finer layout is useful.</p></article>
-                          <article><span>Relative</span><strong>Gallery-relative cues</strong><p>Centroid or residual context that depends on the current gallery.</p></article>
-                        </div>
-                        <div class="gate2-provider-truth">
-                          <span>DEFAULT / MAIN EXPERIMENTS</span>
-                          <strong>Global Semantic only</strong>
-                          <p>Other providers are evaluated as evidence ablations rather than concatenated by default.</p>
-                        </div>
-                        <details class="gate2-equation-details">
-                          <summary>Show the exact formulation</summary>
-                          <div class="gate2-equation-card">
-                            <span class="gate2-mini-label">Cache organization</span>
-                            <div class="gate2-math"><p>B<sub>j</sub> = [b<sub>j,1</sub>; ...; b<sub>j,S</sub>] stores S aligned evidence slots for one gallery image, and B stacks these caches over the full gallery.</p><p>B̄<sub>q</sub>[r,s,:] gathers the slot-s evidence from the r-th ranked candidate, producing a query-specific tensor B̄<sub>q</sub> of size M × S × d.</p></div>
-                          </div>
-                        </details>
-                      </div>
-                    </div>
-                  </article>
-
-                  <article class="gate2-slide gate2-slide--reason" id="gate2-slide-reason" data-gate-slide="2" aria-labelledby="gate2-slide-reason-title">
-                    <header class="gate2-slide__header">
-                      <div class="gate2-slide__index">03 / REASON</div>
-                      <div>
-                        <h3 id="gate2-slide-reason-title">Reason over the evidence cube with query-conditioned structured mixing</h3>
-                        <p>Condition evidence on the query, then mix slot structure within candidates and rank structure across candidates.</p>
-                      </div>
-                    </header>
-
-                    <div class="gate2-slide__grid gate2-slide__grid--reason">
-                      <div class="gate2-reason-scene">
-                        <div class="gate2-reason-node gate2-reason-node--query">
-                          <span>QUERY ANCHOR</span>
-                          <strong>u<sub>q</sub></strong>
-                          <small>Conditions what evidence matters.</small>
-                        </div>
-                        <div class="gate2-reason-arrow" aria-hidden="true">→</div>
-                        <div class="gate2-reason-core">
-                          <div class="gate2-qcrs-step"><span>QCRS MIXER</span><strong>Slot → Rank → Channel</strong></div>
-                          <div class="gate2-qcrs-matrix">
-                            <div class="gate2-qcrs-matrix__label gate2-qcrs-matrix__label--slot">SLOT MIXING ↔<small>within candidate</small></div>
-                            <div class="gate2-qcrs-matrix__label gate2-qcrs-matrix__label--rank">RANK MIXING ↕<small>across candidates</small></div>
-                            <div class="gate2-rank-slot gate2-rank-slot--qcrs" aria-hidden="true">
-                              <div class="gate2-rank-slot__corner"></div><div class="gate2-rank-slot__head">S1</div><div class="gate2-rank-slot__head">S2</div><div class="gate2-rank-slot__head">…</div><div class="gate2-rank-slot__head">S</div>
-                              <div class="gate2-rank-slot__rank">#1</div><i></i><i></i><i></i><i></i>
-                              <div class="gate2-rank-slot__rank">#2</div><i></i><i></i><i></i><i></i>
-                              <div class="gate2-rank-slot__rank">#3</div><i></i><i></i><i></i><i></i>
-                              <div class="gate2-rank-slot__rank">#M</div><i></i><i></i><i></i><i></i>
-                            </div>
-                            <div class="gate2-reason-sweep gate2-reason-sweep--slot"><span>slot pass</span></div>
-                            <div class="gate2-reason-sweep gate2-reason-sweep--rank"><span>rank pass</span></div>
-                          </div>
-                        </div>
-                        <div class="gate2-reason-arrow" aria-hidden="true">→</div>
-                        <div class="gate2-reason-node gate2-reason-node--context">
-                          <span>READOUT</span>
-                          <strong>g<sub>q</sub></strong>
-                          <small>One compact gallery-context vector.</small>
-                        </div>
-                      </div>
-
-                      <div class="gate2-detail-stack">
-                        <div class="gate2-story-strip gate2-story-strip--stack gate2-story-strip--micro">
-                          <article><span>1</span><strong>Condition</strong></article>
-                          <article><span>2</span><strong>Slot → Rank → Channel</strong></article>
-                          <article><span>3</span><strong>Read out context</strong></article>
-                        </div>
-                        <details class="gate2-equation-details">
-                          <summary>Show the exact formulation</summary>
-                          <div class="gate2-equation-card">
-                            <div class="gate2-math"><p>q<sub>q</sub> = W<sub>q</sub>u<sub>q</sub> + b<sub>q</sub>, and MLP<sub>cond</sub>(q<sub>q</sub>) produces the conditioning parameters.</p><p>QCRS then applies structured mixing in the order slot → rank → channel.</p><p>After readout, the final hidden state is summarized into the gallery-context vector g<sub>q</sub>.</p></div>
-                          </div>
-                        </details>
-                      </div>
-                    </div>
-                  </article>
-
-                  <article class="gate2-slide gate2-slide--enrich" id="gate2-slide-enrich" data-gate-slide="3" aria-labelledby="gate2-slide-enrich-title">
-                    <header class="gate2-slide__header">
-                      <div class="gate2-slide__index">04 / ENRICH</div>
-                      <div>
-                        <h3 id="gate2-slide-enrich-title">Predict a controlled residual correction instead of replacing the query</h3>
-                        <p>Predict a small residual correction while preserving the original query as the anchor.</p>
-                      </div>
-                    </header>
-
-                    <div class="gate2-slide__grid gate2-slide__grid--enrich">
-                      <div class="gate2-residual-visual">
-                        <div class="gate2-vector-card gate2-vector-card--query"><span>ORIGINAL QUERY</span><strong>u<sub>q</sub></strong><small>identity path stays intact</small></div>
-                        <div class="gate2-residual-plus" aria-hidden="true">+</div>
-                        <div class="gate2-vector-card gate2-vector-card--delta"><span>CONTROLLED UPDATE</span><strong>γΔq</strong><small>small residual correction</small></div>
-                        <div class="gate2-residual-arrow" aria-hidden="true">→</div>
-                        <div class="gate2-vector-card gate2-vector-card--enriched"><span>ENRICHED QUERY</span><strong>ũ<sub>q</sub></strong><small>same retrieval space, better adapted</small></div>
-                      </div>
-
-                      <div class="gate2-detail-stack">
-                        <div class="gate2-story-strip gate2-story-strip--stack gate2-story-strip--micro">
-                          <article><span>1</span><strong>Fuse</strong></article>
-                          <article><span>2</span><strong>Predict Δq</strong></article>
-                          <article><span>3</span><strong>Scale update</strong></article>
-                        </div>
-                        <details class="gate2-equation-details">
-                          <summary>Show the exact formulation</summary>
-                          <div class="gate2-equation-card">
-                            <span class="gate2-mini-label">Residual fusion head</span>
-                            <div class="gate2-math"><p>h<sub>q</sub> = [u<sub>q</sub>; g<sub>q</sub>; u<sub>q</sub> ⊙ g<sub>q</sub>].</p><p>A small residual head predicts Δq, and the enriched query is ũ<sub>q</sub> = N(u<sub>q</sub> + γΔq) with fixed γ = 0.3.</p></div>
-                          </div>
-                        </details>
-                      </div>
-                    </div>
-                  </article>
-
-                  <article class="gate2-slide gate2-slide--retrieve" id="gate2-slide-retrieve" data-gate-slide="4" aria-labelledby="gate2-slide-retrieve-title">
-                    <header class="gate2-slide__header">
-                      <div class="gate2-slide__index">05 / RETRIEVE</div>
-                      <div>
-                        <h3 id="gate2-slide-retrieve-title">Use the enriched query for a second complete-gallery search</h3>
-                        <p>Top-M provides context; the enriched query then scores the complete gallery again.</p>
-                      </div>
-                    </header>
-
-                    <div class="gate2-slide__grid gate2-slide__grid--retrieve">
-                      <div class="gate2-full-gallery-visual">
-                        <div class="gate2-context-pool">
-                          <span>EVIDENCE INTERFACE</span><strong>Top-M context only</strong>
-                          <div class="gate2-context-pool__thumbs">
-                            <img src="assets/overview/target.png" alt="" loading="lazy" decoding="async"><img src="assets/overview/a_red_01.png" alt="" loading="lazy" decoding="async"><img src="assets/overview/b_bag_01.png" alt="" loading="lazy" decoding="async">
-                          </div>
-                        </div>
-                        <div class="gate2-not-equal" aria-hidden="true">≠</div>
-                        <div class="gate2-final-gallery">
-                          <div class="gate2-final-gallery__head"><span>FINAL SEARCH SPACE</span><strong>Complete gallery</strong></div>
-                          <div class="gate2-final-gallery__grid">
-                            <figure class="gate2-candidate gate2-candidate--accent gate2-candidate--winner"><span>#1</span><img src="assets/overview/target.png" alt="Final rank 1 candidate" loading="lazy" decoding="async"></figure>
-                            <figure class="gate2-candidate"><span>#2</span><img src="assets/overview/a_red_02.png" alt="Final rank 2 candidate" loading="lazy" decoding="async"></figure>
-                            <figure class="gate2-candidate"><span>#3</span><img src="assets/overview/b_bag_02.png" alt="Final rank 3 candidate" loading="lazy" decoding="async"></figure>
-                            <figure class="gate2-candidate"><span>#4</span><img src="assets/overview/a_red_03.png" alt="Final rank 4 candidate" loading="lazy" decoding="async"></figure>
-                            <figure class="gate2-candidate"><span>#5</span><img src="assets/overview/b_bag_03.png" alt="Final rank 5 candidate" loading="lazy" decoding="async"></figure>
-                            <figure class="gate2-candidate"><span>…</span><img src="assets/overview/a_red_01.png" alt="Additional final candidate" loading="lazy" decoding="async"></figure>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="gate2-detail-stack gate2-detail-stack--compressed">
-                        <div class="gate2-word-card">
-                          <span class="gate2-mini-label">TAKEAWAY</span>
-                          <p><strong>Top-M evidence ≠ final search space.</strong> Final retrieval ranks every gallery image.</p>
-                        </div>
-                        <details class="gate2-equation-details">
-                          <summary>Show the exact formulation</summary>
-                          <div class="gate2-equation-card">
-                            <span class="gate2-mini-label">Complete-gallery inference score</span>
-                            <div class="gate2-math"><p>s<sub>GATE</sub>(q,j) = ((1 − η)u<sub>q</sub> + ηũ<sub>q</sub>)<sup>T</sup>a<sub>j</sub>, evaluated for every gallery image j = 1 ... N<sub>g</sub>.</p></div>
-                          </div>
-                        </details>
-                      </div>
-                    </div>
-
-                  </article>
-                </div>
-                <button class="gate2-carousel-control gate2-carousel-control--next" type="button" data-gate-next aria-label="Next GATE stage">→</button>
-              </div>
-
-              <div class="gate2-carousel-footer">
-                <span data-gate-counter>01 / 05</span>
-                <p>Click any overview stage, swipe horizontally, or use the arrows to inspect the method one stage at a time.</p>
-              </div>
-            </div>
-          </details>
-        </div>
-      </section>
-
-
-      <section class="chapter results-chapter" id="results" aria-labelledby="results-title">
-        <div class="section-inner">
-          <div class="chapter-heading results-heading">
-            <p class="section-kicker">Quantitative evidence</p>
-            <h2 id="results-title">Results</h2>
-            <p>
-              The results are organized as a three-step story: a new benchmark frontier,
-              retriever-agnostic gains across frozen hosts, and robust cross-domain transfer.
-            </p>
-          </div>
-
-          <div class="results-story" aria-label="Three-part quantitative results story">
-            <article class="results-stage results-stage--frontier" aria-labelledby="frontier-title">
-              <div class="results-stage__rail" aria-hidden="true">
-                <div class="results-stage__node">
-                  <span class="results-stage__index">01</span>
-                  <div class="results-stage__stat">
-                    <strong class="results-stage__number" data-result-count="3" data-result-decimals="0">3</strong>
-                    <span>benchmarks</span>
-                  </div>
-                  <span class="results-stage__tag">FRONTIER</span>
-                </div>
-              </div>
-
-              <div class="results-stage__body">
-                <div class="result-copy result-copy--frontier">
-                  <p class="subsection-label">01 / Frontier</p>
-                  <h3 id="frontier-title">GATE establishes a new frontier on all three benchmarks</h3>
-                  <p>GATE<sub>ITSELF</sub> reaches the best reported R@1 and mAP on all three benchmarks.</p>
-                </div>
-
-                <div id="benchmark-frontier" class="benchmark-grid" aria-label="Benchmark frontier comparison"></div>
-
-                <section class="frontier-takeaway" aria-labelledby="frontier-takeaway-title">
-                  <div class="frontier-takeaway__copy">
-                    <p class="frontier-takeaway__eyebrow">Takeaway</p>
-                    <h4 id="frontier-takeaway-title">A stronger frontier without depending on a stronger host.</h4>
-                    <p>Best reported R@1 and mAP on 3 / 3 benchmarks with the ITSELF host frozen.</p>
-                  </div>
-
-                  <div class="frontier-proof-grid" aria-label="Frontier supporting evidence">
-                    <article class="frontier-proof">
-                      <span>Across benchmarks</span>
-                      <strong>Best R@1 + mAP on 3 / 3</strong>
-                      <p>The frontier shift is consistent across CUHK-PEDES, ICFG-PEDES, and RSTPReid.</p>
-                    </article>
-                    <article class="frontier-proof">
-                      <span>Frozen host</span>
-                      <strong>No retriever update</strong>
-                      <p>GATE enriches the query at inference while the host TBPS retriever remains frozen.</p>
-                    </article>
-                  </div>
-
-                </section>
-              </div>
-            </article>
-
-            <article class="results-stage results-stage--generality" id="retrievers" aria-labelledby="retrievers-title">
-              <div class="results-stage__rail" aria-hidden="true">
-                <div class="results-stage__node">
-                  <span class="results-stage__index">02</span>
-                  <div class="results-stage__stat">
-                    <strong class="results-stage__number" data-result-count="5" data-result-decimals="0">5</strong>
-                    <span>frozen hosts</span>
-                  </div>
-                  <span class="results-stage__tag">GENERALITY</span>
-                </div>
-              </div>
-
-              <div class="results-stage__body">
-                <div class="result-copy">
-                  <p class="subsection-label">02 / Generalizes across frozen retrievers</p>
-                  <h3 id="retrievers-title">The gain is systematic across all five frozen hosts</h3>
-                  <p>Every dataset × retriever pairing improves in both R@1 and mAP.</p>
-                </div>
-
-                <div class="retriever-panel">
-                  <div id="retriever-matrix" class="retriever-matrix" role="table" aria-label="Retriever by benchmark improvement matrix"></div>
-                  <aside class="retriever-side" aria-label="Retriever-level result summary">
-                    <div class="results-count-card">
-                      <div class="results-count-card__eyebrow">All frozen hosts improve</div>
-                      <strong class="results-count-card__proof" data-result-reveal>15 / 15</strong>
-                      <span>dataset × retriever combinations improve across all 5 frozen hosts</span>
-                    </div>
-                    <div class="ranking-insight">
-                      <p class="ranking-insight__eyebrow">Ranking refinement</p>
-                      <strong>mAP gains exceed R@1 gains on all three benchmarks.</strong>
-                      <div id="ranking-gains" class="ranking-gains" aria-label="Average gains by benchmark"></div>
-                    </div>
-                  </aside>
-                </div>
-              </div>
-            </article>
-
-            <article class="results-stage results-stage--transfer" id="cross-domain" aria-labelledby="cross-domain-title">
-              <div class="results-stage__rail" aria-hidden="true">
-                <div class="results-stage__node">
-                  <span class="results-stage__index">03</span>
-                  <div class="results-stage__stat">
-                    <strong class="results-stage__number" data-result-count="6" data-result-decimals="0">6</strong>
-                    <span>directed routes</span>
-                  </div>
-                  <span class="results-stage__tag">TRANSFER</span>
-                </div>
-              </div>
-
-              <div class="results-stage__body">
-                <div class="result-copy">
-                  <p class="subsection-label">03 / Cross-domain transfer</p>
-                  <h3 id="cross-domain-title">The benefit persists on unseen target benchmarks</h3>
-                  <p>
-                    Train on one benchmark, transfer the frozen retriever and GATE directly to
-                    another, and evaluate without adapting to the target benchmark.
-                  </p>
-                </div>
-
-                <div class="transfer-panel">
-                  <aside class="transfer-side" aria-label="Cross-domain transfer summary">
-                    <div class="results-count-card results-count-card--transfer">
-                      <div class="results-count-card__eyebrow">Every transfer route improves</div>
-                      <strong class="results-count-card__proof" data-result-reveal>30 / 30</strong>
-                      <span>route × retriever transfer settings improve across all 6 directed routes</span>
-                    </div>
-                    <div class="transfer-range" aria-label="Cross-domain gain range">
-                      <div>
-                        <span>Average mAP gain</span>
-                        <strong data-result-reveal>+0.89 to +3.85</strong>
-                      </div>
-                      <div>
-                        <span>Best single mAP gain</span>
-                        <strong data-result-reveal>+5.13</strong>
-                      </div>
-                    </div>
-                    <div class="transfer-constraints" aria-label="Transfer constraints">
-                      <span>No target labels</span>
-                      <span>No pseudo-labels</span>
-                      <span>No target tuning</span>
-                      <span>No parameter updates</span>
-                    </div>
-                  </aside>
-
-                  <figure
-                    class="research-figure transfer-figure"
-                    aria-label="Three benchmark nodes connected by all six directed source-to-target transfer routes. Exact average gains are listed below the topology map."
-                  >
-                    <div class="transfer-figure__header">
-                      <div>
-                        <p class="transfer-figure__eyebrow">Cross-domain transfer graph</p>
-                        <strong>Train on one benchmark, evaluate directly on another</strong>
-                      </div>
-                      <span class="transfer-figure__badge">Full transfer graph</span>
-                    </div>
-
-                    <p class="transfer-figure__hint">Hover or tap a route to isolate it. Select a dataset to inspect all of its incoming and outgoing transfers.</p>
-
-                    <div class="transfer-map" data-transfer-map>
-                      <svg class="transfer-map__svg" viewBox="0 0 640 310" preserveAspectRatio="xMidYMid meet" aria-label="Interactive directed transfer graph">
-                        <defs>
-                          <marker id="transfer-arrow" markerWidth="8" markerHeight="8" refX="6.4" refY="3.5" orient="auto" markerUnits="strokeWidth">
-                            <path d="M0,0 L7,3.5 L0,7 Z"></path>
-                          </marker>
-                          <marker id="transfer-arrow-active" markerWidth="8" markerHeight="8" refX="6.4" refY="3.5" orient="auto" markerUnits="strokeWidth">
-                            <path d="M0,0 L7,3.5 L0,7 Z"></path>
-                          </marker>
-                        </defs>
-                        <path class="transfer-route" data-transfer-route="CUHK → ICFG" data-source="CUHK" data-target="ICFG" pathLength="100" tabindex="0" role="button" aria-label="CUHK to ICFG transfer" d="M170 72 C270 48 370 48 470 72"></path>
-                        <path class="transfer-route" data-transfer-route="ICFG → CUHK" data-source="ICFG" data-target="CUHK" pathLength="100" tabindex="0" role="button" aria-label="ICFG to CUHK transfer" d="M470 94 C370 118 270 118 170 94"></path>
-                        <path class="transfer-route" data-transfer-route="CUHK → RSTP" data-source="CUHK" data-target="RSTP" pathLength="100" tabindex="0" role="button" aria-label="CUHK to RSTP transfer" d="M148 126 C178 171 228 210 278 232"></path>
-                        <path class="transfer-route" data-transfer-route="RSTP → CUHK" data-source="RSTP" data-target="CUHK" pathLength="100" tabindex="0" role="button" aria-label="RSTP to CUHK transfer" d="M290 214 C238 188 192 151 158 111"></path>
-                        <path class="transfer-route" data-transfer-route="ICFG → RSTP" data-source="ICFG" data-target="RSTP" pathLength="100" tabindex="0" role="button" aria-label="ICFG to RSTP transfer" d="M492 126 C462 171 412 210 362 232"></path>
-                        <path class="transfer-route" data-transfer-route="RSTP → ICFG" data-source="RSTP" data-target="ICFG" pathLength="100" tabindex="0" role="button" aria-label="RSTP to ICFG transfer" d="M350 214 C402 188 448 151 482 111"></path>
-                      </svg>
-
-                      <button type="button" class="dataset-node cuhk" data-transfer-node="CUHK" aria-pressed="false"><span>CUHK</span><small>PEDES</small></button>
-                      <button type="button" class="dataset-node icfg" data-transfer-node="ICFG" aria-pressed="false"><span>ICFG</span><small>PEDES</small></button>
-                      <button type="button" class="dataset-node rstp" data-transfer-node="RSTP" aria-pressed="false"><span>RSTP</span><small>ReID</small></button>
-                      <div class="transfer-route-tooltip" data-transfer-tooltip aria-hidden="true"></div>
-                    </div>
-
-                    <div id="transfer-directions" class="transfer-directions" aria-label="Average gains for each transfer direction"></div>
-                    <figcaption>The map shows transfer topology; exact average gains are listed below.</figcaption>
-                  </figure>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="chapter examples-chapter" id="examples" aria-labelledby="examples-title">
-        <div class="section-inner">
-          <div class="chapter-heading qual-heading">
-            <p class="section-kicker">Qualitative evidence</p>
-            <h2 id="examples-title">Qualitative Retrieval Examples</h2>
-            <p>Select a case to compare the frozen base ranking with GATE. Green marks targets; red marks distractors.</p>
-          </div>
-
-          <section class="qual-explorer" data-qual-explorer aria-label="Interactive qualitative retrieval explorer">
-            <div class="qual-control-bar">
-              <div class="qual-control-group">
-                <span class="qual-control-label">Retriever</span>
-                <div class="qual-tabs qual-tabs--retriever" role="tablist" aria-label="Qualitative retriever">
-                  <button type="button" role="tab" aria-selected="true" data-qual-retriever="CLIP">CLIP</button>
-                  <button type="button" role="tab" aria-selected="false" data-qual-retriever="ITSELF">ITSELF</button>
-                  <button type="button" role="tab" aria-selected="false" data-qual-retriever="DM-Adapter">DM-Adapter</button>
-                  <button type="button" role="tab" aria-selected="false" data-qual-retriever="RDE">RDE</button>
-                  <button type="button" role="tab" aria-selected="false" data-qual-retriever="IRRA">IRRA</button>
-                </div>
-              </div>
-
-              <div class="qual-control-group">
-                <span class="qual-control-label">Benchmark</span>
-                <div class="qual-tabs qual-tabs--dataset" role="tablist" aria-label="Qualitative benchmark">
-                  <button type="button" role="tab" aria-selected="true" data-qual-dataset="cuhk">CUHK-PEDES</button>
-                  <button type="button" role="tab" aria-selected="false" data-qual-dataset="icfg">ICFG-PEDES</button>
-                  <button type="button" role="tab" aria-selected="false" data-qual-dataset="rstp">RSTPReid</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="qual-stage" data-qual-stage>
-              <header class="qual-stage-head">
-                <div>
-                  <p class="qual-stage-kicker" data-qual-stage-kicker>CLIP · CUHK-PEDES</p>
-                  <h3>Same query. Same gallery. Different ranking.</h3>
-                </div>
-                <button type="button" class="qual-original-button" data-qual-open-original>
+</figure>
+<div aria-label="What changes and what stays fixed between Standard TBPS and T-TBPS" class="ttbx-boundary-chips"><span class="is-good">Unlabeled gallery ✓</span><span>Gallery labels ×</span><span class="is-good">Full-gallery retrieval ✓</span></div>
+<div aria-label="T-TBPS setting and GATE method distinction" class="ttbx-method-bridge">
+<div><span>SETTING</span><strong>T-TBPS</strong></div>
+<div aria-hidden="true" class="ttbx-method-bridge__arrow"><i></i><b>realized by</b><i></i></div>
+<div><span>METHOD</span><strong>GATE</strong></div>
+</div>
+</div>
+</section>
+<section aria-labelledby="method-title" class="chapter method-chapter" id="method">
+<div class="section-inner">
+<div class="chapter-heading method-heading gate2-heading">
+<h2 id="method-title">GATE: Gallery-Aware Query Enrichment</h2>
+<p>GATE enriches the query from current gallery evidence while keeping the host retriever frozen.</p>
+</div>
+<section aria-labelledby="gate2-overview-title" class="gate2-overview">
+<header class="gate2-overview__header">
+<div>
+<h3 id="gate2-overview-title">Observe → Evidence → Reason → Enrich → Retrieve</h3>
+</div>
+</header>
+<figure aria-label="Conceptual overview of GATE from a natural-language query to complete-gallery retrieval" class="gate2-overview__figure">
+<div class="gate2-overview__source">
+<span class="gate2-mini-label">Natural-language query</span>
+<p class="gate2-overview__query-copy">A person in a <strong>red shirt</strong> with a <strong>black backpack</strong></p>
+</div>
+<div class="gate2-overview__stage-grid">
+<a class="gate2-overview__stage gate2-overview__stage--frozen" data-gate-overview-target="0" href="#gate2-slide-observe">
+<span>01 / OBSERVE</span>
+<strong>Top-M competition</strong>
+</a>
+<a class="gate2-overview__stage gate2-overview__stage--evidence" data-gate-overview-target="1" href="#gate2-slide-evidence">
+<span>02 / EVIDENCE</span>
+<strong>Evidence cube</strong>
+</a>
+<a class="gate2-overview__stage gate2-overview__stage--reason" data-gate-overview-target="2" href="#gate2-slide-reason">
+<span>03 / REASON</span>
+<strong>QCRS reasoning</strong>
+</a>
+<a class="gate2-overview__stage gate2-overview__stage--enrich" data-gate-overview-target="3" href="#gate2-slide-enrich">
+<span>04 / ENRICH</span>
+<strong>Residual update</strong>
+</a>
+<a class="gate2-overview__stage gate2-overview__stage--retrieve" data-gate-overview-target="4" href="#gate2-slide-retrieve">
+<span>05 / RETRIEVE</span>
+<strong>Full-gallery search</strong>
+</a>
+</div>
+</figure>
+</section>
+<details class="gate2-explorer" data-gate-explorer="">
+<summary>
+<span>
+<strong>Explore GATE step by step</strong>
+</span>
+<span class="gate2-explorer__summary-action">Explore →</span>
+</summary>
+<div class="gate2-explorer__body">
+<nav aria-label="Detailed GATE stages" class="gate2-tabs">
+<button aria-current="step" class="is-active" data-gate-tab="0" type="button"><span>01</span>Observe</button>
+<button data-gate-tab="1" type="button"><span>02</span>Evidence</button>
+<button data-gate-tab="2" type="button"><span>03</span>Reason</button>
+<button data-gate-tab="3" type="button"><span>04</span>Enrich</button>
+<button data-gate-tab="4" type="button"><span>05</span>Retrieve</button>
+</nav>
+<div class="gate2-carousel-shell">
+<button aria-label="Previous GATE stage" class="gate2-carousel-control gate2-carousel-control--prev" data-gate-prev="" type="button">←</button>
+<div aria-label="Detailed GATE method slides" class="gate2-carousel" data-gate-carousel="" tabindex="0">
+<article aria-labelledby="gate2-slide-observe-title" class="gate2-slide gate2-slide--observe" data-gate-slide="0" id="gate2-slide-observe">
+<header class="gate2-slide__header">
+<div class="gate2-slide__index">01 / OBSERVE</div>
+<div>
+<h3 id="gate2-slide-observe-title">Use the frozen first-pass ranking to expose the current competition</h3>
+</div>
+</header>
+<div class="gate2-slide__grid">
+<div class="gate2-visual-card gate2-visual-card--observe">
+<div class="gate2-query-card">
+<span>NATURAL QUERY</span>
+<p>“A person in a red shirt with a black backpack.”</p>
+</div>
+<div aria-hidden="true" class="gate2-down-arrow">↓</div>
+<div class="gate2-frozen-card"><span>FROZEN FIRST PASS</span><strong>Host TBPS retriever</strong><small>The native scoring rule stays untouched.</small></div>
+<div aria-hidden="true" class="gate2-down-arrow">↓</div>
+<div aria-label="Ordered Top-M candidates" class="gate2-candidate-row">
+<figure class="gate2-candidate gate2-candidate--accent"><span>#1</span><img alt="Rank 1 candidate" decoding="async" loading="lazy" src="assets/overview/target.png"/></figure>
+<figure class="gate2-candidate"><span>#2</span><img alt="Rank 2 candidate" decoding="async" loading="lazy" src="assets/overview/a_red_01.png"/></figure>
+<figure class="gate2-candidate"><span>#3</span><img alt="Rank 3 candidate" decoding="async" loading="lazy" src="assets/overview/b_bag_01.png"/></figure>
+<div aria-hidden="true" class="gate2-candidate-ellipsis">···</div>
+<figure class="gate2-candidate gate2-candidate--tail"><span>#M</span><img alt="Rank M candidate" decoding="async" loading="lazy" src="assets/overview/a_red_03.png"/></figure>
+</div>
+</div>
+<div class="gate2-detail-stack gate2-detail-stack--compressed">
+<div class="gate2-word-card">
+<span class="gate2-mini-label">TAKEAWAY</span>
+<p>Top-M candidates describe the current competition; they are context, not assumed positives.</p>
+</div>
+<details class="gate2-equation-details">
+<summary>Show the exact formulation</summary>
+<div class="gate2-equation-card">
+<span class="gate2-mini-label">Ordered evidence pool</span>
+<div class="gate2-math"><p>I<sub>q</sub><sup>M</sup> = TopMIndices({u<sub>q</sub><sup>T</sup>a<sub>j</sub>} across the full gallery) = (i<sub>q,1</sub>, ..., i<sub>q,M</sub>).</p></div>
+</div>
+</details>
+</div>
+</div>
+</article>
+<article aria-labelledby="gate2-slide-evidence-title" class="gate2-slide gate2-slide--evidence" data-gate-slide="1" id="gate2-slide-evidence">
+<header class="gate2-slide__header">
+<div class="gate2-slide__index">02 / EVIDENCE</div>
+<div>
+<h3 id="gate2-slide-evidence-title">Turn the current competitors into an aligned evidence cube</h3>
+</div>
+</header>
+<div class="gate2-slide__grid gate2-slide__grid--evidence">
+<div class="gate2-evidence-scene">
+<div class="gate2-evidence-inputs">
+<article class="gate2-evidence-source-card">
+<figure class="gate2-candidate gate2-candidate--accent"><span>#1</span><img alt="Top ranked candidate" decoding="async" loading="lazy" src="assets/overview/target.png"/></figure>
+<div class="gate2-evidence-chip-row"><span>red shirt</span><span>black backpack</span><span>full body</span></div>
+</article>
+<article class="gate2-evidence-source-card">
+<figure class="gate2-candidate"><span>#2</span><img alt="Another candidate" decoding="async" loading="lazy" src="assets/overview/a_red_01.png"/></figure>
+<div class="gate2-evidence-chip-row"><span>red shirt</span><span>no backpack</span><span>distractor</span></div>
+</article>
+<article class="gate2-evidence-source-card">
+<figure class="gate2-candidate"><span>#3</span><img alt="Another candidate" decoding="async" loading="lazy" src="assets/overview/b_bag_01.png"/></figure>
+<div class="gate2-evidence-chip-row"><span>dark pants</span><span>backpack</span><span>shared cue</span></div>
+</article>
+</div>
+<div aria-hidden="true" class="gate2-evidence-assembler">
+<span></span><span></span><span></span>
+</div>
+<div class="gate2-evidence-cube-card">
+<div aria-label="Evidence cube organized by rank and evidence slot" class="gate2-evidence-cube" role="img">
+<div class="gate2-evidence-cube__layer gate2-evidence-cube__layer--back"></div>
+<div class="gate2-evidence-cube__layer gate2-evidence-cube__layer--mid"></div>
+<div class="gate2-evidence-cube__layer gate2-evidence-cube__layer--front"></div>
+<span class="gate2-evidence-cube__axis gate2-evidence-cube__axis--rank">rank</span>
+<span class="gate2-evidence-cube__axis gate2-evidence-cube__axis--slot">slot</span>
+<span class="gate2-evidence-cube__axis gate2-evidence-cube__axis--channel">features</span>
+</div>
+<div class="gate2-evidence-badges"><span>ordered</span><span>aligned</span><span>query-specific gather</span></div>
+</div>
+</div>
+<div class="gate2-detail-stack">
+<details class="gate2-secondary-details"><summary>Evidence provider details</summary><div class="gate2-provider-grid">
+<article><span>Semantic</span><strong>Global appearance</strong><p>The whole-image visual signature of a candidate.</p></article>
+<article><span>Spatial</span><strong>Regional cues</strong><p>Upper/lower or grid-aligned appearance when finer layout is useful.</p></article>
+<article><span>Relative</span><strong>Gallery-relative cues</strong><p>Centroid or residual context that depends on the current gallery.</p></article>
+</div><div class="gate2-provider-truth">
+<span>DEFAULT / MAIN EXPERIMENTS</span>
+<strong>Global Semantic only</strong>
+<p>Other providers are evaluated as evidence ablations rather than concatenated by default.</p>
+</div></details>
+<details class="gate2-equation-details">
+<summary>Show the exact formulation</summary>
+<div class="gate2-equation-card">
+<span class="gate2-mini-label">Cache organization</span>
+<div class="gate2-math"><p>B<sub>j</sub> = [b<sub>j,1</sub>; ...; b<sub>j,S</sub>] stores S aligned evidence slots for one gallery image, and B stacks these caches over the full gallery.</p><p>B̄<sub>q</sub>[r,s,:] gathers the slot-s evidence from the r-th ranked candidate, producing a query-specific tensor B̄<sub>q</sub> of size M × S × d.</p></div>
+</div>
+</details>
+</div>
+</div>
+</article>
+<article aria-labelledby="gate2-slide-reason-title" class="gate2-slide gate2-slide--reason" data-gate-slide="2" id="gate2-slide-reason">
+<header class="gate2-slide__header">
+<div class="gate2-slide__index">03 / REASON</div>
+<div>
+<h3 id="gate2-slide-reason-title">Reason over the evidence cube with query-conditioned structured mixing</h3>
+</div>
+</header>
+<div class="gate2-slide__grid gate2-slide__grid--reason">
+<div class="gate2-reason-scene">
+<div class="gate2-reason-node gate2-reason-node--query">
+<span>QUERY ANCHOR</span>
+<strong>u<sub>q</sub></strong>
+<small>Conditions what evidence matters.</small>
+</div>
+<div aria-hidden="true" class="gate2-reason-arrow">→</div>
+<div class="gate2-reason-core">
+<div class="gate2-qcrs-step"><span>QCRS MIXER</span><strong>Slot → Rank → Channel</strong></div>
+<div class="gate2-qcrs-matrix">
+<div class="gate2-qcrs-matrix__label gate2-qcrs-matrix__label--slot">SLOT MIXING ↔<small>within candidate</small></div>
+<div class="gate2-qcrs-matrix__label gate2-qcrs-matrix__label--rank">RANK MIXING ↕<small>across candidates</small></div>
+<div aria-hidden="true" class="gate2-rank-slot gate2-rank-slot--qcrs">
+<div class="gate2-rank-slot__corner"></div><div class="gate2-rank-slot__head">S1</div><div class="gate2-rank-slot__head">S2</div><div class="gate2-rank-slot__head">…</div><div class="gate2-rank-slot__head">S</div>
+<div class="gate2-rank-slot__rank">#1</div><i></i><i></i><i></i><i></i>
+<div class="gate2-rank-slot__rank">#2</div><i></i><i></i><i></i><i></i>
+<div class="gate2-rank-slot__rank">#3</div><i></i><i></i><i></i><i></i>
+<div class="gate2-rank-slot__rank">#M</div><i></i><i></i><i></i><i></i>
+</div>
+<div class="gate2-reason-sweep gate2-reason-sweep--slot"><span>slot pass</span></div>
+<div class="gate2-reason-sweep gate2-reason-sweep--rank"><span>rank pass</span></div>
+</div>
+</div>
+<div aria-hidden="true" class="gate2-reason-arrow">→</div>
+<div class="gate2-reason-node gate2-reason-node--context">
+<span>READOUT</span>
+<strong>g<sub>q</sub></strong>
+<small>One compact gallery-context vector.</small>
+</div>
+</div>
+<div class="gate2-detail-stack">
+<details class="gate2-equation-details">
+<summary>Show the exact formulation</summary>
+<div class="gate2-equation-card">
+<div class="gate2-math"><p>q<sub>q</sub> = W<sub>q</sub>u<sub>q</sub> + b<sub>q</sub>, and MLP<sub>cond</sub>(q<sub>q</sub>) produces the conditioning parameters.</p><p>QCRS then applies structured mixing in the order slot → rank → channel.</p><p>After readout, the final hidden state is summarized into the gallery-context vector g<sub>q</sub>.</p></div>
+</div>
+</details>
+</div>
+</div>
+</article>
+<article aria-labelledby="gate2-slide-enrich-title" class="gate2-slide gate2-slide--enrich" data-gate-slide="3" id="gate2-slide-enrich">
+<header class="gate2-slide__header">
+<div class="gate2-slide__index">04 / ENRICH</div>
+<div>
+<h3 id="gate2-slide-enrich-title">Predict a controlled residual correction instead of replacing the query</h3>
+</div>
+</header>
+<div class="gate2-slide__grid gate2-slide__grid--enrich">
+<div class="gate2-residual-visual">
+<div class="gate2-vector-card gate2-vector-card--query"><span>ORIGINAL QUERY</span><strong>u<sub>q</sub></strong><small>identity path stays intact</small></div>
+<div aria-hidden="true" class="gate2-residual-plus">+</div>
+<div class="gate2-vector-card gate2-vector-card--delta"><span>CONTROLLED UPDATE</span><strong>γΔq</strong><small>small residual correction</small></div>
+<div aria-hidden="true" class="gate2-residual-arrow">→</div>
+<div class="gate2-vector-card gate2-vector-card--enriched"><span>ENRICHED QUERY</span><strong>ũ<sub>q</sub></strong><small>same retrieval space, better adapted</small></div>
+</div>
+<div class="gate2-detail-stack">
+<details class="gate2-equation-details">
+<summary>Show the exact formulation</summary>
+<div class="gate2-equation-card">
+<span class="gate2-mini-label">Residual fusion head</span>
+<div class="gate2-math"><p>h<sub>q</sub> = [u<sub>q</sub>; g<sub>q</sub>; u<sub>q</sub> ⊙ g<sub>q</sub>].</p><p>A small residual head predicts Δq, and the enriched query is ũ<sub>q</sub> = N(u<sub>q</sub> + γΔq) with fixed γ = 0.3.</p></div>
+</div>
+</details>
+</div>
+</div>
+</article>
+<article aria-labelledby="gate2-slide-retrieve-title" class="gate2-slide gate2-slide--retrieve" data-gate-slide="4" id="gate2-slide-retrieve">
+<header class="gate2-slide__header">
+<div class="gate2-slide__index">05 / RETRIEVE</div>
+<div>
+<h3 id="gate2-slide-retrieve-title">Use the enriched query for a second complete-gallery search</h3>
+</div>
+</header>
+<div class="gate2-slide__grid gate2-slide__grid--retrieve">
+<div class="gate2-full-gallery-visual">
+<div class="gate2-context-pool">
+<span>EVIDENCE INTERFACE</span><strong>Top-M context only</strong>
+<div class="gate2-context-pool__thumbs">
+<img alt="" decoding="async" loading="lazy" src="assets/overview/target.png"/><img alt="" decoding="async" loading="lazy" src="assets/overview/a_red_01.png"/><img alt="" decoding="async" loading="lazy" src="assets/overview/b_bag_01.png"/>
+</div>
+</div>
+<div aria-hidden="true" class="gate2-not-equal">≠</div>
+<div class="gate2-final-gallery">
+<div class="gate2-final-gallery__head"><span>FINAL SEARCH SPACE</span><strong>Complete gallery</strong></div>
+<div class="gate2-final-gallery__grid">
+<figure class="gate2-candidate gate2-candidate--accent gate2-candidate--winner"><span>#1</span><img alt="Final rank 1 candidate" decoding="async" loading="lazy" src="assets/overview/target.png"/></figure>
+<figure class="gate2-candidate"><span>#2</span><img alt="Final rank 2 candidate" decoding="async" loading="lazy" src="assets/overview/a_red_02.png"/></figure>
+<figure class="gate2-candidate"><span>#3</span><img alt="Final rank 3 candidate" decoding="async" loading="lazy" src="assets/overview/b_bag_02.png"/></figure>
+<figure class="gate2-candidate"><span>#4</span><img alt="Final rank 4 candidate" decoding="async" loading="lazy" src="assets/overview/a_red_03.png"/></figure>
+<figure class="gate2-candidate"><span>#5</span><img alt="Final rank 5 candidate" decoding="async" loading="lazy" src="assets/overview/b_bag_03.png"/></figure>
+<figure class="gate2-candidate"><span>…</span><img alt="Additional final candidate" decoding="async" loading="lazy" src="assets/overview/a_red_01.png"/></figure>
+</div>
+</div>
+</div>
+<div class="gate2-detail-stack gate2-detail-stack--compressed">
+<div class="gate2-word-card">
+<span class="gate2-mini-label">TAKEAWAY</span>
+<p><strong>Top-M evidence ≠ final search space.</strong> Final retrieval ranks every gallery image.</p>
+</div>
+<details class="gate2-equation-details">
+<summary>Show the exact formulation</summary>
+<div class="gate2-equation-card">
+<span class="gate2-mini-label">Complete-gallery inference score</span>
+<div class="gate2-math"><p>s<sub>GATE</sub>(q,j) = ((1 − η)u<sub>q</sub> + ηũ<sub>q</sub>)<sup>T</sup>a<sub>j</sub>, evaluated for every gallery image j = 1 ... N<sub>g</sub>.</p></div>
+</div>
+</details>
+</div>
+</div>
+</article>
+</div>
+<button aria-label="Next GATE stage" class="gate2-carousel-control gate2-carousel-control--next" data-gate-next="" type="button">→</button>
+</div>
+<div class="gate2-carousel-footer">
+<span data-gate-counter="">01 / 05</span>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section aria-labelledby="results-title" class="chapter results-chapter" id="results">
+<div class="section-inner">
+<div class="chapter-heading results-heading">
+<h2 id="results-title">Results</h2>
+</div>
+<div aria-label="Three-part quantitative results story" class="results-story">
+<article aria-labelledby="frontier-title" class="results-stage results-stage--frontier">
+<div aria-hidden="true" class="results-stage__rail">
+<div class="results-stage__node">
+<span class="results-stage__index">01</span>
+<div class="results-stage__stat">
+<strong class="results-stage__number" data-result-count="3" data-result-decimals="0">3</strong>
+<span>benchmarks</span>
+</div>
+<span class="results-stage__tag">FRONTIER</span>
+</div>
+</div>
+<div class="results-stage__body">
+<div class="result-copy result-copy--frontier">
+<h3 id="frontier-title">New frontier on all three benchmarks</h3>
+</div>
+<div aria-label="Benchmark frontier comparison" class="benchmark-grid" id="benchmark-frontier"></div>
+<section aria-label="Frontier summary" class="result-compact-proof"><strong>3 / 3</strong><span>Best reported R@1 + mAP · frozen ITSELF host</span></section>
+</div>
+</article>
+<article aria-labelledby="retrievers-title" class="results-stage results-stage--generality" id="retrievers">
+<div aria-hidden="true" class="results-stage__rail">
+<div class="results-stage__node">
+<span class="results-stage__index">02</span>
+<div class="results-stage__stat">
+<strong class="results-stage__number" data-result-count="5" data-result-decimals="0">5</strong>
+<span>frozen hosts</span>
+</div>
+<span class="results-stage__tag">GENERALITY</span>
+</div>
+</div>
+<div class="results-stage__body">
+<div class="result-copy">
+<h3 id="retrievers-title">All five frozen hosts improve</h3>
+</div>
+<div class="retriever-panel">
+<div aria-label="Retriever by benchmark improvement matrix" class="retriever-matrix" id="retriever-matrix" role="table"></div>
+<aside aria-label="Retriever-level result summary" class="retriever-side">
+<div class="results-count-card">
+<div class="results-count-card__eyebrow">All frozen hosts improve</div>
+<strong class="results-count-card__proof" data-result-reveal="">15 / 15</strong>
+<span>dataset × retriever combinations improve across all 5 frozen hosts</span>
+</div>
+<details class="result-secondary-details"><summary>Ranking-refinement detail</summary><div class="ranking-insight">
+<p class="ranking-insight__eyebrow">Ranking refinement</p>
+<strong>mAP gains exceed R@1 gains on all three benchmarks.</strong>
+<div aria-label="Average gains by benchmark" class="ranking-gains" id="ranking-gains"></div>
+</div></details>
+</aside>
+</div>
+</div>
+</article>
+<article aria-labelledby="cross-domain-title" class="results-stage results-stage--transfer" id="cross-domain">
+<div aria-hidden="true" class="results-stage__rail">
+<div class="results-stage__node">
+<span class="results-stage__index">03</span>
+<div class="results-stage__stat">
+<strong class="results-stage__number" data-result-count="6" data-result-decimals="0">6</strong>
+<span>directed routes</span>
+</div>
+<span class="results-stage__tag">TRANSFER</span>
+</div>
+</div>
+<div class="results-stage__body">
+<div class="result-copy">
+<h3 id="cross-domain-title">Every cross-domain setting improves</h3>
+</div>
+<div class="transfer-panel">
+<aside aria-label="Cross-domain transfer summary" class="transfer-side">
+<div class="results-count-card results-count-card--transfer">
+<div class="results-count-card__eyebrow">Every transfer route improves</div>
+<strong class="results-count-card__proof" data-result-reveal="">30 / 30</strong>
+<span>route × retriever transfer settings improve across all 6 directed routes</span>
+</div>
+<div aria-label="Cross-domain gain range" class="transfer-range">
+<div>
+<span>Average mAP gain</span>
+<strong data-result-reveal="">+0.89 to +3.85</strong>
+</div>
+</div>
+<div aria-label="Transfer constraints" class="transfer-constraints"><span>Zero target adaptation</span></div>
+</aside>
+<figure aria-label="Three benchmark nodes connected by all six directed source-to-target transfer routes. Exact average gains are listed below the topology map." class="research-figure transfer-figure">
+<div class="transfer-figure__header">
+<div>
+<p class="transfer-figure__eyebrow">Cross-domain transfer graph</p>
+<strong>Train on one benchmark, evaluate directly on another</strong>
+</div>
+</div>
+<div class="transfer-map" data-transfer-map="">
+<svg aria-label="Interactive directed transfer graph" class="transfer-map__svg" preserveaspectratio="xMidYMid meet" viewbox="0 0 640 310">
+<defs>
+<marker id="transfer-arrow" markerheight="8" markerunits="strokeWidth" markerwidth="8" orient="auto" refx="6.4" refy="3.5">
+<path d="M0,0 L7,3.5 L0,7 Z"></path>
+</marker>
+<marker id="transfer-arrow-active" markerheight="8" markerunits="strokeWidth" markerwidth="8" orient="auto" refx="6.4" refy="3.5">
+<path d="M0,0 L7,3.5 L0,7 Z"></path>
+</marker>
+</defs>
+<path aria-label="CUHK to ICFG transfer" class="transfer-route" d="M170 72 C270 48 370 48 470 72" data-source="CUHK" data-target="ICFG" data-transfer-route="CUHK → ICFG" pathlength="100" role="button" tabindex="0"></path>
+<path aria-label="ICFG to CUHK transfer" class="transfer-route" d="M470 94 C370 118 270 118 170 94" data-source="ICFG" data-target="CUHK" data-transfer-route="ICFG → CUHK" pathlength="100" role="button" tabindex="0"></path>
+<path aria-label="CUHK to RSTP transfer" class="transfer-route" d="M148 126 C178 171 228 210 278 232" data-source="CUHK" data-target="RSTP" data-transfer-route="CUHK → RSTP" pathlength="100" role="button" tabindex="0"></path>
+<path aria-label="RSTP to CUHK transfer" class="transfer-route" d="M290 214 C238 188 192 151 158 111" data-source="RSTP" data-target="CUHK" data-transfer-route="RSTP → CUHK" pathlength="100" role="button" tabindex="0"></path>
+<path aria-label="ICFG to RSTP transfer" class="transfer-route" d="M492 126 C462 171 412 210 362 232" data-source="ICFG" data-target="RSTP" data-transfer-route="ICFG → RSTP" pathlength="100" role="button" tabindex="0"></path>
+<path aria-label="RSTP to ICFG transfer" class="transfer-route" d="M350 214 C402 188 448 151 482 111" data-source="RSTP" data-target="ICFG" data-transfer-route="RSTP → ICFG" pathlength="100" role="button" tabindex="0"></path>
+</svg>
+<button aria-pressed="false" class="dataset-node cuhk" data-transfer-node="CUHK" type="button"><span>CUHK</span><small>PEDES</small></button>
+<button aria-pressed="false" class="dataset-node icfg" data-transfer-node="ICFG" type="button"><span>ICFG</span><small>PEDES</small></button>
+<button aria-pressed="false" class="dataset-node rstp" data-transfer-node="RSTP" type="button"><span>RSTP</span><small>ReID</small></button>
+<div aria-hidden="true" class="transfer-route-tooltip" data-transfer-tooltip=""></div>
+</div>
+<div aria-label="Average gains for each transfer direction" class="transfer-directions" id="transfer-directions"></div>
+<figcaption>The map shows transfer topology; exact average gains are listed below.</figcaption>
+</figure>
+</div>
+</div>
+</article>
+</div>
+</div>
+</section>
+<section aria-labelledby="examples-title" class="chapter examples-chapter" id="examples">
+<div class="section-inner">
+<div class="chapter-heading qual-heading">
+<h2 id="examples-title">Qualitative Retrieval Examples</h2>
+</div>
+<section aria-label="Interactive qualitative retrieval explorer" class="qual-explorer" data-qual-explorer="">
+<div class="qual-control-bar">
+<div class="qual-control-group">
+<span class="qual-control-label">Retriever</span>
+<div aria-label="Qualitative retriever" class="qual-tabs qual-tabs--retriever" role="tablist">
+<button aria-selected="true" data-qual-retriever="CLIP" role="tab" type="button">CLIP</button>
+<button aria-selected="false" data-qual-retriever="ITSELF" role="tab" type="button">ITSELF</button>
+<button aria-selected="false" data-qual-retriever="DM-Adapter" role="tab" type="button">DM-Adapter</button>
+<button aria-selected="false" data-qual-retriever="RDE" role="tab" type="button">RDE</button>
+<button aria-selected="false" data-qual-retriever="IRRA" role="tab" type="button">IRRA</button>
+</div>
+</div>
+<div class="qual-control-group">
+<span class="qual-control-label">Benchmark</span>
+<div aria-label="Qualitative benchmark" class="qual-tabs qual-tabs--dataset" role="tablist">
+<button aria-selected="true" data-qual-dataset="cuhk" role="tab" type="button">CUHK-PEDES</button>
+<button aria-selected="false" data-qual-dataset="icfg" role="tab" type="button">ICFG-PEDES</button>
+<button aria-selected="false" data-qual-dataset="rstp" role="tab" type="button">RSTPReid</button>
+</div>
+</div>
+</div>
+<div class="qual-stage" data-qual-stage="">
+<header class="qual-stage-head">
+<div>
+<p class="qual-stage-kicker" data-qual-stage-kicker="">CLIP · CUHK-PEDES</p>
+<h3>Same query. Same gallery. Different ranking.</h3>
+</div>
+<button class="qual-original-button" data-qual-open-original="" type="button">
                   View original figure <span aria-hidden="true">↗</span>
-                </button>
-              </header>
-
-              <div class="qual-overview-shell">
-                <button type="button" class="qual-overview-button" data-qual-open-original aria-label="Open the complete qualitative figure">
-                  <img data-qual-overview-image src="assets/qualitative/[t]clip-cuhk.png" alt="CLIP CUHK-PEDES qualitative retrieval figure" loading="lazy" decoding="async">
-                  <span class="qual-row-focus" data-qual-row-focus aria-hidden="true"><b>CASE 01</b></span>
-                </button>
-                <div class="qual-overview-caption">
-                  <span>Original figure</span>
-                  <span>Highlighted row expanded below</span>
-                </div>
-              </div>
-
-              <div class="qual-case-toolbar">
-                <div class="qual-case-picker" role="tablist" aria-label="Qualitative case">
-                  <span>Case</span>
-                  <button type="button" role="tab" aria-selected="true" data-qual-case="0">01</button>
-                  <button type="button" role="tab" aria-selected="false" data-qual-case="1">02</button>
-                  <button type="button" role="tab" aria-selected="false" data-qual-case="2">03</button>
-                </div>
-                <button type="button" class="qual-replay-button" data-qual-replay>
-                  <span class="qual-replay-icon" aria-hidden="true">↻</span>
-                  Replay comparison
-                </button>
-              </div>
-
-              <div class="qual-focus-grid">
-                <article class="qual-query-panel">
-                  <div class="qual-panel-label">
-                    <span>Query</span>
-                    <small>held fixed</small>
-                  </div>
-                  <div class="qual-crop qual-crop--query" data-qual-crop="query">
-                    <img data-qual-crop-image alt="Selected text query crop" draggable="false">
-                  </div>
-                </article>
-
-                <div class="qual-ranking-story">
-                  <article class="qual-ranking-panel qual-ranking-panel--base">
-                    <div class="qual-ranking-head">
-                      <div>
-                        <span class="qual-ranking-eyebrow">Frozen base</span>
-                        <strong data-qual-base-label>CLIP</strong>
-                      </div>
-                      <span class="qual-ranking-state">first-pass ranking</span>
-                    </div>
-                    <div class="qual-rank-labels" aria-hidden="true"><span>R1</span><span>R2</span><span>R3</span><span>R4</span><span>R5</span></div>
-                    <div class="qual-crop qual-crop--ranking" data-qual-crop="base">
-                      <img data-qual-crop-image alt="Selected frozen base ranking crop" draggable="false">
-                    </div>
-                  </article>
-
-                  <div class="qual-context-bridge" aria-label="Gallery-aware enrichment connects the base ranking to the GATE ranking">
-                    <div class="qual-context-line" aria-hidden="true"><span></span></div>
-                    <div class="qual-context-copy">
-                      <small>Gallery context</small>
-                      <strong>gallery-aware enrichment</strong>
-                    </div>
-                    <div class="qual-context-line qual-context-line--down" aria-hidden="true"><span></span></div>
-                  </div>
-
-                  <article class="qual-ranking-panel qual-ranking-panel--gate">
-                    <div class="qual-ranking-head">
-                      <div>
-                        <span class="qual-ranking-eyebrow">+ GATE</span>
-                        <strong data-qual-gate-label>GATE–CLIP</strong>
-                      </div>
-                      <span class="qual-ranking-state qual-ranking-state--accent">enriched ranking</span>
-                    </div>
-                    <div class="qual-rank-labels" aria-hidden="true"><span>R1</span><span>R2</span><span>R3</span><span>R4</span><span>R5</span></div>
-                    <div class="qual-crop qual-crop--ranking" data-qual-crop="gate">
-                      <img data-qual-crop-image alt="Selected GATE-enhanced ranking crop" draggable="false">
-                    </div>
-                  </article>
-                </div>
-              </div>
-
-              <footer class="qual-stage-footer">
-                <div class="qual-legend" aria-label="Qualitative figure legend">
-                  <span><i class="qual-legend-dot qual-legend-dot--target"></i> target identity</span>
-                  <span><i class="qual-legend-dot qual-legend-dot--distractor"></i> distractor</span>
-                </div>
-                <p><strong>Inspect:</strong> target rank movement and displaced distractors.</p>
-              </footer>
-              <p class="sr-only" data-qual-status aria-live="polite"></p>
-            </div>
-          </section>
-
-          <div id="qualitative-lightbox" class="qual-lightbox" aria-hidden="true" data-open="false" hidden>
-            <div class="qual-lightbox-backdrop" data-qual-lightbox-close></div>
-            <div class="qual-lightbox-panel" role="dialog" aria-modal="true" aria-label="Qualitative figure preview">
-              <button type="button" class="qual-lightbox-close" data-qual-lightbox-close aria-label="Close image viewer">
-                <span aria-hidden="true">×</span>
-              </button>
-              <img id="qualitative-lightbox-image" alt="">
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="chapter analysis-chapter analysisx-chapter" id="analysis" aria-labelledby="analysis-title">
-        <div class="section-inner">
-          <div class="chapter-heading analysisx-heading">
-            <p class="section-kicker">Interpretation</p>
-            <h2 id="analysis-title">Analysis</h2>
-            <p>Two ablations ask which gallery evidence is useful and how that evidence should be reasoned over.</p>
-          </div>
-
-          <nav class="analysisx-story" aria-label="Analysis story">
-            <span><b>01</b> Evidence</span>
-            <i aria-hidden="true"></i>
-            <span><b>02</b> Reasoning</span>
-            <i aria-hidden="true"></i>
-            <span><b>03</b> Interpretation</span>
-            <i aria-hidden="true"></i>
-            <span><b>04</b> Discussion</span>
-          </nav>
-
-          <article class="analysisx-panel analysisx-evidence" id="evidence-ablation-section" data-analysis-evidence aria-labelledby="evidence-ablation-title">
-            <header class="analysisx-panel__head">
-              <div>
-                <p class="subsection-label">01 / Evidence</p>
-                <h3 id="evidence-ablation-title">More evidence is not automatically better</h3>
-                <p>
-                  Individual semantic, spatial, and gallery-relative providers all improve the frozen
-                  CLIP baseline in different places. Combining Global with another provider can help,
-                  hurt, or barely change the result depending on the benchmark and metric.
-                </p>
-              </div>
-              <div class="analysisx-controls" aria-label="Evidence ablation controls">
-                <div class="analysisx-control-group">
-                  <span>Benchmark</span>
-                  <div class="analysisx-tabs" role="tablist" aria-label="Evidence benchmark">
-                    <button type="button" role="tab" aria-selected="true" data-analysis-evidence-dataset="0">CUHK</button>
-                    <button type="button" role="tab" aria-selected="false" data-analysis-evidence-dataset="1">ICFG</button>
-                    <button type="button" role="tab" aria-selected="false" data-analysis-evidence-dataset="2">RSTP</button>
-                  </div>
-                </div>
-                <div class="analysisx-control-group">
-                  <span>Metric</span>
-                  <div class="analysisx-tabs" role="tablist" aria-label="Evidence metric">
-                    <button type="button" role="tab" aria-selected="false" data-analysis-evidence-metric="r1">R@1</button>
-                    <button type="button" role="tab" aria-selected="true" data-analysis-evidence-metric="map">mAP</button>
-                  </div>
-                </div>
-              </div>
-            </header>
-
-            <div class="analysisx-evidence-workbench">
-              <section class="analysisx-dot-card" aria-labelledby="analysis-evidence-chart-title">
-                <div class="analysisx-card-head">
-                  <div>
-                    <span>DELTA VS FROZEN CLIP</span>
-                    <strong id="analysis-evidence-chart-title">Individual vs Global-combined evidence</strong>
-                  </div>
-                  <small data-analysis-evidence-context>CUHK-PEDES · mAP</small>
-                </div>
-                <div id="analysis-evidence-chart" class="analysisx-dot-chart" aria-live="polite"></div>
-              </section>
-
-              <aside class="analysisx-winner" aria-live="polite">
-                <span>BEST CONFIGURATION</span>
-                <strong data-analysis-evidence-winner>Grid</strong>
-                <div data-analysis-evidence-winner-value>+2.48 mAP</div>
-                <p data-analysis-evidence-winner-note>On this view, the strongest result comes from an individual provider rather than a Global combination.</p>
-                <div class="analysisx-winner-split">
-                  <div><small>best individual</small><b data-analysis-best-individual>Grid · +2.48</b></div>
-                  <div><small>best Global + provider</small><b data-analysis-best-combined>Global + Horizontal · +2.46</b></div>
-                </div>
-              </aside>
-            </div>
-
-            <section class="analysisx-global-test" aria-labelledby="analysis-global-test-title">
-              <div class="analysisx-global-test__head">
-                <div>
-                  <span>DOES ADDING GLOBAL HELP?</span>
-                  <h4 id="analysis-global-test-title">Compare each provider with its Global-combined counterpart</h4>
-                </div>
-                <div class="analysisx-provider-tabs" role="tablist" aria-label="Provider comparison">
-                  <button type="button" role="tab" aria-selected="true" data-analysis-provider="Vertical">Vertical</button>
-                  <button type="button" role="tab" aria-selected="false" data-analysis-provider="Horizontal">Horizontal</button>
-                  <button type="button" role="tab" aria-selected="false" data-analysis-provider="Grid">Grid</button>
-                  <button type="button" role="tab" aria-selected="false" data-analysis-provider="Centroid">Centroid</button>
-                  <button type="button" role="tab" aria-selected="false" data-analysis-provider="Residual">Residual</button>
-                </div>
-              </div>
-
-              <div class="analysisx-global-compare" data-analysis-global-compare>
-                <div class="analysisx-merge-label" aria-hidden="true">
-                  <span class="analysisx-chip">Global</span><b>+</b><span class="analysisx-chip" data-analysis-provider-chip>Vertical</span>
-                </div>
-                <div class="analysisx-dumbbell" aria-label="Individual provider versus Global combined provider">
-                  <div class="analysisx-dumbbell__track">
-                    <span class="analysisx-dumbbell__link" data-analysis-dumbbell-link></span>
-                    <i class="analysisx-dumbbell__point analysisx-dumbbell__point--base" data-analysis-dumbbell-base></i>
-                    <i class="analysisx-dumbbell__point analysisx-dumbbell__point--combo" data-analysis-dumbbell-combo></i>
-                  </div>
-                  <div class="analysisx-dumbbell__labels">
-                    <div><span data-analysis-provider-name>Vertical</span><strong data-analysis-provider-value>+1.61</strong></div>
-                    <div><span data-analysis-combo-name>Global + Vertical</span><strong data-analysis-combo-value>+1.67</strong></div>
-                  </div>
-                </div>
-                <div class="analysisx-global-verdict">
-                  <span data-analysis-global-verdict-label>HELPS</span>
-                  <strong data-analysis-global-verdict-value>+0.06</strong>
-                  <p data-analysis-global-verdict-copy>Adding Global changes the selected metric by +0.06 points.</p>
-                </div>
-              </div>
-              <p class="analysisx-evidence-takeaway"><strong>More evidence is not monotonically better.</strong></p>
-            </section>
-          </article>
-
-          <article class="analysisx-panel analysisx-reasoning" id="reasoning" data-analysis-reasoning aria-labelledby="reasoning-title">
-            <header class="analysisx-panel__head analysisx-panel__head--reasoning">
-              <div>
-                <p class="subsection-label">02 / Reasoning</p>
-                <h3 id="reasoning-title">Seeing gallery evidence is not enough</h3>
-                <p>
-                  MeanPool nearly discards the gain and Flat-MLP improves on pooling, but the complete
-                  QCRS-Mixer gives the strongest balanced cross-benchmark result. Its advantage comes
-                  from keeping query conditioning and rank–slot structure explicit.
-                </p>
-              </div>
-              <div class="analysisx-reasoning-summary">
-                <span>COMPLETE QCRS</span>
-                <strong>Best R@1 on 3 / 3</strong>
-                <small>Best mAP on 2 / 3 benchmarks</small>
-              </div>
-            </header>
-
-            <div class="analysisx-architecture-cards" role="tablist" aria-label="Reasoning architecture comparison">
-              <button type="button" class="analysisx-arch" role="tab" aria-selected="false" data-analysis-reasoning-key="meanpool">
-                <span>BASELINE</span><strong>MeanPool</strong><small>evidence → one vector</small>
-                <div class="analysisx-arch-viz analysisx-arch-viz--pool" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
-              </button>
-              <button type="button" class="analysisx-arch" role="tab" aria-selected="false" data-analysis-reasoning-key="flatmlp">
-                <span>BASELINE</span><strong>Flat-MLP</strong><small>flatten → generic MLP</small>
-                <div class="analysisx-arch-viz analysisx-arch-viz--flat" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
-              </button>
-              <button type="button" class="analysisx-arch analysisx-arch--active" role="tab" aria-selected="true" data-analysis-reasoning-key="qcrs">
-                <span>STRUCTURED</span><strong>QCRS-Mixer</strong><small>rank × slot → structured mixing</small>
-                <div class="analysisx-arch-viz analysisx-arch-viz--qcrs" aria-hidden="true"><i></i><i></i><i></i><i></i><b></b></div>
-              </button>
-            </div>
-
-            <div class="analysisx-dissection">
-              <section class="analysisx-mixer-card" aria-labelledby="analysisx-mixer-title">
-                <div class="analysisx-card-head">
-                  <div><span>DISSECT QCRS</span><strong id="analysisx-mixer-title">Remove one component and inspect the result</strong></div>
-                  <button type="button" class="analysisx-reset" data-analysis-reasoning-reset>Full QCRS</button>
-                </div>
-
-                <div class="analysisx-mixer-scene" data-analysis-mixer-scene>
-                  <div class="analysisx-mixer-query"><span>QUERY</span><strong>u<sub>q</sub></strong></div>
-                  <div class="analysisx-mixer-component" data-analysis-component="film"><span>FiLM</span><small>query condition</small></div>
-                  <div class="analysisx-mixer-tensor">
-                    <div class="analysisx-mixer-embeddings">
-                      <button type="button" data-analysis-component-button="rankemb">Rank emb.</button>
-                      <button type="button" data-analysis-component-button="slotemb">Slot emb.</button>
-                    </div>
-                    <div class="analysisx-mini-cube" aria-hidden="true">
-                      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-                    </div>
-                    <span>rank × slot evidence</span>
-                  </div>
-                  <div class="analysisx-mixer-passes">
-                    <button type="button" data-analysis-component-button="slotmix">SlotMix <small>within candidate</small></button>
-                    <button type="button" data-analysis-component-button="rankmix">RankMix <small>across candidates</small></button>
-                    <button type="button" data-analysis-component-button="chanmix">ChanMix <small>refine channels</small></button>
-                  </div>
-                  <div class="analysisx-mixer-output"><span>CONTEXT</span><strong>g<sub>q</sub></strong></div>
-                </div>
-
-                <div class="analysisx-component-picker" role="group" aria-label="QCRS component ablations">
-                  <button type="button" data-analysis-component-choice="film">– FiLM</button>
-                  <button type="button" data-analysis-component-choice="rankemb">– Rank Emb.</button>
-                  <button type="button" data-analysis-component-choice="slotemb">– Slot Emb.</button>
-                  <button type="button" data-analysis-component-choice="slotmix">– SlotMix</button>
-                  <button type="button" data-analysis-component-choice="rankmix">– RankMix</button>
-                  <button type="button" data-analysis-component-choice="chanmix">– ChanMix</button>
-                </div>
-              </section>
-
-              <aside class="analysisx-reasoning-readout" aria-live="polite">
-                <div class="analysisx-reasoning-readout__summary">
-                  <span data-analysis-reasoning-tag>COMPLETE STRUCTURE</span>
-                  <h4 data-analysis-reasoning-name>QCRS-Mixer</h4>
-                  <p data-analysis-reasoning-copy>Query conditioning, rank/slot embeddings, and all three mixer passes are active.</p>
-                  </div>
-                <div class="analysisx-reasoning-readout__results">
-                  <span class="analysisx-reasoning-results-label">SELECTED CONFIGURATION · R@1 / mAP</span>
-                  <div id="analysis-reasoning-scores" class="analysisx-score-grid"></div>
-                </div>
-              </aside>
-            </div>
-          </article>
-
-          <article class="analysisx-panel analysisx-interpretation analysisx-interpretation--compressed" id="analysis-interpretation" aria-labelledby="analysis-interpretation-title">
-            <header class="analysisx-panel__head analysisx-panel__head--compact">
-              <div>
-                <p class="subsection-label">03 / Interpretation</p>
-                <h3 id="analysis-interpretation-title">What the ablations say</h3>
-              </div>
-              <span class="analysisx-concept-badge">ABLATION → SYNTHESIS</span>
-            </header>
-
-            <div class="analysisx-interpretation-grid analysisx-interpretation-grid--compressed" aria-label="Synthesis from the evidence and reasoning ablations">
-              <article class="analysisx-insight analysisx-insight--selective">
-                <div class="analysisx-insight__icon" aria-hidden="true"><span></span><span></span><span></span><b></b></div>
-                <span>SELECTIVE EVIDENCE</span>
-                <strong>More ≠ better.</strong>
-              </article>
-              <article class="analysisx-insight analysisx-insight--structured">
-                <div class="analysisx-insight__icon analysisx-insight__icon--matrix" aria-hidden="true"><span></span><span></span><span></span><span></span><b></b></div>
-                <span>STRUCTURED REASONING</span>
-                <strong>Seeing ≠ reasoning.</strong>
-              </article>
-            </div>
-
-            <p class="analysisx-synthesis-line">Gallery-aware query adaptation works best when context is <strong>selective</strong> and <strong>structured</strong>.</p>
-          </article>
-
-          <article class="analysisx-panel analysisx-discussion" id="analysis-discussion" aria-labelledby="analysis-discussion-title">
-            <header class="analysisx-panel__head analysisx-panel__head--compact">
-              <div>
-                <p class="subsection-label">04 / Discussion</p>
-                <h3 id="analysis-discussion-title">What does GATE teach us beyond GATE?</h3>
-              </div>
-              <span class="analysisx-concept-badge">GATE ⊂ T-TBPS</span>
-            </header>
-
-            <div class="analysisx-discussion-stack">
-              <section class="analysisx-discussion-band analysisx-discussion-band--gate" aria-labelledby="analysis-gate-discussion-title">
-                <header class="analysisx-discussion-band__head">
-                  <div>
-                    <span>UNDERSTANDING THE MECHANISM</span>
-                    <strong id="analysis-gate-discussion-title">High-ranked mistakes can still be useful evidence.</strong>
-                    <p>The frozen retriever's current competition reveals plausible alternatives the query must distinguish from; evidence need not be treated as predicted positives to be useful.</p>
-                  </div>
-                </header>
-
-                <div class="analysisx-mechanism-sequence analysisx-mechanism-sequence--compressed">
-                  <article class="analysisx-mechanism-step analysisx-mechanism-step--competition">
-                    <div class="analysisx-competition-viz" aria-hidden="true">
-                      <div class="analysisx-competition-query">q</div><i></i>
-                      <div class="analysisx-competition-ranks"><span>#1</span><span>#2</span><span>#3</span><span>…</span><span>#M</span></div>
-                      <b>CURRENT COMPETITION</b>
-                    </div>
-                    <div>
-                      <span>COMPETITION AS SIGNAL</span>
-                      <strong>The useful signal is the structure of plausible alternatives, not only likely positives.</strong>
-                    </div>
-                  </article>
-                </div>
-              </section>
-
-              <section class="analysisx-discussion-band analysisx-discussion-band--ttbps" aria-labelledby="analysis-ttbps-discussion-title">
-                <header class="analysisx-discussion-band__head">
-                  <div>
-                    <span>BEYOND ONE METHOD</span>
-                    <strong id="analysis-ttbps-discussion-title">T-TBPS leaves evidence and reasoning open.</strong>
-                    <p>GATE fixes one choice of gallery evidence and one reasoning mechanism; the setting itself prescribes neither.</p>
-                  </div>
-                </header>
-
-                <article class="analysisx-design-axes analysisx-design-axes--wide">
-                  <span>TWO OPEN DESIGN AXES</span>
-                  <div class="analysisx-axis-row">
-                    <b>WHAT GALLERY EVIDENCE?</b>
-                    <div><span>global</span><span>spatial</span><span>gallery-relative</span><span>local</span><span>relational</span><span>learned</span><em>…</em></div>
-                  </div>
-                  <div class="analysisx-axis-row">
-                    <b>HOW SHOULD THE QUERY REASON?</b>
-                    <div><span>pooling</span><span>structured</span><span>adaptive</span><span>query-conditioned</span><em>…</em></div>
-                  </div>
-                </article>
-              </section>
-            </div>
-
-            <div class="analysisx-discussion-closing">
-              <span>CONCEPTUAL PAYOFF</span>
-              <strong>Use the search space not only as something to rank, but also as context for deciding how to search it.</strong>
-            </div>
-          </article>
-
-        </div>
-      </section>
-
-      <section class="chapter scope-chapter scope2-chapter" id="scope" aria-labelledby="scope-title">
-        <div class="section-inner">
-          <header class="chapter-heading scope2-heading">
-            <p class="section-kicker">Scope / Limitations</p>
-            <h2 id="scope-title">Where does search-space-aware inference apply?</h2>
-            <p>Three boundaries define where the setting and diagnostic apply.</p>
-          </header>
-
-          <div class="scope2-boundaries" id="limitations" aria-label="Scope and limitations from the paper">
-            <article class="scope2-boundary scope2-boundary--gallery">
-              <div class="scope2-boundary__index"><span>01</span><b>SEARCH-SPACE AVAILABILITY</b></div>
-              <div class="scope2-boundary__main">
-                <strong>The current unlabeled gallery must be available before final retrieval.</strong>
-                <p>T-TBPS is therefore most natural for fixed or slowly changing databases, and less direct for fully streaming galleries whose candidate population changes continuously.</p>
-              </div>
-              <div class="scope2-boundary__signal" aria-hidden="true">
-                <span>fixed</span><i></i><span>slowly changing</span><i class="is-faded"></i><span class="is-muted">streaming</span>
-              </div>
-            </article>
-
-            <article class="scope2-boundary scope2-boundary--protocol">
-              <div class="scope2-boundary__index"><span>02</span><b>INFERENCE BOUNDARY</b></div>
-              <div class="scope2-boundary__main">
-                <strong>T-TBPS intentionally changes what information is available during inference.</strong>
-                <p>The unlabeled target gallery may inform query construction. Target identity labels and target supervision remain excluded, so this should be compared as a distinct inference setting rather than silently treated as standard TBPS.</p>
-              </div>
-              <div class="scope2-protocol-chips" aria-label="Allowed and excluded information">
-                <span class="is-allowed">UNLABELED GALLERY ✓</span>
-                <span>IDENTITY LABELS ×</span>
-                <span>TARGET SUPERVISION ×</span>
-              </div>
-            </article>
-
-            <article class="scope2-boundary scope2-boundary--diagnostic">
-              <div class="scope2-boundary__index"><span>03</span><b>DIAGNOSTIC SCOPE</b></div>
-              <div class="scope2-boundary__main">
-                <strong>The controlled intervention establishes one form of gallery dependence—not all of them.</strong>
-                <p>It shows reproducible sensitivity to cue-directed distractor composition, but does not characterize every possible dependence on gallery structure and does not imply that every query benefits equally from gallery-aware interpretation.</p>
-              </div>
-              <div class="scope2-diagnostic-viz" aria-hidden="true">
-                <span>CONTROLLED<br>INTERVENTION</span><i></i><strong>SUPPORTED CLAIM</strong><i class="is-dashed"></i><span class="is-muted">ALL GALLERY<br>DEPENDENCE</span>
-              </div>
-            </article>
-          </div>
-
-        </div>
-      </section>
-
-      <section class="chapter closing-chapter" id="takeaway" aria-labelledby="takeaway-title">
-        <div class="section-inner">
-          <div class="closing2-shell">
-            <div class="closing2-copy">
-              <p class="section-kicker">Closing Takeaway</p>
-              <h2 id="takeaway-title">The gallery can inform <em>how</em> a query searches—not only <em>what</em> it ranks.</h2>
-              <p>T-TBPS makes the unlabeled search space available during query construction; GATE demonstrates the value of doing so across frozen retrievers, benchmarks, and transfer settings.</p>
-            </div>
-
-            <div class="closing2-evidence" aria-label="Experimental breadth summarized in the paper conclusion">
-              <div><strong>5</strong><span>frozen retrievers</span></div>
-              <i aria-hidden="true"></i>
-              <div><strong>3</strong><span>benchmarks</span></div>
-              <i aria-hidden="true"></i>
-              <div><strong>6 / 6</strong><span>transfer directions</span></div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="section-inner footer-inner">
-        <p><strong>The Gallery as Context</strong></p>
-        <p>Publication metadata and public links will be added when explicitly supplied.</p>
-      </div>
-    </footer>
-
-    <script src="script.js"></script>
-  </body>
+</button>
+</header>
+<div class="qual-overview-shell">
+<button aria-label="Open the complete qualitative figure" class="qual-overview-button" data-qual-open-original="" type="button">
+<img alt="CLIP CUHK-PEDES qualitative retrieval figure" data-qual-overview-image="" decoding="async" loading="lazy" src="assets/qualitative/[t]clip-cuhk.png"/>
+<span aria-hidden="true" class="qual-row-focus" data-qual-row-focus=""><b>CASE 01</b></span>
+</button>
+</div>
+<div class="qual-case-toolbar">
+<div aria-label="Qualitative case" class="qual-case-picker" role="tablist">
+<span>Case</span>
+<button aria-selected="true" data-qual-case="0" role="tab" type="button">01</button>
+<button aria-selected="false" data-qual-case="1" role="tab" type="button">02</button>
+<button aria-selected="false" data-qual-case="2" role="tab" type="button">03</button>
+</div>
+</div>
+<div class="qual-focus-grid">
+<article class="qual-query-panel">
+<div class="qual-panel-label">
+<span>Query</span>
+</div>
+<div class="qual-crop qual-crop--query" data-qual-crop="query">
+<img alt="Selected text query crop" data-qual-crop-image="" draggable="false"/>
+</div>
+</article>
+<div class="qual-ranking-story">
+<article class="qual-ranking-panel qual-ranking-panel--base">
+<div class="qual-ranking-head">
+<div>
+<span class="qual-ranking-eyebrow">Frozen base</span>
+<strong data-qual-base-label="">CLIP</strong>
+</div>
+</div>
+<div aria-hidden="true" class="qual-rank-labels"><span>R1</span><span>R2</span><span>R3</span><span>R4</span><span>R5</span></div>
+<div class="qual-crop qual-crop--ranking" data-qual-crop="base">
+<img alt="Selected frozen base ranking crop" data-qual-crop-image="" draggable="false"/>
+</div>
+</article>
+<div aria-label="Gallery-aware enrichment connects the base ranking to the GATE ranking" class="qual-context-bridge">
+<div aria-hidden="true" class="qual-context-line"><span></span></div>
+<div class="qual-context-copy"><strong>GATE</strong></div>
+<div aria-hidden="true" class="qual-context-line qual-context-line--down"><span></span></div>
+</div>
+<article class="qual-ranking-panel qual-ranking-panel--gate">
+<div class="qual-ranking-head">
+<div>
+<span class="qual-ranking-eyebrow">+ GATE</span>
+<strong data-qual-gate-label="">GATE–CLIP</strong>
+</div>
+</div>
+<div aria-hidden="true" class="qual-rank-labels"><span>R1</span><span>R2</span><span>R3</span><span>R4</span><span>R5</span></div>
+<div class="qual-crop qual-crop--ranking" data-qual-crop="gate">
+<img alt="Selected GATE-enhanced ranking crop" data-qual-crop-image="" draggable="false"/>
+</div>
+</article>
+</div>
+</div>
+<footer class="qual-stage-footer">
+<div aria-label="Qualitative figure legend" class="qual-legend">
+<span><i class="qual-legend-dot qual-legend-dot--target"></i> target identity</span>
+<span><i class="qual-legend-dot qual-legend-dot--distractor"></i> distractor</span>
+</div>
+</footer>
+<p aria-live="polite" class="sr-only" data-qual-status=""></p>
+</div>
+</section>
+<div aria-hidden="true" class="qual-lightbox" data-open="false" hidden="" id="qualitative-lightbox">
+<div class="qual-lightbox-backdrop" data-qual-lightbox-close=""></div>
+<div aria-label="Qualitative figure preview" aria-modal="true" class="qual-lightbox-panel" role="dialog">
+<button aria-label="Close image viewer" class="qual-lightbox-close" data-qual-lightbox-close="" type="button">
+<span aria-hidden="true">×</span>
+</button>
+<img alt="" id="qualitative-lightbox-image"/>
+</div>
+</div>
+</div>
+</section>
+<section aria-labelledby="analysis-title" class="chapter analysis-chapter analysisx-chapter" id="analysis">
+<div class="section-inner">
+<div class="chapter-heading analysisx-heading">
+<h2 id="analysis-title">Analysis</h2>
+</div>
+<article aria-labelledby="evidence-ablation-title" class="analysisx-panel analysisx-evidence" data-analysis-evidence="" id="evidence-ablation-section">
+<header class="analysisx-panel__head">
+<div>
+<h3 id="evidence-ablation-title">More evidence is not automatically better</h3>
+</div>
+<div aria-label="Evidence ablation controls" class="analysisx-controls">
+<div class="analysisx-control-group">
+<span>Benchmark</span>
+<div aria-label="Evidence benchmark" class="analysisx-tabs" role="tablist">
+<button aria-selected="true" data-analysis-evidence-dataset="0" role="tab" type="button">CUHK</button>
+<button aria-selected="false" data-analysis-evidence-dataset="1" role="tab" type="button">ICFG</button>
+<button aria-selected="false" data-analysis-evidence-dataset="2" role="tab" type="button">RSTP</button>
+</div>
+</div>
+<div class="analysisx-control-group">
+<span>Metric</span>
+<div aria-label="Evidence metric" class="analysisx-tabs" role="tablist">
+<button aria-selected="false" data-analysis-evidence-metric="r1" role="tab" type="button">R@1</button>
+<button aria-selected="true" data-analysis-evidence-metric="map" role="tab" type="button">mAP</button>
+</div>
+</div>
+</div>
+</header>
+<div class="analysisx-evidence-workbench">
+<section aria-labelledby="analysis-evidence-chart-title" class="analysisx-dot-card">
+<div class="analysisx-card-head">
+<div>
+<span>DELTA VS FROZEN CLIP</span>
+<strong id="analysis-evidence-chart-title">Individual vs Global-combined evidence</strong>
+</div>
+<small data-analysis-evidence-context="">CUHK-PEDES · mAP</small>
+</div>
+<div aria-live="polite" class="analysisx-dot-chart" id="analysis-evidence-chart"></div>
+</section>
+<aside aria-live="polite" class="analysisx-winner">
+<span>BEST CONFIGURATION</span>
+<strong data-analysis-evidence-winner="">Grid</strong>
+<div data-analysis-evidence-winner-value="">+2.48 mAP</div>
+<div class="analysisx-winner-split">
+<div><small>best individual</small><b data-analysis-best-individual="">Grid · +2.48</b></div>
+<div><small>best Global + provider</small><b data-analysis-best-combined="">Global + Horizontal · +2.46</b></div>
+</div>
+</aside>
+</div>
+<details class="analysisx-deep-detail"><summary>Explore provider combinations</summary><section aria-labelledby="analysis-global-test-title" class="analysisx-global-test">
+<div class="analysisx-global-test__head">
+<div>
+<span>DOES ADDING GLOBAL HELP?</span>
+<h4 id="analysis-global-test-title">Compare each provider with its Global-combined counterpart</h4>
+</div>
+<div aria-label="Provider comparison" class="analysisx-provider-tabs" role="tablist">
+<button aria-selected="true" data-analysis-provider="Vertical" role="tab" type="button">Vertical</button>
+<button aria-selected="false" data-analysis-provider="Horizontal" role="tab" type="button">Horizontal</button>
+<button aria-selected="false" data-analysis-provider="Grid" role="tab" type="button">Grid</button>
+<button aria-selected="false" data-analysis-provider="Centroid" role="tab" type="button">Centroid</button>
+<button aria-selected="false" data-analysis-provider="Residual" role="tab" type="button">Residual</button>
+</div>
+</div>
+<div class="analysisx-global-compare" data-analysis-global-compare="">
+<div aria-hidden="true" class="analysisx-merge-label">
+<span class="analysisx-chip">Global</span><b>+</b><span class="analysisx-chip" data-analysis-provider-chip="">Vertical</span>
+</div>
+<div aria-label="Individual provider versus Global combined provider" class="analysisx-dumbbell">
+<div class="analysisx-dumbbell__track">
+<span class="analysisx-dumbbell__link" data-analysis-dumbbell-link=""></span>
+<i class="analysisx-dumbbell__point analysisx-dumbbell__point--base" data-analysis-dumbbell-base=""></i>
+<i class="analysisx-dumbbell__point analysisx-dumbbell__point--combo" data-analysis-dumbbell-combo=""></i>
+</div>
+<div class="analysisx-dumbbell__labels">
+<div><span data-analysis-provider-name="">Vertical</span><strong data-analysis-provider-value="">+1.61</strong></div>
+<div><span data-analysis-combo-name="">Global + Vertical</span><strong data-analysis-combo-value="">+1.67</strong></div>
+</div>
+</div>
+<div class="analysisx-global-verdict">
+<span data-analysis-global-verdict-label="">HELPS</span>
+<strong data-analysis-global-verdict-value="">+0.06</strong>
+<p data-analysis-global-verdict-copy="">Adding Global changes the selected metric by +0.06 points.</p>
+</div>
+</div>
+</section></details>
+</article>
+<article aria-labelledby="reasoning-title" class="analysisx-panel analysisx-reasoning" data-analysis-reasoning="" id="reasoning">
+<header class="analysisx-panel__head analysisx-panel__head--reasoning">
+<div>
+<h3 id="reasoning-title">Seeing gallery evidence is not enough</h3>
+</div>
+<div class="analysisx-reasoning-summary">
+<span>COMPLETE QCRS</span>
+<strong>Best R@1 on 3 / 3</strong>
+<small>Best mAP on 2 / 3 benchmarks</small>
+</div>
+</header>
+<div aria-label="Reasoning architecture comparison" class="analysisx-architecture-cards" role="tablist">
+<button aria-selected="false" class="analysisx-arch" data-analysis-reasoning-key="meanpool" role="tab" type="button">
+<span>BASELINE</span><strong>MeanPool</strong><small>evidence → one vector</small>
+<div aria-hidden="true" class="analysisx-arch-viz analysisx-arch-viz--pool"><i></i><i></i><i></i><b></b></div>
+</button>
+<button aria-selected="false" class="analysisx-arch" data-analysis-reasoning-key="flatmlp" role="tab" type="button">
+<span>BASELINE</span><strong>Flat-MLP</strong><small>flatten → generic MLP</small>
+<div aria-hidden="true" class="analysisx-arch-viz analysisx-arch-viz--flat"><i></i><i></i><i></i><b></b></div>
+</button>
+<button aria-selected="true" class="analysisx-arch analysisx-arch--active" data-analysis-reasoning-key="qcrs" role="tab" type="button">
+<span>STRUCTURED</span><strong>QCRS-Mixer</strong><small>rank × slot → structured mixing</small>
+<div aria-hidden="true" class="analysisx-arch-viz analysisx-arch-viz--qcrs"><i></i><i></i><i></i><i></i><b></b></div>
+</button>
+</div>
+<details class="analysisx-deep-detail"><summary>Explore QCRS component ablations</summary><div class="analysisx-dissection">
+<section aria-labelledby="analysisx-mixer-title" class="analysisx-mixer-card">
+<div class="analysisx-card-head">
+<div><span>DISSECT QCRS</span><strong id="analysisx-mixer-title">Remove one component and inspect the result</strong></div>
+<button class="analysisx-reset" data-analysis-reasoning-reset="" type="button">Full QCRS</button>
+</div>
+<div class="analysisx-mixer-scene" data-analysis-mixer-scene="">
+<div class="analysisx-mixer-query"><span>QUERY</span><strong>u<sub>q</sub></strong></div>
+<div class="analysisx-mixer-component" data-analysis-component="film"><span>FiLM</span><small>query condition</small></div>
+<div class="analysisx-mixer-tensor">
+<div class="analysisx-mixer-embeddings">
+<button data-analysis-component-button="rankemb" type="button">Rank emb.</button>
+<button data-analysis-component-button="slotemb" type="button">Slot emb.</button>
+</div>
+<div aria-hidden="true" class="analysisx-mini-cube">
+<i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+</div>
+<span>rank × slot evidence</span>
+</div>
+<div class="analysisx-mixer-passes">
+<button data-analysis-component-button="slotmix" type="button">SlotMix <small>within candidate</small></button>
+<button data-analysis-component-button="rankmix" type="button">RankMix <small>across candidates</small></button>
+<button data-analysis-component-button="chanmix" type="button">ChanMix <small>refine channels</small></button>
+</div>
+<div class="analysisx-mixer-output"><span>CONTEXT</span><strong>g<sub>q</sub></strong></div>
+</div>
+<div aria-label="QCRS component ablations" class="analysisx-component-picker" role="group">
+<button data-analysis-component-choice="film" type="button">– FiLM</button>
+<button data-analysis-component-choice="rankemb" type="button">– Rank Emb.</button>
+<button data-analysis-component-choice="slotemb" type="button">– Slot Emb.</button>
+<button data-analysis-component-choice="slotmix" type="button">– SlotMix</button>
+<button data-analysis-component-choice="rankmix" type="button">– RankMix</button>
+<button data-analysis-component-choice="chanmix" type="button">– ChanMix</button>
+</div>
+</section>
+<aside aria-live="polite" class="analysisx-reasoning-readout">
+<div class="analysisx-reasoning-readout__summary">
+<span data-analysis-reasoning-tag="">COMPLETE STRUCTURE</span>
+<h4 data-analysis-reasoning-name="">QCRS-Mixer</h4>
+<p data-analysis-reasoning-copy="">Query conditioning, rank/slot embeddings, and all three mixer passes are active.</p>
+</div>
+<div class="analysisx-reasoning-readout__results">
+<span class="analysisx-reasoning-results-label">SELECTED CONFIGURATION · R@1 / mAP</span>
+<div class="analysisx-score-grid" id="analysis-reasoning-scores"></div>
+</div>
+</aside>
+</div></details>
+</article><p class="analysisx-main-synthesis">Gallery context works best when evidence is <strong>selective</strong> and reasoning is <strong>structured</strong>.</p>
+<details class="analysisx-discussion-details"><summary>Discussion &amp; broader implications</summary><article aria-labelledby="analysis-discussion-title" class="analysisx-panel analysisx-discussion" id="analysis-discussion">
+<header class="analysisx-panel__head analysisx-panel__head--compact">
+<div>
+<p class="subsection-label">04 / Discussion</p>
+<h3 id="analysis-discussion-title">What does GATE teach us beyond GATE?</h3>
+</div>
+<span class="analysisx-concept-badge">GATE ⊂ T-TBPS</span>
+</header>
+<div class="analysisx-discussion-stack">
+<section aria-labelledby="analysis-gate-discussion-title" class="analysisx-discussion-band analysisx-discussion-band--gate">
+<header class="analysisx-discussion-band__head">
+<div>
+<span>UNDERSTANDING THE MECHANISM</span>
+<strong id="analysis-gate-discussion-title">High-ranked mistakes can still be useful evidence.</strong>
+<p>The frozen retriever's current competition reveals plausible alternatives the query must distinguish from; evidence need not be treated as predicted positives to be useful.</p>
+</div>
+</header>
+<div class="analysisx-mechanism-sequence analysisx-mechanism-sequence--compressed">
+<article class="analysisx-mechanism-step analysisx-mechanism-step--competition">
+<div aria-hidden="true" class="analysisx-competition-viz">
+<div class="analysisx-competition-query">q</div><i></i>
+<div class="analysisx-competition-ranks"><span>#1</span><span>#2</span><span>#3</span><span>…</span><span>#M</span></div>
+<b>CURRENT COMPETITION</b>
+</div>
+<div>
+<span>COMPETITION AS SIGNAL</span>
+<strong>The useful signal is the structure of plausible alternatives, not only likely positives.</strong>
+</div>
+</article>
+</div>
+</section>
+<section aria-labelledby="analysis-ttbps-discussion-title" class="analysisx-discussion-band analysisx-discussion-band--ttbps">
+<header class="analysisx-discussion-band__head">
+<div>
+<span>BEYOND ONE METHOD</span>
+<strong id="analysis-ttbps-discussion-title">T-TBPS leaves evidence and reasoning open.</strong>
+<p>GATE fixes one choice of gallery evidence and one reasoning mechanism; the setting itself prescribes neither.</p>
+</div>
+</header>
+<article class="analysisx-design-axes analysisx-design-axes--wide">
+<span>TWO OPEN DESIGN AXES</span>
+<div class="analysisx-axis-row">
+<b>WHAT GALLERY EVIDENCE?</b>
+<div><span>global</span><span>spatial</span><span>gallery-relative</span><span>local</span><span>relational</span><span>learned</span><em>…</em></div>
+</div>
+<div class="analysisx-axis-row">
+<b>HOW SHOULD THE QUERY REASON?</b>
+<div><span>pooling</span><span>structured</span><span>adaptive</span><span>query-conditioned</span><em>…</em></div>
+</div>
+</article>
+</section>
+</div>
+<div class="analysisx-discussion-closing">
+<span>CONCEPTUAL PAYOFF</span>
+<strong>Use the search space not only as something to rank, but also as context for deciding how to search it.</strong>
+</div>
+</article></details>
+</div>
+</section>
+<section aria-labelledby="scope-title" class="chapter scope-chapter scope2-chapter" id="scope">
+<div class="section-inner">
+<header class="chapter-heading scope2-heading">
+<h2 class="sr-only" id="scope-title">Scope and limitations</h2>
+</header>
+<details class="scope2-collapsible"><summary>Scope &amp; limitations</summary><div aria-label="Scope and limitations from the paper" class="scope2-boundaries" id="limitations">
+<article class="scope2-boundary scope2-boundary--gallery">
+<div class="scope2-boundary__index"><span>01</span><b>SEARCH-SPACE AVAILABILITY</b></div>
+<div class="scope2-boundary__main">
+<strong>The current unlabeled gallery must be available before final retrieval.</strong>
+</div>
+<div aria-hidden="true" class="scope2-boundary__signal">
+<span>fixed</span><i></i><span>slowly changing</span><i class="is-faded"></i><span class="is-muted">streaming</span>
+</div>
+</article>
+<article class="scope2-boundary scope2-boundary--protocol">
+<div class="scope2-boundary__index"><span>02</span><b>INFERENCE BOUNDARY</b></div>
+<div class="scope2-boundary__main">
+<strong>T-TBPS intentionally changes what information is available during inference.</strong>
+</div>
+<div aria-label="Allowed and excluded information" class="scope2-protocol-chips">
+<span class="is-allowed">UNLABELED GALLERY ✓</span>
+<span>IDENTITY LABELS ×</span>
+<span>TARGET SUPERVISION ×</span>
+</div>
+</article>
+<article class="scope2-boundary scope2-boundary--diagnostic">
+<div class="scope2-boundary__index"><span>03</span><b>DIAGNOSTIC SCOPE</b></div>
+<div class="scope2-boundary__main">
+<strong>The controlled intervention establishes one form of gallery dependence—not all of them.</strong>
+</div>
+<div aria-hidden="true" class="scope2-diagnostic-viz">
+<span>CONTROLLED<br/>INTERVENTION</span><i></i><strong>SUPPORTED CLAIM</strong><i class="is-dashed"></i><span class="is-muted">ALL GALLERY<br/>DEPENDENCE</span>
+</div>
+</article>
+</div></details>
+</div>
+</section>
+<section aria-labelledby="takeaway-title" class="chapter closing-chapter" id="takeaway">
+<div class="section-inner">
+<div class="closing2-shell">
+<div class="closing2-copy">
+<h2 id="takeaway-title">The gallery can inform <em>how</em> a query searches—not only <em>what</em> it ranks.</h2>
+</div>
+<div aria-label="Experimental breadth summarized in the paper conclusion" class="closing2-evidence">
+<div><strong>5</strong><span>retrievers</span></div>
+<i aria-hidden="true"></i>
+<div><strong>3</strong><span>benchmarks</span></div>
+<i aria-hidden="true"></i>
+<div><strong>6 / 6</strong><span>transfer directions</span></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="section-inner footer-inner">
+<p><strong>The Gallery as Context</strong></p>
+</div>
+</footer>
+<script src="script.js"></script>
+</body>
 </html>
