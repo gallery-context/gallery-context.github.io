@@ -322,6 +322,55 @@ h1 {
   line-height: 1.55;
 }
 
+.overview-video {
+  padding-block: 1.15rem 4.25rem;
+  background: var(--color-bg);
+}
+
+.overview-video-inner {
+  display: grid;
+  justify-items: center;
+  max-width: 1000px;
+}
+
+.overview-video-figure {
+  width: min(100%, 960px);
+  margin: 0;
+}
+
+.overview-video-player {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid rgb(var(--color-border-rgb) / 0.94);
+  border-radius: calc(var(--radius-card) + 3px);
+  background: #101416;
+  box-shadow: var(--shadow-subtle);
+  object-fit: contain;
+}
+
+.overview-video-player:focus-visible {
+  outline: 3px solid rgb(var(--color-accent-rgb) / 0.35);
+  outline-offset: 4px;
+}
+
+.overview-video-caption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.78rem 0.75rem 0;
+  color: var(--color-text-muted);
+  font-size: 0.86rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.overview-video-caption span {
+  color: var(--color-accent-dark);
+  font-size: 0.72rem;
+}
+
 .overview-highlights {
   padding-block: 0.65rem 2.25rem;
 }
@@ -14505,3 +14554,19 @@ figcaption {
   }
 }
 \n\n/* Editorial compression pass — 2026-09-07\n   Keep the existing visual language while tightening sections whose prose was merged or removed. */\n.frontier-proof-grid {\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n}\n\n.gate2-story-strip--micro article {\n  grid-template-rows: auto auto;\n  align-content: center;\n  min-height: 74px;\n}\n\n.gate2-story-strip--micro article p {\n  display: none;\n}\n\n.gate2-detail-stack--compressed {\n  align-content: start;\n}\n\n.analysisx-interpretation-grid--compressed {\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n  gap: 0.72rem;\n}\n\n.analysisx-interpretation-grid--compressed .analysisx-insight {\n  grid-template-rows: 54px auto auto;\n  min-height: 150px;\n}\n\n.analysisx-synthesis-line {\n  margin-top: 0.72rem;\n  padding: 0.72rem 0.82rem;\n  border-left: 2px solid rgb(var(--color-accent-rgb) / 0.42);\n  color: var(--color-text);\n  background: rgb(var(--color-accent-soft-rgb) / 0.28);\n  font-size: 0.82rem;\n  line-height: 1.5;\n}\n\n.analysisx-mechanism-sequence--compressed {\n  grid-template-columns: minmax(0, 1fr);\n}\n\n.analysisx-mechanism-sequence--compressed .analysisx-mechanism-step {\n  grid-template-columns: minmax(230px, 0.62fr) minmax(0, 1.38fr);\n  grid-template-rows: none;\n  align-items: center;\n}\n\n.analysisx-mechanism-sequence--compressed .analysisx-mechanism-step > div:last-child > strong {\n  font-size: 0.84rem;\n}\n\n@media (max-width: 720px) {\n  .frontier-proof-grid,\n  .analysisx-interpretation-grid--compressed {\n    grid-template-columns: 1fr;\n  }\n\n  .analysisx-mechanism-sequence--compressed .analysisx-mechanism-step {\n    grid-template-columns: 1fr;\n  }\n}\n
+
+@media (max-width: 640px) {
+  .overview-video {
+    padding-block: 0.95rem 3.25rem;
+  }
+
+  .overview-video-player {
+    border-radius: var(--radius-card);
+  }
+
+  .overview-video-caption {
+    padding-inline: 0.25rem;
+    font-size: 0.82rem;
+  }
+}
+
