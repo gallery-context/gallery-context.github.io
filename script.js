@@ -927,112 +927,47 @@ function bindTtbpsScrollFlow() {
 
 
 function bindGateMethodExplorer() {
-  const explorer = document.querySelector("[data-gate-explorer]");
-  const panels = explorer ? Array.from(explorer.querySelectorAll("[data-gate-panel]")) : [];
-  const tabs = explorer ? Array.from(explorer.querySelectorAll("[data-gate-tab]")) : [];
-  const overviewLinks = Array.from(document.querySelectorAll("#method [data-gate-overview-target]"));
-  const prev = explorer?.querySelector("[data-gate-prev]");
-  const next = explorer?.querySelector("[data-gate-next]");
-  const counter = explorer?.querySelector("[data-gate-counter]");
+  const story = document.querySelector("[data-gate-story]");
+  const overview = story?.querySelector("[data-gate-overview]");
+  const explorer = story?.querySelector("[data-gate-explorer]");
+  const scenes = story ? Array.from(story.querySelectorAll("[data-gate-scene]")) : [];
+  if (!story) return;
 
-  if (!explorer || panels.length === 0 || tabs.length !== panels.length) return;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const revealTargets = [overview, ...scenes].filter(Boolean);
 
-  const clampIndex = (index) => Math.max(0, Math.min(panels.length - 1, index));
-  let activeIndex = 0;
-
-  const typesetPanel = (panel) => {
-    if (!panel || !window.MathJax?.typesetPromise) return;
-    window.MathJax.typesetPromise([panel]).catch(() => {});
+  const reveal = (element) => {
+    if (!element) return;
+    element.classList.add("is-visible");
   };
 
-  function setActive(index, { focus = false, updateHash = false } = {}) {
-    activeIndex = clampIndex(index);
-
-    tabs.forEach((tab, tabIndex) => {
-      const active = tabIndex === activeIndex;
-      tab.classList.toggle("is-active", active);
-      tab.setAttribute("aria-selected", String(active));
-      tab.tabIndex = active ? 0 : -1;
-    });
-
-    panels.forEach((panel, panelIndex) => {
-      const active = panelIndex === activeIndex;
-      panel.classList.toggle("is-active", active);
-      panel.hidden = !active;
-      panel.setAttribute("aria-hidden", String(!active));
-    });
-
-    overviewLinks.forEach((link) => {
-      const targetIndex = Number.parseInt(link.dataset.gateOverviewTarget || "-1", 10);
-      link.classList.toggle("is-linked-active", explorer.open && targetIndex === activeIndex);
-    });
-
-    if (counter) {
-      counter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(panels.length).padStart(2, "0")}`;
-    }
-    if (prev) prev.disabled = activeIndex === 0;
-    if (next) next.disabled = activeIndex === panels.length - 1;
-
-    const activePanel = panels[activeIndex];
-    typesetPanel(activePanel);
-    if (focus) activePanel?.focus({ preventScroll: true });
-
-    if (updateHash && activePanel?.id && window.history?.replaceState) {
-      window.history.replaceState(null, "", `#${activePanel.id}`);
-    }
-  }
-
-  function openAt(index, { scroll = true, updateHash = true } = {}) {
-    explorer.open = true;
-    setActive(index, { updateHash });
-    window.requestAnimationFrame(() => {
-      if (scroll) explorer.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  }
-
-  overviewLinks.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-      const index = Number.parseInt(link.dataset.gateOverviewTarget || "0", 10);
-      openAt(index, { scroll: true, updateHash: true });
-    });
-  });
-
-  tabs.forEach((tab, index) => {
-    tab.addEventListener("click", () => setActive(index, { updateHash: true }));
-    tab.addEventListener("keydown", (event) => {
-      let nextIndex = null;
-      if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
-      if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length;
-      if (event.key === "Home") nextIndex = 0;
-      if (event.key === "End") nextIndex = tabs.length - 1;
-      if (nextIndex === null) return;
-      event.preventDefault();
-      setActive(nextIndex, { updateHash: true });
-      tabs[nextIndex].focus();
-    });
-  });
-
-  prev?.addEventListener("click", () => setActive(activeIndex - 1, { updateHash: true }));
-  next?.addEventListener("click", () => setActive(activeIndex + 1, { updateHash: true }));
-
-  explorer.addEventListener("toggle", () => {
-    if (!explorer.open) {
-      overviewLinks.forEach((link) => link.classList.remove("is-linked-active"));
-      return;
-    }
-    setActive(activeIndex);
-  });
-
-  const initialHashIndex = panels.findIndex((panel) => `#${panel.id}` === window.location.hash);
-  if (initialHashIndex >= 0) {
-    explorer.open = true;
-    setActive(initialHashIndex);
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    revealTargets.forEach(reveal);
   } else {
-    setActive(0);
+    revealTargets.forEach((element) => element.classList.add("gatep-motion-ready"));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        reveal(entry.target);
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -7% 0px" });
+    revealTargets.forEach((element) => observer.observe(element));
   }
-}
 
+  explorer?.addEventListener("toggle", () => {
+    explorer.classList.toggle("is-open", explorer.open);
+    if (!explorer.open) return;
+
+    window.requestAnimationFrame(() => {
+      scenes.forEach((scene, index) => {
+        if (reduceMotion || scene.getBoundingClientRect().top < window.innerHeight * 0.94) {
+          window.setTimeout(() => reveal(scene), reduceMotion ? 0 : index * 80);
+        }
+      });
+    });
+  });
+}
 
 function formatSignedDelta(value) {
   const sign = value > 0 ? "+" : value < 0 ? "−" : "±";
