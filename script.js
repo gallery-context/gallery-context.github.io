@@ -1360,6 +1360,73 @@ function bindAnalysisSection() {
   bindAnalysisMotion();
 }
 
+
+function bindTypographyAudit() {
+  const params = new URLSearchParams(window.location.search);
+  if (!params.has("type-audit")) return;
+
+  const runAudit = () => {
+    document.documentElement.classList.add("typography-audit-active");
+    document.querySelector("#typography-audit-style")?.remove();
+
+    const auditStyle = document.createElement("style");
+    auditStyle.id = "typography-audit-style";
+    auditStyle.textContent = `
+      [data-type-audit="critical"] { outline: 2px solid #c62828 !important; outline-offset: 2px; }
+      [data-type-audit="micro"] { outline: 2px solid #ef6c00 !important; outline-offset: 2px; }
+      [data-type-audit="label"] { outline: 2px solid #d4a017 !important; outline-offset: 2px; }
+    `;
+    document.head.appendChild(auditStyle);
+
+    const results = [];
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    let node;
+
+    while ((node = walker.nextNode())) {
+      const text = node.textContent.replace(/\s+/g, " ").trim();
+      if (!text) continue;
+      const element = node.parentElement;
+      if (!element || element.closest(".sr-only, [hidden], [aria-hidden='true']")) continue;
+
+      const computed = getComputedStyle(element);
+      if (computed.display === "none" || computed.visibility === "hidden" || Number(computed.opacity) === 0) continue;
+
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      const visible = Array.from(range.getClientRects()).some((rect) => rect.width > 0 && rect.height > 0);
+      if (!visible) continue;
+
+      const px = Number.parseFloat(computed.fontSize);
+      if (!Number.isFinite(px) || px >= 14) continue;
+
+      const severity = px < 12 ? "critical" : px < 13 ? "micro" : "label";
+      if (!element.dataset.typeAudit) element.dataset.typeAudit = severity;
+
+      results.push({
+        px: Number(px.toFixed(2)),
+        severity,
+        text: text.slice(0, 120),
+        element: `${element.tagName.toLowerCase()}${element.id ? `#${element.id}` : ""}${Array.from(element.classList).map((name) => `.${name}`).join("")}`
+      });
+    }
+
+    results.sort((a, b) => a.px - b.px || a.element.localeCompare(b.element));
+    console.group(`[Typography audit] ${results.length} visible text nodes below 14px`);
+    console.table(results);
+    console.info("Red <12px · orange 12–<13px · yellow 13–<14px. Micro annotations may be intentional; readable labels should be 13px+, captions 14px+.");
+    console.groupEnd();
+
+    window.typographyAuditResults = results;
+    window.clearTypographyAudit = () => {
+      document.querySelectorAll("[data-type-audit]").forEach((element) => delete element.dataset.typeAudit);
+      document.querySelector("#typography-audit-style")?.remove();
+      document.documentElement.classList.remove("typography-audit-active");
+    };
+  };
+
+  window.requestAnimationFrame(() => window.requestAnimationFrame(runAudit));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderDiagnosticHeatmap();
   renderDiagnosticSensitivityMatrix();
@@ -1377,4 +1444,5 @@ document.addEventListener("DOMContentLoaded", () => {
   bindDiagnosticStory();
   bindTtbpsScrollFlow();
   bindGateMethodExplorer();
+  bindTypographyAudit();
 });

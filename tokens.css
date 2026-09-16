@@ -37,4 +37,14 @@
   --shadow-subtle: 0 1px 2px rgb(var(--color-text-rgb) / 0.05);
   --z-header: 100;
   --z-skip-link: 1000;
+  /* Typography scale — readability-first, normalized 2026-09-16.
+     12px is reserved for true diagram micro-annotations; anything users
+     need to read as a label/control starts at 13px. */
+  --type-micro: 0.75rem;       /* 12px — rank badges / axis microcopy only */
+  --type-label: 0.8125rem;     /* 13px — eyebrows, kickers, legends, labels */
+  --type-ui: 0.8125rem;        /* 13px — compact tabs / controls */
+  --type-caption: 0.875rem;    /* 14px — captions, notes, supporting copy */
+  --type-support: 0.9375rem;   /* 15px — explanatory / lead copy */
+  --type-body: 1rem;           /* 16px — normal content token (body remains 17px) */
+
 }

@@ -193,7 +193,7 @@ p {
   margin: 0 0 0.6rem;
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   font-weight: 600;
   letter-spacing: 0.055em;
   text-transform: uppercase;
@@ -317,7 +317,7 @@ h1 {
 .tldr-label {
   margin: 0;
   color: var(--color-accent-dark);
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
   letter-spacing: 0.11em;
 }
 
@@ -488,7 +488,7 @@ h1 {
 
 .overview-video-caption span {
   color: var(--color-accent-dark);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
 }
 
 .overview-highlights {
@@ -540,7 +540,7 @@ h1 {
   margin: 0;
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   font-weight: 600;
   letter-spacing: 0.055em;
   text-transform: uppercase;
@@ -594,7 +594,7 @@ h1 {
 .overview-gallery-head strong {
   color: var(--color-text);
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: var(--type-micro);
   font-weight: 600;
   letter-spacing: 0.04em;
   line-height: 1;
@@ -633,7 +633,7 @@ h1 {
   border-radius: 4px;
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.53rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.04em;
   line-height: 1;
@@ -664,7 +664,7 @@ h1 {
   align-items: center;
   gap: 0.44rem;
   min-height: 1rem;
-  font-size: 0.71rem;
+  font-size: var(--type-micro);
   line-height: 1.2;
 }
 
@@ -713,7 +713,7 @@ h1 {
 .overview-cue-state {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.59rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.04em;
   line-height: 1;
@@ -821,7 +821,7 @@ h1 {
 .ttbps-section__label {
   color: var(--color-text-muted);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.055em;
   line-height: 1;
@@ -1239,7 +1239,7 @@ figcaption {
   border-radius: 4px;
   color: var(--color-good);
   background: var(--color-good-soft);
-  font-size: 0.64rem;
+  font-size: var(--type-micro);
   font-weight: 600;
   content: attr(data-label);
 }
@@ -1506,7 +1506,7 @@ figcaption {
 .diagnostic-interpretation .section-kicker {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   font-weight: 600;
   letter-spacing: 0.055em;
   line-height: 1;
@@ -1577,7 +1577,7 @@ figcaption {
 .diagnostic-gallery-node strong {
   color: var(--color-text);
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: var(--type-micro);
   font-weight: 600;
   letter-spacing: 0.04em;
   line-height: 1;
@@ -1690,7 +1690,7 @@ figcaption {
 .diagnostic-outcome span {
   color: var(--color-text-muted);
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   font-weight: 600;
   letter-spacing: 0.05em;
   line-height: 1;
@@ -1714,7 +1714,7 @@ figcaption {
 .diagnostic-flip-arrow {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
   font-weight: 600;
   letter-spacing: 0.06em;
   line-height: 1;
@@ -1804,7 +1804,7 @@ figcaption {
   gap: 0.5rem 0.7rem;
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   font-weight: 600;
   letter-spacing: 0.055em;
   line-height: 1;
@@ -1852,7 +1852,7 @@ figcaption {
   display: block;
   margin-top: 0.08rem;
   color: rgb(var(--color-text-rgb) / 0.72);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   font-weight: 500;
 }
 
@@ -1888,7 +1888,7 @@ figcaption {
 .gate-method-bridge span:not(.gate-method-bridge__arrow) {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.61rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.055em;
   text-transform: uppercase;
@@ -1940,13 +1940,13 @@ figcaption {
 
 .gate-scroll__rail-item span {
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.04em;
 }
 
 .gate-scroll__rail-item strong {
-  font-size: 0.74rem;
+  font-size: var(--type-micro);
   font-weight: 650;
 }
 
@@ -2019,7 +2019,7 @@ figcaption {
   padding-top: 0.1rem;
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.63rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.055em;
   line-height: 1.2;
@@ -2050,7 +2050,7 @@ figcaption {
 .gate-mini-label {
   color: var(--color-text-muted);
   font-family: var(--font-mono);
-  font-size: 0.59rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.05em;
   line-height: 1;
@@ -2060,7 +2060,7 @@ figcaption {
 .gate-panel__subhead strong {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.035em;
   text-transform: uppercase;
@@ -2163,7 +2163,7 @@ figcaption {
 .gate-frozen-node > span {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.55rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.055em;
 }
@@ -2174,7 +2174,7 @@ figcaption {
 
 .gate-frozen-node small {
   color: var(--color-text-muted);
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
 }
 
 .gate-observe-ranking {
@@ -2228,7 +2228,7 @@ figcaption {
   color: var(--color-text);
   background: rgb(var(--color-surface-rgb) / 0.92);
   font-family: var(--font-mono);
-  font-size: 0.52rem;
+  font-size: var(--type-micro);
   font-weight: 700;
 }
 
@@ -2286,7 +2286,7 @@ figcaption {
   place-items: center;
   border-radius: 50%;
   font-family: var(--font-mono);
-  font-size: 0.52rem;
+  font-size: var(--type-micro);
   font-weight: 700;
 }
 
@@ -2296,7 +2296,7 @@ figcaption {
 
 .gate-provider small {
   color: var(--color-text-muted);
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
   line-height: 1.3;
 }
 
@@ -2369,7 +2369,7 @@ figcaption {
   color: var(--color-text-muted);
   background: var(--color-surface-muted);
   font-family: var(--font-mono);
-  font-size: 0.54rem;
+  font-size: var(--type-micro);
   font-weight: 700;
 }
 
@@ -2410,7 +2410,7 @@ figcaption {
   color: var(--color-text-quiet);
   background: var(--color-surface-subtle);
   font-family: var(--font-mono);
-  font-size: 0.52rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -2424,7 +2424,7 @@ figcaption {
 
 .gate-axis-note span {
   color: var(--color-text-muted);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   line-height: 1.35;
 }
 
@@ -2477,7 +2477,7 @@ figcaption {
   color: var(--color-text-muted);
   background: var(--color-surface);
   font-family: var(--font-mono);
-  font-size: 0.53rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -2485,7 +2485,7 @@ figcaption {
 .gate-qcrs-query small,
 .gate-qcrs-readout small {
   color: var(--color-text-muted);
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
   line-height: 1.35;
 }
 
@@ -2508,7 +2508,7 @@ figcaption {
 .gate-qcrs-core__title > span {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.59rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.055em;
 }
@@ -2552,7 +2552,7 @@ figcaption {
   position: absolute;
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.5rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.07em;
 }
@@ -2580,14 +2580,14 @@ figcaption {
 .gate-qcrs-sweep span {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.55rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.045em;
 }
 
 .gate-qcrs-sweep small {
   color: var(--color-text-muted);
-  font-size: 0.56rem;
+  font-size: var(--type-micro);
   font-weight: 600;
 }
 
@@ -2622,7 +2622,7 @@ figcaption {
   gap: 0.42rem;
   align-items: center;
   color: var(--color-text-muted);
-  font-size: 0.65rem;
+  font-size: var(--type-micro);
 }
 
 .gate-qcrs-channel i {
@@ -2632,7 +2632,7 @@ figcaption {
 
 .gate-qcrs-channel strong {
   color: var(--color-good);
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
 }
 
 .gate-context-vector {
@@ -2701,7 +2701,7 @@ figcaption {
   z-index: 1;
   color: var(--color-text-muted);
   font-family: var(--font-mono);
-  font-size: 0.64rem;
+  font-size: var(--type-micro);
   font-weight: 700;
 }
 
@@ -2736,7 +2736,7 @@ figcaption {
 .gate-enrich-output strong {
   color: var(--color-text-muted);
   font-family: var(--font-mono);
-  font-size: 0.61rem;
+  font-size: var(--type-micro);
   font-weight: 700;
 }
 
@@ -2754,7 +2754,7 @@ figcaption {
 .gate-enrich-payoff span {
   color: var(--color-good);
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.045em;
   text-transform: uppercase;
@@ -2800,7 +2800,7 @@ figcaption {
 .gate-retrieve-context > strong {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
 }
 
 .gate-retrieve-query {
@@ -2818,7 +2818,7 @@ figcaption {
 
 .gate-retrieve-query > span {
   color: var(--color-text-muted);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   font-weight: 600;
 }
 
@@ -2845,13 +2845,13 @@ figcaption {
 .gate-full-gallery__head span {
   color: var(--color-good);
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.055em;
 }
 
 .gate-full-gallery__head strong {
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
 }
 
 .gate-full-gallery__grid {
@@ -2875,13 +2875,13 @@ figcaption {
 .gate-retrieve-callout strong {
   color: var(--color-warm);
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: var(--type-micro);
   letter-spacing: 0.04em;
 }
 
 .gate-retrieve-callout span {
   color: var(--color-text-muted);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
 }
 
 .gate-final-reveal {
@@ -2894,7 +2894,7 @@ figcaption {
   gap: 0.35rem;
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.61rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.045em;
   text-transform: uppercase;
@@ -2928,7 +2928,7 @@ figcaption {
 .gate-method-spec-strip span {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.54rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.045em;
   text-transform: uppercase;
@@ -2936,7 +2936,7 @@ figcaption {
 
 .gate-method-spec-strip strong {
   color: var(--color-text);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   line-height: 1.2;
 }
 
@@ -3054,7 +3054,7 @@ figcaption {
   .gate-final-reveal__eyebrow {
     color: var(--color-accent-dark);
     font-family: var(--font-mono);
-    font-size: 0.58rem;
+    font-size: var(--type-micro);
     font-weight: 700;
     letter-spacing: 0.06em;
     text-align: center;
@@ -3090,7 +3090,7 @@ figcaption {
   .gate-final-stage > span {
     color: var(--color-accent-dark);
     font-family: var(--font-mono);
-    font-size: 0.52rem;
+    font-size: var(--type-micro);
     font-weight: 700;
     letter-spacing: 0.05em;
   }
@@ -3103,7 +3103,7 @@ figcaption {
 
   .gate-final-stage small {
     color: var(--color-text-muted);
-    font-size: 0.61rem;
+    font-size: var(--type-micro);
     line-height: 1.3;
   }
 
@@ -3141,7 +3141,7 @@ figcaption {
     color: var(--color-text-muted);
     background: var(--color-surface);
     font-family: var(--font-mono);
-    font-size: 0.48rem;
+    font-size: var(--type-micro);
   }
 
   .gate-final-reveal__takeaway {
@@ -3150,7 +3150,7 @@ figcaption {
     justify-content: center;
     gap: 0.45rem;
     color: var(--color-text-muted);
-    font-size: 0.72rem;
+    font-size: var(--type-micro);
   }
 
   .gate-final-reveal__takeaway strong {
@@ -3242,7 +3242,7 @@ figcaption {
   }
 
   .gate-scroll__rail-item strong {
-    font-size: 0.62rem;
+    font-size: var(--type-micro);
   }
 
   .gate-candidate-row {
@@ -3298,7 +3298,7 @@ figcaption {
   }
 
   .gate-scroll__rail-item strong {
-    font-size: 0.56rem;
+    font-size: var(--type-micro);
   }
 
   .gate-scroll__track {
@@ -3400,7 +3400,7 @@ figcaption {
 .results-hero-claim__copy span {
   color: var(--color-text-muted);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.055em;
   text-transform: uppercase;
@@ -3451,7 +3451,7 @@ figcaption {
 .benchmark-card__head > span {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.035em;
   white-space: nowrap;
@@ -3482,7 +3482,7 @@ figcaption {
 .metric-box__head span {
   color: var(--color-text-muted);
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -3494,7 +3494,7 @@ figcaption {
   color: var(--color-good);
   background: var(--color-good-soft);
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: var(--type-micro);
   font-style: normal;
   font-weight: 700;
 }
@@ -3509,7 +3509,7 @@ figcaption {
 
 .metric-box small {
   color: var(--color-text-quiet);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   font-weight: 500;
   line-height: 1.2;
 }
@@ -3545,7 +3545,7 @@ figcaption {
   color: var(--color-accent-dark);
   background: rgb(var(--color-accent-soft-rgb) / 0.58);
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   white-space: nowrap;
 }
@@ -3598,7 +3598,7 @@ figcaption {
 .retriever-matrix__legend {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
   font-weight: 600;
   letter-spacing: 0.025em;
 }
@@ -3614,7 +3614,7 @@ figcaption {
   padding: 0 0.5rem;
   color: var(--color-text-muted);
   font-family: var(--font-mono);
-  font-size: 0.67rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -3648,7 +3648,7 @@ figcaption {
 .retriever-matrix__cell span {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.035em;
   text-transform: uppercase;
@@ -3666,7 +3666,7 @@ figcaption {
 .ranking-insight__eyebrow {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -3700,12 +3700,12 @@ figcaption {
 
 .ranking-gain strong {
   color: var(--color-text-muted);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
 }
 
 .ranking-gain span,
 .ranking-gain b {
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   font-variant-numeric: tabular-nums;
 }
 
@@ -3747,7 +3747,7 @@ figcaption {
 
 .transfer-range span {
   color: var(--color-text-quiet);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   line-height: 1.25;
 }
 
@@ -3778,12 +3778,12 @@ figcaption {
   border: 1px solid var(--color-border);
   border-radius: calc(var(--radius-card) - 1px);
   background: var(--color-surface-subtle);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
 }
 
 .transfer-direction strong {
   color: var(--color-text);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   font-weight: 650;
 }
 
@@ -3813,7 +3813,7 @@ figcaption {
   border-radius: calc(var(--radius-card) - 1px);
   color: var(--color-accent-dark);
   background: rgb(var(--color-accent-soft-rgb) / 0.58);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   font-weight: 600;
 }
 
@@ -4002,7 +4002,7 @@ figcaption {
 .qual-ranking-eyebrow {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.61rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.055em;
   line-height: 1;
@@ -4170,7 +4170,7 @@ figcaption {
   color: var(--color-surface);
   background: rgb(var(--color-accent-rgb) / 0.92);
   font-family: var(--font-mono);
-  font-size: 0.56rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.045em;
   line-height: 1;
@@ -4182,7 +4182,7 @@ figcaption {
   justify-content: space-between;
   gap: 0.65rem;
   color: var(--color-text-quiet);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   line-height: 1.35;
 }
 
@@ -4209,7 +4209,7 @@ figcaption {
   margin-right: 0.15rem;
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.055em;
   text-transform: uppercase;
@@ -4223,7 +4223,7 @@ figcaption {
   padding: 0;
   border-radius: 999px;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   font-weight: 700;
 }
 
@@ -4273,7 +4273,7 @@ figcaption {
 .qual-panel-label small {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.57rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -4335,7 +4335,7 @@ figcaption {
 
 .qual-ranking-state {
   color: var(--color-text-quiet);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   font-weight: 600;
 }
 
@@ -4350,7 +4350,7 @@ figcaption {
   padding: 0 0.22rem;
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.04em;
   text-align: center;
@@ -4441,7 +4441,7 @@ figcaption {
 .qual-context-copy small {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.54rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.055em;
   text-transform: uppercase;
@@ -4467,7 +4467,7 @@ figcaption {
   flex-wrap: wrap;
   gap: 0.55rem;
   color: var(--color-text-muted);
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
   font-weight: 600;
   white-space: nowrap;
 }
@@ -5106,7 +5106,7 @@ figcaption {
   .retriever-matrix__head,
   .retriever-matrix__label {
     padding-inline: 0.1rem;
-    font-size: 0.68rem;
+    font-size: var(--type-micro);
   }
 
   .retriever-matrix__cell {
@@ -5119,23 +5119,23 @@ figcaption {
 
   .comparison-chip {
     padding: 0.28rem 0.48rem;
-    font-size: 0.67rem;
+    font-size: var(--type-micro);
   }
 
   .comparison-step__items span {
     padding: 0.18rem 0.4rem;
-    font-size: 0.66rem;
+    font-size: var(--type-micro);
   }
 
   .transfer-direction {
     padding: 0.4rem 0.48rem;
-    font-size: 0.74rem;
+    font-size: var(--type-micro);
   }
 
   .transfer-constraints span {
     min-height: 2rem;
     padding: 0.28rem 0.46rem;
-    font-size: 0.72rem;
+    font-size: var(--type-micro);
   }
 }
 
@@ -5222,7 +5222,7 @@ figcaption {
   position: relative;
   z-index: 1;
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -5255,7 +5255,7 @@ figcaption {
 .results-stage__stat span {
   min-width: 0;
   color: var(--color-text-muted);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   font-weight: 650;
   line-height: 1.15;
 }
@@ -5309,7 +5309,7 @@ figcaption {
   margin-bottom: 0.16rem;
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -5327,7 +5327,7 @@ figcaption {
   color: var(--color-accent-dark);
   background: rgb(var(--color-accent-soft-rgb) / 0.76);
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   white-space: nowrap;
 }
@@ -5358,7 +5358,7 @@ figcaption {
 .metric-box__head span {
   color: var(--color-text-muted);
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -5371,7 +5371,7 @@ figcaption {
   color: var(--color-good);
   background: rgb(var(--color-good-rgb) / 0.12);
   font-family: var(--font-mono);
-  font-size: 0.61rem;
+  font-size: var(--type-micro);
   font-style: normal;
   font-weight: 700;
   white-space: nowrap;
@@ -5406,7 +5406,7 @@ figcaption {
 .frontier-takeaway__eyebrow {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -5444,7 +5444,7 @@ figcaption {
 .frontier-proof > span {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.59rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -5458,7 +5458,7 @@ figcaption {
 
 .frontier-proof > p {
   color: var(--color-text-muted);
-  font-size: 0.73rem;
+  font-size: var(--type-micro);
   line-height: 1.42;
 }
 
@@ -5496,7 +5496,7 @@ figcaption {
 .results-count-card__eyebrow {
   color: var(--color-good);
   font-family: var(--font-mono);
-  font-size: 0.63rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -5628,7 +5628,7 @@ figcaption {
   margin: 0 0 0.18rem;
   color: var(--color-warm);
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -5649,7 +5649,7 @@ figcaption {
   color: var(--color-warm);
   background: rgb(var(--color-warm-rgb) / 0.08);
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -5715,7 +5715,7 @@ figcaption {
   display: block;
   margin-top: 0.12rem;
   color: var(--color-text-muted);
-  font-size: 0.64rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -5755,14 +5755,14 @@ figcaption {
 
 .transfer-direction strong {
   color: var(--color-text);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   line-height: 1.25;
 }
 
 .transfer-direction span,
 .transfer-direction b {
   display: block;
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   font-variant-numeric: tabular-nums;
 }
 
@@ -5936,7 +5936,7 @@ figcaption {
   }
 
   .dataset-node small {
-    font-size: 0.56rem;
+    font-size: var(--type-micro);
   }
 }
 
@@ -6075,7 +6075,7 @@ figcaption {
   margin: -0.12rem 0 0;
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: var(--type-micro);
   font-weight: 650;
   letter-spacing: 0.025em;
   line-height: 1.4;
@@ -6184,7 +6184,7 @@ figcaption {
   background: var(--color-surface);
   box-shadow: 0 3px 8px rgb(var(--color-text-rgb) / 0.06);
   font-family: var(--font-mono);
-  font-size: 0.48rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.055em;
   line-height: 1;
@@ -6262,13 +6262,13 @@ figcaption {
 }
 
 .transfer-route-tooltip strong {
-  font-size: 0.64rem;
+  font-size: var(--type-micro);
   line-height: 1.25;
 }
 
 .transfer-route-tooltip span,
 .transfer-route-tooltip b {
-  font-size: 0.62rem;
+  font-size: var(--type-micro);
   line-height: 1.25;
   font-variant-numeric: tabular-nums;
 }
@@ -6371,7 +6371,7 @@ figcaption {
 .gate2-bridge span:not(.gate2-bridge__connector) {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -6393,7 +6393,7 @@ figcaption {
   color: var(--color-text-muted);
   background: rgb(var(--color-surface-rgb) / 0.9);
   font-family: var(--font-mono);
-  font-size: 0.64rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.055em;
   line-height: 1;
@@ -6452,7 +6452,7 @@ figcaption {
 .gate2-final-gallery__head > span {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.61rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.055em;
   line-height: 1.15;
@@ -6534,7 +6534,7 @@ figcaption {
   margin-top: 0.14rem;
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
   font-style: normal;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -6604,13 +6604,13 @@ figcaption {
 
 .gate2-overview__facts span {
   color: var(--color-text-quiet);
-  font-size: 0.62rem;
+  font-size: var(--type-micro);
   line-height: 1.2;
 }
 
 .gate2-overview__facts strong {
   color: var(--color-text);
-  font-size: 0.73rem;
+  font-size: var(--type-micro);
   font-weight: 650;
   line-height: 1.3;
 }
@@ -6658,7 +6658,7 @@ figcaption {
   flex: 0 0 auto;
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -6669,7 +6669,7 @@ figcaption {
 }
 
 .gate2-explorer[open] .gate2-explorer__summary-action::after {
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
   content: "Close ↑";
 }
 
@@ -6705,7 +6705,7 @@ figcaption {
 .gate2-tabs button span {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: var(--type-micro);
 }
 
 .gate2-tabs button:hover,
@@ -6896,7 +6896,7 @@ figcaption {
 
 .gate2-frozen-card small {
   color: var(--color-text-muted);
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
 }
 
 .gate2-candidate-row {
@@ -6938,7 +6938,7 @@ figcaption {
   color: var(--color-text);
   background: rgb(var(--color-surface-rgb) / 0.94);
   font-family: var(--font-mono);
-  font-size: 0.5rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   line-height: 1;
 }
@@ -6988,7 +6988,7 @@ figcaption {
 }
 
 .gate2-math--small {
-  font-size: 0.69rem;
+  font-size: var(--type-micro);
 }
 
 .gate2-math mjx-container[jax="CHTML"] {
@@ -7018,7 +7018,7 @@ figcaption {
   padding: 0.48rem 0.58rem;
   border-bottom: 1px solid rgb(var(--color-border-rgb) / 0.66);
   color: var(--color-text-muted);
-  font-size: 0.73rem;
+  font-size: var(--type-micro);
   line-height: 1.4;
 }
 
@@ -7047,7 +7047,7 @@ figcaption {
 
 .gate2-provider-truth p {
   color: var(--color-text-muted);
-  font-size: 0.71rem;
+  font-size: var(--type-micro);
   line-height: 1.4;
 }
 
@@ -7069,7 +7069,7 @@ figcaption {
 
 .gate2-provider-grid article strong {
   color: var(--color-text);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   line-height: 1.28;
 }
 
@@ -7088,7 +7088,7 @@ figcaption {
 .gate2-structure-card__head strong {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: var(--type-micro);
 }
 
 .gate2-rank-slot {
@@ -7104,7 +7104,7 @@ figcaption {
 .gate2-rank-slot__rank {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.54rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   line-height: 1.1;
   text-transform: uppercase;
@@ -7132,7 +7132,7 @@ figcaption {
   grid-column: span 4;
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.52rem;
+  font-size: var(--type-micro);
   font-weight: 600;
   text-align: center;
 }
@@ -7151,7 +7151,7 @@ figcaption {
   border-radius: 999px;
   color: var(--color-text-muted);
   background: var(--color-surface);
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
   line-height: 1.2;
 }
 
@@ -7191,7 +7191,7 @@ figcaption {
 
 .gate2-technical-note {
   color: var(--color-text-muted);
-  font-size: 0.67rem;
+  font-size: var(--type-micro);
   line-height: 1.4;
 }
 
@@ -7207,14 +7207,14 @@ figcaption {
   gap: 0.08rem;
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.55rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.04em;
 }
 
 .gate2-qcrs-matrix__label small {
   color: var(--color-text-muted);
-  font-size: 0.5rem;
+  font-size: var(--type-micro);
   font-weight: 600;
   letter-spacing: 0;
 }
@@ -7268,7 +7268,7 @@ figcaption {
 
 .gate2-vector-card small {
   color: var(--color-text-muted);
-  font-size: 0.62rem;
+  font-size: var(--type-micro);
 }
 
 .gate2-vector-card--delta {
@@ -7370,13 +7370,13 @@ figcaption {
 
 .gate2-retrieve-callout strong {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   letter-spacing: 0.04em;
 }
 
 .gate2-retrieve-callout span {
   color: var(--color-text-muted);
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
 }
 
 .gate2-carousel-footer {
@@ -7390,14 +7390,14 @@ figcaption {
 .gate2-carousel-footer > span {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.04em;
 }
 
 .gate2-carousel-footer p {
   color: var(--color-text-quiet);
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
   line-height: 1.35;
   text-align: right;
 }
@@ -7679,7 +7679,7 @@ figcaption {
 }
 
 .gate2-overview__stage small {
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
 }
 
 .gate2-word-card {
@@ -7722,19 +7722,19 @@ figcaption {
   color: var(--color-accent-dark);
   background: rgb(var(--color-accent-soft-rgb) / 0.82);
   font-family: var(--font-mono);
-  font-size: 0.56rem;
+  font-size: var(--type-micro);
   font-weight: 700;
 }
 
 .gate2-story-strip article strong {
   color: var(--color-text);
-  font-size: 0.71rem;
+  font-size: var(--type-micro);
   line-height: 1.25;
 }
 
 .gate2-story-strip article p {
   color: var(--color-text-muted);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   line-height: 1.38;
 }
 
@@ -7758,7 +7758,7 @@ figcaption {
   cursor: pointer;
   color: var(--color-text-muted);
   font-family: var(--font-mono);
-  font-size: 0.63rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.04em;
   list-style: none;
@@ -7824,7 +7824,7 @@ figcaption {
   border-radius: 999px;
   color: var(--color-text-muted);
   background: var(--color-surface);
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
   line-height: 1.2;
 }
 
@@ -7914,7 +7914,7 @@ figcaption {
   position: absolute;
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.56rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -7933,7 +7933,7 @@ figcaption {
 
 .gate2-provider-grid article p {
   color: var(--color-text-muted);
-  font-size: 0.67rem;
+  font-size: var(--type-micro);
   line-height: 1.4;
 }
 
@@ -7969,7 +7969,7 @@ figcaption {
 .gate2-reason-node span {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.59rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -7982,7 +7982,7 @@ figcaption {
 
 .gate2-reason-node small {
   color: var(--color-text-muted);
-  font-size: 0.65rem;
+  font-size: var(--type-micro);
   line-height: 1.35;
 }
 
@@ -8022,7 +8022,7 @@ figcaption {
   color: var(--color-surface);
   background: rgb(var(--color-accent-rgb) / 0.76);
   font-family: var(--font-mono);
-  font-size: 0.5rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -8326,17 +8326,17 @@ figcaption {
   }
 
   .qual-context-copy strong {
-    font-size: 0.69rem;
+    font-size: var(--type-micro);
   }
 
   .qual-rank-labels {
-    font-size: 0.52rem;
+    font-size: var(--type-micro);
   }
 
   .qual-row-focus b {
     left: 0.24rem;
     top: 0.22rem;
-    font-size: 0.48rem;
+    font-size: var(--type-micro);
   }
 }
 
@@ -8355,7 +8355,7 @@ figcaption {
   }
 
   .qual-overview-caption {
-    font-size: 0.66rem;
+    font-size: var(--type-micro);
   }
 }
 
@@ -8497,7 +8497,7 @@ figcaption {
 .ttbx-method-bridge > div > span {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.055em;
   line-height: 1.2;
@@ -8530,7 +8530,7 @@ figcaption {
   border-radius: 999px;
   color: var(--color-text-muted);
   background: var(--color-surface-subtle);
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
   white-space: nowrap;
 }
 
@@ -8540,7 +8540,7 @@ figcaption {
   gap: 0.2rem;
   color: var(--color-text);
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.025em;
   text-transform: uppercase;
@@ -8603,7 +8603,7 @@ figcaption {
 
 .diagx-gallery__head small {
   color: var(--color-text-quiet);
-  font-size: 0.67rem;
+  font-size: var(--type-micro);
   text-align: right;
 }
 
@@ -8652,7 +8652,7 @@ figcaption {
   color: var(--color-good);
   background: rgb(var(--color-surface-rgb) / 0.94);
   font-family: var(--font-mono);
-  font-size: 0.46rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.04em;
 }
@@ -8673,7 +8673,7 @@ figcaption {
   align-items: center;
   padding-top: 0.55rem;
   border-top: 1px solid rgb(var(--color-border-rgb) / 0.64);
-  font-size: 0.65rem;
+  font-size: var(--type-micro);
 }
 
 .diagx-cue-readout span {
@@ -8685,7 +8685,7 @@ figcaption {
   justify-self: end;
   color: var(--color-text);
   font-family: var(--font-mono);
-  font-size: 0.56rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.025em;
   text-transform: uppercase;
@@ -8702,7 +8702,7 @@ figcaption {
   max-width: 8rem;
   color: var(--color-warm);
   font-family: var(--font-mono);
-  font-size: 0.5rem;
+  font-size: var(--type-micro);
   font-weight: 750;
   letter-spacing: 0.055em;
   line-height: 1.3;
@@ -8768,14 +8768,14 @@ figcaption {
 .diagx-retriever-band small {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.48rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.05em;
 }
 
 .diagx-retriever-band strong {
   color: var(--color-text);
-  font-size: 0.74rem;
+  font-size: var(--type-micro);
   font-weight: 650;
 }
 
@@ -8800,7 +8800,7 @@ figcaption {
 
 .diagx-rank-card > span {
   color: var(--color-text-muted);
-  font-size: 0.54rem;
+  font-size: var(--type-micro);
 }
 
 .diagx-rank-card > div {
@@ -8829,7 +8829,7 @@ figcaption {
   color: var(--color-text);
   background: rgb(var(--color-surface-rgb) / 0.93);
   font-family: var(--font-mono);
-  font-size: 0.5rem;
+  font-size: var(--type-micro);
 }
 
 .diagx-rank-card > b {
@@ -8889,7 +8889,7 @@ figcaption {
 .diagx-flip-core small {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.48rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -8980,7 +8980,7 @@ figcaption {
 .diagx-matrix-card > p,
 .diagx-range-card > p {
   color: var(--color-text-muted);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   line-height: 1.4;
 }
 
@@ -9007,7 +9007,7 @@ figcaption {
   color: var(--color-text-muted);
   background: var(--color-surface-muted);
   font-family: var(--font-mono);
-  font-size: 0.54rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   line-height: 1.15;
   text-align: center;
@@ -9040,7 +9040,7 @@ figcaption {
 .diagx-matrix__cell strong {
   color: var(--color-text);
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   text-align: right;
 }
@@ -9065,7 +9065,7 @@ figcaption {
   justify-content: space-between;
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.5rem;
+  font-size: var(--type-micro);
   font-style: normal;
 }
 
@@ -9135,7 +9135,7 @@ figcaption {
 
 .diagx-scale-number span {
   color: var(--color-text-muted);
-  font-size: 0.74rem;
+  font-size: var(--type-micro);
   line-height: 1.35;
 }
 
@@ -9248,7 +9248,7 @@ figcaption {
 .diagx-transition__flow b {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.54rem;
+  font-size: var(--type-micro);
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -9303,7 +9303,7 @@ figcaption {
   color: var(--color-text-muted);
   background: transparent;
   font: inherit;
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
   font-weight: 650;
   cursor: pointer;
   transition: color 180ms ease, background 180ms ease, box-shadow 180ms ease;
@@ -9371,7 +9371,7 @@ figcaption {
 .ttbx-gallery-card > small,
 .ttbx-retrieval-core small {
   color: var(--color-text-quiet);
-  font-size: 0.65rem;
+  font-size: var(--type-micro);
   line-height: 1.35;
 }
 
@@ -9461,7 +9461,7 @@ figcaption {
   color: var(--color-text-muted);
   background: var(--color-surface);
   font-family: var(--font-mono);
-  font-size: 0.55rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.045em;
 }
@@ -9526,7 +9526,7 @@ figcaption {
   max-width: 14ch;
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.48rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   line-height: 1.28;
   text-transform: uppercase;
@@ -9576,7 +9576,7 @@ figcaption {
 .ttbx-gallery-card__head strong {
   color: var(--color-text-muted);
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -9695,7 +9695,7 @@ figcaption {
   color: var(--color-text);
   background: rgb(var(--color-surface-rgb) / 0.92);
   font-family: var(--font-mono);
-  font-size: 0.46rem;
+  font-size: var(--type-micro);
 }
 
 .ttbx-ranking-meta {
@@ -9716,7 +9716,7 @@ figcaption {
 .ttbx-ranking-meta > div > span {
   color: var(--color-text-muted);
   font-family: var(--font-mono);
-  font-size: 0.56rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.05em;
 }
@@ -9724,7 +9724,7 @@ figcaption {
 .ttbx-ranking-meta small {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.46rem;
+  font-size: var(--type-micro);
   letter-spacing: 0.035em;
   text-transform: uppercase;
 }
@@ -9781,7 +9781,7 @@ figcaption {
   color: var(--color-good);
   background: rgb(var(--color-surface-rgb) / 0.94);
   font-family: var(--font-mono);
-  font-size: 0.4rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.04em;
 }
@@ -9890,13 +9890,13 @@ figcaption {
 
 .ttbx-compare__row span {
   color: var(--color-text-muted);
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
   font-weight: 600;
 }
 
 .ttbx-compare__row b {
   color: var(--color-text);
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
   font-weight: 650;
   text-align: center;
 }
@@ -9904,7 +9904,7 @@ figcaption {
 .ttbx-compare__row--head b {
   color: var(--color-text-muted);
   font-family: var(--font-mono);
-  font-size: 0.55rem;
+  font-size: var(--type-micro);
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -9956,7 +9956,7 @@ figcaption {
 .ttbx-method-bridge__arrow b {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.52rem;
+  font-size: var(--type-micro);
   letter-spacing: 0.045em;
   text-transform: uppercase;
 }
@@ -10385,7 +10385,7 @@ figcaption {
   margin: -0.12rem 0 -0.48rem;
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.5rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.055em;
   text-align: center;
@@ -10449,7 +10449,7 @@ figcaption {
 .analysisx-story b {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: var(--type-micro);
   letter-spacing: 0.04em;
 }
 
@@ -10557,7 +10557,7 @@ figcaption {
 .analysisx-mixer-output > span {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.56rem;
+  font-size: var(--type-micro);
   font-weight: 750;
   letter-spacing: 0.065em;
   line-height: 1;
@@ -10583,7 +10583,7 @@ figcaption {
   color: var(--color-text-muted);
   background: transparent;
   font: inherit;
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   font-weight: 650;
   cursor: pointer;
 }
@@ -10639,7 +10639,7 @@ figcaption {
 .analysisx-card-head > small {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.64rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   white-space: nowrap;
 }
@@ -10662,7 +10662,7 @@ figcaption {
   margin-right: 2.8rem;
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.53rem;
+  font-size: var(--type-micro);
 }
 
 .analysisx-dot-scale span:nth-child(2) { text-align: center; }
@@ -10682,14 +10682,14 @@ figcaption {
   border-bottom: 1px solid rgb(var(--color-border-rgb) / 0.72);
   color: var(--color-text-muted);
   font-family: var(--font-mono);
-  font-size: 0.56rem;
+  font-size: var(--type-micro);
   font-weight: 750;
   letter-spacing: 0.055em;
 }
 
 .analysisx-dot-group > header small {
   color: var(--color-text-quiet);
-  font-size: 0.52rem;
+  font-size: var(--type-micro);
   font-weight: 600;
   letter-spacing: 0;
 }
@@ -10718,7 +10718,7 @@ figcaption {
 .analysisx-dot-label strong {
   overflow: visible;
   color: var(--color-text);
-  font-size: 0.73rem;
+  font-size: var(--type-micro);
   font-weight: 650;
   text-overflow: clip;
   white-space: nowrap;
@@ -10727,7 +10727,7 @@ figcaption {
 .analysisx-dot-label small {
   margin-top: 0.14rem;
   color: var(--color-text-quiet);
-  font-size: 0.53rem;
+  font-size: var(--type-micro);
 }
 
 .analysisx-dot-track {
@@ -10784,7 +10784,7 @@ figcaption {
 .analysisx-dot-row > b {
   color: var(--color-text-muted);
   font-family: var(--font-mono);
-  font-size: 0.64rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   text-align: right;
 }
@@ -10853,13 +10853,13 @@ figcaption {
 
 .analysisx-winner-split small {
   color: var(--color-text-quiet);
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
   text-transform: uppercase;
 }
 
 .analysisx-winner-split b {
   color: var(--color-text);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   font-weight: 650;
 }
 
@@ -10930,7 +10930,7 @@ figcaption {
   border-radius: 999px;
   color: var(--color-accent-dark);
   background: rgb(var(--color-accent-soft-rgb) / 0.62);
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   white-space: nowrap;
 }
@@ -11020,14 +11020,14 @@ figcaption {
   gap: 0.4rem;
   padding-top: 0.32rem;
   border-top: 1px solid rgb(var(--color-border-rgb) / 0.68);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
 }
 
 .analysisx-dumbbell__labels span { color: var(--color-text-muted); }
 .analysisx-dumbbell__labels strong {
   color: var(--color-text);
   font-family: var(--font-mono);
-  font-size: 0.64rem;
+  font-size: var(--type-micro);
 }
 
 .analysisx-global-verdict {
@@ -11040,7 +11040,7 @@ figcaption {
 .analysisx-global-verdict > span {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.57rem;
+  font-size: var(--type-micro);
   font-weight: 750;
   letter-spacing: 0.06em;
 }
@@ -11055,7 +11055,7 @@ figcaption {
 .analysisx-global-verdict > p {
   max-width: 18ch;
   color: var(--color-text-muted);
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
   line-height: 1.35;
 }
 
@@ -11093,7 +11093,7 @@ figcaption {
 
 .analysisx-reasoning-summary > small {
   color: var(--color-text-muted);
-  font-size: 0.65rem;
+  font-size: var(--type-micro);
 }
 
 .analysisx-architecture-cards {
@@ -11124,7 +11124,7 @@ figcaption {
 .analysisx-arch > span {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.53rem;
+  font-size: var(--type-micro);
   font-weight: 750;
   letter-spacing: 0.055em;
 }
@@ -11136,7 +11136,7 @@ figcaption {
 
 .analysisx-arch > small {
   color: var(--color-text-muted);
-  font-size: 0.64rem;
+  font-size: var(--type-micro);
 }
 
 .analysisx-arch-viz {
@@ -11171,7 +11171,7 @@ figcaption {
 }
 
 .analysisx-arch-viz--pool i { transform: scaleY(.68); }
-.analysisx-arch-viz--pool b::before { content: "μ"; display: grid; place-items: center; height: 100%; color: var(--color-text-muted); font: 700 0.7rem var(--font-mono); }
+.analysisx-arch-viz--pool b::before { content: "μ"; display: grid; place-items: center; height: 100%; color: var(--color-text-muted); font: 700 var(--type-micro) var(--font-mono); }
 .analysisx-arch-viz--flat b { border-radius: 4px; background: linear-gradient(135deg, rgb(var(--color-accent-rgb) / .12), var(--color-surface)); }
 .analysisx-arch-viz--qcrs { display: grid; grid-template-columns: repeat(2, 16px) 28px; grid-template-rows: repeat(2, 16px); gap: 4px; }
 .analysisx-arch-viz--qcrs i { width: 16px; height: 16px; }
@@ -11198,7 +11198,7 @@ figcaption {
   color: var(--color-accent-dark);
   background: rgb(var(--color-accent-soft-rgb) / 0.5);
   font: inherit;
-  font-size: 0.65rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   cursor: pointer;
 }
@@ -11262,7 +11262,7 @@ figcaption {
 }
 
 .analysisx-mixer-component > span { color: var(--color-accent-dark); font-size: 0.8rem; font-weight: 750; }
-.analysisx-mixer-component > small { color: var(--color-text-muted); font-size: 0.55rem; text-align: center; }
+.analysisx-mixer-component > small { color: var(--color-text-muted); font-size: var(--type-micro); text-align: center; }
 
 .analysisx-mixer-tensor {
   display: grid;
@@ -11283,7 +11283,7 @@ figcaption {
   color: var(--color-text-muted);
   background: var(--color-surface);
   font: inherit;
-  font-size: 0.56rem;
+  font-size: var(--type-micro);
   font-weight: 650;
   cursor: pointer;
   transition: opacity 180ms ease, filter 180ms ease, border-color 180ms ease;
@@ -11316,7 +11316,7 @@ figcaption {
 
 .analysisx-mixer-tensor > span {
   color: var(--color-text-quiet);
-  font-size: 0.54rem;
+  font-size: var(--type-micro);
 }
 
 .analysisx-mixer-passes {
@@ -11335,7 +11335,7 @@ figcaption {
 .analysisx-mixer-passes button:first-child { border-left-color: rgb(var(--color-warm-rgb) / .5); }
 .analysisx-mixer-passes button:nth-child(2) { border-left-color: rgb(var(--color-accent-rgb) / .5); }
 .analysisx-mixer-passes button:last-child { border-left-color: rgb(var(--color-good-rgb) / .5); }
-.analysisx-mixer-passes small { color: var(--color-text-quiet); font-size: 0.48rem; }
+.analysisx-mixer-passes small { color: var(--color-text-quiet); font-size: var(--type-micro); }
 
 .analysisx-mixer-scene .is-removed {
   opacity: 0.22;
@@ -11373,7 +11373,7 @@ figcaption {
   color: var(--color-text-muted);
   background: var(--color-surface);
   font: inherit;
-  font-size: 0.6rem;
+  font-size: var(--type-micro);
   font-weight: 650;
   cursor: pointer;
 }
@@ -11409,7 +11409,7 @@ figcaption {
 .analysisx-reasoning-results-label {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.55rem;
+  font-size: var(--type-micro);
   font-weight: 750;
   letter-spacing: 0.06em;
   line-height: 1;
@@ -11419,7 +11419,7 @@ figcaption {
 .analysisx-reasoning-readout__summary > p:not(.analysisx-readout-note) {
   max-width: 54ch;
   color: var(--color-text-muted);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   line-height: 1.42;
 }
 
@@ -11447,7 +11447,7 @@ figcaption {
 .analysisx-score-card > span {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.54rem;
+  font-size: var(--type-micro);
   font-weight: 750;
 }
 
@@ -11465,7 +11465,7 @@ figcaption {
 
 .analysisx-score-card > small {
   color: var(--color-good);
-  font-size: 0.56rem;
+  font-size: var(--type-micro);
 }
 
 .analysisx-readout-note {
@@ -11473,7 +11473,7 @@ figcaption {
   margin-top: 0.08rem;
   border-top: 1px solid rgb(var(--color-border-rgb) / 0.7);
   color: var(--color-text-muted);
-  font-size: 0.64rem;
+  font-size: var(--type-micro);
   line-height: 1.4;
 }
 
@@ -11504,7 +11504,7 @@ figcaption {
 .analysisx-invariant-strip article > span {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.54rem;
+  font-size: var(--type-micro);
   font-weight: 750;
 }
 
@@ -11515,7 +11515,7 @@ figcaption {
 
 .analysisx-invariant-strip article > p {
   color: var(--color-text-muted);
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
   line-height: 1.38;
 }
 
@@ -11525,7 +11525,7 @@ figcaption {
   padding-top: 0.32rem;
   border-top: 1px dashed rgb(var(--color-border-rgb) / 0.88);
   color: var(--color-bad);
-  font-size: 0.53rem;
+  font-size: var(--type-micro);
   font-weight: 650;
   line-height: 1.3;
 }
@@ -11556,7 +11556,7 @@ figcaption {
   border-radius: 999px;
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.53rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.045em;
   white-space: nowrap;
@@ -11587,7 +11587,7 @@ figcaption {
   padding: 0.5rem;
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.52rem;
+  font-size: var(--type-micro);
   font-weight: 650;
   line-height: 1.35;
   text-align: center;
@@ -11597,7 +11597,7 @@ figcaption {
   display: grid;
   place-items: center;
   color: var(--color-text-muted);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   font-weight: 700;
 }
 
@@ -11619,7 +11619,7 @@ figcaption {
 
 .analysisx-design-row small {
   color: var(--color-text-quiet);
-  font-size: 0.56rem;
+  font-size: var(--type-micro);
 }
 
 .analysisx-design-cell {
@@ -11632,13 +11632,13 @@ figcaption {
 }
 
 .analysisx-design-cell > span {
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   font-weight: 700;
 }
 
 .analysisx-design-cell > small {
   color: var(--color-text-muted);
-  font-size: 0.54rem;
+  font-size: var(--type-micro);
 }
 
 .analysisx-design-cell--gate {
@@ -11727,7 +11727,7 @@ figcaption {
 .analysisx-design-axes > span {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.55rem;
+  font-size: var(--type-micro);
   font-weight: 750;
   letter-spacing: 0.055em;
   line-height: 1.25;
@@ -11740,7 +11740,7 @@ figcaption {
 
 .analysisx-insight > p {
   color: var(--color-text-muted);
-  font-size: 0.69rem;
+  font-size: var(--type-micro);
   line-height: 1.46;
 }
 
@@ -11804,7 +11804,7 @@ figcaption {
   justify-content: center;
   color: var(--color-text-muted);
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
   font-weight: 700;
 }
 
@@ -11897,7 +11897,7 @@ figcaption {
 .analysisx-discussion-column__head span {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.065em;
 }
@@ -11913,7 +11913,7 @@ figcaption {
 .analysisx-discussion-column__head small {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.54rem;
+  font-size: var(--type-micro);
   font-weight: 650;
   letter-spacing: 0.04em;
   white-space: nowrap;
@@ -11943,7 +11943,7 @@ figcaption {
 
 .analysisx-discussion-point > div:last-child > p {
   color: var(--color-text-muted);
-  font-size: 0.63rem;
+  font-size: var(--type-micro);
   line-height: 1.42;
 }
 
@@ -11976,7 +11976,7 @@ figcaption {
   border-radius: 50%;
   color: var(--color-accent-dark);
   background: var(--color-surface);
-  font: 750 0.68rem var(--font-mono);
+  font: 750 var(--type-micro) var(--font-mono);
 }
 
 .analysisx-competition-viz > i {
@@ -11999,7 +11999,7 @@ figcaption {
   border-radius: 3px;
   color: var(--color-text-muted);
   background: var(--color-surface);
-  font: 700 0.5rem var(--font-mono);
+  font: 700 var(--type-micro) var(--font-mono);
 }
 
 .analysisx-competition-viz > b {
@@ -12007,7 +12007,7 @@ figcaption {
   right: 0.42rem;
   top: 0.42rem;
   color: var(--color-text-quiet);
-  font: 700 0.46rem var(--font-mono);
+  font: 700 var(--type-micro) var(--font-mono);
   letter-spacing: 0.04em;
 }
 
@@ -12017,7 +12017,7 @@ figcaption {
   gap: 0.28rem;
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
 }
 
 .analysisx-anchor-viz span,
@@ -12042,7 +12042,7 @@ figcaption {
   gap: 0.22rem;
   color: var(--color-text-muted);
   font-family: var(--font-mono);
-  font-size: 0.54rem;
+  font-size: var(--type-micro);
   font-weight: 700;
 }
 
@@ -12095,7 +12095,7 @@ figcaption {
   border-radius: 999px;
   color: var(--color-text-quiet);
   background: var(--color-surface-muted);
-  font: 700 0.49rem var(--font-mono);
+  font: 700 var(--type-micro) var(--font-mono);
   letter-spacing: 0.035em;
 }
 
@@ -12140,7 +12140,7 @@ figcaption {
 
 .analysisx-boundary-compare > div > span {
   color: var(--color-text-quiet);
-  font: 700 0.49rem var(--font-mono);
+  font: 700 var(--type-micro) var(--font-mono);
   letter-spacing: 0.045em;
 }
 
@@ -12168,7 +12168,7 @@ figcaption {
   border-radius: 4px;
   background: var(--color-surface);
   color: var(--color-text-muted);
-  font: 650 0.5rem var(--font-mono);
+  font: 650 var(--type-micro) var(--font-mono);
   font-style: normal;
   text-align: center;
 }
@@ -12181,7 +12181,7 @@ figcaption {
 .analysisx-boundary-compare > div > small {
   align-self: end;
   color: var(--color-text-quiet);
-  font-size: 0.52rem;
+  font-size: var(--type-micro);
   line-height: 1.35;
 }
 
@@ -12193,7 +12193,7 @@ figcaption {
   justify-items: center;
   gap: 0.08rem;
   color: var(--color-good);
-  font: 700 0.46rem var(--font-mono);
+  font: 700 var(--type-micro) var(--font-mono);
 }
 
 .analysisx-gallery-injection i {
@@ -12235,7 +12235,7 @@ figcaption {
 
 .analysisx-setting-method__flow small {
   color: var(--color-text-quiet);
-  font: 700 0.47rem var(--font-mono);
+  font: 700 var(--type-micro) var(--font-mono);
 }
 
 .analysisx-setting-method__flow strong {
@@ -12245,7 +12245,7 @@ figcaption {
 
 .analysisx-setting-method__flow p {
   color: var(--color-text-muted);
-  font-size: 0.56rem;
+  font-size: var(--type-micro);
   line-height: 1.35;
 }
 
@@ -12281,7 +12281,7 @@ figcaption {
 
 .analysisx-axis-row > b {
   color: var(--color-text-muted);
-  font: 700 0.49rem var(--font-mono);
+  font: 700 var(--type-micro) var(--font-mono);
   letter-spacing: 0.035em;
 }
 
@@ -12298,7 +12298,7 @@ figcaption {
   border-radius: 999px;
   color: var(--color-text-muted);
   background: var(--color-surface-muted);
-  font-size: 0.51rem;
+  font-size: var(--type-micro);
   font-style: normal;
   line-height: 1;
 }
@@ -12313,7 +12313,7 @@ figcaption {
   padding-top: 0.34rem;
   border-top: 1px dashed rgb(var(--color-border-rgb) / 0.8);
   color: var(--color-text-muted);
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
   line-height: 1.4;
 }
 
@@ -12330,7 +12330,7 @@ figcaption {
 
 .analysisx-discussion-closing > span {
   color: var(--color-accent-dark);
-  font: 750 0.54rem var(--font-mono);
+  font: 750 var(--type-micro) var(--font-mono);
   letter-spacing: 0.055em;
   white-space: nowrap;
 }
@@ -12527,7 +12527,7 @@ figcaption {
   }
 
   .analysisx-story i { display: none; }
-  .analysisx-story span { justify-content: center; font-size: 0.62rem; }
+  .analysisx-story span { justify-content: center; font-size: var(--type-micro); }
 
   .analysisx-controls {
     grid-template-columns: 1fr;
@@ -12552,7 +12552,7 @@ figcaption {
     gap: 0.42rem;
   }
 
-  .analysisx-dot-label strong { font-size: 0.66rem; white-space: normal; line-height: 1.15; }
+  .analysisx-dot-label strong { font-size: var(--type-micro); white-space: normal; line-height: 1.15; }
   .analysisx-dot-label small { display: none; }
 
   .analysisx-winner {
@@ -12664,7 +12664,7 @@ figcaption {
   }
 
   .analysisx-dot-label strong {
-    font-size: 0.6rem;
+    font-size: var(--type-micro);
     white-space: normal;
     line-height: 1.12;
   }
@@ -12733,7 +12733,7 @@ figcaption {
 .rs-eyebrow {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.64rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.065em;
   line-height: 1;
@@ -12817,7 +12817,7 @@ figcaption {
   color: var(--color-accent-dark);
   background: rgb(var(--color-accent-soft-rgb) / 0.52);
   font-family: var(--font-mono);
-  font-size: 0.59rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.035em;
   text-transform: uppercase;
@@ -12876,7 +12876,7 @@ figcaption {
 .rs-gallery__head small {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.56rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.055em;
   line-height: 1.2;
@@ -12942,7 +12942,7 @@ figcaption {
   color: var(--color-accent-dark);
   background: var(--color-surface);
   font-family: var(--font-mono);
-  font-size: 0.49rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.04em;
   line-height: 1;
@@ -12971,14 +12971,14 @@ figcaption {
 
 .rs-cue__meta span {
   color: var(--color-text);
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
   font-weight: 650;
 }
 
 .rs-cue__meta b {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.52rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.045em;
 }
@@ -13049,7 +13049,7 @@ figcaption {
 .rs-cue-swap__title span {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.51rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.055em;
 }
@@ -13072,7 +13072,7 @@ figcaption {
 
 .rs-swap-lane__label {
   color: var(--color-text);
-  font-size: 0.63rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   text-align: center;
 }
@@ -13087,7 +13087,7 @@ figcaption {
 .rs-swap-lane__flow > span {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.43rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.025em;
   text-transform: uppercase;
@@ -13135,7 +13135,7 @@ figcaption {
 
 .rs-cue-swap__note {
   color: var(--color-text-muted);
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
   line-height: 1.35;
   text-align: center;
 }
@@ -13154,7 +13154,7 @@ figcaption {
 .rs-punchline > span {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.55rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.06em;
 }
@@ -13172,7 +13172,7 @@ figcaption {
 .rs-punchline small {
   max-width: 30ch;
   color: var(--color-text-quiet);
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
   line-height: 1.35;
   text-align: right;
 }
@@ -13235,14 +13235,14 @@ figcaption {
 .rs-stage__top span {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   font-weight: 800;
 }
 
 .rs-stage__top b {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.52rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.055em;
 }
@@ -13255,7 +13255,7 @@ figcaption {
 
 .rs-stage p {
   color: var(--color-text-muted);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   line-height: 1.42;
 }
 
@@ -13268,7 +13268,7 @@ figcaption {
   border-top: 1px solid rgb(var(--color-border-rgb) / 0.7);
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.56rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.055em;
   text-decoration: none;
@@ -13350,7 +13350,7 @@ figcaption {
   color: var(--color-accent-dark);
   background: var(--color-accent-soft);
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   font-weight: 800;
 }
 
@@ -13369,7 +13369,7 @@ figcaption {
 .rs-mini-plus,
 .rs-mini-arrow {
   color: var(--color-text-quiet);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   font-weight: 800;
 }
 
@@ -13409,7 +13409,7 @@ figcaption {
 
 .rs-flow-arrow span {
   font-family: var(--font-mono);
-  font-size: 0.46rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.035em;
   text-transform: uppercase;
@@ -13711,11 +13711,11 @@ figcaption {
   }
 
   .rs-person--target span {
-    font-size: 0.44rem;
+    font-size: var(--type-micro);
   }
 
   .rs-cue__meta span {
-    font-size: 0.66rem;
+    font-size: var(--type-micro);
   }
 }
 
@@ -13771,7 +13771,7 @@ figcaption {
 .analysisx-discussion-band__head span,
 .analysisx-discussion-band__head > small {
   color: var(--color-accent-dark);
-  font: 750 0.54rem var(--font-mono);
+  font: 750 var(--type-micro) var(--font-mono);
   letter-spacing: 0.055em;
   line-height: 1.2;
 }
@@ -13829,7 +13829,7 @@ figcaption {
 .analysisx-design-axes > span,
 .analysisx-boundary-shift__label > span {
   color: var(--color-accent-dark);
-  font: 750 0.5rem var(--font-mono);
+  font: 750 var(--type-micro) var(--font-mono);
   letter-spacing: 0.045em;
   line-height: 1.25;
 }
@@ -13849,7 +13849,7 @@ figcaption {
 
 .analysisx-mechanism-step > div:last-child > p {
   color: var(--color-text-muted);
-  font-size: 0.61rem;
+  font-size: var(--type-micro);
   line-height: 1.48;
 }
 
@@ -13904,7 +13904,7 @@ figcaption {
 }
 
 .analysisx-discussion-band .analysisx-discussion-chips span {
-  font-size: 0.51rem;
+  font-size: var(--type-micro);
 }
 
 .analysisx-boundary-shift--wide,
@@ -13931,7 +13931,7 @@ figcaption {
   border-left: 2px solid rgb(var(--color-good-rgb) / 0.52);
   color: var(--color-text);
   background: rgb(var(--color-good-rgb) / 0.045);
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
   font-weight: 650;
   line-height: 1.45;
 }
@@ -13945,7 +13945,7 @@ figcaption {
 }
 
 .analysisx-setting-method--wide .analysisx-setting-method__flow p {
-  font-size: 0.61rem;
+  font-size: var(--type-micro);
 }
 
 .analysisx-design-axes--wide {
@@ -13958,11 +13958,11 @@ figcaption {
 
 .analysisx-design-axes--wide .analysisx-axis-row span,
 .analysisx-design-axes--wide .analysisx-axis-row em {
-  font-size: 0.55rem;
+  font-size: var(--type-micro);
 }
 
 .analysisx-design-axes--wide > p {
-  font-size: 0.63rem;
+  font-size: var(--type-micro);
 }
 
 /* Scope / limitations */
@@ -14023,7 +14023,7 @@ figcaption {
 
 .scope2-boundary__index b {
   color: var(--color-text-quiet);
-  font: 750 0.52rem var(--font-mono);
+  font: 750 var(--type-micro) var(--font-mono);
   letter-spacing: 0.05em;
   line-height: 1.32;
 }
@@ -14042,7 +14042,7 @@ figcaption {
 .scope2-boundary__main p {
   max-width: 72ch;
   color: var(--color-text-muted);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   line-height: 1.5;
 }
 
@@ -14065,7 +14065,7 @@ figcaption {
   border-radius: 999px;
   color: var(--color-text-muted);
   background: var(--color-surface-muted);
-  font: 700 0.48rem var(--font-mono);
+  font: 700 var(--type-micro) var(--font-mono);
   line-height: 1.15;
   text-align: center;
   white-space: nowrap;
@@ -14121,14 +14121,14 @@ figcaption {
 
 .scope2-summary span {
   color: var(--color-warm);
-  font: 750 0.52rem var(--font-mono);
+  font: 750 var(--type-micro) var(--font-mono);
   letter-spacing: 0.05em;
   white-space: nowrap;
 }
 
 .scope2-summary p {
   color: var(--color-text-muted);
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
   line-height: 1.46;
 }
 
@@ -14226,7 +14226,7 @@ figcaption {
 
 .closing2-evidence span {
   color: rgb(229 237 239 / 0.66);
-  font: 650 0.66rem var(--font-mono);
+  font: 650 var(--type-micro) var(--font-mono);
   line-height: 1.3;
 }
 
@@ -14242,7 +14242,7 @@ figcaption {
 
 .closing2-direction > span {
   color: rgb(146 226 229 / 0.9);
-  font: 750 0.55rem var(--font-mono);
+  font: 750 var(--type-micro) var(--font-mono);
   letter-spacing: 0.05em;
 }
 
@@ -14264,7 +14264,7 @@ figcaption {
 
 .closing2-axes small {
   color: rgb(229 237 239 / 0.48);
-  font: 750 0.48rem var(--font-mono);
+  font: 750 var(--type-micro) var(--font-mono);
   letter-spacing: 0.045em;
 }
 
@@ -14275,7 +14275,7 @@ figcaption {
 
 .closing2-axes p {
   color: rgb(229 237 239 / 0.62);
-  font-size: 0.65rem;
+  font-size: var(--type-micro);
   line-height: 1.42;
 }
 
@@ -14478,7 +14478,7 @@ figcaption {
 
 .analysisx-mixer-query > span,
 .analysisx-mixer-output > span {
-  font-size: 0.61rem;
+  font-size: var(--type-micro);
 }
 
 .analysisx-mixer-query strong,
@@ -14497,7 +14497,7 @@ figcaption {
 }
 
 .analysisx-mixer-component > small {
-  font-size: 0.63rem;
+  font-size: var(--type-micro);
   line-height: 1.3;
 }
 
@@ -14512,7 +14512,7 @@ figcaption {
 .analysisx-mixer-embeddings button {
   min-height: 1.9rem;
   padding: 0.34rem 0.52rem;
-  font-size: 0.62rem;
+  font-size: var(--type-micro);
 }
 
 .analysisx-mini-cube {
@@ -14527,7 +14527,7 @@ figcaption {
 }
 
 .analysisx-mixer-tensor > span {
-  font-size: 0.61rem;
+  font-size: var(--type-micro);
   line-height: 1.25;
 }
 
@@ -14540,11 +14540,11 @@ figcaption {
   min-height: 3rem;
   padding: 0.52rem 0.58rem;
   border-left-width: 2px;
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
 }
 
 .analysisx-mixer-passes small {
-  font-size: 0.55rem;
+  font-size: var(--type-micro);
   line-height: 1.25;
 }
 
@@ -14556,7 +14556,7 @@ figcaption {
 .analysisx-component-picker button {
   min-height: 1.9rem;
   padding: 0.3rem 0.56rem;
-  font-size: 0.63rem;
+  font-size: var(--type-micro);
 }
 
 /* 03 / Interpretation + 04 / Discussion — headings stand on their own after
@@ -14663,7 +14663,7 @@ figcaption {
 
 .closing2-evidence span {
   color: var(--color-text-muted);
-  font: 650 0.66rem var(--font-mono);
+  font: 650 var(--type-micro) var(--font-mono);
   line-height: 1.3;
 }
 
@@ -14678,7 +14678,7 @@ figcaption {
 
 .closing2-direction > span {
   color: var(--color-text-quiet);
-  font: 750 0.53rem var(--font-mono);
+  font: 750 var(--type-micro) var(--font-mono);
   letter-spacing: 0.055em;
 }
 
@@ -14697,7 +14697,7 @@ figcaption {
 
 .closing2-axes small {
   color: var(--color-accent-dark);
-  font: 750 0.49rem var(--font-mono);
+  font: 750 var(--type-micro) var(--font-mono);
   letter-spacing: 0.05em;
 }
 
@@ -14708,7 +14708,7 @@ figcaption {
 
 .closing2-axes p {
   color: var(--color-text-muted);
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
   line-height: 1.44;
 }
 
@@ -15014,7 +15014,7 @@ figcaption {
 .gatep-second-pass-node > span,
 .gatep-winner > span {
   font-family: var(--font-mono);
-  font-size: .63rem;
+  font-size: var(--type-micro);
   font-weight: 750;
   letter-spacing: .075em;
   line-height: 1.2;
@@ -15070,7 +15070,7 @@ figcaption {
   gap: .7rem;
   padding-bottom: .12rem;
   color: var(--gatep-muted);
-  font-size: .68rem;
+  font-size: var(--type-micro);
   white-space: nowrap;
 }
 .gatep-overview__legend span { display:flex; align-items:center; gap:.3rem; }
@@ -15094,13 +15094,13 @@ figcaption {
 .gatep-lane__intro { display:grid; grid-template-columns:auto 1fr; gap:.62rem; align-items:start; }
 .gatep-step-number {
   display:grid; place-items:center; width:2.05rem; height:2.05rem; border-radius:50%;
-  color:var(--gatep-teal-dark); background:#ddf0f0; font-family:var(--font-mono); font-size:.68rem; font-weight:800;
+  color:var(--gatep-teal-dark); background:#ddf0f0; font-family:var(--font-mono); font-size: var(--type-micro); font-weight:800;
   box-shadow: inset 0 0 0 1px rgb(var(--color-accent-rgb) / .08);
 }
 .gatep-lane__intro div { display:grid; gap:.12rem; }
-.gatep-lane__intro b { color:var(--gatep-teal-dark); font-family:var(--font-mono); font-size:.59rem; letter-spacing:.09em; }
+.gatep-lane__intro b { color:var(--gatep-teal-dark); font-family:var(--font-mono); font-size: var(--type-micro); letter-spacing:.09em; }
 .gatep-lane__intro strong { color:var(--gatep-ink); font-size:.82rem; line-height:1.3; }
-.gatep-lane__intro small { color:#87929a; font-size:.61rem; line-height:1.35; }
+.gatep-lane__intro small { color:#87929a; font-size: var(--type-micro); line-height:1.35; }
 
 .gatep-query-token,
 .gatep-enriched-token {
@@ -15123,7 +15123,7 @@ figcaption {
 }
 .gatep-enriched-token > span { color:var(--gatep-teal-dark); }
 .gatep-enriched-token strong { color:var(--gatep-teal-dark); font-size:.78rem; line-height:1.34; }
-.gatep-enriched-token small { color:#6a8185; font-size:.6rem; }
+.gatep-enriched-token small { color:#6a8185; font-size: var(--type-micro); }
 .gatep-enriched-token--inline { align-self:stretch; align-content:center; }
 
 .gatep-flow { position:relative; width:100%; height:18px; }
@@ -15148,7 +15148,7 @@ figcaption {
 .gatep-gallery-film header span { color:#7b8992; }
 .gatep-gallery-film header small,
 .gatep-competition header small,
-.gatep-ranking header small { color:#8d979d; font-size:.58rem; }
+.gatep-ranking header small { color:#8d979d; font-size: var(--type-micro); }
 
 .gatep-film-strip { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:.28rem; }
 .gatep-film-strip figure,
@@ -15165,9 +15165,9 @@ figcaption {
   display:grid; place-items:center; align-content:center; gap:.12rem; min-height:90px; padding:.55rem; text-align:center;
   border:1px dashed #b8c7cb; border-radius:12px; background:rgba(255,255,255,.7);
 }
-.gatep-retriever-node > span { color:#849098; font-size:.55rem; }
+.gatep-retriever-node > span { color:#849098; font-size: var(--type-micro); }
 .gatep-retriever-node strong { color:var(--gatep-ink); font-size:.85rem; }
-.gatep-retriever-node small { color:#849098; font-size:.58rem; }
+.gatep-retriever-node small { color:#849098; font-size: var(--type-micro); }
 .gatep-retriever-node--second { border-color:#91c4c5; background:rgba(245,251,250,.85); }
 
 .gatep-competition { background:#f3f9f9; box-shadow: inset 0 0 0 1px #c6e0e1; }
@@ -15175,7 +15175,7 @@ figcaption {
 .gatep-competition__cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)) auto minmax(0,1fr); gap:.3rem; align-items:center; }
 .gatep-competition__cards figure { aspect-ratio:.7; background:#fff; box-shadow: inset 0 0 0 1px #d5e5e5, 0 4px 10px rgb(var(--color-accent-rgb) / .045); }
 .gatep-competition__cards b,
-.gatep-ranking__cards b { position:absolute; left:.28rem; top:.25rem; z-index:2; font-family:var(--font-mono); font-size:.51rem; color:var(--gatep-ink); }
+.gatep-ranking__cards b { position:absolute; left:.28rem; top:.25rem; z-index:2; font-family:var(--font-mono); font-size: var(--type-micro); color:var(--gatep-ink); }
 .gatep-competition__cards em,
 .gatep-ranking__cards em { color:#819096; font-style:normal; font-weight:800; letter-spacing:.1em; }
 
@@ -15183,7 +15183,7 @@ figcaption {
 .gatep-ranking header span { color:#287454; }
 .gatep-ranking__cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)) auto; gap:.3rem; align-items:center; }
 .gatep-ranking__cards .is-winner { box-shadow: inset 0 0 0 1.5px #4e9a72, 0 7px 16px rgb(31 122 77 / .1); background:#fff; }
-.gatep-ranking__cards .is-winner span { position:absolute; left:50%; bottom:.22rem; transform:translateX(-50%); color:#26734f; font-family:var(--font-mono); font-size:.48rem; font-weight:800; }
+.gatep-ranking__cards .is-winner span { position:absolute; left:50%; bottom:.22rem; transform:translateX(-50%); color:#26734f; font-family:var(--font-mono); font-size: var(--type-micro); font-weight:800; }
 
 .gatep-hero-bridge {
   position:relative;
@@ -15198,7 +15198,7 @@ figcaption {
   border-block:1px solid #dce9ea;
 }
 .gatep-hero-bridge__lead { display:grid; gap:.42rem; align-content:center; }
-.gatep-hero-bridge__lead span { color:#708087; font-family:var(--font-mono); font-size:.57rem; font-weight:750; letter-spacing:.07em; line-height:1.45; }
+.gatep-hero-bridge__lead span { color:#708087; font-family:var(--font-mono); font-size: var(--type-micro); font-weight:750; letter-spacing:.07em; line-height:1.45; }
 .gatep-hero-bridge__lead i { display:block; width:74%; height:1px; background:linear-gradient(90deg,#afcacc,transparent); }
 
 .gatep-core {
@@ -15223,14 +15223,14 @@ figcaption {
 .gatep-core__copy > span { color:var(--gatep-teal-dark); }
 .gatep-core__copy strong { color:#0f555b; font-size:clamp(1.2rem,2vw,1.55rem); letter-spacing:-.02em; }
 .gatep-core__copy strong em { font-style:normal; color:#177c84; }
-.gatep-core__copy p { max-width:48ch; color:#547177; font-size:.72rem; line-height:1.45; }
+.gatep-core__copy p { max-width:48ch; color:#547177; font-size: var(--type-micro); line-height:1.45; }
 .gatep-core__steps { position:relative; z-index:1; display:flex; align-items:center; gap:.38rem; }
-.gatep-core__steps span { display:flex; align-items:center; gap:.3rem; padding:.4rem .5rem; border-radius:999px; background:rgb(255 255 255 / .72); color:#345f63; font-size:.62rem; font-weight:700; box-shadow:inset 0 0 0 1px rgb(var(--color-accent-rgb) / .12); white-space:nowrap; }
-.gatep-core__steps span b { display:grid; place-items:center; width:1.15rem; height:1.15rem; border-radius:50%; background:#d5ebeb; font-family:var(--font-mono); font-size:.48rem; }
+.gatep-core__steps span { display:flex; align-items:center; gap:.3rem; padding:.4rem .5rem; border-radius:999px; background:rgb(255 255 255 / .72); color:#345f63; font-size: var(--type-micro); font-weight:700; box-shadow:inset 0 0 0 1px rgb(var(--color-accent-rgb) / .12); white-space:nowrap; }
+.gatep-core__steps span b { display:grid; place-items:center; width:1.15rem; height:1.15rem; border-radius:50%; background:#d5ebeb; font-family:var(--font-mono); font-size: var(--type-micro); }
 .gatep-core__steps > i { width:14px; height:1px; background:#7fb7ba; }
 
 .gatep-overview__footer { display:flex; justify-content:center; flex-wrap:wrap; gap:.45rem; padding:.82rem 1.2rem 1rem; background:#fff; }
-.gatep-overview__footer span { padding:.32rem .62rem; border-radius:999px; background:#f7f9f9; box-shadow:inset 0 0 0 1px #e0e6e8; color:#66737b; font-size:.66rem; font-weight:650; }
+.gatep-overview__footer span { padding:.32rem .62rem; border-radius:999px; background:#f7f9f9; box-shadow:inset 0 0 0 1px #e0e6e8; color:#66737b; font-size: var(--type-micro); font-weight:650; }
 
 /* ---------- Explorer shell ---------- */
 .gatep-explorer {
@@ -15248,11 +15248,11 @@ figcaption {
 .gatep-explorer > summary::-webkit-details-marker { display:none; }
 .gatep-explorer > summary > span:first-child { display:grid; gap:.08rem; }
 .gatep-explorer > summary strong { color:var(--gatep-ink); font-size:.96rem; }
-.gatep-explorer > summary small { color:#76828a; font-size:.7rem; }
-.gatep-explorer__action { padding:.32rem .58rem; border-radius:999px; color:var(--gatep-teal-dark); background:#eef8f7; font-size:.7rem; font-weight:750; white-space:nowrap; }
+.gatep-explorer > summary small { color:#76828a; font-size: var(--type-micro); }
+.gatep-explorer__action { padding:.32rem .58rem; border-radius:999px; color:var(--gatep-teal-dark); background:#eef8f7; font-size: var(--type-micro); font-weight:750; white-space:nowrap; }
 .gatep-explorer[open] > summary { background:#f5faf9; border-bottom:1px solid #e0e9ea; }
 .gatep-explorer[open] .gatep-explorer__action { font-size:0; }
-.gatep-explorer[open] .gatep-explorer__action::after { font-size:.7rem; content:"Close ↑"; }
+.gatep-explorer[open] .gatep-explorer__action::after { font-size: var(--type-micro); content:"Close ↑"; }
 .gatep-explorer__body { display:grid; }
 
 /* ---------- Story scenes ---------- */
@@ -15265,9 +15265,9 @@ figcaption {
 }
 .gatep-scene:nth-of-type(2) { background:linear-gradient(180deg,#fbfdfd,#f4f9f9); }
 .gatep-scene__rail { display:grid; grid-template-rows:auto 1fr auto; justify-items:center; gap:.75rem; padding:1.55rem .75rem 1.35rem; border-right:1px solid #e2e9ea; background:#fafcfc; }
-.gatep-scene__rail > span { display:grid; place-items:center; width:2.2rem; height:2.2rem; border-radius:50%; color:var(--gatep-teal-dark); background:#e4f3f2; font-family:var(--font-mono); font-size:.68rem; font-weight:800; }
+.gatep-scene__rail > span { display:grid; place-items:center; width:2.2rem; height:2.2rem; border-radius:50%; color:var(--gatep-teal-dark); background:#e4f3f2; font-family:var(--font-mono); font-size: var(--type-micro); font-weight:800; }
 .gatep-scene__rail > i { width:1px; height:100%; min-height:54px; background:linear-gradient(#9fc7ca,#dfe8e9); }
-.gatep-scene__rail > small { color:#738087; font-family:var(--font-mono); font-size:.54rem; font-weight:750; letter-spacing:.07em; line-height:1.38; text-align:center; }
+.gatep-scene__rail > small { color:#738087; font-family:var(--font-mono); font-size: var(--type-micro); font-weight:750; letter-spacing:.07em; line-height:1.38; text-align:center; }
 .gatep-scene__content { display:grid; gap:1.1rem; min-width:0; padding:1.55rem 1.5rem 1.45rem; }
 .gatep-scene__header { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr); gap:1.5rem; align-items:end; }
 .gatep-scene__header > div { display:grid; gap:.28rem; }
@@ -15275,8 +15275,8 @@ figcaption {
 .gatep-scene__header h3 { max-width:730px; color:var(--gatep-ink); font-size:clamp(1.32rem,2.2vw,1.72rem); line-height:1.18; letter-spacing:-.02em; }
 .gatep-scene__header p { max-width:50ch; color:#68757e; font-size:.78rem; line-height:1.5; justify-self:end; }
 .gatep-scene-label { display:flex; justify-content:space-between; align-items:baseline; gap:.6rem; }
-.gatep-scene-label span { color:#75838b; font-family:var(--font-mono); font-size:.61rem; font-weight:750; letter-spacing:.07em; }
-.gatep-scene-label small { color:#8b969c; font-size:.6rem; }
+.gatep-scene-label span { color:#75838b; font-family:var(--font-mono); font-size: var(--type-micro); font-weight:750; letter-spacing:.07em; }
+.gatep-scene-label small { color:#8b969c; font-size: var(--type-micro); }
 .gatep-flow--large { min-width:28px; }
 
 /* Scene 1 */
@@ -15290,19 +15290,19 @@ figcaption {
 .gatep-scene1-gallery__grid figure { position:relative; margin:0; aspect-ratio:.66; overflow:hidden; border-radius:9px; background:#fff; opacity:.38; box-shadow:inset 0 0 0 1px #e0e6e7; transition:transform .24s ease,opacity .24s ease,box-shadow .24s ease; }
 .gatep-scene1-gallery__grid figure.is-picked { opacity:1; transform:translateY(-4px); box-shadow:inset 0 0 0 1.5px #75b4b8,0 8px 16px rgb(var(--color-accent-rgb) / .08); }
 .gatep-scene1-gallery__grid img { width:100%; height:100%; object-fit:contain; object-position:center bottom; }
-.gatep-scene1-gallery__grid b { position:absolute; right:.28rem; top:.26rem; z-index:2; display:grid; place-items:center; min-width:1rem; height:1rem; padding:0 .2rem; border-radius:999px; color:var(--gatep-teal-dark); background:#e6f4f4; font-family:var(--font-mono); font-size:.47rem; }
+.gatep-scene1-gallery__grid b { position:absolute; right:.28rem; top:.26rem; z-index:2; display:grid; place-items:center; min-width:1rem; height:1rem; padding:0 .2rem; border-radius:999px; color:var(--gatep-teal-dark); background:#e6f4f4; font-family:var(--font-mono); font-size: var(--type-micro); }
 .gatep-scan-line { position:absolute; left:1rem; right:1rem; bottom:.42rem; height:2px; overflow:hidden; border-radius:999px; background:#e7eeee; }
 .gatep-scan-line i { display:block; width:22%; height:100%; border-radius:inherit; background:linear-gradient(90deg,transparent,var(--gatep-teal),transparent); animation:gatepScan 2.25s ease-in-out infinite; }
 .gatep-scene1-focus { display:grid; gap:.65rem; padding:1rem; border-radius:14px; background:linear-gradient(145deg,#eef8f7,#f9fcfc); box-shadow:inset 0 0 0 1px #bfdddd; }
 .gatep-scene1-focus__stack { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.36rem; }
 .gatep-scene1-focus__stack figure { position:relative; margin:0; aspect-ratio:.66; overflow:hidden; border-radius:8px; background:#fff; box-shadow:inset 0 0 0 1px #d7e5e5,0 4px 10px rgb(var(--color-accent-rgb) / .045); }
 .gatep-scene1-focus__stack img { width:100%; height:100%; object-fit:contain; }
-.gatep-scene1-focus__stack b { position:absolute; left:.25rem; top:.22rem; z-index:2; font-family:var(--font-mono); font-size:.49rem; }
-.gatep-scene1-focus > strong { color:#215f64; font-size:.73rem; line-height:1.4; }
+.gatep-scene1-focus__stack b { position:absolute; left:.25rem; top:.22rem; z-index:2; font-family:var(--font-mono); font-size: var(--type-micro); }
+.gatep-scene1-focus > strong { color:#215f64; font-size: var(--type-micro); line-height:1.4; }
 
 .gatep-callout { display:flex; align-items:center; gap:.6rem; padding:.72rem .9rem; border-radius:10px; background:#f7f9f9; color:#66737b; }
-.gatep-callout b { color:var(--gatep-ink); font-size:.72rem; white-space:nowrap; }
-.gatep-callout span { font-size:.69rem; line-height:1.45; }
+.gatep-callout b { color:var(--gatep-ink); font-size: var(--type-micro); white-space:nowrap; }
+.gatep-callout span { font-size: var(--type-micro); line-height:1.45; }
 .gatep-callout--accent { background:#edf7f6; box-shadow:inset 3px 0 0 var(--gatep-teal); }
 .gatep-callout--accent b { color:var(--gatep-teal-dark); }
 
@@ -15311,7 +15311,7 @@ figcaption {
 .gatep-evidence-stack { display:grid; gap:.18rem; padding:1rem; border-radius:14px; background:#fff; box-shadow:inset 0 0 0 1px #dfe7e8; }
 .gatep-evidence-item { display:grid; grid-template-columns:28px 46px minmax(0,1fr); gap:.5rem; align-items:center; min-height:66px; padding:.38rem 0; border-top:1px solid #e8edee; }
 .gatep-evidence-item:nth-of-type(2) { border-top:0; }
-.gatep-evidence-item > b { color:#74828a; font-family:var(--font-mono); font-size:.57rem; }
+.gatep-evidence-item > b { color:#74828a; font-family:var(--font-mono); font-size: var(--type-micro); }
 .gatep-evidence-item img { width:46px; height:58px; object-fit:contain; }
 .gatep-evidence-item > span { display:grid; grid-template-columns:repeat(5,1fr); gap:.24rem; }
 .gatep-evidence-item > span i { height:.38rem; border-radius:999px; background:#dfe5e7; }
@@ -15320,7 +15320,7 @@ figcaption {
 .gatep-reason-hero { position:relative; display:grid; place-items:center; align-content:center; min-height:310px; overflow:hidden; border-radius:18px; background:radial-gradient(circle at 50% 48%,#d9eeee 0%,#edf7f7 40%,#f7fbfb 72%); box-shadow:inset 0 0 0 1px #afd3d5,0 14px 32px rgb(var(--color-accent-rgb) / .08); }
 .gatep-reason-hero__query { position:absolute; left:1rem; right:1rem; top:1rem; display:flex; justify-content:space-between; gap:.7rem; padding:.55rem .65rem; border-radius:10px; background:rgb(255 255 255 / .74); box-shadow:inset 0 0 0 1px rgb(var(--color-accent-rgb) / .12); }
 .gatep-reason-hero__query > span { color:#72878a; }
-.gatep-reason-hero__query b { color:#274f54; font-size:.7rem; }
+.gatep-reason-hero__query b { color:#274f54; font-size: var(--type-micro); }
 .gatep-reason-orbit { position:absolute; width:186px; height:186px; border:1px solid rgb(var(--color-accent-rgb) / .18); border-radius:50%; }
 .gatep-reason-orbit::before,
 .gatep-reason-orbit::after { position:absolute; inset:22px; border:1px dashed rgb(var(--color-accent-rgb) / .18); border-radius:50%; content:""; }
@@ -15328,20 +15328,20 @@ figcaption {
 .gatep-reason-orbit i { position:absolute; width:10px; height:10px; border-radius:3px; background:#79b9bd; box-shadow:0 0 0 4px rgb(255 255 255 / .55); }
 .gatep-reason-orbit i:nth-of-type(1){left:15px;top:86px}.gatep-reason-orbit i:nth-of-type(2){right:15px;top:86px}.gatep-reason-orbit i:nth-of-type(3){left:88px;top:14px}.gatep-reason-orbit i:nth-of-type(4){left:88px;bottom:14px}.gatep-reason-orbit i:nth-of-type(5){left:36px;top:36px}.gatep-reason-orbit i:nth-of-type(6){right:36px;bottom:36px}
 .gatep-reason-hero__core { position:relative; z-index:2; display:grid; place-items:center; gap:.18rem; width:126px; height:126px; border-radius:50%; text-align:center; background:linear-gradient(145deg,#0d7b83,#0b666d); box-shadow:0 14px 28px rgb(var(--color-accent-rgb) / .2),inset 0 1px 0 rgb(255 255 255 / .16); }
-.gatep-reason-hero__core > span { color:#cde9ea; font-size:.54rem; }
+.gatep-reason-hero__core > span { color:#cde9ea; font-size: var(--type-micro); }
 .gatep-reason-hero__core strong { color:white; font-size:.95rem; line-height:1.14; }
-.gatep-reason-hero__core small { color:#c7e2e3; font-size:.52rem; }
-.gatep-reason-hero__caption { position:absolute; left:1.2rem; right:1.2rem; bottom:1rem; color:#60777b; font-size:.64rem; line-height:1.42; text-align:center; }
+.gatep-reason-hero__core small { color:#c7e2e3; font-size: var(--type-micro); }
+.gatep-reason-hero__caption { position:absolute; left:1.2rem; right:1.2rem; bottom:1rem; color:#60777b; font-size: var(--type-micro); line-height:1.42; text-align:center; }
 
 .gatep-context-readout { display:grid; align-content:center; gap:.75rem; padding:1rem 1.05rem; border-radius:16px; background:#fff; box-shadow:inset 0 0 0 1px #cfe1e1; }
 .gatep-context-readout > strong { color:var(--gatep-ink); font-size:.93rem; line-height:1.38; }
 .gatep-context-readout > strong em { color:var(--gatep-teal-dark); font-style:normal; }
-.gatep-context-readout > p { color:#8a959a; font-size:.58rem; line-height:1.4; }
+.gatep-context-readout > p { color:#8a959a; font-size: var(--type-micro); line-height:1.4; }
 .gatep-cue-readout { display:grid; gap:.65rem; }
 .gatep-cue-readout > div { display:grid; gap:.28rem; }
 .gatep-cue-readout header { display:flex; justify-content:space-between; gap:.5rem; align-items:baseline; }
-.gatep-cue-readout header span { color:#4f5d65; font-size:.68rem; font-weight:700; }
-.gatep-cue-readout header small { color:#8a969c; font-size:.58rem; }
+.gatep-cue-readout header span { color:#4f5d65; font-size: var(--type-micro); font-weight:700; }
+.gatep-cue-readout header small { color:#8a969c; font-size: var(--type-micro); }
 .gatep-cue-readout > div > i { position:relative; display:block; height:.45rem; overflow:hidden; border-radius:999px; background:#e8edef; }
 .gatep-cue-readout > div > i > b { position:absolute; inset:0 auto 0 0; width:var(--level); border-radius:inherit; background:#8abdc0; transform-origin:left; }
 .gatep-cue-readout > div.is-strong header span { color:var(--gatep-teal-dark); }
@@ -15352,7 +15352,7 @@ figcaption {
 .gatep-refine-token { display:grid; gap:.2rem; min-width:0; padding:.72rem .78rem; border-radius:10px; background:rgb(255 255 255 / .75); }
 .gatep-refine-token > span { color:#8b796a; }
 .gatep-refine-token strong { color:#4b3e36; font-size:.75rem; line-height:1.35; }
-.gatep-refine-token small { color:#8e8a86; font-size:.58rem; }
+.gatep-refine-token small { color:#8e8a86; font-size: var(--type-micro); }
 .gatep-refine-token--correction { background:#faf0e8; box-shadow:inset 0 0 0 1px #ead3c0; }
 .gatep-refine-token--correction > span { color:#9e704d; }
 .gatep-refine-token--output { background:#e5f4f3; box-shadow:inset 0 0 0 1px #a8d2d4; }
@@ -15365,18 +15365,18 @@ figcaption {
 .gatep-second-pass-node { display:grid; place-items:center; align-content:center; gap:.2rem; padding:.8rem; border:1px dashed #91c2c5; border-radius:14px; background:#f4faf9; text-align:center; }
 .gatep-second-pass-node > span { color:#75898c; }
 .gatep-second-pass-node strong { color:var(--gatep-ink); font-size:.9rem; }
-.gatep-second-pass-node small { color:#7b8b90; font-size:.6rem; }
+.gatep-second-pass-node small { color:#7b8b90; font-size: var(--type-micro); }
 .gatep-winner { display:grid; place-items:center; align-content:center; gap:.48rem; min-width:0; padding:.8rem; border-radius:16px; background:#f0f8f3; box-shadow:inset 0 0 0 1px #add4bf; text-align:center; }
 .gatep-winner > span { color:#367b59; }
 .gatep-winner figure { position:relative; width:88px; margin:0; aspect-ratio:.68; overflow:hidden; border-radius:10px; background:#fff; box-shadow:inset 0 0 0 1.5px #4f9b73,0 10px 20px rgb(31 122 77 / .12); }
 .gatep-winner figure img { width:100%; height:100%; object-fit:contain; }
-.gatep-winner figure b { position:absolute; left:.32rem; top:.28rem; z-index:2; font-family:var(--font-mono); font-size:.55rem; }
-.gatep-winner figure small { position:absolute; left:50%; bottom:.25rem; transform:translateX(-50%); color:#2c7754; font-family:var(--font-mono); font-size:.5rem; font-weight:800; }
-.gatep-winner > strong { color:#2e7153; font-size:.7rem; }
+.gatep-winner figure b { position:absolute; left:.32rem; top:.28rem; z-index:2; font-family:var(--font-mono); font-size: var(--type-micro); }
+.gatep-winner figure small { position:absolute; left:50%; bottom:.25rem; transform:translateX(-50%); color:#2c7754; font-family:var(--font-mono); font-size: var(--type-micro); font-weight:800; }
+.gatep-winner > strong { color:#2e7153; font-size: var(--type-micro); }
 
 .gatep-explorer__footer { display:grid; grid-template-columns:auto minmax(0,1fr); gap:.55rem; align-items:center; padding:1rem 1.25rem; background:#fafcfc; }
-.gatep-explorer__footer > span { color:var(--gatep-ink); font-size:.7rem; font-weight:800; }
-.gatep-explorer__footer p { color:#708087; font-size:.67rem; line-height:1.45; }
+.gatep-explorer__footer > span { color:var(--gatep-ink); font-size: var(--type-micro); font-weight:800; }
+.gatep-explorer__footer p { color:#708087; font-size: var(--type-micro); line-height:1.45; }
 
 /* ---------- Motion ---------- */
 .gatep-motion-ready { opacity:0; transform:translateY(12px); transition:opacity .55s ease,transform .55s ease; }
@@ -15536,7 +15536,7 @@ figcaption {
   border-radius: 999px;
   color: var(--color-accent-dark);
   background: rgb(var(--color-surface-rgb) / 0.72);
-  font-size: 0.64rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.09em;
   line-height: 1;
@@ -15659,7 +15659,7 @@ figcaption {
   margin: 0;
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.09em;
   line-height: 1;
@@ -15685,7 +15685,7 @@ figcaption {
   color: var(--color-text-muted);
   background: var(--color-surface);
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.06em;
   line-height: 1;
@@ -15741,7 +15741,7 @@ figcaption {
   margin-left: auto;
   padding-right: 0.1rem;
   font-family: var(--font-mono);
-  font-size: 0.55rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.08em;
   line-height: 1;
@@ -15886,7 +15886,7 @@ figcaption {
   .overview-video-duration {
     min-height: 1.7rem;
     padding: 0.3rem 0.5rem;
-    font-size: 0.6rem;
+    font-size: var(--type-micro);
   }
 
   .overview-video-frame {
@@ -15908,7 +15908,7 @@ figcaption {
 
   .overview-video-caption {
     padding-top: 0.72rem;
-    font-size: 0.74rem;
+    font-size: var(--type-micro);
   }
 
   .overview-video-caption b {
@@ -16003,7 +16003,7 @@ figcaption {
 .diagx-eyebrow {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: var(--type-micro);
   font-weight: 750;
   letter-spacing: 0.075em;
   text-transform: uppercase;
@@ -16039,7 +16039,7 @@ figcaption {
   padding-inline: 0.62rem;
   border-color: rgb(var(--color-border-rgb) / 0.85);
   background: rgb(var(--color-surface-rgb) / 0.92);
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
 }
 
 .diagx-control-strip {
@@ -16065,7 +16065,7 @@ figcaption {
   flex: 0 0 auto;
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.54rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.075em;
 }
@@ -16083,7 +16083,7 @@ figcaption {
   min-height: 1.62rem;
   padding: 0.23rem 0.45rem;
   border-radius: 999px;
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
   font-weight: 650;
   line-height: 1;
 }
@@ -16153,7 +16153,7 @@ figcaption {
   border-radius: 999px;
   color: var(--color-text-muted);
   background: rgb(var(--color-border-rgb) / 0.32);
-  font-size: 0.62rem;
+  font-size: var(--type-micro);
   font-weight: 600;
 }
 
@@ -16186,7 +16186,7 @@ figcaption {
 
 .diagx-cue-row > span {
   color: var(--color-text-muted);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   font-weight: 600;
 }
 
@@ -16218,7 +16218,7 @@ figcaption {
 .diagx-cue-row > strong {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.53rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.045em;
 }
@@ -16242,7 +16242,7 @@ figcaption {
 .diagx-gallery__outcome > span {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.49rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.055em;
 }
@@ -16250,14 +16250,14 @@ figcaption {
 .diagx-gallery__outcome > strong {
   color: var(--color-text);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   justify-self: center;
 }
 
 .diagx-gallery__outcome > b {
   justify-self: end;
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   font-weight: 750;
   text-transform: uppercase;
 }
@@ -16294,7 +16294,7 @@ figcaption {
 .diagx-intervention-axis > span {
   color: var(--color-warm);
   font-family: var(--font-mono);
-  font-size: 0.5rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.07em;
   line-height: 1.35;
@@ -16332,7 +16332,7 @@ figcaption {
 
 .diagx-intervention-axis .diagx-flip-core small {
   color: var(--color-text-quiet);
-  font-size: 0.44rem;
+  font-size: var(--type-micro);
 }
 
 .diagx-intervention-axis .diagx-flip-core strong {
@@ -16396,7 +16396,7 @@ figcaption {
 .diagx-proof-card > header span {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.56rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.055em;
 }
@@ -16481,7 +16481,7 @@ figcaption {
 
 .diagx-scale-row span {
   color: var(--color-text-muted);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   line-height: 1.35;
 }
 
@@ -16527,7 +16527,7 @@ figcaption {
 .diagx-transition__concept span,
 .diagx-transition__concept strong {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: var(--type-micro);
   font-weight: 750;
   letter-spacing: 0.025em;
   line-height: 1.3;
@@ -16707,7 +16707,7 @@ figcaption {
   }
 
   .diagx-matrix__cell strong {
-    font-size: 0.53rem;
+    font-size: var(--type-micro);
   }
 
   .diagx-transition__concept {
@@ -16798,7 +16798,7 @@ figcaption {
 .diagx-matrix-panel__head > div > span {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.055em;
   line-height: 1.25;
@@ -16842,7 +16842,7 @@ figcaption {
   grid-area: gallery;
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.55rem;
+  font-size: var(--type-micro);
   font-weight: 700;
   letter-spacing: 0.05em;
 }
@@ -16851,7 +16851,7 @@ figcaption {
   grid-area: top;
   color: var(--color-text-muted);
   font-family: var(--font-mono);
-  font-size: 0.55rem;
+  font-size: var(--type-micro);
   letter-spacing: 0.045em;
 }
 
@@ -16902,7 +16902,7 @@ figcaption {
 .diagx-flip-mini-axis em,
 .diagx-flip-mini-axis b {
   font-family: var(--font-mono);
-  font-size: 0.5rem;
+  font-size: var(--type-micro);
   font-style: normal;
   font-weight: 700;
   line-height: 1.3;
@@ -16988,14 +16988,14 @@ figcaption {
   color: var(--color-warm);
   background: rgb(var(--color-warm-rgb) / 0.09);
   font-family: var(--font-mono);
-  font-size: 0.5rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.05em;
 }
 
 .diagx-flip-read-note p {
   color: var(--color-text-muted);
-  font-size: 0.69rem;
+  font-size: var(--type-micro);
   line-height: 1.42;
 }
 
@@ -17047,7 +17047,7 @@ figcaption {
   grid-area: label;
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.57rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.055em;
   line-height: 1.25;
@@ -17113,7 +17113,7 @@ figcaption {
 
 .diagx-matrix-panel__head > p {
   color: var(--color-text-muted);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
   line-height: 1.46;
 }
 
@@ -17143,7 +17143,7 @@ figcaption {
   color: var(--color-text-muted);
   background: rgb(var(--color-surface-muted) / 0.96);
   font-family: var(--font-mono);
-  font-size: 0.56rem;
+  font-size: var(--type-micro);
   font-weight: 750;
   line-height: 1.15;
   text-align: center;
@@ -17151,7 +17151,7 @@ figcaption {
 
 .diagx-evidence--explained .diagx-matrix__corner span {
   color: var(--color-text-quiet);
-  font-size: 0.48rem;
+  font-size: var(--type-micro);
   letter-spacing: 0.04em;
 }
 
@@ -17162,12 +17162,12 @@ figcaption {
 
 .diagx-evidence--explained .diagx-matrix__head strong {
   color: var(--color-text);
-  font-size: 0.59rem;
+  font-size: var(--type-micro);
 }
 
 .diagx-evidence--explained .diagx-matrix__head small {
   color: var(--color-text-quiet);
-  font-size: 0.46rem;
+  font-size: var(--type-micro);
   font-weight: 700;
 }
 
@@ -17175,7 +17175,7 @@ figcaption {
   justify-items: start;
   padding-left: 0.58rem;
   color: var(--color-text);
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
 }
 
 .diagx-evidence--explained .diagx-matrix__cell {
@@ -17192,7 +17192,7 @@ figcaption {
 .diagx-evidence--explained .diagx-matrix__cell > strong {
   color: var(--color-text);
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: var(--type-micro);
   font-variant-numeric: tabular-nums;
   font-weight: 800;
   line-height: 1;
@@ -17203,7 +17203,7 @@ figcaption {
 .diagx-evidence--explained .diagx-matrix__cell > strong small {
   margin-left: 0.08rem;
   color: var(--color-text-muted);
-  font-size: 0.46rem;
+  font-size: var(--type-micro);
   font-weight: 700;
 }
 
@@ -17239,7 +17239,7 @@ figcaption {
   min-width: 620px;
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.48rem;
+  font-size: var(--type-micro);
 }
 
 .diagx-matrix-panel__footer i {
@@ -17252,7 +17252,7 @@ figcaption {
 .diagx-matrix-panel__footer p {
   margin-left: 0.2rem;
   color: var(--color-text-quiet);
-  font-size: 0.48rem;
+  font-size: var(--type-micro);
 }
 
 .diagx-scale-row--supporting {
@@ -17289,7 +17289,7 @@ figcaption {
   flex: 0 0 auto;
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.52rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.055em;
 }
@@ -17298,7 +17298,7 @@ figcaption {
   margin-top: -0.28rem;
   padding-inline: 0.15rem;
   color: var(--color-text-quiet);
-  font-size: 0.66rem;
+  font-size: var(--type-micro);
   line-height: 1.45;
 }
 
@@ -17410,7 +17410,7 @@ figcaption {
 .ttbx-takeaway__boundaries article > span {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: var(--type-micro);
   font-weight: 750;
   letter-spacing: 0.065em;
   line-height: 1.15;
@@ -17512,7 +17512,7 @@ figcaption {
   flex: 0 0 auto;
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: var(--type-micro);
   font-weight: 750;
   letter-spacing: 0.06em;
   line-height: 1;
@@ -17529,7 +17529,7 @@ figcaption {
   border-radius: 50%;
   background: rgb(var(--color-accent-soft-rgb) / 0.62);
   font-family: var(--font-body);
-  font-size: 0.65rem;
+  font-size: var(--type-micro);
   font-style: normal;
   letter-spacing: 0;
 }
@@ -17572,7 +17572,7 @@ figcaption {
 .interaction-mini-label {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.52rem;
+  font-size: var(--type-micro);
   font-weight: 750;
   letter-spacing: 0.06em;
   line-height: 1;
@@ -17594,13 +17594,13 @@ figcaption {
   gap: 0.34rem;
   margin: 0.38rem 0 0;
   color: var(--color-text-quiet);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   line-height: 1.35;
 }
 
 .qual-overview-hint span {
   color: var(--color-accent-dark);
-  font-size: 0.72rem;
+  font-size: var(--type-micro);
 }
 
 .analysisx-component-hint {
@@ -17609,7 +17609,7 @@ figcaption {
   gap: 0.38rem;
   margin: -0.05rem 0 0.72rem;
   color: var(--color-text-muted);
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
   line-height: 1.4;
 }
 
@@ -17685,7 +17685,7 @@ figcaption {
 .disclosure__eyebrow {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.56rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.075em;
   line-height: 1;
@@ -17702,7 +17702,7 @@ figcaption {
 .disclosure__description {
   max-width: 70ch;
   color: var(--color-text-muted);
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
   font-weight: 450;
   line-height: 1.42;
 }
@@ -17721,7 +17721,7 @@ figcaption {
   color: var(--color-accent-dark);
   background: rgb(var(--color-accent-soft-rgb) / 0.66);
   font-family: var(--font-mono);
-  font-size: 0.61rem;
+  font-size: var(--type-micro);
   font-weight: 750;
   line-height: 1;
   white-space: nowrap;
@@ -17772,7 +17772,7 @@ figcaption {
 }
 
 .disclosure--primary .disclosure__eyebrow {
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
 }
 
 .disclosure--primary .disclosure__title {
@@ -17790,7 +17790,7 @@ figcaption {
 }
 
 .disclosure--compact .disclosure__eyebrow {
-  font-size: 0.5rem;
+  font-size: var(--type-micro);
 }
 
 .disclosure--compact .disclosure__title {
@@ -17798,14 +17798,14 @@ figcaption {
 }
 
 .disclosure--compact .disclosure__description {
-  font-size: 0.64rem;
+  font-size: var(--type-micro);
 }
 
 .disclosure--compact .disclosure__action {
   min-width: 3.65rem;
   min-height: 1.8rem;
   padding-inline: 0.44rem;
-  font-size: 0.56rem;
+  font-size: var(--type-micro);
 }
 
 .disclosure[open] > :not(summary) {
@@ -17849,7 +17849,7 @@ figcaption {
 
 .gatep-explorer.disclosure > .disclosure__summary .disclosure__description {
   color: var(--color-text-muted);
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
 }
 
 .analysisx-deep-detail.disclosure > .disclosure__summary,
@@ -18006,7 +18006,7 @@ figcaption {
 .diagx-exact-values > header > span {
   color: var(--color-accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.56rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.065em;
   line-height: 1.25;
@@ -18071,7 +18071,7 @@ figcaption {
 
 .diagx-exact-values > header p {
   color: var(--color-text-quiet);
-  font-size: 0.68rem;
+  font-size: var(--type-micro);
   line-height: 1.4;
   text-align: right;
 }
@@ -18099,7 +18099,7 @@ figcaption {
 
 .diagx-details .heatmap caption {
   margin: 0 0 0.52rem;
-  font-size: 0.7rem;
+  font-size: var(--type-micro);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -18166,7 +18166,7 @@ figcaption {
 .analysisx-qcrs-stage__eyebrow {
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.54rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.065em;
   line-height: 1;
@@ -18176,7 +18176,7 @@ figcaption {
 .analysisx-qcrs-stage__caption,
 .analysisx-qcrs-stage > small:not(.analysisx-qcrs-stage__eyebrow) {
   color: var(--color-text-quiet);
-  font-size: 0.58rem;
+  font-size: var(--type-micro);
   line-height: 1.35;
   text-align: center;
 }
@@ -18240,7 +18240,7 @@ figcaption {
 
 .analysisx-mixer-component > small {
   color: var(--color-text-muted);
-  font-size: 0.61rem;
+  font-size: var(--type-micro);
   line-height: 1.3;
   text-align: center;
 }
@@ -18277,7 +18277,7 @@ figcaption {
 .analysisx-mixer-embeddings button {
   min-height: 2.2rem;
   padding: 0.38rem 0.48rem;
-  font-size: 0.6rem;
+  font-size: var(--type-micro);
   font-weight: 700;
 }
 
@@ -18336,7 +18336,7 @@ figcaption {
 
 .analysisx-mixer-passes button > strong {
   color: var(--color-text-muted);
-  font-size: 0.64rem;
+  font-size: var(--type-micro);
   font-weight: 750;
   line-height: 1.2;
 }
@@ -18348,7 +18348,7 @@ figcaption {
 
 .analysisx-mixer-passes small {
   color: var(--color-text-quiet);
-  font-size: 0.52rem;
+  font-size: var(--type-micro);
   line-height: 1.25;
 }
 
@@ -18379,7 +18379,7 @@ figcaption {
   color: var(--color-bad);
   background: rgb(248 231 228 / 0.7);
   font-family: var(--font-mono);
-  font-size: 0.43rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.045em;
   line-height: 1;
@@ -18432,7 +18432,7 @@ figcaption {
 
 .analysisx-reasoning-readout__summary > p:not(.analysisx-readout-note) {
   max-width: 38ch;
-  font-size: 0.67rem;
+  font-size: var(--type-micro);
   line-height: 1.42;
 }
 
@@ -18474,12 +18474,12 @@ figcaption {
 }
 
 .analysisx-score-card > strong {
-  font-size: 0.74rem;
+  font-size: var(--type-micro);
   white-space: nowrap;
 }
 
 .analysisx-score-card > small {
-  font-size: 0.52rem;
+  font-size: var(--type-micro);
   line-height: 1.35;
 }
 
@@ -18617,7 +18617,7 @@ figcaption {
   justify-self: start;
   color: var(--color-text-quiet);
   font-family: var(--font-mono);
-  font-size: 0.54rem;
+  font-size: var(--type-micro);
   font-weight: 800;
   letter-spacing: 0.065em;
   line-height: 1;
@@ -18891,7 +18891,7 @@ figcaption {
 
 .footer-brand p span {
   color: var(--color-text-quiet);
-  font-size: 0.74rem;
+  font-size: var(--type-micro);
 }
 
 /* Responsive mascot behavior */
@@ -19028,3 +19028,407 @@ figcaption {
   }
 }
 
+
+
+/* ========================================================================== */
+/* SITE-WIDE TYPOGRAPHY NORMALIZATION — 2026-09-16                            */
+/* Semantic roles, not component-by-component arbitrary sizes.                */
+/*                                                                            */
+/* Scale:                                                                     */
+/*   micro   12px — only dense diagram annotations / rank markers             */
+/*   label   13px — kickers, eyebrows, legends, metadata                      */
+/*   UI      13px — compact controls and tabs                                 */
+/*   caption 14px — captions, notes, secondary explanations                   */
+/*   support 15px — explanatory copy that must read comfortably               */
+/* ========================================================================== */
+
+/* Global readable roles. */
+.nav-links a,
+.paper-links a,
+main button,
+main summary {
+  font-size: var(--type-ui) !important;
+}
+
+figcaption,
+main [class*="caption"],
+main [class*="description"],
+main [class*="footnote"],
+main [class*="hint"]:not(.interaction-hint__label) {
+  font-size: var(--type-caption) !important;
+}
+
+.section-kicker,
+.subsection-label,
+main [class*="eyebrow"],
+main [class*="kicker"],
+main [class*="label"],
+main [class*="legend"],
+.interaction-hint__label,
+.disclosure__eyebrow {
+  font-size: var(--type-label) !important;
+}
+
+main small {
+  font-size: var(--type-micro) !important;
+}
+
+/* Paragraphs inside the dense visual sections are still prose, not microcopy. */
+.diagx-chapter p,
+.ttbx-chapter p,
+.gatep-chapter p,
+.results-chapter p,
+.examples-chapter p,
+.analysisx-chapter p,
+.scope2-chapter p,
+.closing-chapter p {
+  font-size: var(--type-caption) !important;
+}
+
+.chapter-heading p:not(.section-kicker),
+.diagx-lead,
+.gatep-heading p:not(.section-kicker),
+.ttbx-takeaway__lead p,
+.analysisx-panel__head + p {
+  font-size: var(--type-support) !important;
+}
+
+/* Overview / TL;DR / video metadata. */
+.tldr-label,
+.overview-video-eyebrow,
+.overview-video-duration {
+  font-size: var(--type-label) !important;
+}
+
+.overview-video-frame__bar b {
+  font-size: var(--type-micro) !important;
+}
+
+.overview-video-caption {
+  font-size: var(--type-caption) !important;
+}
+
+/* Diagnostic: all explanatory labels are readable; only diagram-local markers
+   remain at the micro tier. */
+.diagx-eyebrow,
+.diagx-control-group > span,
+.diagx-control-group b,
+.diagx-control-group > strong,
+.diagx-gallery__head small,
+.diagx-cue-row > span,
+.diagx-cue-row > strong,
+.diagx-gallery__outcome > span,
+.diagx-gallery__outcome > strong,
+.diagx-gallery__outcome > b,
+.diagx-flip-definition-card > header span,
+.diagx-flip-read-card > header span,
+.diagx-matrix-panel__head > div > span,
+.diagx-summary-stat > span,
+.diagx-matrix-panel__head > p,
+.diagx-evidence-takeaway > span,
+.diagx-scope-note > span,
+.diagx-technical-grid article > span,
+.diagx-exact-values > header > span {
+  font-size: var(--type-label) !important;
+}
+
+.diagx-replay,
+.diagx-experiment > figcaption,
+.diagx-flip-definition-card > p,
+.diagx-flip-read-card > p,
+.diagx-flip-read-note p,
+.diagx-summary-stat > p,
+.diagx-evidence-takeaway,
+.diagx-evidence-footnote,
+.diagx-scope-note p,
+.diagx-technical-grid article > p,
+.diagx-exact-values > header p,
+.diagx-details .heatmap caption {
+  font-size: var(--type-caption) !important;
+}
+
+.diagx-person--target span,
+.diagx-intervention-axis > span,
+.diagx-intervention-axis .diagx-flip-core small,
+.diagx-flip-mini-trial small,
+.diagx-flip-mini-trial b,
+.diagx-flip-mini-axis em,
+.diagx-flip-mini-axis b,
+.diagx-flip-read-note > span,
+.diagx-evidence--explained .diagx-matrix__corner,
+.diagx-evidence--explained .diagx-matrix__head,
+.diagx-evidence--explained .diagx-matrix__label,
+.diagx-evidence--explained .diagx-matrix__corner span,
+.diagx-evidence--explained .diagx-matrix__head strong,
+.diagx-evidence--explained .diagx-matrix__head small,
+.diagx-evidence--explained .diagx-matrix__cell > strong small,
+.diagx-matrix-panel__footer,
+.diagx-matrix-panel__footer p {
+  font-size: var(--type-micro) !important;
+}
+
+.diagx-evidence--explained .diagx-matrix__cell > strong {
+  font-size: var(--type-label) !important;
+}
+
+/* T-TBPS: controls and conceptual labels should never read like annotations. */
+.ttbx-toggle button,
+.ttbx-core__eyebrow,
+.ttbx-query-card > span,
+.ttbx-gallery-card__head > span,
+.ttbx-gallery-card__head > strong,
+.ttbx-ranking-meta > div > span,
+.ttbx-takeaway__lead > span,
+.ttbx-takeaway__boundaries article > span,
+.ttbx-method-bridge > div > span {
+  font-size: var(--type-label) !important;
+}
+
+.ttbx-head-note,
+.ttbx-ranking-status,
+.ttbx-takeaway__boundaries strong,
+.ttbx-method-bridge p {
+  font-size: var(--type-caption) !important;
+}
+
+.ttbx-output-chip,
+.ttbx-context-channel b,
+.ttbx-gallery-card > small,
+.ttbx-rank-item b,
+.ttbx-ranking-meta small,
+.ttbx-rank-target-label,
+.ttbx-method-bridge__arrow b {
+  font-size: var(--type-micro) !important;
+}
+
+/* GATE overview + deep dive. */
+.gatep-eyebrow,
+.gatep-overview header span,
+.gatep-gallery-film header span,
+.gatep-competition header span,
+.gatep-ranking header span,
+.gatep-query-token > span,
+.gatep-enriched-token > span,
+.gatep-step-number,
+.gatep-lane__intro b,
+.gatep-overview__legend,
+.gatep-hero-bridge__lead span,
+.gatep-core__steps span,
+.gatep-overview__footer span,
+.gatep-scene__rail > span,
+.gatep-scene-label span,
+.gatep-callout b,
+.gatep-explorer__footer > span {
+  font-size: var(--type-label) !important;
+}
+
+.gatep-lane__intro small,
+.gatep-enriched-token small,
+.gatep-gallery-film header small,
+.gatep-competition header small,
+.gatep-ranking header small,
+.gatep-retriever-node > span,
+.gatep-retriever-node small,
+.gatep-competition__cards b,
+.gatep-ranking__cards b,
+.gatep-ranking__cards .is-winner span,
+.gatep-core__steps span b,
+.gatep-scene__rail > small,
+.gatep-scene1-gallery__grid b,
+.gatep-scene1-focus__stack b,
+.gatep-evidence-item > b,
+.gatep-reason-hero__core > span,
+.gatep-reason-hero__core small,
+.gatep-cue-readout header small,
+.gatep-refine-token small,
+.gatep-second-pass-node small,
+.gatep-winner figure b,
+.gatep-winner figure small {
+  font-size: var(--type-micro) !important;
+}
+
+.gatep-query-token strong,
+.gatep-enriched-token strong,
+.gatep-retriever-node strong,
+.gatep-scene1-focus > strong,
+.gatep-callout span,
+.gatep-reason-hero__query b,
+.gatep-reason-hero__caption,
+.gatep-context-readout > p,
+.gatep-cue-readout header span,
+.gatep-refine-token strong,
+.gatep-second-pass-node strong,
+.gatep-winner > strong,
+.gatep-explorer__footer p {
+  font-size: var(--type-caption) !important;
+}
+
+.gatep-scene__header p,
+.gatep-core__copy p {
+  font-size: var(--type-support) !important;
+}
+
+/* Results: keep dense tables compact but not tiny. */
+.results-stage__index,
+.results-stage__tag,
+.results-stage__stat span,
+.benchmark-card__eyebrow,
+.benchmark-card__model,
+.metric-box__head span,
+.metric-box__head em,
+.retriever-matrix__legend,
+.retriever-matrix__head,
+.retriever-matrix__label,
+.results-count-card__eyebrow,
+.transfer-figure__eyebrow,
+.transfer-range span,
+.transfer-constraints span,
+.transfer-direction,
+.transfer-direction strong,
+.transfer-direction span,
+.transfer-direction b {
+  font-size: var(--type-label) !important;
+}
+
+.retriever-matrix__cell span,
+.dataset-node small,
+.transfer-route-tooltip strong,
+.transfer-route-tooltip span,
+.transfer-route-tooltip b {
+  font-size: var(--type-micro) !important;
+}
+
+.results-count-card > span,
+.transfer-figure figcaption {
+  font-size: var(--type-caption) !important;
+}
+
+/* Qualitative explorer controls and ranking labels. */
+.qual-control-label,
+.qual-stage-kicker,
+.qual-ranking-eyebrow,
+.qual-case-picker > span,
+.qual-panel-label,
+.qual-ranking-state,
+.qual-context-copy strong,
+.qual-legend {
+  font-size: var(--type-label) !important;
+}
+
+.qual-tabs button,
+.qual-original-button,
+.qual-replay-button,
+.qual-case-picker button,
+.qual-overview-hint,
+.qual-query-panel > p,
+.qual-stage-footer p {
+  font-size: var(--type-caption) !important;
+}
+
+.qual-row-focus b,
+.qual-panel-label small,
+.qual-rank-labels,
+.qual-context-copy small {
+  font-size: var(--type-micro) !important;
+}
+
+/* Analysis controls, charts and QCRS dissection. */
+.analysisx-control-group > span,
+.analysisx-card-head span,
+.analysisx-winner > span,
+.analysisx-global-test__head span,
+.analysisx-reasoning-summary > span,
+.analysisx-reasoning-results-label,
+.analysisx-qcrs-stage__eyebrow,
+.analysisx-dot-label strong,
+.analysisx-discussion-band__head span {
+  font-size: var(--type-label) !important;
+}
+
+.analysisx-tabs button,
+.analysisx-provider-tabs button,
+.analysisx-arch,
+.analysisx-reset,
+.analysisx-component-picker button {
+  font-size: var(--type-ui) !important;
+}
+
+.analysisx-qcrs-stage__caption,
+.analysisx-qcrs-stage > small:not(.analysisx-qcrs-stage__eyebrow),
+.analysisx-mixer-component > small,
+.analysisx-mixer-embeddings button,
+.analysisx-mixer-passes button > strong,
+.analysisx-mixer-passes small,
+.analysisx-score-card > small {
+  font-size: var(--type-micro) !important;
+}
+
+.analysisx-score-card > strong,
+.analysisx-reasoning-readout__summary > p:not(.analysisx-readout-note),
+.analysisx-component-hint {
+  font-size: var(--type-label) !important;
+}
+
+.analysisx-panel p,
+.analysisx-discussion p,
+.analysisx-discussion-band p,
+.analysisx-discussion-details p {
+  font-size: var(--type-caption) !important;
+}
+
+/* Scope and final takeaway previously contained several 8–11px labels/body lines. */
+.scope2-boundary__index b,
+.scope2-boundary__signal span,
+.scope2-protocol-chips span,
+.scope2-diagnostic-viz span,
+.scope2-diagnostic-viz strong,
+.scope2-summary span,
+.closing2-evidence span,
+.closing2-axes p {
+  font-size: var(--type-label) !important;
+}
+
+.scope2-boundary__main p,
+.scope2-summary p,
+.closing2-copy > p:last-child {
+  font-size: var(--type-caption) !important;
+}
+
+/* Shared interaction/disclosure language. */
+.interaction-mini-label,
+.disclosure__eyebrow,
+.disclosure__action,
+.disclosure--primary .disclosure__eyebrow,
+.disclosure--compact .disclosure__eyebrow,
+.disclosure--compact .disclosure__action {
+  font-size: var(--type-label) !important;
+}
+
+.disclosure__description,
+.disclosure--compact .disclosure__description,
+.gatep-explorer.disclosure > .disclosure__summary .disclosure__description {
+  font-size: var(--type-caption) !important;
+}
+
+.disclosure--compact .disclosure__title {
+  font-size: var(--type-ui) !important;
+}
+
+.footer-brand p span {
+  font-size: var(--type-label) !important;
+}
+
+/* Keep the readability floor intact on small screens; responsive layout may
+   reflow, but text should not become smaller merely to fit. */
+@media (max-width: 620px) {
+  .nav-links a,
+  main button,
+  main summary,
+  .section-kicker,
+  .subsection-label,
+  .tldr-label,
+  .interaction-hint__label,
+  .disclosure__eyebrow {
+    font-size: var(--type-label) !important;
+  }
+}
