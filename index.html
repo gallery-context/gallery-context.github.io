@@ -6,6 +6,7 @@
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="Overview for The Gallery as Context: Transductive Text-Based Person Search." name="description"/>
 <title>The Gallery as Context: Transductive Text-Based Person Search</title>
+<link href="assets/mascot/chameleon.png" rel="icon" type="image/png"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
@@ -17,8 +18,9 @@
 <header aria-label="Site header" class="site-header">
 <nav aria-label="Primary navigation" class="site-nav">
 <a aria-label="The Gallery as Context home" class="brand" href="#hero">
-          The Gallery as Context
-        </a>
+<img aria-hidden="true" class="brand-mascot" decoding="async" src="assets/mascot/chameleon.png"/>
+<span>The Gallery as Context</span>
+</a>
 <button aria-controls="nav-links" aria-expanded="false" class="nav-toggle" type="button">
 <span aria-hidden="true" class="nav-toggle-lines"></span>
 <span class="sr-only">Toggle navigation</span>
@@ -38,7 +40,14 @@
 <main id="main">
 <section aria-labelledby="hero-title" class="chapter paper-hero" id="hero">
 <div class="section-inner paper-header">
+<div class="paper-hero-lockup">
+<span aria-hidden="true" class="paper-hero-balance"></span>
 <h1 id="hero-title">The Gallery as Context: Transductive Text-Based Person Search</h1>
+<figure class="paper-hero-mascot">
+<div aria-hidden="true" class="paper-hero-mascot__halo"></div>
+<img alt="Chameleon mascot for The Gallery as Context" decoding="async" fetchpriority="high" src="assets/mascot/chameleon.png"/>
+</figure>
+</div>
 <div aria-label="Author and publication metadata" class="paper-metadata"><!-- TODO(public metadata): add author names once explicitly supplied by the project owner. --><!-- TODO(public metadata): add affiliation and venue once explicitly supplied by the project owner. --></div>
 <nav aria-label="Project resources" class="paper-links">
 <a href="https://gallery-context.github.io/" rel="noreferrer noopener" target="_blank">
@@ -332,9 +341,15 @@
 <button aria-selected="true" data-ttbps-mode-button="standard" role="tab" type="button">Standard TBPS</button>
 <button aria-selected="false" data-ttbps-mode-button="transductive" role="tab" type="button">T-TBPS</button>
 </div>
+<div class="ttbx-guide-row">
+<div aria-hidden="true" class="ttbx-mascot-guide">
+<span class="ttbx-mascot-guide__halo"></span>
+<img decoding="async" loading="lazy" src="assets/mascot/chameleon.png"/>
+</div>
 <div class="interaction-hint interaction-hint--inline ttbx-head-note" role="note">
 <span class="interaction-hint__label"><i aria-hidden="true">↗</i> TRY IT</span>
 <p>Click “T-TBPS” to let the current gallery inform the query.</p>
+</div>
 </div>
 </div>
 </header>
@@ -482,6 +497,9 @@
 <div class="gatep-hero-bridge__lead"><span>THE COMPETITION BECOMES CONTEXT</span><i></i></div>
 <article class="gatep-core">
 <div class="gatep-core__halo" aria-hidden="true"><i></i><i></i><i></i></div>
+<div aria-hidden="true" class="gatep-mascot">
+<img decoding="async" loading="lazy" src="assets/mascot/chameleon.png"/>
+</div>
 <div class="gatep-core__copy">
 <span>GATE</span>
 <strong>Read what matters <em>here</em>.</strong>
@@ -1250,7 +1268,10 @@
 </main>
 <footer class="site-footer">
 <div class="section-inner footer-inner">
-<p><strong>The Gallery as Context</strong></p>
+<div class="footer-brand">
+<div aria-hidden="true" class="footer-mascot"><img decoding="async" loading="lazy" src="assets/mascot/chameleon.png"/></div>
+<p><strong>The Gallery as Context</strong><span>Gallery-aware retrieval, from context to query.</span></p>
+</div>
 </div>
 </footer>
 <script src="script.js"></script>

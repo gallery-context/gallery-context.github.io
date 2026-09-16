@@ -18647,3 +18647,384 @@ figcaption {
 .analysisx-mixer-output strong {
   align-self: center;
 }
+
+/* ================================================================
+   PROJECT MASCOT SYSTEM · Chameleon
+   Reuses assets/mascot/chameleon.png as a restrained brand signature.
+   Placements: navbar, hero, T-TBPS interaction, GATE bridge, footer.
+   ================================================================ */
+
+/* Navbar: compact logo mark */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-mascot {
+  display: block;
+  width: 1.65rem;
+  height: 1.65rem;
+  flex: 0 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgb(var(--color-text-rgb) / 0.08));
+  transform: rotate(-2deg);
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.brand:hover .brand-mascot,
+.brand:focus-visible .brand-mascot {
+  transform: rotate(2deg) translateY(-1px);
+  filter: drop-shadow(0 3px 7px rgb(var(--color-accent-rgb) / 0.18));
+}
+
+/* Hero: the primary brand appearance. A symmetric 3-column lockup keeps
+   the title visually centered while giving the mascot its own space. */
+.paper-hero-lockup {
+  display: grid;
+  grid-template-columns: 8.25rem minmax(0, 1fr) 8.25rem;
+  align-items: center;
+  width: 100%;
+  min-height: 8.5rem;
+}
+
+.paper-hero-lockup > h1 {
+  grid-column: 2;
+  justify-self: center;
+  max-width: 790px;
+}
+
+.paper-hero-balance {
+  grid-column: 1;
+  width: 8.25rem;
+  height: 1px;
+}
+
+.paper-hero-mascot {
+  position: relative;
+  grid-column: 3;
+  display: grid;
+  place-items: center;
+  width: 8.25rem;
+  height: 8.25rem;
+  margin: 0;
+  isolation: isolate;
+}
+
+.paper-hero-mascot__halo {
+  position: absolute;
+  inset: 0.65rem;
+  z-index: -1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgb(var(--color-accent-rgb) / 0.13) 0 26%, rgb(var(--color-accent-rgb) / 0.055) 42%, transparent 70%);
+  box-shadow: inset 0 0 0 1px rgb(var(--color-accent-rgb) / 0.08);
+}
+
+.paper-hero-mascot img {
+  display: block;
+  width: 7.2rem;
+  height: 7.2rem;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 18px rgb(var(--color-text-rgb) / 0.10));
+  transform: rotate(2deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .paper-hero-mascot img {
+    animation: mascotHeroFloat 5.6s ease-in-out infinite;
+  }
+}
+
+@keyframes mascotHeroFloat {
+  0%, 100% { transform: translateY(0) rotate(2deg); }
+  50% { transform: translateY(-4px) rotate(0deg); }
+}
+
+/* T-TBPS: the mascot behaves like a context-aware interaction guide.
+   In Standard TBPS it is visually dormant; selecting T-TBPS activates it. */
+.ttbx-guide-row {
+  display: inline-grid;
+  grid-template-columns: 3.3rem minmax(0, auto);
+  gap: 0.58rem;
+  align-items: center;
+  max-width: min(100%, 620px);
+}
+
+.ttbx-mascot-guide {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 3.3rem;
+  height: 3.3rem;
+  isolation: isolate;
+}
+
+.ttbx-mascot-guide__halo {
+  position: absolute;
+  inset: 0.15rem;
+  z-index: -1;
+  border: 1px solid rgb(var(--color-border-rgb) / 0.9);
+  border-radius: 50%;
+  background: rgb(var(--color-surface-rgb) / 0.82);
+  transition: border-color 320ms ease, background 320ms ease, box-shadow 320ms ease, transform 320ms ease;
+}
+
+.ttbx-mascot-guide img {
+  width: 2.85rem;
+  height: 2.85rem;
+  object-fit: contain;
+  opacity: 0.5;
+  filter: grayscale(0.88) saturate(0.55);
+  transform: translateX(-2px) rotate(-5deg) scale(0.92);
+  transition: opacity 360ms ease, filter 360ms ease, transform 440ms cubic-bezier(.2,.75,.2,1);
+}
+
+.ttbx-explorer[data-ttbps-mode="transductive"] .ttbx-mascot-guide__halo {
+  border-color: rgb(var(--color-accent-rgb) / 0.28);
+  background: rgb(var(--color-accent-soft-rgb) / 0.62);
+  box-shadow: 0 0 0 5px rgb(var(--color-accent-rgb) / 0.045), 0 8px 20px rgb(var(--color-accent-rgb) / 0.10);
+  transform: scale(1.03);
+}
+
+.ttbx-explorer[data-ttbps-mode="transductive"] .ttbx-mascot-guide img {
+  opacity: 1;
+  filter: none;
+  transform: translateX(5px) rotate(3deg) scale(1.04);
+}
+
+.ttbx-explorer[data-ttbps-mode="transductive"] .ttbx-head-note {
+  color: var(--color-text);
+}
+
+/* GATE: a small signature inside the reasoning core, not inside results or
+   quantitative evidence, so it reads as narrative guidance rather than data. */
+.gatep-core {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.gatep-mascot {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 4.3rem;
+  height: 4.3rem;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.58);
+  box-shadow: inset 0 0 0 1px rgb(var(--color-accent-rgb) / 0.12), 0 8px 18px rgb(var(--color-accent-rgb) / 0.08);
+}
+
+.gatep-mascot::after {
+  position: absolute;
+  right: -0.58rem;
+  top: 50%;
+  width: 0.85rem;
+  height: 1px;
+  background: linear-gradient(90deg, rgb(var(--color-accent-rgb) / 0.38), transparent);
+  content: "";
+}
+
+.gatep-mascot img {
+  width: 3.65rem;
+  height: 3.65rem;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 8px rgb(var(--color-accent-rgb) / 0.12));
+  transform: rotate(-2deg);
+}
+
+.gatep-core__copy {
+  min-width: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gatep-overview.is-visible .gatep-mascot img {
+    animation: mascotGateAttend 4.8s ease-in-out infinite;
+  }
+}
+
+@keyframes mascotGateAttend {
+  0%, 100% { transform: rotate(-2deg) translateY(0); }
+  45% { transform: rotate(2deg) translateY(-2px); }
+  60% { transform: rotate(2deg) translateY(-2px); }
+}
+
+/* Footer: a quiet sign-off rather than another content illustration. */
+.footer-inner {
+  align-items: center;
+}
+
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.72rem;
+}
+
+.footer-mascot {
+  display: grid;
+  place-items: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: rgb(var(--color-accent-soft-rgb) / 0.52);
+  box-shadow: inset 0 0 0 1px rgb(var(--color-accent-rgb) / 0.10);
+}
+
+.footer-mascot img {
+  display: block;
+  width: 2.75rem;
+  height: 2.75rem;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 7px rgb(var(--color-text-rgb) / 0.08));
+}
+
+.footer-brand p {
+  display: grid;
+  gap: 0.08rem;
+}
+
+.footer-brand p strong {
+  color: var(--color-text);
+  font-weight: 650;
+}
+
+.footer-brand p span {
+  color: var(--color-text-quiet);
+  font-size: 0.74rem;
+}
+
+/* Responsive mascot behavior */
+@media (max-width: 1040px) {
+  .gatep-core {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .gatep-core__steps {
+    grid-column: 1 / -1;
+    margin-left: 4.95rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .paper-hero-lockup {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+    min-height: 0;
+  }
+
+  .paper-hero-lockup > h1 {
+    grid-column: 1;
+    grid-row: 2;
+    max-width: 760px;
+  }
+
+  .paper-hero-balance {
+    display: none;
+  }
+
+  .paper-hero-mascot {
+    grid-column: 1;
+    grid-row: 1;
+    width: 5.9rem;
+    height: 5.9rem;
+  }
+
+  .paper-hero-mascot img {
+    width: 5.2rem;
+    height: 5.2rem;
+  }
+
+  .gatep-core {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .gatep-core__steps {
+    grid-column: 1 / -1;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 620px) {
+  .brand {
+    gap: 0.38rem;
+  }
+
+  .brand-mascot {
+    width: 1.45rem;
+    height: 1.45rem;
+  }
+
+  .paper-hero-mascot {
+    width: 5.2rem;
+    height: 5.2rem;
+  }
+
+  .paper-hero-mascot img {
+    width: 4.6rem;
+    height: 4.6rem;
+  }
+
+  .ttbx-guide-row {
+    grid-template-columns: 2.8rem minmax(0, 1fr);
+    width: 100%;
+    gap: 0.48rem;
+  }
+
+  .ttbx-mascot-guide {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+
+  .ttbx-mascot-guide img {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .ttbx-head-note {
+    text-align: left;
+  }
+
+  .gatep-core {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+
+  .gatep-mascot {
+    width: 3.7rem;
+    height: 3.7rem;
+  }
+
+  .gatep-mascot img {
+    width: 3.15rem;
+    height: 3.15rem;
+  }
+
+  .gatep-mascot::after {
+    display: none;
+  }
+
+  .gatep-core__steps {
+    grid-column: 1;
+  }
+
+  .footer-brand {
+    align-items: center;
+  }
+
+  .footer-brand p span {
+    max-width: 34ch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-mascot,
+  .paper-hero-mascot img,
+  .ttbx-mascot-guide img,
+  .ttbx-mascot-guide__halo,
+  .gatep-mascot img {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
