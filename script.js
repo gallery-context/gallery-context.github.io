@@ -919,13 +919,39 @@ function bindDiagnosticStory() {
 function bindTtbpsScrollFlow() {
   const figure = document.querySelector("[data-ttbps-visual]");
   const buttons = figure ? Array.from(figure.querySelectorAll("[data-ttbps-mode-button]")) : [];
+  const rankItems = figure ? Array.from(figure.querySelectorAll("[data-ttbps-rank-item]")) : [];
   if (!figure || buttons.length === 0) return;
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let switchTimer = 0;
 
+  const animateRankingReorder = (firstRects) => {
+    if (reduceMotion || !rankItems.length || !firstRects) return;
+
+    rankItems.forEach((item) => {
+      const first = firstRects.get(item);
+      const last = item.getBoundingClientRect();
+      if (!first) return;
+      const dx = first.left - last.left;
+      const dy = first.top - last.top;
+      if (Math.abs(dx) < 1 && Math.abs(dy) < 1) return;
+
+      item.animate([
+        { transform: `translate(${dx}px, ${dy}px)`, zIndex: 3 },
+        { transform: "translate(0, 0)", zIndex: 3 }
+      ], {
+        duration: 520,
+        easing: "cubic-bezier(0.22, 1, 0.36, 1)"
+      });
+    });
+  };
+
   const setMode = (mode, animate = true) => {
     const nextMode = mode === "transductive" ? "transductive" : "standard";
+    const firstRects = animate && !reduceMotion
+      ? new Map(rankItems.map((item) => [item, item.getBoundingClientRect()]))
+      : null;
+
     figure.dataset.ttbpsMode = nextMode;
 
     buttons.forEach((button) => {
@@ -934,12 +960,14 @@ function bindTtbpsScrollFlow() {
       button.tabIndex = selected ? 0 : -1;
     });
 
+
     if (!animate || reduceMotion) return;
     window.clearTimeout(switchTimer);
     figure.classList.remove("is-switching");
     void figure.offsetWidth;
+    animateRankingReorder(firstRects);
     figure.classList.add("is-switching");
-    switchTimer = window.setTimeout(() => figure.classList.remove("is-switching"), 420);
+    switchTimer = window.setTimeout(() => figure.classList.remove("is-switching"), 560);
   };
 
   buttons.forEach((button, index) => {

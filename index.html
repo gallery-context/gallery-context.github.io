@@ -294,9 +294,12 @@
 </div>
 <figure aria-describedby="ttbps-caption" class="research-figure ttbx-explorer" data-ttbps-mode="standard" data-ttbps-visual="">
 <header class="ttbx-explorer__head">
+<div class="ttbx-explorer__controls">
 <div aria-label="Compare TBPS inference settings" class="ttbx-toggle" role="tablist">
 <button aria-selected="true" data-ttbps-mode-button="standard" role="tab" type="button">Standard TBPS</button>
 <button aria-selected="false" data-ttbps-mode-button="transductive" role="tab" type="button">T-TBPS</button>
+</div>
+<p class="ttbx-head-note">Click “T-TBPS” to let the current gallery inform the query.</p>
 </div>
 </header>
 <div class="ttbx-workbench">
@@ -340,21 +343,39 @@
 </div>
 <div aria-hidden="true" class="ttbx-down-flow"><i></i></div>
 <div class="ttbx-ranking-strip">
-<span>RANKING</span>
-<div>
-<figure><b>#1</b><img alt="Ranked gallery candidate" decoding="async" loading="lazy" src="assets/overview/target.png"/></figure>
-<figure><b>#2</b><img alt="Ranked gallery candidate" decoding="async" loading="lazy" src="assets/overview/a_red_01.png"/></figure>
-<figure><b>#3</b><img alt="Ranked gallery candidate" decoding="async" loading="lazy" src="assets/overview/b_bag_01.png"/></figure>
-<figure><b>#4</b><img alt="Ranked gallery candidate" decoding="async" loading="lazy" src="assets/overview/a_red_02.png"/></figure>
-<figure><b>…</b><img alt="Additional ranked gallery candidate" decoding="async" loading="lazy" src="assets/overview/b_bag_03.png"/></figure>
+<div class="ttbx-ranking-meta">
+<div><span>RANKING</span><small>illustrative</small></div>
+<strong class="ttbx-copy-standard ttbx-ranking-status ttbx-ranking-status--bad">Target at Rank #2</strong>
+<strong class="ttbx-copy-transductive ttbx-ranking-status ttbx-ranking-status--good">Target rises to Rank #1</strong>
+</div>
+<div class="ttbx-ranking-track" data-ttbps-ranking>
+<figure class="ttbx-rank-item ttbx-rank-item--target" data-ttbps-rank-item="target"><b><span class="ttbx-copy-standard">#2</span><span class="ttbx-copy-transductive">#1</span></b><span class="ttbx-rank-target-label">TARGET</span><img alt="Target identity in the illustrative ranking" decoding="async" loading="lazy" src="assets/overview/target.png"/></figure>
+<figure class="ttbx-rank-item ttbx-rank-item--lead" data-ttbps-rank-item="lead"><b><span class="ttbx-copy-standard">#1</span><span class="ttbx-copy-transductive">#2</span></b><img alt="Distractor candidate in the illustrative ranking" decoding="async" loading="lazy" src="assets/overview/a_red_01.png"/></figure>
+<figure class="ttbx-rank-item" data-ttbps-rank-item="third"><b>#3</b><img alt="Ranked gallery candidate" decoding="async" loading="lazy" src="assets/overview/b_bag_01.png"/></figure>
+<figure class="ttbx-rank-item" data-ttbps-rank-item="fourth"><b>#4</b><img alt="Ranked gallery candidate" decoding="async" loading="lazy" src="assets/overview/a_red_02.png"/></figure>
+<figure class="ttbx-rank-item" data-ttbps-rank-item="tail"><b>…</b><img alt="Additional ranked gallery candidate" decoding="async" loading="lazy" src="assets/overview/b_bag_03.png"/></figure>
 </div>
 </div>
 </div>
-<figcaption id="ttbps-caption">
-              T-TBPS is an inference setting, not a specific architecture: it permits unlabeled gallery context during query construction while retaining complete-gallery retrieval.
-            </figcaption>
+<figcaption id="ttbps-caption">Same text query and same full gallery; only the information available during query construction changes.</figcaption>
 </figure>
-<div aria-label="What changes and what stays fixed between Standard TBPS and T-TBPS" class="ttbx-boundary-chips"><span class="is-good">Unlabeled gallery ✓</span><span>Gallery labels ×</span><span class="is-good">Full-gallery retrieval ✓</span></div>
+<section aria-labelledby="ttbps-takeaway-title" class="ttbx-takeaway">
+<div class="ttbx-takeaway__lead">
+<span>TAKEAWAY</span>
+<h3 id="ttbps-takeaway-title">T-TBPS changes what information the query may use—not where retrieval happens.</h3>
+<p><strong>T-TBPS is an inference setting, not a specific architecture:</strong> it permits unlabeled gallery context during query construction while retaining complete-gallery retrieval.</p>
+</div>
+<div class="ttbx-takeaway__boundaries" aria-label="What changes and what stays fixed in T-TBPS">
+<article>
+<span>WHAT CHANGES</span>
+<strong>Query construction can use unlabeled gallery context.</strong>
+</article>
+<article>
+<span>WHAT STAYS FIXED</span>
+<strong>No gallery labels · final retrieval still uses the full gallery.</strong>
+</article>
+</div>
+</section>
 <div aria-label="T-TBPS setting and GATE method distinction" class="ttbx-method-bridge">
 <div><span>SETTING</span><strong>T-TBPS</strong></div>
 <div aria-hidden="true" class="ttbx-method-bridge__arrow"><i></i><b>realized by</b><i></i></div>
