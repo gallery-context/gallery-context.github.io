@@ -760,6 +760,27 @@ function bindQualitativeExplorer() {
   observer.observe(stage);
 }
 
+function bindTldrStory() {
+  const story = document.querySelector("[data-tldr-story]");
+  if (!story) return;
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reveal = () => story.classList.add("is-visible");
+
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    reveal();
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    if (!entries.some((entry) => entry.isIntersecting)) return;
+    reveal();
+    observer.disconnect();
+  }, { threshold: 0.22, rootMargin: "0px 0px -7% 0px" });
+
+  observer.observe(story);
+}
+
 function bindNav() {
   const toggle = document.querySelector(".nav-toggle");
   const links = document.querySelector("#nav-links");
@@ -1311,6 +1332,7 @@ document.addEventListener("DOMContentLoaded", () => {
   bindTransferGraph();
   bindAnalysisSection();
   bindQualitativeExplorer();
+  bindTldrStory();
   bindNav();
   bindActiveNav();
   bindDiagnosticStory();
