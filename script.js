@@ -137,18 +137,29 @@ function renderDiagnosticSensitivityMatrix() {
   const container = document.querySelector("#diagnostic-sensitivity-matrix");
   if (!container) return;
 
-  const shortDatasets = ["CUHK", "ICFG", "RSTP"];
-  const header = shortDatasets.map((name) => `<div class="diagx-matrix__head">${name}</div>`).join("");
+  const matrixMax = 16;
+  const datasetHeaders = [
+    ["CUHK", "PEDES"],
+    ["ICFG", "PEDES"],
+    ["RSTP", "ReID"]
+  ];
+  const header = datasetHeaders.map(([name, suffix]) => `
+    <div class="diagx-matrix__head"><strong>${name}</strong><small>${suffix}</small></div>
+  `).join("");
   const rows = diagnostic.map((row) => `
     <div class="diagx-matrix__label">${row.retriever}</div>
-    ${row.values.map((value, index) => `
-      <div class="diagx-matrix__cell" title="${row.retriever} · ${datasets[index]}: ${value.toFixed(2)}% Flip Rate">
-        <i aria-hidden="true"></i><strong>${value.toFixed(2)}</strong>
-      </div>
-    `).join("")}
+    ${row.values.map((value, index) => {
+      const level = Math.max(0, Math.min(100, value / matrixMax * 100));
+      return `
+        <div class="diagx-matrix__cell" title="${row.retriever} · ${datasets[index]}: ${value.toFixed(2)}% Top-1 Flip Rate">
+          <strong>${value.toFixed(2)}<small>%</small></strong>
+          <span class="diagx-matrix__bar" aria-hidden="true"><i style="--diagx-matrix-level:${level.toFixed(1)}%"></i></span>
+        </div>
+      `;
+    }).join("")}
   `).join("");
 
-  container.innerHTML = `<div class="diagx-matrix__corner"></div>${header}${rows}`;
+  container.innerHTML = `<div class="diagx-matrix__corner"><span>RETRIEVER</span></div>${header}${rows}`;
 }
 
 function renderBenchmarkCards() {
