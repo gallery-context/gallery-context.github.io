@@ -19069,9 +19069,7 @@ main [class*="legend"],
   font-size: var(--type-label) !important;
 }
 
-main small {
-  font-size: var(--type-micro) !important;
-}
+/* <small> no longer implies micro text; component semantics set the size. */
 
 /* Paragraphs inside the dense visual sections are still prose, not microcopy. */
 .diagx-chapter p,
@@ -19972,3 +19970,259 @@ main small {
     transform-origin: 50% 50%;
   }
 }
+
+/* ==========================================================================
+   TYPOGRAPHY AUDIT — semantic readability pass, 2026-09-17
+   12px is reserved for true diagram-local annotations. Explanatory copy,
+   controls, state labels and reading-critical metadata remain >= 13px.
+   ========================================================================== */
+
+/* Global semantic floor: kickers/labels are readable metadata, not microcopy. */
+.section-kicker,
+.subsection-label,
+.tldr-label,
+.overview-video-eyebrow,
+.overview-video-duration,
+.interaction-mini-label {
+  font-size: var(--type-label) !important;
+}
+
+/* Diagnostic comparison: static by design. The main figure has no replay
+   control or JS play hook; these guards ensure legacy animation rules cannot
+   animate it if an old class is reintroduced accidentally. */
+.diagx-experiment .diagx-person--swap,
+.diagx-experiment .diagx-flip-core,
+.diagx-experiment .diagx-gallery__outcome,
+.diagx-experiment .diagx-cue-row > i > b {
+  animation: none !important;
+}
+
+.diagx-experiment__head {
+  display: block;
+}
+
+.diagx-query-anchor {
+  width: 100%;
+}
+
+.diagx-experiment__head h3 {
+  max-width: 860px;
+}
+
+.diagx-eyebrow,
+.diagx-control-group > span,
+.diagx-control-group b,
+.diagx-control-group > strong,
+.diagx-gallery__head > div > span,
+.diagx-gallery__head small,
+.diagx-cue-row > span,
+.diagx-cue-row > strong,
+.diagx-gallery__outcome > span,
+.diagx-gallery__outcome > strong,
+.diagx-gallery__outcome > b,
+.diagx-intervention-axis > span,
+.diagx-flip-definition-card > header span,
+.diagx-flip-read-card > header span,
+.diagx-summary-stat > span,
+.diagx-matrix-panel__head > div > span,
+.diagx-scope-note > span,
+.diagx-technical-grid article > span,
+.diagx-exact-values > header > span {
+  font-size: var(--type-label) !important;
+}
+
+.diagx-experiment > figcaption,
+.diagx-flip-definition-card > p,
+.diagx-flip-read-card > p,
+.diagx-flip-read-note p,
+.diagx-summary-stat > p,
+.diagx-matrix-panel__head > p,
+.diagx-scope-note p,
+.diagx-technical-grid article > p,
+.diagx-exact-values > header p,
+.disclosure__description {
+  font-size: var(--type-caption) !important;
+}
+
+/* True local annotations in the diagnostic may remain at 12px. */
+.diagx-person--target span,
+.diagx-intervention-axis .diagx-flip-core small,
+.diagx-flip-mini-trial small,
+.diagx-flip-mini-trial b,
+.diagx-flip-mini-axis em,
+.diagx-flip-mini-axis b,
+.diagx-flip-read-note > span,
+.diagx-matrix-panel__footer,
+.diagx-matrix-panel__footer p {
+  font-size: var(--type-micro) !important;
+}
+
+/* T-TBPS: conceptual states and explanatory notes must not look like axis text. */
+.ttbx-output-chip,
+.ttbx-context-channel b,
+.ttbx-ranking-meta > div > span,
+.ttbx-method-bridge__arrow b {
+  font-size: var(--type-label) !important;
+}
+
+.ttbx-head-note,
+.ttbx-ranking-status,
+.ttbx-method-bridge p,
+.ttbx-gallery-card > small {
+  font-size: var(--type-caption) !important;
+}
+
+.ttbx-rank-item b,
+.ttbx-ranking-meta small,
+.ttbx-rank-target-label {
+  font-size: var(--type-micro) !important;
+}
+
+/* GATE: only rank/slot markers stay micro; explanatory small text is promoted. */
+.gatep-lane__intro small,
+.gatep-enriched-token small,
+.gatep-gallery-film header small,
+.gatep-competition header small,
+.gatep-ranking header small,
+.gatep-retriever-node > span,
+.gatep-retriever-node small,
+.gatep-scene__rail > small,
+.gatep-reason-hero__core > span,
+.gatep-reason-hero__core small,
+.gatep-cue-readout header small,
+.gatep-refine-token small,
+.gatep-second-pass-node small,
+.gatep-winner figure small {
+  font-size: var(--type-label) !important;
+}
+
+.gatep-lane__intro small,
+.gatep-enriched-token small,
+.gatep-gallery-film header small,
+.gatep-competition header small,
+.gatep-ranking header small,
+.gatep-retriever-node small,
+.gatep-refine-token small,
+.gatep-second-pass-node small {
+  line-height: 1.35;
+}
+
+.gatep-competition__cards b,
+.gatep-ranking__cards b,
+.gatep-core__steps span b,
+.gatep-scene1-gallery__grid b,
+.gatep-scene1-focus__stack b,
+.gatep-evidence-item > b,
+.gatep-winner figure b {
+  font-size: var(--type-micro) !important;
+}
+
+.gatep-query-token strong,
+.gatep-enriched-token strong,
+.gatep-retriever-node strong,
+.gatep-callout span,
+.gatep-reason-hero__caption,
+.gatep-context-readout > p,
+.gatep-refine-token strong,
+.gatep-second-pass-node strong,
+.gatep-explorer__footer p {
+  font-size: var(--type-caption) !important;
+}
+
+/* Results: hover/readout text is UI metadata, dense metric sublabels stay micro. */
+.transfer-route-tooltip strong,
+.transfer-route-tooltip span,
+.transfer-route-tooltip b {
+  font-size: var(--type-label) !important;
+}
+
+.retriever-matrix__cell span,
+.dataset-node small {
+  font-size: var(--type-micro) !important;
+}
+
+/* Qualitative explorer: controls/explanations are readable at 13–14px. */
+.qual-tabs button,
+.qual-original-button,
+.qual-replay-button,
+.qual-case-picker button,
+.qual-overview-hint,
+.qual-query-panel > p,
+.qual-stage-footer p {
+  font-size: var(--type-caption) !important;
+}
+
+.qual-panel-label small,
+.qual-context-copy small,
+.qual-ranking-state,
+.qual-legend {
+  font-size: var(--type-label) !important;
+}
+
+.qual-row-focus b,
+.qual-rank-labels {
+  font-size: var(--type-micro) !important;
+}
+
+/* Analysis / QCRS: component controls and explanations are not micro annotations. */
+.analysisx-qcrs-stage__caption {
+  font-size: var(--type-caption) !important;
+}
+
+.analysisx-qcrs-stage > small:not(.analysisx-qcrs-stage__eyebrow),
+.analysisx-mixer-component > small,
+.analysisx-mixer-passes button > strong,
+.analysisx-mixer-passes small,
+.analysisx-score-card > small,
+.analysisx-component-hint {
+  font-size: var(--type-label) !important;
+}
+
+.analysisx-tabs button,
+.analysisx-provider-tabs button,
+.analysisx-arch,
+.analysisx-reset,
+.analysisx-component-picker button,
+.analysisx-mixer-embeddings button {
+  font-size: var(--type-ui) !important;
+}
+
+/* Shared disclosures and interaction guidance. */
+.interaction-hint p,
+.interaction-hint--inline p,
+.disclosure__description,
+.disclosure--compact .disclosure__description,
+.gatep-explorer.disclosure > .disclosure__summary .disclosure__description {
+  font-size: var(--type-caption) !important;
+}
+
+/* Responsive typography should reflow, never shrink to solve fit. */
+@media (max-width: 620px) {
+  .section-kicker,
+  .subsection-label,
+  .diagx-eyebrow,
+  .diagx-control-group > span,
+  .diagx-gallery__head small,
+  .diagx-cue-row > span,
+  .diagx-cue-row > strong,
+  .gatep-lane__intro small,
+  .gatep-gallery-film header small,
+  .gatep-competition header small,
+  .gatep-ranking header small,
+  .analysisx-mixer-component > small,
+  .analysisx-mixer-passes small {
+    font-size: var(--type-label) !important;
+  }
+}
+
+/* Remaining Analysis/GATE semantic labels found in the full-page audit. */
+.gatep-scene-label small,
+.analysisx-card-head > small,
+.analysisx-reasoning-summary > small,
+.analysisx-arch > span,
+.analysisx-arch > small,
+.analysisx-winner-split small,
+.analysisx-winner-split b {
+  font-size: var(--type-label) !important;
+}
+

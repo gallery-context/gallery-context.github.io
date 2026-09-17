@@ -836,25 +836,11 @@ function bindActiveNav() {
 }
 
 function bindDiagnosticStory() {
-  const figure = document.querySelector("[data-diagnostic-visual]");
-  const replay = figure?.querySelector("[data-diagnostic-replay]");
   const matrix = document.querySelector("#diagnostic-sensitivity-matrix");
   const count = document.querySelector("[data-diagnostic-count]");
-  if (!figure) return;
+  if (!matrix && !count) return;
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let playTimer = 0;
-
-  const play = () => {
-    window.clearTimeout(playTimer);
-    figure.classList.remove("is-playing");
-    if (reduceMotion) return;
-    void figure.offsetWidth;
-    figure.classList.add("is-playing");
-    playTimer = window.setTimeout(() => figure.classList.remove("is-playing"), 1900);
-  };
-
-  replay?.addEventListener("click", play);
 
   const finishCount = () => {
     if (!count) return;
@@ -869,11 +855,13 @@ function bindDiagnosticStory() {
       finishCount();
       return;
     }
+
     const target = Number.parseInt(count.dataset.diagnosticCount || "0", 10);
     const formatter = new Intl.NumberFormat("en-US");
     const start = performance.now();
     const duration = 760;
     count.dataset.diagnosticAnimated = "true";
+
     const tick = (now) => {
       const progress = Math.min(1, (now - start) / duration);
       const eased = 1 - Math.pow(1 - progress, 3);
@@ -881,6 +869,7 @@ function bindDiagnosticStory() {
       if (progress < 1) window.requestAnimationFrame(tick);
       else count.textContent = formatter.format(target);
     };
+
     window.requestAnimationFrame(tick);
   };
 
@@ -889,13 +878,6 @@ function bindDiagnosticStory() {
     finishCount();
     return;
   }
-
-  const figureObserver = new IntersectionObserver((entries) => {
-    if (!entries.some((entry) => entry.isIntersecting)) return;
-    play();
-    figureObserver.disconnect();
-  }, { threshold: 0.34, rootMargin: "0px 0px -8% 0px" });
-  figureObserver.observe(figure);
 
   if (matrix) {
     const matrixObserver = new IntersectionObserver((entries) => {
