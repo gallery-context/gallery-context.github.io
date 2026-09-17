@@ -47,4 +47,14 @@
   --type-support: 0.9375rem;   /* 15px — explanatory / lead copy */
   --type-body: 1rem;           /* 16px — normal content token (body remains 17px) */
 
+  /* Semantic connector + takeaway system — 2026-09-17. */
+  --arrow-process-rgb: 8 125 135;
+  --arrow-context-rgb: 91 101 112;
+  --arrow-outcome-rgb: 31 122 77;
+  --arrow-line-width: 1.5px;
+  --takeaway-bg-rgb: 241 248 248;
+  --takeaway-border-rgb: 177 214 216;
+  --takeaway-concept-rgb: 8 125 135;
+  --takeaway-boundary-rgb: 141 104 74;
+
 }

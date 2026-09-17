@@ -19432,3 +19432,543 @@ main small {
     font-size: var(--type-label) !important;
   }
 }
+
+/* ================================================================
+   Semantic arrows + unified section takeaways
+   Added 2026-09-17: arrows encode process/context/outcome meaning;
+   takeaways provide a consistent secondary visual anchor after each claim.
+   ================================================================ */
+
+/* ---------- Semantic connector language ---------- */
+.semantic-arrow {
+  --semantic-arrow-rgb: var(--arrow-process-rgb);
+  --semantic-arrow-color: rgb(var(--semantic-arrow-rgb));
+  --semantic-arrow-soft: rgb(var(--semantic-arrow-rgb) / 0.28);
+}
+
+.semantic-arrow--process {
+  --semantic-arrow-rgb: var(--arrow-process-rgb);
+}
+
+.semantic-arrow--context,
+.semantic-arrow--intervention {
+  --semantic-arrow-rgb: var(--arrow-context-rgb);
+}
+
+.semantic-arrow--outcome {
+  --semantic-arrow-rgb: var(--arrow-outcome-rgb);
+}
+
+.semantic-arrow--bridge {
+  --semantic-arrow-rgb: var(--arrow-process-rgb);
+}
+
+/* Process arrows: solid directional flow. */
+.ttbx-query-arrow.semantic-arrow--process {
+  height: var(--arrow-line-width);
+  overflow: visible;
+  background: rgb(var(--semantic-arrow-rgb) / 0.24);
+}
+
+.ttbx-query-arrow.semantic-arrow--process::after {
+  border-color: var(--semantic-arrow-color);
+}
+
+.ttbx-query-arrow.semantic-arrow--process i {
+  height: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--semantic-arrow-color);
+}
+
+.ttbx-down-flow.semantic-arrow--process {
+  width: var(--arrow-line-width);
+  overflow: visible;
+  background: rgb(var(--semantic-arrow-rgb) / 0.24);
+}
+
+.ttbx-down-flow.semantic-arrow--process::after {
+  border-color: var(--semantic-arrow-color);
+}
+
+.ttbx-down-flow.semantic-arrow--process i {
+  width: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--semantic-arrow-color);
+}
+
+.gatep-flow.semantic-arrow--process::before {
+  height: var(--arrow-line-width);
+  background: rgb(var(--semantic-arrow-rgb) / 0.34);
+}
+
+.gatep-flow.semantic-arrow--process::after {
+  border-color: var(--semantic-arrow-color);
+}
+
+.gatep-flow.semantic-arrow--process i {
+  background: var(--semantic-arrow-color);
+}
+
+/* Context arrows: dashed injection / intervention rather than pipeline flow. */
+.ttbx-context-channel.semantic-arrow--context::before {
+  height: 0;
+  border-top: var(--arrow-line-width) dashed rgb(var(--semantic-arrow-rgb) / 0.42);
+  background: none;
+}
+
+.ttbx-context-channel.semantic-arrow--context::after {
+  border-color: rgb(var(--semantic-arrow-rgb) / 0.62);
+}
+
+.ttbx-explorer[data-ttbps-mode="transductive"] .ttbx-context-channel.semantic-arrow--context::before {
+  border-top-color: rgb(var(--arrow-process-rgb) / 0.64);
+  background: none;
+}
+
+.ttbx-explorer[data-ttbps-mode="transductive"] .ttbx-context-channel.semantic-arrow--context::after {
+  border-color: rgb(var(--arrow-process-rgb));
+}
+
+.diagx-intervention-axis.semantic-arrow--intervention > svg path:nth-child(1),
+.diagx-intervention-axis.semantic-arrow--intervention > svg path:nth-child(3) {
+  stroke: rgb(var(--semantic-arrow-rgb) / 0.62);
+  stroke-dasharray: 4 4;
+}
+
+.diagx-intervention-axis.semantic-arrow--intervention > svg path:nth-child(2),
+.diagx-intervention-axis.semantic-arrow--intervention > svg path:nth-child(4) {
+  stroke: rgb(var(--semantic-arrow-rgb) / 0.86);
+}
+
+.diagx-intervention-axis.semantic-arrow--intervention > span {
+  color: rgb(var(--semantic-arrow-rgb) / 0.92);
+}
+
+/* Narrative bridge: explicitly names what the arrow means. */
+.semantic-arrow--labeled {
+  display: grid !important;
+  grid-template-rows: auto auto;
+  justify-items: center;
+  gap: 0.26rem;
+  min-width: 5.5rem;
+  color: var(--semantic-arrow-color) !important;
+}
+
+.semantic-arrow--labeled > i {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: var(--arrow-line-width);
+  border-radius: 999px;
+  background: rgb(var(--semantic-arrow-rgb) / 0.38);
+}
+
+.semantic-arrow--labeled > i::after {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-top: 1.5px solid var(--semantic-arrow-color);
+  border-right: 1.5px solid var(--semantic-arrow-color);
+  transform: translateY(-50%) rotate(45deg);
+  content: "";
+}
+
+.semantic-arrow--labeled > b {
+  color: var(--semantic-arrow-color) !important;
+  font-family: var(--font-mono);
+  font-size: var(--type-label) !important;
+  font-weight: 750;
+  letter-spacing: 0.055em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ttbx-method-bridge__arrow.semantic-arrow--bridge i {
+  position: relative;
+  background: rgb(var(--semantic-arrow-rgb) / 0.34);
+}
+
+.ttbx-method-bridge__arrow.semantic-arrow--bridge i:last-of-type::after {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-top: 1.5px solid var(--semantic-arrow-color);
+  border-right: 1.5px solid var(--semantic-arrow-color);
+  transform: translateY(-50%) rotate(45deg);
+  content: "";
+}
+
+.ttbx-method-bridge__arrow.semantic-arrow--bridge b {
+  color: var(--semantic-arrow-color);
+}
+
+.gatep-core__steps > i {
+  position: relative;
+  width: 20px;
+  background: rgb(var(--arrow-process-rgb) / 0.48);
+}
+
+.gatep-core__steps > i::after {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-top: 1.4px solid rgb(var(--arrow-process-rgb));
+  border-right: 1.4px solid rgb(var(--arrow-process-rgb));
+  transform: translateY(-50%) rotate(45deg);
+  content: "";
+}
+
+/* Outcome arrow: ranking improvement is visually distinct from process flow. */
+.ttbx-rank-shift {
+  display: inline-grid;
+  grid-template-columns: auto 1.55rem auto;
+  align-items: center;
+  gap: 0.28rem;
+  margin-left: 0.18rem;
+  vertical-align: middle;
+}
+
+.ttbx-rank-shift b {
+  color: var(--color-good);
+  font-family: var(--font-mono);
+  font-size: var(--type-label);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.ttbx-rank-shift i {
+  position: relative;
+  display: block;
+  height: 1.5px;
+  border-radius: 999px;
+  background: rgb(var(--arrow-outcome-rgb) / 0.54);
+}
+
+.ttbx-rank-shift i::after {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-top: 1.5px solid rgb(var(--arrow-outcome-rgb));
+  border-right: 1.5px solid rgb(var(--arrow-outcome-rgb));
+  transform: translateY(-50%) rotate(45deg);
+  content: "";
+}
+
+/* Directed transfer routes remain deliberately thin: they encode domain direction,
+   not the method pipeline. */
+.transfer-route {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- Unified section takeaway ---------- */
+.section-takeaway {
+  --takeaway-local-rgb: var(--takeaway-concept-rgb);
+  position: relative;
+  display: grid;
+  grid-template-columns: 5px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+  width: 100%;
+  margin-top: clamp(1.05rem, 2vw, 1.45rem);
+  padding: clamp(1rem, 2.2vw, 1.35rem);
+  overflow: hidden;
+  border: 1px solid rgb(var(--takeaway-border-rgb) / 0.92);
+  border-radius: calc(var(--radius-card) + 5px);
+  background:
+    radial-gradient(circle at 88% 10%, rgb(var(--takeaway-local-rgb) / 0.075), transparent 16rem),
+    linear-gradient(120deg, rgb(var(--takeaway-bg-rgb) / 0.96), rgb(var(--color-surface-rgb) / 0.99) 68%);
+  box-shadow: 0 10px 30px rgb(var(--color-text-rgb) / 0.045);
+}
+
+.section-takeaway::after {
+  position: absolute;
+  right: -4rem;
+  bottom: -5rem;
+  width: 11rem;
+  height: 11rem;
+  border: 1px solid rgb(var(--takeaway-local-rgb) / 0.07);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.section-takeaway__accent {
+  position: relative;
+  z-index: 1;
+  width: 5px;
+  min-height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgb(var(--takeaway-local-rgb)), rgb(var(--takeaway-local-rgb) / 0.24));
+  box-shadow: 0 0 0 4px rgb(var(--takeaway-local-rgb) / 0.055);
+}
+
+.section-takeaway__body {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: center;
+  gap: 0.42rem;
+  min-width: 0;
+  max-width: 900px;
+}
+
+.section-takeaway__label {
+  color: rgb(var(--takeaway-local-rgb));
+  font-family: var(--font-mono);
+  font-size: var(--type-label) !important;
+  font-weight: 800;
+  letter-spacing: 0.095em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.section-takeaway__statement {
+  max-width: 920px;
+  color: var(--color-text);
+  font-size: clamp(1.18rem, 2.05vw, 1.52rem);
+  font-weight: 680;
+  line-height: 1.22;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+
+.section-takeaway__statement strong {
+  color: rgb(var(--takeaway-local-rgb));
+  font-weight: 760;
+}
+
+.section-takeaway__detail {
+  max-width: 78ch;
+  color: var(--color-text-muted);
+  font-size: var(--type-support) !important;
+  line-height: 1.52;
+}
+
+.section-takeaway__detail strong {
+  color: var(--color-text);
+  font-weight: 650;
+}
+
+.section-takeaway--with-meta {
+  grid-template-columns: 5px minmax(0, 1.15fr) minmax(315px, 0.85fr);
+}
+
+.section-takeaway__meta {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.58rem;
+  align-self: stretch;
+  min-width: 0;
+}
+
+.section-takeaway__meta article {
+  display: grid;
+  align-content: center;
+  gap: 0.34rem;
+  min-width: 0;
+  padding: 0.78rem 0.8rem;
+  border: 1px solid rgb(var(--color-border-rgb) / 0.82);
+  border-radius: calc(var(--radius-card) + 1px);
+  background: rgb(var(--color-surface-rgb) / 0.78);
+}
+
+.section-takeaway__meta article:first-child {
+  border-color: rgb(var(--takeaway-local-rgb) / 0.2);
+  background: rgb(var(--takeaway-local-rgb) / 0.055);
+}
+
+.section-takeaway__meta span {
+  color: rgb(var(--takeaway-local-rgb));
+  font-family: var(--font-mono);
+  font-size: var(--type-label) !important;
+  font-weight: 780;
+  letter-spacing: 0.055em;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.section-takeaway__meta article:last-child span {
+  color: var(--color-text-muted);
+}
+
+.section-takeaway__meta strong {
+  color: var(--color-text);
+  font-size: var(--type-caption);
+  font-weight: 650;
+  line-height: 1.42;
+}
+
+.section-takeaway--compact {
+  padding-block: 1rem;
+}
+
+.section-takeaway--concept {
+  --takeaway-local-rgb: var(--takeaway-concept-rgb);
+  margin-top: 0.95rem;
+}
+
+.section-takeaway--boundary {
+  --takeaway-local-rgb: var(--takeaway-boundary-rgb);
+  border-color: rgb(var(--takeaway-boundary-rgb) / 0.28);
+  background:
+    radial-gradient(circle at 88% 10%, rgb(var(--takeaway-boundary-rgb) / 0.07), transparent 16rem),
+    linear-gradient(120deg, rgb(var(--color-warm-rgb) / 0.065), rgb(var(--color-surface-rgb) / 0.99) 68%);
+}
+
+/* Give GATE, Results, Analysis and Scope a deliberate stop before the next block. */
+.gatep-chapter > .section-inner > .section-takeaway,
+.results-chapter .section-takeaway,
+.analysisx-chapter .section-takeaway,
+.scope2-chapter .section-takeaway {
+  margin-bottom: 1rem;
+}
+
+/* Scroll reveal is restrained: the card should read as content, not decoration. */
+.section-takeaway.takeaway-motion-ready {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 420ms ease, transform 420ms cubic-bezier(.2,.7,.2,1), border-color 220ms ease;
+}
+
+.section-takeaway.takeaway-motion-ready.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+  .section-takeaway--with-meta {
+    grid-template-columns: 5px minmax(0, 1fr);
+  }
+
+  .section-takeaway--with-meta .section-takeaway__meta {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 680px) {
+  .section-takeaway,
+  .section-takeaway--with-meta {
+    grid-template-columns: 1fr;
+    gap: 0.78rem;
+    padding: 0.92rem;
+  }
+
+  .section-takeaway__accent {
+    width: min(84px, 28vw);
+    min-height: 4px;
+    height: 4px;
+  }
+
+  .section-takeaway--with-meta .section-takeaway__meta {
+    grid-column: 1;
+  }
+
+  .section-takeaway__meta {
+    grid-template-columns: 1fr;
+  }
+
+  .section-takeaway__statement {
+    font-size: clamp(1.12rem, 5.1vw, 1.34rem);
+  }
+
+  .diagx-transition__concept {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding-left: 0;
+    border-left: 0;
+    text-align: center;
+  }
+
+  .semantic-arrow--labeled {
+    width: 4.5rem;
+    min-width: 0;
+    transform: rotate(90deg);
+  }
+
+  .semantic-arrow--labeled > b {
+    transform: rotate(-90deg);
+  }
+
+  .ttbx-rank-shift {
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-takeaway.takeaway-motion-ready,
+  .section-takeaway.takeaway-motion-ready.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Matched-trial explainer uses the same intervention language as the main diagnostic. */
+.diagx-mini-intervention-arrow.semantic-arrow--intervention {
+  position: relative;
+  display: block;
+  width: 3.25rem;
+  height: 1rem;
+  background: none !important;
+}
+
+.diagx-mini-intervention-arrow.semantic-arrow--intervention::before {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: 50%;
+  border-top: var(--arrow-line-width) dashed rgb(var(--arrow-context-rgb) / 0.6);
+  transform: translateY(-50%);
+  content: "";
+}
+
+.diagx-mini-intervention-arrow.semantic-arrow--intervention::after {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(45deg, transparent 46%, rgb(var(--arrow-context-rgb) / 0.82) 47% 54%, transparent 55%) left 1px center / 7px 7px no-repeat,
+    linear-gradient(-45deg, transparent 46%, rgb(var(--arrow-context-rgb) / 0.82) 47% 54%, transparent 55%) left 1px center / 7px 7px no-repeat,
+    linear-gradient(135deg, transparent 46%, rgb(var(--arrow-context-rgb) / 0.82) 47% 54%, transparent 55%) right 1px center / 7px 7px no-repeat,
+    linear-gradient(-135deg, transparent 46%, rgb(var(--arrow-context-rgb) / 0.82) 47% 54%, transparent 55%) right 1px center / 7px 7px no-repeat;
+  content: "";
+}
+
+/* =========================================================
+   GATE deep-dive connector alignment fix — 2026-09-17
+   Keep cards stretched where intended, but center process arrows
+   on the visual axis between adjacent nodes.
+   ========================================================= */
+@media (min-width: 861px) {
+  .gatep-scene1-visual > .gatep-flow,
+  .gatep-scene2-visual > .gatep-flow,
+  .gatep-refine-ribbon > .gatep-flow,
+  .gatep-final-search > .gatep-flow {
+    align-self: center;
+    justify-self: stretch;
+  }
+}
+
+@media (max-width: 860px) {
+  .gatep-scene1-visual > .gatep-flow,
+  .gatep-scene2-visual > .gatep-flow,
+  .gatep-refine-ribbon > .gatep-flow,
+  .gatep-final-search > .gatep-flow {
+    align-self: center;
+    justify-self: center;
+    transform-origin: 50% 50%;
+  }
+}

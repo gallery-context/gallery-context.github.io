@@ -193,7 +193,7 @@
 </footer>
 </article>
 
-<div aria-hidden="true" class="diagx-intervention-axis">
+<div aria-hidden="true" class="diagx-intervention-axis semantic-arrow semantic-arrow--intervention">
 <span>COMPETITORS<br/>ONLY</span>
 <svg focusable="false" viewBox="0 0 92 50"><path d="M8 15H76"></path><path d="m69 8 8 7-8 7"></path><path d="M84 35H16"></path><path d="m23 28-8 7 8 7"></path></svg>
 <div class="diagx-flip-core"><small>TOP-1</small><strong>FLIP</strong></div>
@@ -235,7 +235,7 @@
 <header><span>01 · WHAT COUNTS AS A FLIP?</span><strong>Correctness changes</strong></header>
 <div class="diagx-flip-definition-viz" aria-label="The same query, target, and retriever are evaluated in two matched galleries. A flip occurs when Top-1 correctness changes between the paired trials.">
 <div class="diagx-flip-mini-trial diagx-flip-mini-trial--good"><small>GALLERY A</small><b>TOP-1</b><strong>CORRECT</strong><span>✓</span></div>
-<div class="diagx-flip-mini-axis"><em>same query · target · retriever</em><i aria-hidden="true">↔</i><b>competitors change</b></div>
+<div class="diagx-flip-mini-axis"><em>same query · target · retriever</em><i aria-hidden="true" class="diagx-mini-intervention-arrow semantic-arrow semantic-arrow--intervention"></i><b>competitors change</b></div>
 <div class="diagx-flip-mini-trial diagx-flip-mini-trial--bad"><small>GALLERY B</small><b>TOP-1</b><strong>INCORRECT</strong><span>×</span></div>
 </div>
 <p><strong>Flip Rate</strong> = percentage of paired interventions where Top-1 correctness changes after changing only the competitors.</p>
@@ -276,8 +276,14 @@
 <article><strong>&gt;3.1M</strong><span>retriever × trial evaluations</span></article>
 </div>
 
-<p class="diagx-evidence-takeaway"><span>TAKEAWAY</span> Changing only the competitors can change whether the same query retrieves the correct identity at Rank-1.</p>
-<p class="diagx-evidence-footnote">Flip Rate tracks <strong>changes in Top-1 correctness</strong>, not every change in which image occupies Rank-1.</p>
+<aside aria-labelledby="diagnostic-takeaway-title" class="section-takeaway section-takeaway--compact" data-section-takeaway>
+<div class="section-takeaway__accent" aria-hidden="true"></div>
+<div class="section-takeaway__body">
+<span class="section-takeaway__label">TAKEAWAY</span>
+<h3 class="section-takeaway__statement" id="diagnostic-takeaway-title">Changing only the competitors can change whether the same query retrieves the correct identity at Rank-1.</h3>
+<p class="section-takeaway__detail">Flip Rate tracks <strong>changes in Top-1 correctness</strong>, not every change in which image occupies Rank-1.</p>
+</div>
+</aside>
 </section>
 
 <details class="technical-details diagx-details disclosure disclosure--secondary">
@@ -324,7 +330,7 @@
 
 <div aria-label="Transition from the diagnostic to T-TBPS" class="diagx-transition diagx-transition--question">
 <p>If the gallery affects the retrieval decision, <strong>why construct the query without seeing it?</strong></p>
-<div class="diagx-transition__concept"><span>Gallery sensitivity</span><b>→</b><strong>Gallery-aware query construction</strong></div>
+<div class="diagx-transition__concept"><span>Gallery sensitivity</span><span aria-hidden="true" class="semantic-arrow semantic-arrow--bridge semantic-arrow--labeled"><i></i><b>motivates</b></span><strong>Gallery-aware query construction</strong></div>
 </div>
 </div>
 </section>
@@ -358,7 +364,7 @@
 <span>TEXT QUERY</span>
 <p>A person in a <strong>red shirt</strong> with a <strong>black backpack</strong>.</p>
 </article>
-<div aria-hidden="true" class="ttbx-query-arrow"><i></i></div>
+<div aria-hidden="true" class="ttbx-query-arrow semantic-arrow semantic-arrow--process"><i></i></div>
 <article aria-live="polite" class="ttbx-core">
 <span class="ttbx-core__eyebrow">QUERY CONSTRUCTION</span>
 <div aria-hidden="true" class="ttbx-core__icon"><i></i><i></i><i></i></div>
@@ -369,7 +375,7 @@
 <span class="ttbx-copy-transductive">ENRICHED QUERY</span>
 </div>
 </article>
-<div aria-hidden="true" class="ttbx-context-channel">
+<div aria-hidden="true" class="ttbx-context-channel semantic-arrow semantic-arrow--context">
 <div class="ttbx-context-channel__blocked"><span>×</span><b>not used</b></div>
 <div class="ttbx-context-channel__active"><i></i><i></i><i></i><b>gallery context</b></div>
 </div>
@@ -387,17 +393,17 @@
 </article>
 </div>
 <div aria-label="Final retrieval remains over the complete gallery" class="ttbx-retrieval-flow">
-<div aria-hidden="true" class="ttbx-down-flow"><i></i></div>
+<div aria-hidden="true" class="ttbx-down-flow semantic-arrow semantic-arrow--process"><i></i></div>
 <div class="ttbx-retrieval-core">
 <span>FINAL SEARCH</span>
 <strong>Complete-gallery retrieval</strong>
 </div>
-<div aria-hidden="true" class="ttbx-down-flow"><i></i></div>
+<div aria-hidden="true" class="ttbx-down-flow semantic-arrow semantic-arrow--process"><i></i></div>
 <div class="ttbx-ranking-strip">
 <div class="ttbx-ranking-meta">
 <div><span>RANKING</span><small>illustrative</small></div>
 <strong class="ttbx-copy-standard ttbx-ranking-status ttbx-ranking-status--bad">Target at Rank #2</strong>
-<strong class="ttbx-copy-transductive ttbx-ranking-status ttbx-ranking-status--good">Target rises to Rank #1</strong>
+<strong class="ttbx-copy-transductive ttbx-ranking-status ttbx-ranking-status--good">Target <span class="ttbx-rank-shift" aria-label="moves from Rank 2 to Rank 1"><b>#2</b><i aria-hidden="true"></i><b>#1</b></span></strong>
 </div>
 <div class="ttbx-ranking-track" data-ttbps-ranking>
 <figure class="ttbx-rank-item ttbx-rank-item--target" data-ttbps-rank-item="target"><b><span class="ttbx-copy-standard">#2</span><span class="ttbx-copy-transductive">#1</span></b><span class="ttbx-rank-target-label">TARGET</span><img alt="Target identity in the illustrative ranking" decoding="async" loading="lazy" src="assets/overview/target.png"/></figure>
@@ -410,13 +416,14 @@
 </div>
 <figcaption id="ttbps-caption">Same text query and same full gallery; only the information available during query construction changes.</figcaption>
 </figure>
-<section aria-labelledby="ttbps-takeaway-title" class="ttbx-takeaway">
-<div class="ttbx-takeaway__lead">
-<span>TAKEAWAY</span>
-<h3 id="ttbps-takeaway-title">T-TBPS changes what information the query may use—not where retrieval happens.</h3>
-<p><strong>T-TBPS is an inference setting, not a specific architecture:</strong> it permits unlabeled gallery context during query construction while retaining complete-gallery retrieval.</p>
+<aside aria-labelledby="ttbps-takeaway-title" class="section-takeaway section-takeaway--with-meta" data-section-takeaway>
+<div class="section-takeaway__accent" aria-hidden="true"></div>
+<div class="section-takeaway__body">
+<span class="section-takeaway__label">TAKEAWAY</span>
+<h3 class="section-takeaway__statement" id="ttbps-takeaway-title">T-TBPS changes what information the query may use—not where retrieval happens.</h3>
+<p class="section-takeaway__detail"><strong>T-TBPS is an inference setting, not a specific architecture:</strong> it permits unlabeled gallery context during query construction while retaining complete-gallery retrieval.</p>
 </div>
-<div class="ttbx-takeaway__boundaries" aria-label="What changes and what stays fixed in T-TBPS">
+<div class="section-takeaway__meta" aria-label="What changes and what stays fixed in T-TBPS">
 <article>
 <span>WHAT CHANGES</span>
 <strong>Query construction can use unlabeled gallery context.</strong>
@@ -426,10 +433,10 @@
 <strong>No gallery labels · final retrieval still uses the full gallery.</strong>
 </article>
 </div>
-</section>
+</aside>
 <div aria-label="T-TBPS setting and GATE method distinction" class="ttbx-method-bridge">
 <div><span>SETTING</span><strong>T-TBPS</strong></div>
-<div aria-hidden="true" class="ttbx-method-bridge__arrow"><i></i><b>realized by</b><i></i></div>
+<div aria-hidden="true" class="ttbx-method-bridge__arrow semantic-arrow semantic-arrow--bridge"><i></i><b>realized by</b><i></i></div>
 <div><span>METHOD</span><strong>GATE</strong></div>
 </div>
 </div>
@@ -465,7 +472,7 @@
 <span>TEXT QUERY</span>
 <strong>red shirt <i>+</i> black backpack</strong>
 </div>
-<div aria-hidden="true" class="gatep-flow"><i></i></div>
+<div aria-hidden="true" class="gatep-flow semantic-arrow semantic-arrow--process"><i></i></div>
 <article class="gatep-gallery-film gatep-gallery-film--source">
 <header><span>FULL GALLERY</span><small>unlabeled</small></header>
 <div class="gatep-film-strip">
@@ -478,9 +485,9 @@
 <figure><img alt="Gallery candidate" decoding="async" loading="lazy" src="assets/overview/b_bag_03.png"/></figure>
 </div>
 </article>
-<div aria-hidden="true" class="gatep-flow"><i></i></div>
+<div aria-hidden="true" class="gatep-flow semantic-arrow semantic-arrow--process"><i></i></div>
 <div class="gatep-retriever-node"><span>FROZEN HOST</span><strong>1st pass</strong><small>scan everyone</small></div>
-<div aria-hidden="true" class="gatep-flow"><i></i></div>
+<div aria-hidden="true" class="gatep-flow semantic-arrow semantic-arrow--process"><i></i></div>
 <article class="gatep-competition">
 <header><span>CURRENT COMPETITION</span><small>what GATE reads</small></header>
 <div class="gatep-competition__cards">
@@ -518,7 +525,7 @@
 <div><b>SEARCH</b><strong>Rank the complete gallery again.</strong><small>Second pass · actual retrieval</small></div>
 </div>
 <div class="gatep-enriched-token gatep-enriched-token--inline"><span>ENRICHED QUERY</span><strong>gallery-aware query</strong></div>
-<div aria-hidden="true" class="gatep-flow"><i></i></div>
+<div aria-hidden="true" class="gatep-flow semantic-arrow semantic-arrow--process"><i></i></div>
 <article class="gatep-gallery-film gatep-gallery-film--return">
 <header><span>FULL GALLERY</span><small>everyone remains eligible</small></header>
 <div class="gatep-film-strip">
@@ -531,9 +538,9 @@
 <figure><img alt="Gallery candidate" decoding="async" loading="lazy" src="assets/overview/b_bag_03.png"/></figure>
 </div>
 </article>
-<div aria-hidden="true" class="gatep-flow"><i></i></div>
+<div aria-hidden="true" class="gatep-flow semantic-arrow semantic-arrow--process"><i></i></div>
 <div class="gatep-retriever-node gatep-retriever-node--second"><span>SAME FROZEN HOST</span><strong>2nd pass</strong><small>score everyone</small></div>
-<div aria-hidden="true" class="gatep-flow"><i></i></div>
+<div aria-hidden="true" class="gatep-flow semantic-arrow semantic-arrow--process"><i></i></div>
 <article class="gatep-ranking">
 <header><span>FULL-GALLERY RANKING</span><small>actual output</small></header>
 <div class="gatep-ranking__cards">
@@ -550,6 +557,15 @@
 <span>Frozen host</span><span>Unlabeled gallery context</span><span>Competition informs the query — it never becomes the final search space</span>
 </footer>
 </section>
+
+<aside aria-labelledby="gate-takeaway-title" class="section-takeaway" data-section-takeaway>
+<div class="section-takeaway__accent" aria-hidden="true"></div>
+<div class="section-takeaway__body">
+<span class="section-takeaway__label">TAKEAWAY</span>
+<h3 class="section-takeaway__statement" id="gate-takeaway-title">GATE reads the current competition to refine the query, then searches the complete gallery again.</h3>
+<p class="section-takeaway__detail">Top-ranked gallery candidates provide context for enrichment; they do not replace the final search space.</p>
+</div>
+</aside>
 
 <details class="gatep-explorer disclosure disclosure--primary" data-gate-explorer>
 <summary class="disclosure__summary">
@@ -571,7 +587,7 @@
 </header>
 <div class="gatep-scene1-visual">
 <div class="gatep-scene1-query"><span>QUERY</span><strong>red shirt <i>+</i><br/>black backpack</strong></div>
-<div aria-hidden="true" class="gatep-flow gatep-flow--large"><i></i></div>
+<div aria-hidden="true" class="gatep-flow gatep-flow--large semantic-arrow semantic-arrow--process"><i></i></div>
 <div class="gatep-scene1-gallery">
 <div class="gatep-scene-label"><span>FULL GALLERY</span><small>scan everyone</small></div>
 <div class="gatep-scene1-gallery__grid">
@@ -585,7 +601,7 @@
 </div>
 <div class="gatep-scan-line" aria-hidden="true"><i></i></div>
 </div>
-<div aria-hidden="true" class="gatep-flow gatep-flow--large"><i></i></div>
+<div aria-hidden="true" class="gatep-flow gatep-flow--large semantic-arrow semantic-arrow--process"><i></i></div>
 <div class="gatep-scene1-focus">
 <div class="gatep-scene-label"><span>CURRENT COMPETITION</span><small>context for GATE</small></div>
 <div class="gatep-scene1-focus__stack">
@@ -616,14 +632,14 @@
 <div class="gatep-evidence-item"><b>#3</b><img alt="Evidence candidate" decoding="async" loading="lazy" src="assets/overview/b_bag_01.png"/><span><i></i><i></i><i class="is-hot"></i><i></i><i class="is-hot"></i></span></div>
 <div class="gatep-evidence-item"><b>…</b><img alt="Additional evidence candidate" decoding="async" loading="lazy" src="assets/overview/a_red_03.png"/><span><i class="is-hot"></i><i></i><i></i><i class="is-hot"></i><i></i></span></div>
 </div>
-<div aria-hidden="true" class="gatep-flow gatep-flow--large"><i></i></div>
+<div aria-hidden="true" class="gatep-flow gatep-flow--large semantic-arrow semantic-arrow--process"><i></i></div>
 <div class="gatep-reason-hero">
 <div class="gatep-reason-hero__query"><span>QUERY</span><b>red shirt + black backpack</b></div>
 <div class="gatep-reason-orbit" aria-hidden="true"><span></span><i></i><i></i><i></i><i></i><i></i><i></i></div>
 <div class="gatep-reason-hero__core"><span>QCRS-MIXER</span><strong>Structured<br/>reasoning</strong><small>rank × evidence × query</small></div>
 <div class="gatep-reason-hero__caption">Preserve who ranked where while reasoning about what the query needs.</div>
 </div>
-<div aria-hidden="true" class="gatep-flow gatep-flow--large"><i></i></div>
+<div aria-hidden="true" class="gatep-flow gatep-flow--large semantic-arrow semantic-arrow--process"><i></i></div>
 <div class="gatep-context-readout">
 <div class="gatep-scene-label"><span>GALLERY CONTEXT</span><small>conceptual interpretation</small></div>
 <strong>What is useful <em>for this query</em>, in <em>this gallery</em>?</strong>
@@ -648,7 +664,7 @@
 <div class="gatep-refine-token"><span>ORIGINAL QUERY</span><strong>red shirt + black backpack</strong><small>anchor</small></div>
 <b class="gatep-refine-op">+</b>
 <div class="gatep-refine-token gatep-refine-token--correction"><span>GALLERY CONTEXT</span><strong>small correction</strong><small>from current competition</small></div>
-<div aria-hidden="true" class="gatep-flow"><i></i></div>
+<div aria-hidden="true" class="gatep-flow semantic-arrow semantic-arrow--process"><i></i></div>
 <div class="gatep-refine-token gatep-refine-token--output"><span>ENRICHED QUERY</span><strong>same intent, gallery-aware</strong><small>ready for final search</small></div>
 </div>
 <div class="gatep-final-search">
@@ -664,9 +680,9 @@
 <figure><img alt="Gallery candidate" decoding="async" loading="lazy" src="assets/overview/b_bag_03.png"/></figure>
 </div>
 </article>
-<div aria-hidden="true" class="gatep-flow gatep-flow--large"><i></i></div>
+<div aria-hidden="true" class="gatep-flow gatep-flow--large semantic-arrow semantic-arrow--process"><i></i></div>
 <div class="gatep-second-pass-node"><span>SAME FROZEN HOST</span><strong>Second pass</strong><small>complete-gallery search</small></div>
-<div aria-hidden="true" class="gatep-flow gatep-flow--large"><i></i></div>
+<div aria-hidden="true" class="gatep-flow gatep-flow--large semantic-arrow semantic-arrow--process"><i></i></div>
 <div class="gatep-winner">
 <span>FINAL RANKING</span>
 <figure><b>#1</b><img alt="Target ranked first" decoding="async" loading="lazy" src="assets/overview/target.png"/><small>target</small></figure>
@@ -822,6 +838,14 @@
 </div>
 </article>
 </div>
+<aside aria-labelledby="results-takeaway-title" class="section-takeaway" data-section-takeaway>
+<div class="section-takeaway__accent" aria-hidden="true"></div>
+<div class="section-takeaway__body">
+<span class="section-takeaway__label">TAKEAWAY</span>
+<h3 class="section-takeaway__statement" id="results-takeaway-title">Gallery-aware query enrichment improves all tested frozen hosts and all evaluated transfer settings.</h3>
+<p class="section-takeaway__detail">The gains appear across five frozen retrievers, three benchmarks, and all six directed cross-domain routes.</p>
+</div>
+</aside>
 </div>
 </section>
 <section aria-labelledby="examples-title" class="chapter examples-chapter" id="examples">
@@ -902,9 +926,9 @@
 </div>
 </article>
 <div aria-label="Gallery-aware enrichment connects the base ranking to the GATE ranking" class="qual-context-bridge">
-<div aria-hidden="true" class="qual-context-line"><span></span></div>
+<div aria-hidden="true" class="qual-context-line semantic-arrow semantic-arrow--context"><span></span></div>
 <div class="qual-context-copy"><strong>GATE</strong></div>
-<div aria-hidden="true" class="qual-context-line qual-context-line--down"><span></span></div>
+<div aria-hidden="true" class="qual-context-line qual-context-line--down semantic-arrow semantic-arrow--context"><span></span></div>
 </div>
 <article class="qual-ranking-panel qual-ranking-panel--gate">
 <div class="qual-ranking-head">
@@ -1133,7 +1157,14 @@
 </div>
 </aside>
 </div></details>
-</article><p class="analysisx-main-synthesis">Gallery context works best when evidence is <strong>selective</strong> and reasoning is <strong>structured</strong>.</p>
+</article><aside aria-labelledby="analysis-takeaway-title" class="section-takeaway section-takeaway--compact" data-section-takeaway>
+<div class="section-takeaway__accent" aria-hidden="true"></div>
+<div class="section-takeaway__body">
+<span class="section-takeaway__label">TAKEAWAY</span>
+<h3 class="section-takeaway__statement" id="analysis-takeaway-title">Gallery context works best when evidence is <strong>selective</strong> and reasoning is <strong>structured</strong>.</h3>
+<p class="section-takeaway__detail">More gallery evidence is not automatically better; the way evidence is chosen and organized matters.</p>
+</div>
+</aside>
 <details class="analysisx-discussion-details disclosure disclosure--primary">
 <summary class="disclosure__summary">
 <span class="disclosure__copy">
@@ -1195,10 +1226,13 @@
 </article>
 </section>
 </div>
-<div class="analysisx-discussion-closing">
-<span>CONCEPTUAL PAYOFF</span>
-<strong>Use the search space not only as something to rank, but also as context for deciding how to search it.</strong>
+<aside aria-labelledby="discussion-takeaway-title" class="section-takeaway section-takeaway--concept section-takeaway--compact" data-section-takeaway>
+<div class="section-takeaway__accent" aria-hidden="true"></div>
+<div class="section-takeaway__body">
+<span class="section-takeaway__label">CONCEPTUAL TAKEAWAY</span>
+<h3 class="section-takeaway__statement" id="discussion-takeaway-title">Use the search space not only as something to rank, but also as context for deciding how to search it.</h3>
 </div>
+</aside>
 </article></details>
 </div>
 </section>
@@ -1207,6 +1241,14 @@
 <header class="chapter-heading scope2-heading">
 <h2 class="sr-only" id="scope-title">Scope and limitations</h2>
 </header>
+<aside aria-labelledby="scope-boundary-title" class="section-takeaway section-takeaway--boundary" data-section-takeaway>
+<div class="section-takeaway__accent" aria-hidden="true"></div>
+<div class="section-takeaway__body">
+<span class="section-takeaway__label">BOUNDARY</span>
+<h3 class="section-takeaway__statement" id="scope-boundary-title">T-TBPS requires access to the unlabeled gallery at inference—but not identity labels or target supervision.</h3>
+<p class="section-takeaway__detail">The setting changes the inference information boundary; the detailed limitations below clarify where that assumption applies.</p>
+</div>
+</aside>
 <details class="scope2-collapsible disclosure disclosure--primary">
 <summary class="disclosure__summary">
 <span class="disclosure__copy">
